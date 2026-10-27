@@ -34,15 +34,16 @@ class AnthropicEpisodeTests(unittest.TestCase):
 
     def test_exact_income_statement_reconciliation(self):
         # USD billions, sourced from Oct. 26 Anthropic S-1.
-        operating = Decimal('-.693')
-        fair_value = Decimal('-72.388')
-        other = Decimal('-8.757')
-        interest = Decimal('1.111')
-        tax = Decimal('-.021')
-        net = Decimal('-80.748')
-        self.assertEqual(operating + fair_value + other + interest + tax, net)
-        self.assertEqual(Decimal('16.286') / Decimal('1.163') > 14, True)
-        self.assertEqual(round(Decimal('16.286') / Decimal('1.163'), 1), Decimal('14.0'))
+        figures = json.loads((ROOT / 'episodes/002/financials.json').read_text())
+        self.assertEqual(figures['units'], 'USD millions')
+        h1 = figures['h1_2026']
+        total = (h1['operating_loss'] + h1['convertible_financing_fair_value_change']
+                 + h1['other_income_expense_net'] + h1['interest_income']
+                 - h1['income_tax_provision'])
+        self.assertEqual(total, h1['net_loss'])
+        growth = Decimal(h1['revenue']) / Decimal(figures['h1_2025']['revenue'])
+        self.assertGreater(growth, 14)
+        self.assertEqual(round(growth, 1), Decimal('14.0'))
 
     def test_no_assumed_final_media_or_ipo_price(self):
         joined = ' '.join(x['narration'].lower() for x in self.episode['scenes'])
