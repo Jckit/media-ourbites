@@ -84,3 +84,18 @@ Keep secrets, private analytics, media masters and generated scratch files out o
 **Visual strategy:** look for genuinely relevant, verifiable photographs, official announcements, archival footage, product clips, and filing excerpts *during research*, and plan original Remotion visualizations around them. Public availability is not a reuse license. Rights/provenance assessment and human approval precede their insertion in any final video. These are editorial requirements, not implemented automatic asset retrieval or legal clearance.
 
 **Reusable framework ambition:** preserve a shared research → narrative → asset-provenance → production → review → measurement engine for eventual additional channels and client projects. For now, Ourbites is the only configured channel; don't split the working pilot into a large multi-channel platform before the pilot demonstrates repeatability.
+
+## Asset research CLI — working metadata-only MVP
+
+The new `asset_research.py` reads a structured episode JSON manifest and scene-linked media research plan, producing a candidate asset register and Markdown shot list. Offline mode uses curated official links; optional `--commons` searches Wikimedia Commons **metadata** (requires internet). Nothing is downloaded, licensed, or approved automatically.
+
+```powershell
+python asset_research.py build --episode examples/merger-v2.json --plan examples/merger-media-plan.json --out out/media-research/001
+# Optional live search:
+python asset_research.py build --episode examples/merger-v2.json --plan examples/merger-media-plan.json --out out/media-research/001 --commons --limit 3
+# Preflight only after human selection and rights/fact review:
+python asset_research.py check --packet out/media-research/001/assets.json
+python -m unittest discover -s tests -v
+```
+
+The outputs are `out/media-research/001/assets.json` and `shot-list.md`. Assets default to `unreviewed` and `unverified`. Failed network searches are logged. The `check` command fails when no final asset has been selected, or when selected files lack necessary human review/evidence fields. Passing it is not copyright clearance or publication authorization. No live Commons integration test, automatic download, or Remotion asset importer has yet been run. See [visual sourcing policy](research/VISUAL-EVIDENCE.md).
