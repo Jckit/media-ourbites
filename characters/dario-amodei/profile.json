@@ -1,0 +1,40 @@
+{
+  "id": "dario-amodei",
+  "name": "Dario Amodei",
+  "type": "stylized_real_person",
+  "company": "Anthropic",
+  "role": "Co-founder and CEO",
+  "status": "concept_awaiting_likeness_and_art_approval",
+  "episode_ids": [
+    "ourbites-anthropic-ipo-accounting"
+  ],
+  "reference_log": "characters/dario-amodei/references.md",
+  "base_asset": null,
+  "proposed_style": "Ourbites editorial flat animation; separate face identity from the fictional host",
+  "visual_traits_to_confirm": [
+    "dark wavy/curly hair",
+    "light skin",
+    "slim-to-average build",
+    "glasses: review from current official portrait before treating as canonical",
+    "understated business-casual clothing"
+  ],
+  "poses_to_create": [
+    "neutral",
+    "explain",
+    "thinking",
+    "react"
+  ],
+  "depiction_rules": [
+    "Always identify as illustrated depiction when context could imply real event footage.",
+    "Do not invent historical quotes or a synthetic speech by this person.",
+    "Do not claim an illustration is a photograph or a recorded moment.",
+    "Use one reviewed master likeness for variants; do not regenerate a new face each scene."
+  ],
+  "review": {
+    "approved": false,
+    "reviewer": null,
+    "approved_at": null,
+    "asset_sha256": null,
+    "notes": "The concept image generated in chat is not automatically an approved or committed asset."
+  }
+}
