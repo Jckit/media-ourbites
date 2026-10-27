@@ -3,6 +3,7 @@ import {AbsoluteFill, interpolate, Sequence, useCurrentFrame, useVideoConfig} fr
 import episode from '../episodes/002/episode.json';
 import financials from '../episodes/002/financials.json';
 import {getHumanReviewedAsset, ReviewedMediaInsert} from './ReviewedMediaInsert';
+import {OurbitesHostCameo} from './OurbitesHost';
 
 // Silent editorial storyboard: not a voiced, approved or publishable master.
 export const ANTHROPIC_SHORT_FPS = 30;
@@ -153,6 +154,10 @@ const Scene:React.FC<{scene:(typeof episode.scenes)[number];index:number}>=({sce
         <div style={{marginBottom:22}}><ReviewedMediaInsert sceneId={scene.id} height={310}/></div>}
       {graphic}
     </div>
+    {(scene.id==='hook'||scene.id==='operations'||scene.id==='payoff') &&
+      <OurbitesHostCameo
+        pose={scene.id==='hook' ? 'react' : scene.id==='operations' ? 'think' : 'point'}
+        top={1180} right={92} width={215}/>}
     <div style={{position:'absolute',bottom:248,left:88,right:88,
       borderTop:'2px solid '+C.ink,paddingTop:28,fontSize:35,lineHeight:1.3}}>
       {scene.narration}</div>
