@@ -211,5 +211,30 @@
         "compute"
       ]
     }
-  ]
+  ],
+  "character_cast": {
+    "protagonist": {
+      "id": "ourbites-protagonist",
+      "profile": "characters/protagonist/profile.json",
+      "appearance_scene_ids": [
+        "hook",
+        "operations",
+        "payoff"
+      ],
+      "status": "provisional_awaiting_user_approval"
+    },
+    "real_people": [
+      {
+        "id": "dario-amodei",
+        "profile": "characters/dario-amodei/profile.json",
+        "planned_scene_ids": [
+          "growth",
+          "cost"
+        ],
+        "appearance_scene_ids": [],
+        "status": "concept_awaiting_likeness_and_art_approval"
+      }
+    ],
+    "notes": "Host is present in three scenes of the silent Remotion draft. No real-person illustrations have been rendered; planned Dario asset needs human visual approval."
+  }
 }
