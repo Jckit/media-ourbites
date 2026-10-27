@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Composition, Sequence, interpolate, registerRoot, useCurrentFrame, useVideoConfig} from 'remotion';
 import example from '../examples/merger.json';
 import {OwnershipProof} from './OwnershipProof';
+import {AnthropicShort, ANTHROPIC_SHORT_FRAMES} from './AnthropicShort';
 import proofAudio from './proof-audio.json';
 import {playbackSpeed} from './story-motion';
 
@@ -76,5 +77,5 @@ const Explainer: React.FC<Episode> = ({scenes,draft=true}) => {
 };
 
 const Root: React.FC = () => <Composition id="BusinessShort" component={Explainer} defaultProps={example} width={1080} height={1920} fps={30} durationInFrames={1800} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((n,s)=>n+Math.round(s.duration*30),0)})}/>;
-const AllCompositions:React.FC=()=> <><Root/><Composition id="OwnershipProof" component={OwnershipProof} width={1080} height={1920} fps={30} durationInFrames={Math.ceil((proofAudio.duration+5)*30/playbackSpeed)}/><Composition id="OwnershipSecondScenario" component={OwnershipProof} defaultProps={{variant:"second" as const}} width={1080} height={1920} fps={30} durationInFrames={Math.ceil((proofAudio.duration+5)*30/playbackSpeed)}/></>;
+const AllCompositions:React.FC=()=> <><Root/><Composition id="AnthropicShort" component={AnthropicShort} width={1080} height={1920} fps={30} durationInFrames={ANTHROPIC_SHORT_FRAMES}/><Composition id="OwnershipProof" component={OwnershipProof} width={1080} height={1920} fps={30} durationInFrames={Math.ceil((proofAudio.duration+5)*30/playbackSpeed)}/><Composition id="OwnershipSecondScenario" component={OwnershipProof} defaultProps={{variant:"second" as const}} width={1080} height={1920} fps={30} durationInFrames={Math.ceil((proofAudio.duration+5)*30/playbackSpeed)}/></>;
 registerRoot(AllCompositions);
