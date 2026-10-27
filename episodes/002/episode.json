@@ -8,12 +8,12 @@
     {
       "id": "s1",
       "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
-      "publisher": "Anthropic / SEC EDGAR",
+      "publisher": "Anthropic",
       "kind": "primary",
       "published_at": "2026-10-26",
       "checked_at": "2026-10-27T11:55:52+00:00",
       "locator": "Prospectus summary — Consolidated Statements of Operations Data; Risk Factors revaluation discussion; original filed S-1 0001628280-26-067168",
-      "note": "H1 2025/2026 revenue and operations table; fair value remeasurement and cost disclosures."
+      "note": "H1 2025/2026 revenue and operations table; fair value remeasurement and cost disclosures. SEC EDGAR is the hosting regulator; this source and the company press release are NOT independent publishers."
     },
     {
       "id": "anthropic-release",
