@@ -60,3 +60,9 @@ Do **not** generate a manifest by copying Tesla's `examples/merger-v2.json` nume
 ## Exit criteria
 
 Primary sources reviewed with timestamps; no false comparison of fiscal periods; every scene linked to claim IDs; verified visual source provenance and rights; actual narration measured; human editorial approval; exact final-media approval; publication status freshly rechecked. No such signoffs exist yet.
+
+## Specific archival-photo lead and license conflict
+
+- [Wikimedia Commons: Dario Amodei at TechCrunch Disrupt 2023](https://commons.wikimedia.org/wiki/File:Dario_Amodei_at_TechCrunch_Disrupt_2023_08.jpg), photographed **20 September 2023**, is a concrete event-authentic portrait candidate for a historical founder segment. Commons describes it as **CC BY 2.0**, posted by TechCrunch/Flickr, requiring attribution and indication of changes; **however its EXIF metadata states Getty Images / photographer Kimberly White**. Treat this **provenance/licensing discrepancy as unresolved**; confirm the uploader's authority and scope of rights before use. Do not assume Commons listing eliminates potential Getty rights. A sourced animated portrait placeholder or narrator/diagram can replace it.
+- [Anthropic's events archive](https://www.anthropic.com/events) contains official event listings and references to recordings and livestreams. Search for an exact historical video with known event date, owner, duration and timestamp; **no specific event clip was cleared or downloaded**.
+- [Anthropic's September 2026 model page](https://www.anthropic.com/claude-fable-and-mythos-5-1) documents product visuals and an embedded video showing model-assisted protein design. This is a candidate to explain product use, *not* a visual of the IPO. Rights status **unreviewed**.
