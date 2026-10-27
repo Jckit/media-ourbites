@@ -1,0 +1,78 @@
+{
+  "episode_id": "ourbites-same-shares-smaller-slice",
+  "scenes": {
+    "hook": {
+      "fallback": "Keep TESLA and SPACEX cards separate; show original ownership number card and a question mark.",
+      "leads": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm",
+          "title": "Tesla Q3 2026 Form 10-Q (Part II, Item 5)",
+          "publisher": "Tesla / SEC",
+          "kind": "document_excerpt",
+          "locator": "Part II, Item 5",
+          "purpose": "Anchor proposed combination to actual filing; no visual claim that a deal occurred.",
+          "claim_ids": [
+            "ownership"
+          ]
+        }
+      ],
+      "commons_searches": [
+        "Tesla car official event photograph",
+        "SpaceX Falcon 9 rocket launch photograph"
+      ]
+    },
+    "fact": {
+      "fallback": "Render sourced Tesla filing text and POSSIBLE in Remotion, no fake deal footage.",
+      "leads": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm",
+          "title": "Tesla Form 10-Q disclosure about exploring a potential business combination",
+          "publisher": "Tesla / SEC",
+          "kind": "document_excerpt",
+          "locator": "Part II, Item 5",
+          "purpose": "Establish exact conditional nature of disclosed exploration.",
+          "claim_ids": [
+            "committee",
+            "uncertainty"
+          ]
+        }
+      ],
+      "commons_searches": [
+        "Tesla company factory official press event"
+      ]
+    },
+    "mechanism": {
+      "fallback": "Use original 10/100 to 10/125 Remotion token animation clearly labeled an illustration; no company documentary footage in the math demonstration.",
+      "leads": [],
+      "commons_searches": []
+    },
+    "tradeoff": {
+      "fallback": "Use original diagram to distinguish dilution percentage from value; no photo can prove the relationship.",
+      "leads": [],
+      "commons_searches": []
+    },
+    "watch": {
+      "fallback": "Create animated checklist for deal price, ownership and approval conditions; label uncertainty.",
+      "leads": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm",
+          "title": "Tesla filing: no assurance a transaction will be consummated",
+          "publisher": "Tesla / SEC",
+          "kind": "document_excerpt",
+          "locator": "Part II, Item 5",
+          "purpose": "Ground the need to evaluate and not assume transaction terms.",
+          "claim_ids": [
+            "committee",
+            "uncertainty"
+          ]
+        }
+      ],
+      "commons_searches": []
+    },
+    "close": {
+      "fallback": "Original question-card and company-outline payoff. No event footage is needed.",
+      "leads": [],
+      "commons_searches": []
+    }
+  }
+}
