@@ -1,0 +1,82 @@
+# Create a video from your script
+
+## What works today
+
+Two paths exist. `BusinessShort` reads episode JSON and produces a **silent diagram storyboard**. `OwnershipProof` has custom animated scenes, narration and phrase captions. A script alone does not automatically produce custom animation yet. The production pipeline validates editorial structure; it does not verify truth or generate narration.
+
+## 1. Open the project
+
+```powershell
+cd 'C:\Users\Justin\Documents\ChatGPT\Businesses\business-and-chats'
+# Only on a fresh checkout:
+npm ci --ignore-scripts
+```
+
+## 2. Break your script into beats
+
+Use one central question. Split into hook, confirmed context, explanation, consequence and payoff. For each beat record spoken text, visible action, source references and estimated duration. Keep factual assertions separate from examples. Review the script before spending time animating it.
+
+## 3. Create the manifest
+
+```powershell
+Copy-Item examples/merger-v2.json examples/my-episode.json
+```
+
+Edit the new file: replace ID, title, dates, sources, claims and scenes. Do not retain Tesla claims for an unrelated script. Record `checked_at` only after actually reading the source. Each scene needs `id`, `duration`, `kicker`, `title`, `narration`, `visual`, `labels`, `claim_ids`. Supported storyboard visuals and required label counts:
+
+| Visual | Labels |
+|---|---|
+| combination | Three: left object, right object, relationship |
+| ownership | Empty array; this legacy diagram uses fixed example numbers |
+| balance | One explanatory label |
+| steps | Three steps |
+
+Do not use the legacy ownership visual for other numbers without changing its code. The newer `ownership-state.ts` is the parameterized ownership component's calculation source.
+
+## 4. Validate and review
+
+```powershell
+python pipeline.py validate examples/my-episode.json
+python pipeline.py review examples/my-episode.json --out out/my-episode-review.md
+```
+
+Read the review packet. Fix stale sources, unsupported claims and timing warnings. Passing validation is not editorial approval.
+
+## 5. Preview a quick storyboard
+
+```powershell
+npx remotion studio src/index.tsx --props=examples/my-episode.json
+```
+
+Select **BusinessShort**. This composition uses your manifest. Selecting OwnershipProof instead shows the separate custom pilot, not your new script.
+
+## 6. Record narration
+
+Record one WAV per beat or create speech using a voice whose terms allow your use. Put files under `public/my-episode/`. Measure the actual durations before locking scene timing. The current Windows demo generator is `powershell -File scripts/generate-proof-voice.ps1`; it generates only the fixed pilot script and overwrites its demo audio. Copy and adapt it for another episode instead of overwriting the pilot.
+
+## 7. Build the animated version
+
+Create `src/MyEpisode.tsx` and register a new Composition in `src/index.tsx`. Reuse:
+
+- `StoryBeat` from `src/story-motion.tsx` for scene entry/exit.
+- `HybridHost` from `src/OwnershipProof.tsx` for the character.
+- `ownershipState` from `src/ownership-state.ts` for supported ownership scenarios.
+- Remotion `Sequence`, `Audio` and `staticFile` for audio placement.
+
+Follow OwnershipProof's timeline pattern. Keep captions in a separate overlay above transitions. Show each caption for its measured audio clip duration. These are phrase captions; word highlighting requires word timestamps from alignment/transcription.
+
+The current shared speed is `playbackSpeed=1.1` in `src/story-motion.tsx`. `useStoryClock()` returns effective frames per source second. Use it consistently for animation, scene starts and audio durations, and set Audio `playbackRate` to the same value. Composition duration is `ceil(sourceSeconds * outputFps / playbackSpeed)`. Do not speed the resulting export again. The older BusinessShort composition does not use this speed setting.
+
+## 8. Inspect and export
+
+```powershell
+npm run typecheck
+# Silent storyboard:
+npx remotion render src/index.tsx BusinessShort out/my-storyboard.mp4 --props=examples/my-episode.json --concurrency=2
+# Current narrated pilot:
+npx remotion render src/index.tsx OwnershipProof out/my-pilot.mp4 --concurrency=2
+# After registering your custom MyEpisode composition:
+# npx remotion render src/index.tsx MyEpisode out/my-episode.mp4 --concurrency=2
+```
+
+In Studio, inspect scene starts, mid-transition frames and endings. Confirm visible numbers match diagrams at every step; captions do not overlap visuals; narration finishes before scene changes; and the payoff answers the hook. Watch and listen to the exported MP4 before release. Keep publication manual until the full media is approved.

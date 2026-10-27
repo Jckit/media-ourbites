@@ -1,0 +1,149 @@
+{
+  "id": "ourbites-same-shares-smaller-slice",
+  "title": "Tesla + SpaceX? Same shares. Smaller slice?",
+  "draft": true,
+  "language": "en",
+  "as_of": "2026-10-27",
+  "sources": [
+    {
+      "id": "tesla-q3",
+      "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm",
+      "publisher": "Tesla / SEC",
+      "kind": "primary",
+      "published_at": "2026-10-21",
+      "checked_at": "2026-10-27T08:20:56+00:00",
+      "locator": "Part II, Item 5: Other Information",
+      "note": "Special committee exploring deeper relationship with SpaceX including possible business combination; no assurance of consummation."
+    }
+  ],
+  "claims": [
+    {
+      "id": "committee",
+      "kind": "fact",
+      "text": "Tesla disclosed a special committee exploring a deeper relationship with SpaceX, including a possible business combination.",
+      "source_ids": [
+        "tesla-q3"
+      ],
+      "volatile": true
+    },
+    {
+      "id": "uncertainty",
+      "kind": "fact",
+      "text": "The filing says there is no assurance that a transaction will be consummated.",
+      "source_ids": [
+        "tesla-q3"
+      ],
+      "volatile": true
+    },
+    {
+      "id": "ownership",
+      "kind": "scenario",
+      "text": "Illustration only: 10 shares out of 100 is 10%; if total shares increase to 125 while those 10 are retained, the stake is 8%.",
+      "source_ids": [],
+      "volatile": false
+    },
+    {
+      "id": "value",
+      "kind": "analysis",
+      "text": "A lower ownership percentage alone does not establish a lower investment value; what is acquired and the price paid matter.",
+      "source_ids": [],
+      "volatile": false
+    }
+  ],
+  "scenes": [
+    {
+      "id": "hook",
+      "duration": 7,
+      "kicker": "THE BUSINESS MOVE",
+      "title": "Same shares. Smaller slice?",
+      "narration": "Could you keep every share you own, but end up owning less of the company?",
+      "visual": "combination",
+      "labels": [
+        "TESLA",
+        "SPACEX",
+        "Potential combination"
+      ],
+      "claim_ids": [
+        "ownership"
+      ]
+    },
+    {
+      "id": "fact",
+      "duration": 11,
+      "kicker": "WHAT IS CONFIRMED",
+      "title": "Possible does not mean agreed.",
+      "narration": "Tesla disclosed a committee exploring a deeper relationship with SpaceX, including a possible combination. Possible. Keep the confetti in the drawer. A deal is not guaranteed.",
+      "visual": "steps",
+      "labels": [
+        "Explore a transaction",
+        "Evaluate the terms",
+        "Required approvals"
+      ],
+      "claim_ids": [
+        "committee",
+        "uncertainty"
+      ]
+    },
+    {
+      "id": "mechanism",
+      "duration": 12,
+      "kicker": "HOW OWNERSHIP WORKS",
+      "title": "Ten shares. Ten percent. Then eight.",
+      "narration": "Here is an example, not proposed deal terms. You own ten of one hundred shares. Issue twenty-five more, and your ten shares now represent eight percent. Rude.",
+      "visual": "ownership",
+      "labels": [],
+      "claim_ids": [
+        "ownership"
+      ]
+    },
+    {
+      "id": "tradeoff",
+      "duration": 11,
+      "kicker": "THE IMPORTANT DISTINCTION",
+      "title": "A smaller slice of what?",
+      "narration": "But eight percent does not automatically mean your investment lost value. If new shares buy valuable assets, you own a smaller percentage of a different business.",
+      "visual": "balance",
+      "labels": [
+        "Ownership percentage is not investment value"
+      ],
+      "claim_ids": [
+        "value"
+      ]
+    },
+    {
+      "id": "watch",
+      "duration": 11,
+      "kicker": "WHAT TO WATCH",
+      "title": "Read the terms.",
+      "narration": "So ask: what is being bought, at what price, and how does ownership change? Then check the required approvals. A headline cannot answer those questions.",
+      "visual": "steps",
+      "labels": [
+        "Price and value",
+        "Ownership and control",
+        "Approval conditions"
+      ],
+      "claim_ids": [
+        "committee",
+        "uncertainty",
+        "value"
+      ]
+    },
+    {
+      "id": "close",
+      "duration": 8,
+      "kicker": "BUSINESS EXPLAINED",
+      "title": "The percentage is only half the story.",
+      "narration": "The takeaway: count your slice, but also understand the whole business. That is the part a merger headline leaves out.",
+      "visual": "combination",
+      "labels": [
+        "PROPOSAL",
+        "OUTCOME",
+        "Keep uncertainty visible"
+      ],
+      "claim_ids": [
+        "ownership",
+        "value"
+      ]
+    }
+  ]
+}

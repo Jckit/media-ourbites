@@ -1,0 +1,12 @@
+node_modules/
+build/
+out/
+__pycache__/
+.env
+credentials*.json
+token*.json
+research/pdf-preview/
+.venv-voice/
+models/
+auditions/*.wav
+.venv-chatterbox/

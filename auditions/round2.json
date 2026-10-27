@@ -1,0 +1,16 @@
+[
+  {
+    "label": "E",
+    "voice": "am_onyx",
+    "speed": 1.0,
+    "seconds": 18.047333333333334,
+    "generation_seconds": 5.499212300000181
+  },
+  {
+    "label": "F",
+    "voice": "am_michael",
+    "speed": 1.0,
+    "seconds": 23.104625,
+    "generation_seconds": 7.922156700000414
+  }
+]

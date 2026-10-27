@@ -1,0 +1,48 @@
+{
+  "engine": "kokoro-onnx",
+  "model": "Kokoro v1.0",
+  "model_sha256": "beb0d1848dee9a49da392cc3df26958d46cfa35d321edf434f52949153f0df3a",
+  "voices_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "candidates": [
+    {
+      "label": "A",
+      "voice": "am_puck",
+      "language": "en-us",
+      "speed": 1.0,
+      "seconds": 18.39,
+      "generation_seconds": 7.04,
+      "sample_rate": 24000,
+      "sha256": "671ff5a7a57e031052afa3eecb660d20cc70489546bc61a0837c2a5b94c31b77"
+    },
+    {
+      "label": "B",
+      "voice": "af_heart",
+      "language": "en-us",
+      "speed": 1.0,
+      "seconds": 20.94,
+      "generation_seconds": 6.59,
+      "sample_rate": 24000,
+      "sha256": "fe09cd849ab58859e0c9755336b7f8e8af8b8ac901709f0e37670f091c9cec37"
+    },
+    {
+      "label": "C",
+      "voice": "bm_george",
+      "language": "en-gb",
+      "speed": 1.0,
+      "seconds": 20.7,
+      "generation_seconds": 6.48,
+      "sample_rate": 24000,
+      "sha256": "6e4a10960f829b68ba8d3ba817e605a19910355ea33f66364efd977a2564f2f4"
+    },
+    {
+      "label": "D",
+      "voice": "bf_emma",
+      "language": "en-gb",
+      "speed": 1.0,
+      "seconds": 19.24,
+      "generation_seconds": 5.89,
+      "sample_rate": 24000,
+      "sha256": "f3a16a8fb7a81b49def2bd66b98cbef48ace6e17e28d5cb4a45fc7e83060b57b"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "clips": [
+    {
+      "text": "You own ten of one hundred shares.",
+      "start": 0,
+      "duration": 2.439092970521542,
+      "file": "proof/voice-0.wav"
+    },
+    {
+      "text": "The company issues twenty-five more.",
+      "start": 2.619092970521542,
+      "duration": 2.529160997732426,
+      "file": "proof/voice-1.wav"
+    },
+    {
+      "text": "Your ten shares now represent eight percent.",
+      "start": 5.328253968253968,
+      "duration": 2.8789569160997734,
+      "file": "proof/voice-2.wav"
+    },
+    {
+      "text": "Rude.",
+      "start": 8.387210884353742,
+      "duration": 1.0694331065759637,
+      "file": "proof/voice-3.wav"
+    },
+    {
+      "text": "Same shares. Smaller percentage. Not necessarily less value.",
+      "start": 9.636643990929706,
+      "duration": 5.65859410430839,
+      "file": "proof/voice-4.wav"
+    }
+  ],
+  "duration": 15.875238095238096
+}

@@ -1,0 +1,22 @@
+{
+  "name": "business-and-chats-pilot",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "studio": "remotion studio src/index.tsx --no-open",
+    "typecheck": "tsc --noEmit",
+    "render:draft": "remotion render src/index.tsx BusinessShort out/merger-draft.mp4 --props=examples/merger.json --concurrency=2",
+    "still": "remotion still src/index.tsx BusinessShort out/merger-still.png --props=examples/merger.json --frame=660"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.539",
+    "remotion": "4.0.539",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}
