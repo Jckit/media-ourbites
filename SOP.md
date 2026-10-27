@@ -102,3 +102,25 @@ Use these sequentially in one operator workflow; they do not require autonomous 
 ## Definition of an accepted pilot episode
 
 Original and useful explanation; verified source packet; measured voice timing; correct visual mechanics; consistent approved style; mobile-readable captions; rights recorded; final master reviewed; explicit release decision; costs and hours logged. The starter implementation covers the manifest/review/receipt foundation and silent visuals. Remaining integrations are tracked in README.md.
+
+## Extension: news-led story selection, visual evidence, and retention (27 October 2026)
+
+This extends steps 1–7 above and does not change human gates A/B/C. The goal is *the business behind the headline*: the event creates a reason to watch now; a mechanism and critical counterpoint make the video valuable later. **No story goes forward just because it is trending.**
+
+### Story qualification (Gate A)
+
+Add `news_peg` (what happened, as of when), `viewer_question`, `explainable_mechanism`, `counterpoint_or_unknown`, and `evergreen_payoff` to story briefs. Prioritize regulatory disclosures, earnings, IPOs, acquisitions, governance and business-model changes when the source trail is strong. Shortlist contradictions, surprising incentives and consequential decisions rather than generic headlines. Explicitly reject angles with no original takeaway or overly speculative causal interpretation. A recent event can produce a separate update later only if *new evidence* adds new understanding.
+
+### Required visual-evidence packet (between steps 2 and 4)
+
+With each sourced claim/scene, look for authentic **event photos, archival clips, original company material, product demos, official records and relevant footage**. Attach candidate source URL, creator, event date, location/timecode, evidence links, intended on-screen seconds/crop, factual verification, copyright/license/permission or exception-review state, credit requirements, and a fallback. Follow [research/VISUAL-EVIDENCE.md](research/VISUAL-EVIDENCE.md). Do not download assets for production or assume reusable rights from a public URL, attribution, a short excerpt, or editorial/educational intent. Distinguish actual footage from reenactment, hypothetical scenarios and AI-generated illustrations.
+
+**Human media-rights checkpoint:** before a third-party asset is included in a final master, verify permission/license or document an applicable exception assessment (with appropriate legal review as needed). Unreviewed and permission-requested assets cannot be approved for the final cut. Keep the asset register and license evidence alongside the draft review. Final-media Gate C must review the *exact versions* of footage and audio plus credits and potential Content ID claims. Changing an asset invalidates relevant review decisions. The current Python validator **does not implement** this gate automatically.
+
+### Narrative and media-mix tests
+
+Available narrative structures: contradiction → explanation; growth → constraint; strategic reversal; financial/accounting puzzle; power/control; question under uncertainty. Do not force every script into the same scene timing. A Short should generally move through concrete puzzle → necessary context → mechanism → counterpoint → payoff; use long-form when material details cannot be responsibly compressed. Real media makes the story tangible; custom Remotion diagrams make it understandable. Avoid unmotivated AI B-roll and repetitive transitions.
+
+### Measurement
+
+Write a short per-video hypothesis before publication (e.g. a financial contradiction creates a stronger first-three-second hold). After publication, log stayed-to-watch (Shorts), engaged views, average percentage viewed, video-level retention dips/spikes, subscriber gains, production minutes, revisions, and rights/Content ID outcomes. Compare videos of similar lengths and ages; keep private Studio data out of Git. Public competitor views are not internal retention evidence. Detailed protocol: [research/COMPETITOR-FORMATS.md](research/COMPETITOR-FORMATS.md).
