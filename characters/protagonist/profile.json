@@ -1,0 +1,45 @@
+{
+  "id": "ourbites-protagonist",
+  "name": "Ourbites guide",
+  "type": "recurring_fictional_protagonist",
+  "channel": "ourbites",
+  "status": "provisional_awaiting_user_approval",
+  "base_design": "styles/character-hybrid.png",
+  "base_implementation": "src/OurbitesHost.tsx",
+  "origin": "styles/CHARACTER-PROMPTS.md#hybrid",
+  "is_real_person": false,
+  "must_appear_in_every_video": true,
+  "suggested_story_roles": [
+    "hook",
+    "mechanism",
+    "payoff"
+  ],
+  "poses": [
+    "neutral",
+    "explain",
+    "think",
+    "point",
+    "react"
+  ],
+  "traits": [
+    "round cream head",
+    "one angular navy hair tuft",
+    "expressive eyebrows",
+    "teal compact rounded torso",
+    "thin navy stick limbs",
+    "simple mitten hands"
+  ],
+  "palette": {
+    "paper": "#F4F0E6",
+    "ink": "#142B38",
+    "teal": "#087E83",
+    "orange": "#E97F48"
+  },
+  "review": {
+    "approved": false,
+    "reviewer": null,
+    "approved_at": null,
+    "asset_sha256": null,
+    "notes": "SVG/Remotion prototype is usable for drafts; human must approve final protagonist design and variants."
+  }
+}
