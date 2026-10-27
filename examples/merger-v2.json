@@ -145,5 +145,19 @@
         "value"
       ]
     }
-  ]
+  ],
+  "character_cast": {
+    "protagonist": {
+      "id": "ourbites-protagonist",
+      "profile": "characters/protagonist/profile.json",
+      "appearance_scene_ids": [
+        "hook",
+        "mechanism",
+        "close"
+      ],
+      "status": "provisional_awaiting_user_approval"
+    },
+    "real_people": [],
+    "notes": "The existing recurring hybrid character guides the viewer; possible corporate transaction is not personified as an actual event."
+  }
 }
