@@ -80,3 +80,9 @@ npx remotion render src/index.tsx OwnershipProof out/my-pilot.mp4 --concurrency=
 ```
 
 In Studio, inspect scene starts, mid-transition frames and endings. Confirm visible numbers match diagrams at every step; captions do not overlap visuals; narration finishes before scene changes; and the payoff answers the hook. Watch and listen to the exported MP4 before release. Keep publication manual until the full media is approved.
+
+## Authentic footage and archival assets (added 27 October 2026)
+
+During research, create a separate **shot-linked candidate media register** (see [research/VISUAL-EVIDENCE.md](research/VISUAL-EVIDENCE.md)). For each proposed visual, tie it to a specific sentence/claim, preserve the official source and exact moment, state the factual value, rights and credit conditions, and a clean illustrated fallback. A public news/YouTube URL is a research lead, **not** a license. Do not add unreviewed third-party media to the final composition. If permission/exception cannot be substantiated, render the equivalent event/context with original text and code-native animation.
+
+When an asset has been cleared, place the exact approved local file under your **private production asset store**, record its hash, then incorporate the local still or video into Remotion with correct cropping and attributions. Keep borrowed soundtrack, embedded branding, people and editorial-only licensing under separate review where applicable. A film-like sequence should alternate **real event/context → sourced financial visualization → explanatory host/diagram → payoff** based on the needs of the story, not on fixed quotas. Preserve the existing human final-media approval and verify the actual exported media.
