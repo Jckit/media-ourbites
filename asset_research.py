@@ -209,9 +209,10 @@ def build(episode: dict, plan: dict, use_commons: bool = False, limit: int = 4,
 def release_issues(packet: dict) -> list[str]:
     """Candidate packet review—not a replacement for human or legal approval."""
     problems = []
-    for item in packet.get("assets", []):
-        if not item.get("selected_for_final"):
-            continue
+    selected = [item for item in packet.get("assets", []) if item.get("selected_for_final")]
+    if not selected:
+        return ["No assets selected_for_final; this packet is research, not a cleared production package"]
+    for item in selected:
         tag = item.get("id", "unknown")
         if item.get("rights_status") not in {"licensed", "permitted_public_domain", "exception_reviewed"}:
             problems.append(f"{tag}: rights not cleared")
