@@ -20,6 +20,10 @@ jobs:
           python-version: '3.11'
       - name: Python editorial and media research tests
         run: python -m unittest discover -s tests -v
+      - name: Check declared character cast for Ourbites draft episodes
+        run: |
+          python scripts/validate_character_cast.py episodes/002/episode.json
+          python scripts/validate_character_cast.py examples/merger-v2.json
       - name: Verify local reviewed-media registry (graphics-only draft)
         run: python scripts/verify_anthropic_media.py
       - name: Node
