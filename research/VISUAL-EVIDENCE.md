@@ -75,3 +75,15 @@ Do not force these timings into every script. Prefer a purposeful mix of archiva
 - **Final approval:** review exact asset versions, final cut, credits, audio and disclosures alongside the pre-existing final-media gate.
 
 The pilot must be reviewable and manually cleared; later code may validate required fields and block release if rights statuses are unresolved. No automated publish or rights detector is implemented.
+
+## Implementation update: asset research CLI (27 October 2026)
+
+`asset_research.py` now implements candidate discovery and packet generation. Input is an existing episode manifest plus a scene-linked curated plan (see [pilot 001 plan](../examples/merger-media-plan.json)). Output is an ignored `out/` directory containing `assets.json` and `shot-list.md`, including claim references, media URLs where found, license *hints*, rights state, search logs and a fallback for each planned scene.
+
+```powershell
+python asset_research.py build --episode examples/merger-v2.json --plan examples/merger-media-plan.json --out out/media-research/001
+# Internet required, metadata lookup only:
+python asset_research.py build --episode examples/merger-v2.json --plan examples/merger-media-plan.json --out out/media-research/001 --commons --limit 3
+```
+
+Every record defaults to `unreviewed` rights and `unverified` facts. Commons license/creator fields must be checked on the original file page; the API cannot establish rights. The optional search has mocked unit tests but has **not** been live-tested from this workspace. Curated official research links are not permission to reuse material. `python asset_research.py check --packet out/media-research/001/assets.json` performs limited field checks on manually selected, reviewed, version-hashed assets; it intentionally rejects a packet with no selected assets. This does **not** replace legal/editorial review, download rights, the final-media gate, or code-level enforcement in Remotion. The earlier "Research worker (future)" paragraph above is superseded for *metadata discovery only*.
