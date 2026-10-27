@@ -3,10 +3,12 @@ import {AbsoluteFill,Audio,Sequence,staticFile,useCurrentFrame,interpolate} from
 import audio from './proof-audio.json';
 import {StoryBeat,storyTiming,useStoryClock,playbackSpeed,motionClamp} from './story-motion';
 import {ownershipState,primaryScenario,secondScenario,type OwnershipScenario} from './ownership-state';
+import {OurbitesHost} from './OurbitesHost';
 const ink='#142B38',teal='#087E83',paper='#F4F0E6';
 const panel:React.CSSProperties={background:paper,color:ink,fontFamily:'Arial, sans-serif',padding:'120px 90px'};
 const Brand=()=> <div style={{fontSize:32,fontWeight:800,letterSpacing:4}}>OURBITES</div>;
-export const HybridHost:React.FC<{doubt?:number}>=({doubt=0})=><svg viewBox="0 0 360 520" width="330" height="477"><g stroke={ink} strokeWidth="9" strokeLinecap="round" strokeLinejoin="round"><path d="M145 355 L135 475 H105 M215 355 L228 475 H257" fill="none"/><path d="M125 235 Q100 290 120 350 Q180 380 240 350 L235 235" fill={teal}/><path d="M120 250 Q65 300 108 325" fill="none"/><path d={`M238 255 Q295 300 ${325-96*doubt} ${210-2*doubt}`} fill="none"/><circle cx="180" cy="145" r="97" fill={paper}/><path d="M130 65 L164 20 L176 75 Z" fill={ink}/><path d={`M128 109 Q140 ${96+12*doubt} 153 108 M204 108 Q218 95 232 108`} fill="none"/><circle cx="144" cy="139" r="6"/><circle cx="219" cy="139" r="6"/><path d={`M165 183 Q182 ${199-22*doubt} 200 183`} fill="none"/></g></svg>;
+// Preserve the existing OwnershipProof usage while sharing the canonical host design.
+export const HybridHost = OurbitesHost;
 const Hook:React.FC<{s:OwnershipScenario}>=({s})=>{
  const f=useCurrentFrame(),{fps}=useStoryClock(),t=f/fps,event=t>=1.5;
  return <AbsoluteFill style={panel}><Brand/><h1 style={{fontSize:94,lineHeight:1.05,marginTop:150}}>{t<2.4?'You kept every share.':'So why do you own less?'}</h1><div style={{position:'absolute',top:850,left:100,scale:'1.2'}}><HybridHost doubt={interpolate(t,[1.5,1.9],[0,1],motionClamp)}/></div><div style={{position:'absolute',top:850,left:490,width:430,background:ink,color:'white',padding:30,borderRadius:30,textAlign:'center'}}><div style={{fontSize:38}}>YOUR OWNERSHIP</div><div style={{fontSize:130,color:'#FFAE72',fontWeight:800}}>{Number((s.owned/(s.initial+(event?s.issued:0))*100).toFixed(1))}%</div><div style={{fontSize:36}}>{event?s.initial+s.issued:s.initial} total shares</div></div><div style={{position:'absolute',top:1280,left:490,fontSize:43,color:teal,fontWeight:700}}>Your {s.owned} shares.<br/>Still yours.</div><div style={{position:'absolute',top:1570,left:100,fontSize:46}}>{event?`+${s.issued} shares issued to others`:'Illustrative example'}</div></AbsoluteFill>;
