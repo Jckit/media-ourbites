@@ -1,0 +1,160 @@
+{
+  "episode_id": "ourbites-anthropic-ipo-accounting",
+  "scenes": {
+    "hook": {
+      "fallback": "Original headline/title and sourced period-labeled loss card; never treat an unpriced IPO as completed.",
+      "leads": [
+        {
+          "url": "https://www.anthropic.com/news/s1-sec",
+          "title": "Official October 26 IPO announcement",
+          "publisher": "Anthropic",
+          "kind": "document_excerpt",
+          "event_date": "2026-10-26",
+          "locator": "S-1 announcement headline",
+          "purpose": "Establish the event is a proposed IPO, not a completed listing.",
+          "claim_ids": [
+            "ipo"
+          ]
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+          "title": "Filed S-1 financial statements",
+          "publisher": "SEC / Anthropic",
+          "kind": "document_excerpt",
+          "locator": "Consolidated Statements of Operations Data: net loss H1 2026",
+          "purpose": "Provide the exact H1 2026 net loss and its financial statement period.",
+          "claim_ids": [
+            "net"
+          ]
+        }
+      ],
+      "commons_searches": [
+        "Dario Amodei Anthropic 2025 conference photograph"
+      ]
+    },
+    "growth": {
+      "fallback": "Native Remotion grouped 2025 versus 2026 six-month revenue bars; optional original abstract product UI illustration.",
+      "leads": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+          "title": "S-1 same-period revenue",
+          "publisher": "SEC / Anthropic",
+          "kind": "document_excerpt",
+          "locator": "Revenue row, six months ended June 30 2025 and 2026",
+          "purpose": "Ground fourteenfold growth in like-for-like periods.",
+          "claim_ids": [
+            "revenues"
+          ]
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=MhfnicQVkgY",
+          "title": "The future of work with Claude — verified Claude channel",
+          "publisher": "Claude official YouTube channel",
+          "kind": "official_demo",
+          "event_date": "2026-07-02",
+          "purpose": "Optional real product/company activity context, not footage of an IPO; soundtrack and video remain uncleared.",
+          "claim_ids": [
+            "revenues"
+          ]
+        }
+      ],
+      "commons_searches": []
+    },
+    "operations": {
+      "fallback": "Original operating/net-loss contrast; not an uncontrolled animation of actual cash transfers.",
+      "leads": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+          "title": "S-1 operating and net loss table",
+          "publisher": "SEC / Anthropic",
+          "kind": "document_excerpt",
+          "locator": "Consolidated Statements of Operations Data, six months ended June 30 2026",
+          "purpose": "Visually establish operating vs net income distinction.",
+          "claim_ids": [
+            "operating",
+            "net"
+          ]
+        }
+      ],
+      "commons_searches": []
+    },
+    "accounting": {
+      "fallback": "Original coded step-by-step signed USD billions bridge, every figure derived from exact statement rows, notes sourced.",
+      "leads": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+          "title": "Convertible-note fair-value disclosure and earnings table",
+          "publisher": "SEC / Anthropic",
+          "kind": "document_excerpt",
+          "locator": "Consolidated Statements of Operations Data; Risk Factors and convertible-note fair-value discussion",
+          "purpose": "Support precise finance accounting waterfall and avoid cash-loss confusion.",
+          "claim_ids": [
+            "remeasure",
+            "cash-distinction",
+            "other-lines",
+            "net"
+          ]
+        }
+      ],
+      "commons_searches": []
+    },
+    "cost": {
+      "fallback": "Original cost-card showing H1 2026 compute/infrastructure operating expense; footage only as period-matched context.",
+      "leads": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+          "title": "S-1 compute and infrastructure expense table",
+          "publisher": "SEC / Anthropic",
+          "kind": "document_excerpt",
+          "locator": "Operating expenses: Compute and infrastructure, H1 2026",
+          "purpose": "Show a real operating constraint distinct from fair-value charges.",
+          "claim_ids": [
+            "compute"
+          ]
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=hQR_VJF6ukk",
+          "title": "Dario Amodei CBS Sunday Morning extended interview",
+          "publisher": "CBS Sunday Morning",
+          "kind": "video_clip",
+          "event_date": "2026-09-13",
+          "purpose": "Contemporary, genuine CEO context; not IPO event footage. CBS lists licensing@veritone.com; request permission or do not render.",
+          "claim_ids": [
+            "compute"
+          ]
+        }
+      ],
+      "commons_searches": [
+        "Dario Amodei portrait conference Creative Commons"
+      ]
+    },
+    "payoff": {
+      "fallback": "Original money-flow icons and question card; avoid using an unsourced Korean-stock-market comparison.",
+      "leads": [
+        {
+          "url": "https://www.anthropic.com/news/s1-sec",
+          "title": "IPO price range not yet determined",
+          "publisher": "Anthropic",
+          "kind": "document_excerpt",
+          "locator": "Official press release, offering price and share count",
+          "purpose": "Establish what remains unknown about valuation.",
+          "claim_ids": [
+            "ipo",
+            "value-uncertain"
+          ]
+        },
+        {
+          "url": "https://www.anthropic.com/events",
+          "title": "Anthropic official events archive",
+          "publisher": "Anthropic",
+          "kind": "official_demo",
+          "purpose": "Potential company context; research a specific event and timestamp before use.",
+          "claim_ids": [
+            "value-uncertain"
+          ]
+        }
+      ],
+      "commons_searches": []
+    }
+  }
+}
