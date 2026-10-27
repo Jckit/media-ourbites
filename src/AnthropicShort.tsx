@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, Sequence, useCurrentFrame, useVideoConfig} from 'remotion';
 import episode from '../episodes/002/episode.json';
+import financials from '../episodes/002/financials.json';
 import {getHumanReviewedAsset, ReviewedMediaInsert} from './ReviewedMediaInsert';
 
 // Silent editorial storyboard: not a voiced, approved or publishable master.
@@ -9,9 +10,19 @@ export const ANTHROPIC_SHORT_FRAMES =
   episode.scenes.reduce((sum, scene) => sum + Math.round(scene.duration * ANTHROPIC_SHORT_FPS), 0);
 const C = {paper:'#F4F0E6', ink:'#142B38', teal:'#087E83',
   orange:'#E97F48', muted:'#607078', pale:'#E0E9E7', white:'#FFFFFF'};
-const DATA = {revenueH12025:1.163, revenueH12026:16.286, operatingLoss:-0.693,
-  fairValueChange:-72.388, otherExpense:-8.757, interestIncome:1.111, tax:-0.021,
-  netLoss:-80.748, computeExpense:8.945};
+const USD_B = 1000; // filing figures are in USD millions; visuals use billions
+const h1 = financials.h1_2026;
+const DATA = {
+  revenueH12025: financials.h1_2025.revenue / USD_B,
+  revenueH12026: h1.revenue / USD_B,
+  operatingLoss: h1.operating_loss / USD_B,
+  fairValueChange: h1.convertible_financing_fair_value_change / USD_B,
+  otherExpense: h1.other_income_expense_net / USD_B,
+  interestIncome: h1.interest_income / USD_B,
+  tax: -h1.income_tax_provision / USD_B,
+  netLoss: h1.net_loss / USD_B,
+  computeExpense: h1.compute_and_infrastructure_expense / USD_B,
+};
 const afterFairValue = DATA.otherExpense + DATA.interestIncome + DATA.tax;
 const reconciledNet = DATA.operatingLoss + DATA.fairValueChange + afterFairValue;
 if (Math.abs(reconciledNet - DATA.netLoss) > 0.0000001) {
