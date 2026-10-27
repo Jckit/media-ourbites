@@ -86,3 +86,16 @@ In Studio, inspect scene starts, mid-transition frames and endings. Confirm visi
 During research, create a separate **shot-linked candidate media register** (see [research/VISUAL-EVIDENCE.md](research/VISUAL-EVIDENCE.md)). For each proposed visual, tie it to a specific sentence/claim, preserve the official source and exact moment, state the factual value, rights and credit conditions, and a clean illustrated fallback. A public news/YouTube URL is a research lead, **not** a license. Do not add unreviewed third-party media to the final composition. If permission/exception cannot be substantiated, render the equivalent event/context with original text and code-native animation.
 
 When an asset has been cleared, place the exact approved local file under your **private production asset store**, record its hash, then incorporate the local still or video into Remotion with correct cropping and attributions. Keep borrowed soundtrack, embedded branding, people and editorial-only licensing under separate review where applicable. A film-like sequence should alternate **real event/context → sourced financial visualization → explanatory host/diagram → payoff** based on the needs of the story, not on fixed quotas. Preserve the existing human final-media approval and verify the actual exported media.
+
+## Anthropic financial-news episode (example implementation)
+
+Episode 002 now has its **own `AnthropicShort` Remotion composition** instead of reusing the Tesla-focused generic ownership diagram. Its figures come from [episodes/002/financials.json](episodes/002/financials.json); its narration/claim ledger come from [episodes/002/episode.json](episodes/002/episode.json). Build visual candidate metadata using `python asset_research.py build --episode episodes/002/episode.json --plan episodes/002/media-plan.json --out out/media-research/002`.
+
+```powershell
+npm run still:anthropic
+npm run render:anthropic:storyboard
+```
+
+**Important:** the result is silent and visibly marked `EDITORIAL STORYBOARD · SILENT · UNAPPROVED`. Its text is a script preview, **not** timed subtitles. To add reviewed photographs/video, copy properly licensed exact files into ignored `public/approved/`, record provenance/human review/real SHA256 in `src/anthropic-approved-media.json`, and run `python scripts/verify_anthropic_media.py --require-media`; passing hash/field checks alone does not replace legal clearance. The renderer only considers locally referenced approved-media records and uses original graphics otherwise. No remote media is embedded by source URL.
+
+Run Kokoro auditions with `.venv-voice/Scripts/python scripts/audition-anthropic.py --mode compare`. Select and listen to one voice *first*, then use `--mode full --voice VOICE_ID` to generate per-scene drafts and measured timing metadata under ignored `out/`. Retiming and word-level caption alignment remain manual/pending; do **not** represent the silent storyboard as a publishable master.
