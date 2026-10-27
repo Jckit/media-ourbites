@@ -47,3 +47,11 @@ Audition A/E/F/H/I and Chatterbox G where a local render exists; consult [../../
 - [ ] Final narrator selected and audio/word alignment measured.
 - [ ] Final mobile composition and sound inspected, licensed music/audio confirmed.
 - [ ] Exact final master and metadata approved; release/manual publication only afterward.
+
+## Recurring protagonist and illustrated real-person layer (2026-10-27)
+
+The Anthropic storyboard **now reuses the same Ourbites hybrid SVG host** from `OwnershipProof` in three story beats: **hook** (skeptical reaction to the $80B headline), **operations** (thinking/asking about the income statement mismatch), and **payoff** (pointing toward the lasting financial question). The host has a stable look and is not Dario Amodei. The exact visual design and position are still **provisional until human review of the new rendered scenes**. Keep the financial cards and narration legible; move/resize the character if it crowds them.
+
+[Dario Amodei's stylized character profile](../../characters/dario-amodei/profile.json) and [official image reference record](../../characters/dario-amodei/references.md) are ready for a **future** approved likeness. Consider Dario in `growth` and `cost` beats if he contributes context. Do **not** render the generated chat concept as a final identity, or claim he said the script's lines; the current render has no named real-person illustrations. All depicted-character approval and real footage rights rules: [research/CHARACTER-ASSETS.md](../../research/CHARACTER-ASSETS.md) and [research/VISUAL-EVIDENCE.md](../../research/VISUAL-EVIDENCE.md).
+
+Check: `python scripts/validate_character_cast.py episodes/002/episode.json`. Final release `--release` intentionally rejects the current provisional host design until a human-approved version/hash is recorded and reviewed.
