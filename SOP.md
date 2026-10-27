@@ -124,3 +124,15 @@ Available narrative structures: contradiction → explanation; growth → constr
 ### Measurement
 
 Write a short per-video hypothesis before publication (e.g. a financial contradiction creates a stronger first-three-second hold). After publication, log stayed-to-watch (Shorts), engaged views, average percentage viewed, video-level retention dips/spikes, subscriber gains, production minutes, revisions, and rights/Content ID outcomes. Compare videos of similar lengths and ages; keep private Studio data out of Git. Public competitor views are not internal retention evidence. Detailed protocol: [research/COMPETITOR-FORMATS.md](research/COMPETITOR-FORMATS.md).
+
+### Asset research CLI operational handoff (added 27 October 2026)
+
+After Gate A and the claim/scene manifest, prepare a scene-specific lead/search plan and run:
+
+```powershell
+python asset_research.py build --episode examples/merger-v2.json --plan examples/merger-media-plan.json --out out/media-research/001
+# Optional, online Commons metadata search:
+python asset_research.py build --episode examples/merger-v2.json --plan examples/merger-media-plan.json --out out/media-research/001 --commons --limit 3
+```
+
+Review `assets.json` and `shot-list.md` before contacting rights holders or preparing assets. A discovered URL or Creative Commons license *hint* is not a clearance. Do not convert `unreviewed` to `licensed` without independent permission/license checks. After legitimate acquisition, human selection, fact review and file hashes, run `python asset_research.py check --packet out/media-research/001/assets.json`. This is a preliminary metadata preflight, **not** a sufficient legal review, a final-media receipt or a publication authorization. The current renderer and `pipeline.py` are not yet connected to this asset register.
