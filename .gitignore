@@ -10,3 +10,4 @@ research/pdf-preview/
 models/
 auditions/*.wav
 .venv-chatterbox/
+public/approved/
