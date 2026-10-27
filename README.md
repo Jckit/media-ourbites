@@ -99,3 +99,32 @@ python -m unittest discover -s tests -v
 ```
 
 The outputs are `out/media-research/001/assets.json` and `shot-list.md`. Assets default to `unreviewed` and `unverified`. Failed network searches are logged. The `check` command fails when no final asset has been selected, or when selected files lack necessary human review/evidence fields. Passing it is not copyright clearance or publication authorization. No live Commons integration test, automatic download, or Remotion asset importer has yet been run. See [visual sourcing policy](research/VISUAL-EVIDENCE.md).
+
+## Episode 002 — Anthropic IPO (2026-10-27)
+
+**Real implemented draft:** [episodes/002/episode.json](episodes/002/episode.json) (82-second estimated, six-scene sourced narration), [financials.json](episodes/002/financials.json) (S-1 accounting figures, USD millions), [SHOT-PLAN.md](episodes/002/SHOT-PLAN.md), [media-plan.json](episodes/002/media-plan.json), and the independent, source-driven Remotion `AnthropicShort` composition in `src/AnthropicShort.tsx`. Joseph Carlson's Oct. 26 Anthropic commentary was used as a *secondary editorial lens*, not footage or data authority. The reported company-wide Korea market-size comparison is **not asserted** in the episode because IPO terms remain unpriced and Korea's combined market is larger than speculative Anthropic valuations.
+
+```powershell
+git pull origin main
+npm ci --ignore-scripts
+python -m unittest discover -s tests -v
+python pipeline.py validate episodes/002/episode.json
+python pipeline.py review episodes/002/episode.json --out out/anthropic-editorial-review.md
+python asset_research.py build --episode episodes/002/episode.json --plan episodes/002/media-plan.json --out out/media-research/002
+python scripts/verify_anthropic_media.py
+npm run typecheck
+npm run still:anthropic
+npm run render:anthropic:storyboard
+```
+
+The Remotion export is a **silent editorial storyboard with draft script visible**, **not** a completed video. `src/anthropic-approved-media.json` begins with zero approved third-party inserts, so the animation falls back to code-drawn explanatory visuals. The curated source plan includes genuine [CBS Dario Amodei interview](https://www.youtube.com/watch?v=hQR_VJF6ukk) and [Claude product video](https://www.youtube.com/watch?v=MhfnicQVkgY) candidates, but public clips are **not cleared for reuse**. Do not manually populate approved-media JSON until rights, factual date/context and file hashes are reviewed. The private `public/approved/` folder is ignored by Git.
+
+Local Kokoro voice audition paths:
+
+```powershell
+.venv-voice/Scripts/python scripts/audition-anthropic.py --mode compare
+# After choosing and listening to a specific voice:
+.venv-voice/Scripts/python scripts/audition-anthropic.py --mode full --voice am_liam
+```
+
+The chosen voice above is only an **illustrative command argument**, not a recommendation or approval. These scripts create ignored local WAVs and measured scene durations; a human must choose a voice, listen, retime, and align captions before final production. Rendering, media rights, and publication remain gated by the existing SOP.
