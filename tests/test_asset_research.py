@@ -68,6 +68,10 @@ class AssetResearchTests(unittest.TestCase):
         wrong["imageinfo"][0]["mime"] = "application/pdf"
         self.assertIsNone(commons_candidate("hook", ["ownership"], "fallback", "query", wrong))
 
+    def test_empty_selection_not_misreported_as_cleared(self):
+        packet = build(EPISODE, PLAN)
+        self.assertTrue(any("No assets selected" in issue for issue in release_issues(packet)))
+
     def test_final_candidate_without_rights_fails_closed(self):
         packet = build(EPISODE, PLAN)
         packet["assets"][0]["selected_for_final"] = True
