@@ -1,0 +1,25 @@
+{
+  "source_id": "s1",
+  "source_url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+  "locator": "Consolidated Statements of Operations Data; in millions; six months ended June 30",
+  "units": "USD millions",
+  "h1_2025": {
+    "revenue": 1163
+  },
+  "h1_2026": {
+    "revenue": 16286,
+    "compute_and_infrastructure_expense": 8945,
+    "operating_loss": -693,
+    "convertible_financing_fair_value_change": -72388,
+    "other_income_expense_net": -8757,
+    "interest_income": 1111,
+    "income_tax_provision": 21,
+    "net_loss": -80748
+  },
+  "notes": [
+    "These are matched six-month periods, not annual figures.",
+    "Expense/earnings accounting data is not itself a cash-flow statement.",
+    "The fair-value line includes convertible notes, derivative liabilities and SAFEs.",
+    "IPO price is not established in this numerical dataset."
+  ]
+}
