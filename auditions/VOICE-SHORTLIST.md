@@ -58,3 +58,15 @@ This table describes **committed scripts and metadata**, not new listening score
 The individual audition WAV files (`auditions/*.wav`) and model weights (`models/`) are ignored by Git. Current committed `public/proof/*.wav` files are Windows narration placeholders for the ownership animation and are **not** a final narration voice audition. Textual metadata and generation duration do not establish acoustic quality, human preference, or transcript fidelity. A reviewer must actually listen to the local WAVs at consistent playback settings and score them before adopting a production voice.
 
 **Next audition gate:** compare A (including the preferred pitch modification, with audio artifacts saved separately), E, F, H, I and G *only if its recording was successfully made*. Rank clarity, naturalness, restrained playfulness, and comfort using the weights above. Explicitly test names and financial numbers for mispronunciations. Only then synthesize a true final narration and retime Remotion from measured audio; do not treat `playbackSpeed=1.1` as a mandatory final voice speed.
+
+## Anthropic episode 002 voice audition handoff (2026-10-27)
+
+The independent episode script and narrative are in [episodes/002/episode.json](../episodes/002/episode.json). A new local audition generator [scripts/audition-anthropic.py](../scripts/audition-anthropic.py) reads Kokoro v1.0 weights already expected by the project. It compares **A / E / F / H / I** on the *same short Anthropic test text*, including `Anthropic`, `convertible financing`, `operating loss` and number pronunciation; it saves `out/voice-auditions/002/*.wav` plus comparison metadata. G (Chatterbox) remains a separate audition and is not falsely labeled generated.
+
+```powershell
+.venv-voice/Scripts/python scripts/audition-anthropic.py --mode compare
+# After human audition/choice; value only an example:
+.venv-voice/Scripts/python scripts/audition-anthropic.py --mode full --voice am_liam
+```
+
+Full mode generates **rough per-scene WAVs** with measured durations under `out/voice-auditions/002/full-VOICE/`; it does not insert them into Remotion or approve a voice. Carefully listen, check names and figures, select final delivery speed and correct mispronunciations. Then retime the 82-second estimated storyboard and use actual word alignment for captions. **Do not** apply a second post-render acceleration on top of chosen TTS speed. Auditions and generated WAVs remain excluded from Git; no voice has been approved in this repository.
