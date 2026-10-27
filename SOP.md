@@ -136,3 +136,15 @@ python asset_research.py build --episode examples/merger-v2.json --plan examples
 ```
 
 Review `assets.json` and `shot-list.md` before contacting rights holders or preparing assets. A discovered URL or Creative Commons license *hint* is not a clearance. Do not convert `unreviewed` to `licensed` without independent permission/license checks. After legitimate acquisition, human selection, fact review and file hashes, run `python asset_research.py check --packet out/media-research/001/assets.json`. This is a preliminary metadata preflight, **not** a sufficient legal review, a final-media receipt or a publication authorization. The current renderer and `pipeline.py` are not yet connected to this asset register.
+
+## Character casting and recurring presenter gate (added 2026-10-27)
+
+**Apply this stage to every new Ourbites production, after the story evidence/media packet and before asset/scene lock.** The shared framework can support other channels with their own guide; **Ourbites specifically requires one recurring fictional protagonist**. Use the existing provisional hybrid host rather than generating a different mascot per video.
+
+1. Add `character_cast.protagonist` in the episode manifest with the canonical host profile, human approval status, and `appearance_scene_ids`. The host should meaningfully bookend or explain the story, not sit on top of financial numbers. Aim for a hook/question, an explanation/reaction, and a payoff where layout permits. The mandatory rule is **present in every video**, not every scene.
+2. For real CEOs/founders, research an authentic reference portrait and dated sources; record visible traits and intended narrative role in `characters/<slug>/references.md`, then create one stable base illustration and compatible poses. Include an explicit `real_people` cast entry. Avoid fabricated historic footage, quotes or cloned voices.
+3. Route the base design and variant sheets through **human identity/style approval**. Verify accuracy, mobile readability, no uncanny identity drift, and whether on-screen labeling is needed to distinguish illustration from actual-event footage. A generated concept remains `concept`, not `approved`, until the exact version/hash and reviewer are recorded.
+4. Use shared [OurbitesHost](src/OurbitesHost.tsx) React/SVG animation. The current hybrid is provisional; do **not** auto-publish it as final character identity. Record character version/hash in the final visual asset package. Third-party source photos/videos still require their own clearance under [research/VISUAL-EVIDENCE.md](research/VISUAL-EVIDENCE.md).
+5. Run `python scripts/validate_character_cast.py episodes/002/episode.json` during drafting. `--release` deliberately rejects unapproved host/real-person assets, but passing after approvals is only a **structural preflight**. Human editorial Gate B and final-media Gate C still review the entire video; neither may be forged.
+
+Casting details, identity source policy, required poses and current status: [research/CHARACTER-ASSETS.md](research/CHARACTER-ASSETS.md). Human approval is independent of TypeScript tests, media hashing, and GitHub Actions.
