@@ -20,6 +20,8 @@ jobs:
           python-version: '3.11'
       - name: Python editorial and media research tests
         run: python -m unittest discover -s tests -v
+      - name: Verify local reviewed-media registry (graphics-only draft)
+        run: python scripts/verify_anthropic_media.py
       - name: Node
         uses: actions/setup-node@v4
         with:
