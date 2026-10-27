@@ -5,6 +5,7 @@ import {OwnershipProof} from './OwnershipProof';
 import {AnthropicShort, ANTHROPIC_SHORT_FRAMES} from './AnthropicShort';
 import proofAudio from './proof-audio.json';
 import {playbackSpeed} from './story-motion';
+import {OurbitesHostCameo} from './OurbitesHost';
 
 type Scene = {id: string; duration: number; kicker: string; title: string; narration: string; visual: string; labels: string[]; claim_ids: string[]};
 type Episode = {title: string; scenes: Scene[]; draft?: boolean};
@@ -61,6 +62,9 @@ const SceneView: React.FC<{scene: Scene; index: number; draft: boolean}> = ({sce
     <div style={{marginTop:100,color:colors.teal,fontWeight:700,fontSize:29,letterSpacing:3}}>{scene.kicker}</div>
     <div style={{fontSize:80,lineHeight:1.06,fontWeight:800,letterSpacing:-3,marginTop:28,minHeight:270,transform:`translateY(${lift}px)`}}>{scene.title}</div>
     <div style={{height:600,marginTop:20}}><Diagram scene={scene}/></div>
+    {(index===0 || scene.visual==='ownership' || scene.id==='close') &&
+      <OurbitesHostCameo pose={index===0?'react':scene.visual==='ownership'?'explain':'point'}
+        top={970} right={82} width={178}/>}
     <div style={{borderTop:`3px solid ${colors.ink}`,paddingTop:32,fontSize:34,lineHeight:1.35,marginTop:35}}>{scene.narration}</div>
     <div style={{position:'absolute',bottom:140,left:84,right:84,fontSize:24,color:colors.muted,display:'flex',justifyContent:'space-between'}}><span>{draft ? 'SILENT STORYBOARD Â· EDITORIAL REVIEW REQUIRED' : 'BUSINESS EXPLAINED'}</span><span>{scene.duration}s</span></div>
     <div style={{position:'absolute',bottom:105,left:84,width:912,height:6,background:'#D7DFDB'}}><div style={{width:`${100*Math.min(1,frame/(scene.duration*fps))}%`,height:'100%',background:colors.teal}}/></div>
