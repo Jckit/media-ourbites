@@ -1,0 +1,215 @@
+{
+  "id": "ourbites-anthropic-ipo-accounting",
+  "title": "Anthropic's $80 Billion Loss Isn't What You Think",
+  "draft": true,
+  "language": "en",
+  "as_of": "2026-10-27",
+  "sources": [
+    {
+      "id": "s1",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+      "publisher": "Anthropic / SEC EDGAR",
+      "kind": "primary",
+      "published_at": "2026-10-26",
+      "checked_at": "2026-10-27T11:55:52+00:00",
+      "locator": "Prospectus summary — Consolidated Statements of Operations Data; Risk Factors revaluation discussion; original filed S-1 0001628280-26-067168",
+      "note": "H1 2025/2026 revenue and operations table; fair value remeasurement and cost disclosures."
+    },
+    {
+      "id": "anthropic-release",
+      "url": "https://www.anthropic.com/news/s1-sec",
+      "publisher": "Anthropic",
+      "kind": "primary",
+      "published_at": "2026-10-26",
+      "checked_at": "2026-10-27T11:55:52+00:00",
+      "locator": "Anthropic official announcement dated October 26, 2026",
+      "note": "Proposed IPO, Nasdaq ANT proposed symbol, offering share count/range not determined, registration not effective."
+    }
+  ],
+  "claims": [
+    {
+      "id": "ipo",
+      "kind": "fact",
+      "text": "On October 26, 2026 Anthropic publicly filed an S-1 for a proposed IPO; shares and price range are not yet set.",
+      "source_ids": [
+        "anthropic-release",
+        "s1"
+      ],
+      "volatile": true
+    },
+    {
+      "id": "revenues",
+      "kind": "fact",
+      "text": "Revenue was $1,163 million for the six months ended June 30, 2025 and $16,286 million for the six months ended June 30, 2026, around fourteenfold growth; these are matched six-month periods, not annual figures.",
+      "source_ids": [
+        "s1"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "operating",
+      "kind": "fact",
+      "text": "Operating loss for the first six months of 2026 was $693 million.",
+      "source_ids": [
+        "s1"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "net",
+      "kind": "fact",
+      "text": "Net loss for the first six months of 2026 was $80,748 million.",
+      "source_ids": [
+        "s1"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "remeasure",
+      "kind": "fact",
+      "text": "Change in fair value of convertible notes, derivative liabilities and SAFEs was negative $72,388 million in the first half of 2026; the filing says the rise in value of convertible notes was primarily driven by increasing enterprise valuation.",
+      "source_ids": [
+        "s1"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "cash-distinction",
+      "kind": "analysis",
+      "text": "Fair-value remeasurement in reported earnings is not equivalent to a like-for-like cash operating outflow; it does not make the reported net loss fictitious or eliminate real capital obligations.",
+      "source_ids": [
+        "s1"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "other-lines",
+      "kind": "fact",
+      "text": "For H1 2026 other expense net was negative $8,757 million, interest income was $1,111 million, and tax expense was $21 million; combined with operating and fair-value lines they reconcile to negative $80,748 million net income.",
+      "source_ids": [
+        "s1"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "compute",
+      "kind": "fact",
+      "text": "Compute and infrastructure operating expense was $8,945 million in H1 2026. This is an expense-category figure, not total cash expenditure.",
+      "source_ids": [
+        "s1"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "value-uncertain",
+      "kind": "analysis",
+      "text": "IPO offer price and share count are undetermined as of the October 26 announcement. A valuation should be evaluated against growth sustainability and future economics; rumored valuations are not offering terms.",
+      "source_ids": [
+        "anthropic-release",
+        "s1"
+      ],
+      "volatile": true
+    }
+  ],
+  "scenes": [
+    {
+      "id": "hook",
+      "duration": 8,
+      "kicker": "THE IPO FILING",
+      "title": "Eighty billion. Really?",
+      "narration": "Anthropic just filed to go public. Its prospectus shows an eighty-billion-dollar loss in six months. Wait—what?",
+      "visual": "combination",
+      "labels": [
+        "PROPOSED IPO",
+        "$80.7B NET LOSS",
+        "Six months ended June 2026"
+      ],
+      "claim_ids": [
+        "ipo",
+        "net"
+      ]
+    },
+    {
+      "id": "growth",
+      "duration": 13,
+      "kicker": "WHAT'S ACTUALLY GROWING",
+      "title": "Fourteen times the revenue",
+      "narration": "And yet, revenue hit sixteen-point-three billion dollars in that same half-year. That's about fourteen times the revenue of the first half of 2025.",
+      "visual": "steps",
+      "labels": [
+        "H1 2025: $1.16B",
+        "H1 2026: $16.29B",
+        "About 14×"
+      ],
+      "claim_ids": [
+        "revenues"
+      ]
+    },
+    {
+      "id": "operations",
+      "duration": 13,
+      "kicker": "THE FIRST DISTINCTION",
+      "title": "Operating loss: $693M",
+      "narration": "The operating loss? Six-hundred-ninety-three million dollars. Still serious money. But nowhere near eighty billion. So where did the rest come from?",
+      "visual": "balance",
+      "labels": [
+        "Operating loss is not net loss"
+      ],
+      "claim_ids": [
+        "operating",
+        "net"
+      ]
+    },
+    {
+      "id": "accounting",
+      "duration": 21,
+      "kicker": "FOLLOW THE MONEY",
+      "title": "A very expensive accounting adjustment",
+      "narration": "Around seventy-two-point-four billion was a fair-value change on convertible financing and related instruments. As Anthropic's valuation rose, those liabilities became more expensive on paper. It affects reported earnings—not the same as spending that amount in cash.",
+      "visual": "steps",
+      "labels": [
+        "$72.39B fair-value charge",
+        "$8.76B other net expense",
+        "Net loss: $80.75B"
+      ],
+      "claim_ids": [
+        "remeasure",
+        "cash-distinction",
+        "other-lines",
+        "net"
+      ]
+    },
+    {
+      "id": "cost",
+      "duration": 13,
+      "kicker": "BUT THE COSTS ARE REAL",
+      "title": "Compute isn't cheap",
+      "narration": "That doesn't mean the underlying business is risk-free. Compute and infrastructure expenses still reached almost nine billion dollars in six months. All that intelligence needs hardware.",
+      "visual": "balance",
+      "labels": [
+        "H1 2026 compute expense: $8.95B"
+      ],
+      "claim_ids": [
+        "compute"
+      ]
+    },
+    {
+      "id": "payoff",
+      "duration": 14,
+      "kicker": "THE BIGGER QUESTION",
+      "title": "Growth isn't a valuation",
+      "narration": "And the IPO hasn't even been priced. Before asking what Anthropic is worth, ask how much of that growth can eventually become sustainable profit. That's the real IPO question.",
+      "visual": "combination",
+      "labels": [
+        "FAST GROWTH",
+        "REAL EXPENSES",
+        "NO IPO PRICE YET"
+      ],
+      "claim_ids": [
+        "ipo",
+        "value-uncertain",
+        "compute"
+      ]
+    }
+  ]
+}
