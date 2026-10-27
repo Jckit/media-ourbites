@@ -128,3 +128,19 @@ Local Kokoro voice audition paths:
 ```
 
 The chosen voice above is only an **illustrative command argument**, not a recommendation or approval. These scripts create ignored local WAVs and measured scene durations; a human must choose a voice, listen, retime, and align captions before final production. Rendering, media rights, and publication remain gated by the existing SOP.
+
+## Reusable character system — recurring Ourbites host + real-person illustrations
+
+The character stage is documented in [research/CHARACTER-ASSETS.md](research/CHARACTER-ASSETS.md), with machine-readable [protagonist](characters/protagonist/profile.json) and [Dario Amodei](characters/dario-amodei/profile.json) profiles. The **existing hybrid host** has been extracted into [src/OurbitesHost.tsx](src/OurbitesHost.tsx): one fictional face/silhouette with `neutral`, `explain`, `think`, `point`, and `react` poses. The owner can approve or revise its final appearance later; **provisional is not approved**.
+
+This shared character is present in the existing `OwnershipProof`, generic `BusinessShort`, and Anthropic `AnthropicShort` storyboards. The Anthropic host currently appears in `hook`, `operations`, and `payoff` scenes. A **Dario Amodei illustrated character is only planned**: no likeness/illustration is marked approved or shown in the renderer. Character-asset research belongs beside source/media research before final scene approval.
+
+```powershell
+python scripts/validate_character_cast.py episodes/002/episode.json
+python scripts/validate_character_cast.py examples/merger-v2.json
+# For final production, stricter gate: expected to reject the current provisional host
+python scripts/validate_character_cast.py episodes/002/episode.json --release
+npm run typecheck
+```
+
+This Python guard validates scene/cast metadata, but does not inspect rendered pixels, validate a likeness, approve a face, or waive source-media rights. Final-release asset and editorial signoffs remain human.
