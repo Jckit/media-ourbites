@@ -42,3 +42,19 @@ A: am_puck (US male). B: af_heart (US female). C: bm_george (British male). D: b
 
 ## Round two
 Justin preferred A minus one semitone for pitch but found its delivery insufficiently natural. E (am_onyx) and F (am_michael) use the same script and speed=1.0, without pitch shifting. Their identities are candidates, not a claim of verified perceived depth or quality. See round2.json for measured durations. Chatterbox is being evaluated separately using its bundled default voice; production voice remains unchanged.
+
+## Repository-visible audition inventory (reviewed 27 October 2026)
+
+This table describes **committed scripts and metadata**, not new listening scores or separate autonomous voice agents. Codex/local session history is not automatically available through GitHub.
+
+| ID | Engine / preset | Evidence in repository | Current interpretation |
+| --- | --- | --- | --- |
+| A | Kokoro `am_puck` | `scripts/audition-voices.py`, `auditions/manifest.json` | Generated; pitch-lowered variant previously preferred in tone, but not natural enough; no final selection |
+| B, C, D | Kokoro `af_heart`, `bm_george`, `bf_emma` | Same script and manifest | Generated initial controls; British voices are excluded from current preference |
+| E, F | Kokoro `am_onyx`, `am_michael` | `scripts/audition-round2.py`, `auditions/round2.json` | Generated American candidates; no documented winner |
+| G | Chatterbox default | `scripts/audition-chatterbox.py` | Script available; no `auditions/chatterbox.json` results committed, so successful generation **not confirmed here** |
+| H, I | Kokoro `am_liam`, `am_eric` | `scripts/audition-american.py`, `auditions/american-conversational.json` | Generated American candidates; audition and approval outstanding |
+
+The individual audition WAV files (`auditions/*.wav`) and model weights (`models/`) are ignored by Git. Current committed `public/proof/*.wav` files are Windows narration placeholders for the ownership animation and are **not** a final narration voice audition. Textual metadata and generation duration do not establish acoustic quality, human preference, or transcript fidelity. A reviewer must actually listen to the local WAVs at consistent playback settings and score them before adopting a production voice.
+
+**Next audition gate:** compare A (including the preferred pitch modification, with audio artifacts saved separately), E, F, H, I and G *only if its recording was successfully made*. Rank clarity, naturalness, restrained playfulness, and comfort using the weights above. Explicitly test names and financial numbers for mispronunciations. Only then synthesize a true final narration and retime Remotion from measured audio; do not treat `playbackSpeed=1.1` as a mandatory final voice speed.
