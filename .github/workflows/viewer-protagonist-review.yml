@@ -8,6 +8,7 @@ on:
       - 'src/CharacterStage.tsx'
       - 'src/AnthropicCharacter.tsx'
       - 'src/BusinessWorld.tsx'
+      - 'src/framework/scene-kit.tsx'
       - '.github/workflows/viewer-protagonist-review.yml'
 
 permissions:
@@ -38,16 +39,16 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out/viewer-pr/before out/viewer-pr/after
-          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx src/BusinessWorld.tsx src/framework/scene-kit.tsx; do
             cp "$f" "out/viewer-pr/after/$(basename "$f")"
             git show "${{ github.event.pull_request.base.sha }}:$f" > "$f"
           done
           for f in 18 25 30 45 60 100 150 220 310 311 325 450 465 470 474; do
             npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-$f.png" --frame="$f" --scale=0.4
           done
-          # Baseline-only end frame demonstrates the removed silent hold.
-          npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-499.png" --frame=499 --scale=0.4
-          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+          # AnthropicCharacter is now 475 frames (0–474). Do not sample the obsolete
+          # 499th frame; it belonged to the earlier, untrimmed 500-frame version.
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx src/BusinessWorld.tsx src/framework/scene-kit.tsx; do
             cp "out/viewer-pr/after/$(basename "$f")" "$f"
           done
           npm run typecheck
@@ -164,6 +165,7 @@ jobs:
           python3 scripts/verify_caption_windows.py \
             --video out/viewer-pr/after/anthropic-character-review.mp4 \
             --manifest src/anthropic-character-audio.json \
+            --expected-frames 475 \
             --output out/viewer-pr/review-caption-windows.json
       - name: Upload exact visual evidence
         if: always()

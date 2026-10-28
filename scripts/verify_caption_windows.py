@@ -25,7 +25,16 @@ def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def check(video, manifest_path):
+def expected_frame_count(manifest_duration, explicit_frames=None):
+    """Enforce the exact composition length when supplied, else legacy full narration."""
+    if explicit_frames is not None:
+        if isinstance(explicit_frames, bool) or not isinstance(explicit_frames, int) or explicit_frames <= 0:
+            raise ValueError('Expected composition frame count must be a positive integer')
+        return explicit_frames
+    return math.ceil(manifest_duration * FPS / SPEED)
+
+
+def check(video, manifest_path, expected_frames=None):
     manifest = json.loads(Path(manifest_path).read_text(encoding='utf-8'))
     clips = manifest['clips']
     if not clips or any(c['duration'] <= 0 for c in clips):
@@ -48,7 +57,7 @@ def check(video, manifest_path):
     if len(raw) % frame_bytes:
         raise ValueError('Incomplete decoded caption frames')
     frame_count = len(raw) // frame_bytes
-    expected_count = math.ceil(manifest['duration'] * FPS / SPEED)
+    expected_count = expected_frame_count(manifest['duration'], expected_frames)
     if frame_count != expected_count:
         raise ValueError(f'Unexpected frame count {frame_count} != {expected_count}')
     boundaries = [v * FPS / SPEED for c in clips for v in (c['start'], c['start'] + c['duration'])]
@@ -82,7 +91,9 @@ def check(video, manifest_path):
                         'first_frame': frames[0], 'last_frame': frames[-1]})
     report = {
         'video_sha256': sha256(video), 'manifest_sha256': sha256(manifest_path),
-        'video_frames': frame_count, 'fps': FPS, 'playback_speed': SPEED,
+        'video_frames': frame_count, 'expected_video_frames': expected_count,
+        'expected_frames_source': 'composition_argument' if expected_frames is not None else 'narration_manifest',
+        'fps': FPS, 'playback_speed': SPEED,
         'crop_xywh': list(CROP), 'dark_luma_below': DARK_LUMA,
         'min_dark_pixels': MIN_DARK_PIXELS,
         'boundary_tolerance_frames': BOUNDARY_TOLERANCE_FRAMES,
@@ -101,9 +112,11 @@ def main():
     parser.add_argument('--video', type=Path, required=True)
     parser.add_argument('--manifest', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--expected-frames', type=int, default=None,
+                        help='Exact registered composition frame count; default is untrimmed narration length')
     args = parser.parse_args()
     try:
-        report = check(args.video, args.manifest)
+        report = check(args.video, args.manifest, expected_frames=args.expected_frames)
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
         print(f"Caption presence: {report['caption_visible_frames']} visible / "

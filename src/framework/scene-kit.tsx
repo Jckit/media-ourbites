@@ -31,15 +31,29 @@ export const PlanarBox: React.FC<{
   </g>
 );
 
+/** Shared flat room shell. Custom sets can add their own furnishings on top.
+ * Its geometry and colors are reused in both synthetic fixtures and real scenes.
+ * No episode-specific action, camera motion, characters or numeric claims live here.
+ */
+export const RoomShell: React.FC<{floorLineColor?: string; floorLineWidth?: number}> = ({
+  floorLineColor = '#B7AA96', floorLineWidth = 5,
+}) => (
+  <g>
+    <rect width={sceneLayout.width} height={sceneLayout.height} fill={scenePalette.paper}/>
+    <path d={`M0 370 H${sceneLayout.width} V${sceneLayout.floorY} H0Z`} fill={scenePalette.wall}/>
+    <path d={`M0 370 H76 V${sceneLayout.floorY} H0Z`} fill="#DDD5C7"/>
+    <rect y={sceneLayout.floorY} width={sceneLayout.width}
+      height={sceneLayout.height - sceneLayout.floorY} fill={scenePalette.floor}/>
+    <path d={`M0 ${sceneLayout.floorY} H${sceneLayout.width}`}
+      stroke={floorLineColor} strokeWidth={floorLineWidth}/>
+  </g>
+);
+
 /** A quiet setting only: no episode facts, embedded timing, camera or character. */
 export const SceneEnvironment: React.FC<{preset: EnvironmentPreset}> = ({preset}) => (
   <svg viewBox="0 0 1080 1920" width={1080} height={1920} aria-label={`Illustrative ${preset} setting`}
     role="img" style={{position: 'absolute', inset: 0, pointerEvents: 'none'}}>
-    <rect width={1080} height={1920} fill={scenePalette.paper}/>
-    <path d="M0 370 H1080 V1420 H0Z" fill={scenePalette.wall}/>
-    <path d="M0 370 H76 V1420 H0Z" fill="#DDD5C7"/>
-    <rect y={sceneLayout.floorY} width={1080} height={500} fill={scenePalette.floor}/>
-    <path d="M0 1420 H1080" stroke="#B7AA96" strokeWidth={5}/>
+    <RoomShell/>
     {preset === 'office' ? <g>
       <PlanarBox x={630} y={430} width={300} height={400} depth={22}
         colors={{front: '#B0C1BE', top: '#D7DFD6', side: '#8EAAA7'}}/>
