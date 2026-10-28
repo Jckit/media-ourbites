@@ -151,3 +151,9 @@ Casting details, identity source policy, required poses and current status: [res
 
 ## Character-led scene direction
 For each beat specify actor, action, prop, visible change and takeaway. Characters demonstrate the mechanism; charts supply precision when needed. Keep figures large enough for phone screens. Link beats with motivated gesture, prop movement or camera motion. Design previews may contain clearly labeled proposed likenesses when requested; publication still requires recorded human review.
+
+### Story-world / physical animation stage (2026-10-28)
+
+The updated [scenic-animation research](research/SCENIC-ANIMATION-STYLE.md) asks for physical **cause-and-effect** rather than only large animated facts. After claims and rights research, annotate each important beat with `setting`, `actor`, `intent`, `prop`, `action`, `visible consequence`, `reaction`, and `why the visual explains the claim`. For purely abstract accounting, an original exact-number data card is appropriate *for that short beat*; avoid using cards as the entire scene world.
+
+Choose original reusable 2D SVG environment layers and motivated contact/gesture/camera changes before costly 3D, AI-video generation, or additional editing subscriptions. New or historical scenes must be labeled as illustrative, and real historic imagery is separately licensed. Keep the protagonist's one canonical identity, exact finance and human publication gates. Phone-sized before/after renders must reveal an actual physical improvement; source/TypeScript tests alone do not approve the look.
