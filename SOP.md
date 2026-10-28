@@ -151,3 +151,11 @@ Casting details, identity source policy, required poses and current status: [res
 
 ## Character-led scene direction
 For each beat specify actor, action, prop, visible change and takeaway. Characters demonstrate the mechanism; charts supply precision when needed. Keep figures large enough for phone screens. Link beats with motivated gesture, prop movement or camera motion. Design previews may contain clearly labeled proposed likenesses when requested; publication still requires recorded human review.
+
+### Illustrated 2D animation style review (clarified 2026-10-28)
+
+The [scenic-animation research](research/SCENIC-ANIMATION-STYLE.md) is a **style reference**, not an instruction to imitate the oxygen video's hypothetical event structure. Ourbites remains a business explainer. Prioritize coherent illustrated 2D environments, consistent reusable characters, layer depth, uncluttered phone-size staging, and purposeful movement. A clear chart, talking figure, or still illustrated environment is acceptable when it communicates financial information best.
+
+For each scene, note the foreground subject, background plane, safe label/caption zones, and any **optional** actor, prop or camera motion that serves the narration. Contact reactions, simulated physical consequences and multi-location storytelling are techniques to consider—not mandatory steps. Never add activity merely to satisfy an animation quota.
+
+Keep current identity, audited finance and human editorial, likeness, media-rights and publication gates unchanged. Compare the same phone-size frames through camera zoom and check furniture/actor depth, foot grounding, identity labels and source clarity. A successful code/typecheck is not a finished visual review.

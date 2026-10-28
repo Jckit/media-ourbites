@@ -5,6 +5,7 @@ import narration from './anthropic-character-audio.json';
 import financials from '../episodes/002/financials.json';
 import {playbackSpeed} from './story-motion';
 import {DarioIllustration} from './DarioIllustration';
+import {OfficeWorld} from './BusinessWorld';
 
 const ink='#142B38',teal='#087E83',orange='#E97F48';
 export const CHARACTER_FRAMES=Math.ceil(narration.duration*30/playbackSpeed);
@@ -44,8 +45,8 @@ export const AnthropicCharacter:React.FC=()=>{
    <div style={{position:'absolute',left:85,top:105,fontSize:32,letterSpacing:4,fontWeight:900}}>OURBITES</div>
    <div style={{position:'absolute',left:85,top:165,fontSize:26,color:'#607078'}}>ILLUSTRATIVE SCENE · LIKENESS REVIEW PENDING</div>
    <CharacterStage zoom={1+open*0.06-end*0.06} focusX={650} focusY={850}>
-     <div style={{position:'absolute',top:1435,left:0,width:1080,height:20,background:ink}}/>
-     <div style={{position:'absolute',top:1455,left:0,width:1080,height:100,background:'#D7CEBB'}}/>
+     {/* World space and characters share the camera transform. Original vector set dressing reacts to the falling filing. */}
+     <OfficeWorld t={t}/>
      <div style={{position:'absolute',left:280,top:0,transform:'scale(0.76)',transformOrigin:'top left'}}>
      <FilingProp x={0} y={drop/0.76} angle={-5+open*7}>
        <div style={{fontSize:38,fontWeight:900}}>ANTHROPIC</div>

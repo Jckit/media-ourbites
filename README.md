@@ -157,3 +157,11 @@ Get-ScheduledTaskInfo -TaskName 'Ourbites Viewer Loop'
 ```
 
 This configures a current-user 20-minute Task Scheduler recurrence while your PC is on and you are signed in. Full setup, pause/resume/remove commands, concurrency safeguards and limitations: [viewer scheduling guide](skills/ourbites-viewer/SCHEDULING.md). ChatGPT's in-chat scheduler currently cannot create sub-hourly tasks; don't confuse a prepared local installer with an active cloud task.
+
+## Animation direction: coherent illustrated 2D worlds
+
+Ourbites is moving beyond a mostly infographic appearance toward the **illustration and character-animation style** of accessible 2D explainers. This means consistent character designs, grounded visual settings, layered depth, uncluttered phone-size compositions and purposeful animation. The science "what-if" reference is **visual inspiration**, not a mandate for simulated consequences, multiple locations, rapid cuts or new editorial formats. Exact diagrams and financial labels remain important. See [research/SCENIC-ANIMATION-STYLE.md](research/SCENIC-ANIMATION-STYLE.md).
+
+The draft [`OfficeWorld` pilot](src/BusinessWorld.tsx) gives `AnthropicCharacter` a simple illustrated office instead of a blank cream stage. Optional loose-paper motion illustrates what Remotion can do, but isn't a requirement for other videos. PR #2 review identified furniture perspective and an illustrated-person label collision; both are subject to phone-size visual verification before merge. No changes to the chosen voice, financial values, cast, historic evidence or publication approvals are implied.
+
+**Optional visual blend (PR #2):** the requested reference is **low-poly animation**, but the intended Ourbites aesthetic is still the established flat 2D hybrid. We are testing small 2.5D/faceted-shading touches on scenery and props—not replacing the host, forcing 3D, or requiring event simulations. See [Ourbites Hybrid 2.5D](styles/OURBITES-HYBRID-2.5D.md). PR #2 remains draft pending visual review and clearance of the desk/label feedback.

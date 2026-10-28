@@ -7,6 +7,7 @@ on:
       - 'src/OurbitesHost.tsx'
       - 'src/CharacterStage.tsx'
       - 'src/AnthropicCharacter.tsx'
+      - 'src/BusinessWorld.tsx'
       - '.github/workflows/viewer-protagonist-review.yml'
 
 permissions:
@@ -41,14 +42,14 @@ jobs:
             cp "$f" "out/viewer-pr/after/$(basename "$f")"
             git show "${{ github.event.pull_request.base.sha }}:$f" > "$f"
           done
-          for f in 30 100 150 220 310 311 325 450 499; do
+          for f in 18 25 30 45 60 100 150 220 310 311 325 450 499; do
             npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-$f.png" --frame="$f" --scale=0.4
           done
           for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
             cp "out/viewer-pr/after/$(basename "$f")" "$f"
           done
           npm run typecheck
-          for f in 30 100 150 220 310 311 325 450 499; do
+          for f in 18 25 30 45 60 100 150 220 310 311 325 450 499; do
             npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/after/frame-$f.png" --frame="$f" --scale=0.4
           done
           sha256sum out/viewer-pr/before/*.png out/viewer-pr/after/*.png > out/viewer-pr/frame-sha256.txt
