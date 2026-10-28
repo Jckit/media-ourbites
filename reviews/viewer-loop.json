@@ -3,74 +3,18 @@
   "entry": "src/index.tsx",
   "preview_url": "http://localhost:3000/AnthropicCharacter",
   "latest_draft": "out/anthropic-character-smooth-grip.mp4",
-  "last_review": "reviews/viewer/20261028T124931Z-cloud-audio-signal.md",
+  "last_review": "reviews/viewer/20261028T094251Z.md",
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "PR #1 merged on 2026-10-28T13:15:48Z at dcbbeb76e396f7a62e30b5f0b074aa27fc7af674; the October 28 host-gaze refinement remains consumed once. Four expected 1.1x narration windows passed decoded audio-signal presence checks on the full 432x768 MP4; this is not listening, original-pitch verification, caption word synchronization or continuous-motion approval. PR #2 scenic animation and PR #3 caption QA remain separate draft reviews. Prior subjective caps and all human gates remain in force.",
-  "last_status": "cloud_pr_per_clip_audio_signal_verified_listening_pending",
-  "last_verified_frame": "GitHub Actions artifact viewer-protagonist-before-after, run 40676453311, after/frame-220.png",
+  "notes": "Fixed observed one-frame hand jump with a continuous reach into the shared card grip. Seven after frames inspected; TypeScript and export passed. Three accepted revisions since actual human feedback; hold additional subjective changes. Technical checks may continue; audio/full playback unreviewed.",
+  "last_status": "grip_discontinuity_fixed_partial_visual_verified",
+  "last_verified_frame": "out/viewer-20261028T094251Z-after-311.png",
   "input_hashes": "reviews/viewer/20261028T094251Z-inputs.json",
   "output_hashes": "reviews/viewer/20261028T094251Z-outputs.json",
   "backlog": [
-    "Listen to the exact PR review MP4 against original Kokoro am_puck Voice A at 1.1x; verify intelligibility, pitch and caption sync",
-    "Review continuous Dario grip/host gaze motion and remaining secondary financing caveat readability; change only for demonstrated defects",
-    "Protagonist October 28 direction consumed once; further subjective changes require fresh human feedback. Human likeness/factual/rights/final-media approvals remain pending."
+    "Review full motion/audio; sampled grip discontinuity fixed",
+    "Supporting text/caveat hierarchy: await fresh human feedback before further subjective changes"
   ],
-  "last_human_direction": "Justin requested implementation-first feedback loop and purposeful Dario role on 2026-10-28; not final-media approval",
-  "protagonist_oct28_direction_consumed": true,
-  "protagonist_oct28_refinement_review": "reviews/viewer/20261028T105800Z-cloud-protagonist.md",
-  "cloud_review": {
-    "pr": "https://github.com/jcbandc-arch/media-creator-outbites/pull/1",
-    "baseline_commit": "db6ce1fd08568281fbeb700152fda84fd334e570",
-    "tested_commit": "98000a836e1c51456b981873b8228ccefe89f813",
-    "actions_run": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40676453311",
-    "artifact": "viewer-protagonist-before-after",
-    "review_scope": "nine paired 432x768 frames; no full audio or video playback",
-    "approved_for_release": false,
-    "merged_to_main": true,
-    "merge_commit_sha": "dcbbeb76e396f7a62e30b5f0b074aa27fc7af674",
-    "merged_at": "2026-10-28T13:15:48Z"
-  },
-  "cloud_playback_review": {
-    "pr": "https://github.com/jcbandc-arch/media-creator-outbites/pull/1",
-    "source_commit": "d81d5dd94a09e3a6c2c9698da0db8633953dd02e",
-    "actions_run": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40683964231",
-    "artifact_url": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40683964231/artifacts/12813693441",
-    "artifact_zip_sha256": "f838d5483f478ee2e4c61efed64c847987e23e372d01a426329d1aba6fb6b9b3",
-    "mp4_sha256_file": "review-sha256.txt",
-    "probe_file": "review-probe.json",
-    "frames": 500,
-    "width": 432,
-    "height": 768,
-    "duration_seconds": 16.683,
-    "video_codec": "h264",
-    "audio_codec": "aac",
-    "continuous_playback_reviewed": false,
-    "audio_listening_reviewed": false
-  },
-  "cloud_audio_signal_check": {
-    "pr": "https://github.com/jcbandc-arch/media-creator-outbites/pull/1",
-    "workflow_commit": "f382b8b7e592792bdc3d94ee272492b35dfa9cda",
-    "actions_run": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40691160665",
-    "artifact_url": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40691160665/artifacts/12816778529",
-    "artifact_zip_sha256": "a87d5eeb7edfb7dcc75002edc993bc24e1965fb3516a8c4dcadf47de4f083068",
-    "mp4_sha256": "793f48ccfbe36e0ab92605275eb19c9abf4db280e0eda6e294152c71d2efb568",
-    "decoded_clip_rms_dbfs": [
-      -20.82,
-      -20.6,
-      -23.99,
-      -23.23
-    ],
-    "decoded_clip_peak_dbfs": [
-      -4.05,
-      -4.14,
-      -4.08,
-      -4.12
-    ],
-    "all_four_windows_passed": true,
-    "voice_pitch_listening_verified": false,
-    "continuous_playback_reviewed": false,
-    "approved_for_release": false
-  }
+  "last_human_direction": "Justin requested implementation-first feedback loop and purposeful Dario role on 2026-10-28; not final-media approval"
 }
