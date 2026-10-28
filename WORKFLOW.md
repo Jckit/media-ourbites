@@ -69,3 +69,9 @@ This is a distinct narrative test from Tesla ownership: rapid revenue growth →
 
 ## Character-led preview v2 (2026-10-27)
 AnthropicCharacter now stages the recurring host and a provisional Dario SVG together. The filing falls between them; host reacts, Dario gestures, then a financing prop moves into their shared space. Voice A and 1.1x timing remain. Dario design is an original interpretation of Justin's supplied concept, not verified historical imagery. Likeness/final media approval remain pending. This preview does not change the separate AnthropicShort episode cast or authorize publication.
+
+## Scene-first animation direction (28 October 2026)
+
+After PR #1 was merged, user feedback pivoted from "make the mascot better" to "the *whole animation* still resembles an infographic; animate events and physical consequences, like an illustrated oxygen-disappearing what-if, but not necessarily as detailed." Read [research/SCENIC-ANIMATION-STYLE.md](research/SCENIC-ANIMATION-STYLE.md). This **separate new human directive** supports a bounded environment/physical-interaction pilot while preserving the previous host subjective-revision cap.
+
+Implemented as a **draft PR**, not released: `src/BusinessWorld.tsx` illustrates a business office with depth, city window and physical pages responding to the S-1 drop. `src/AnthropicCharacter.tsx` uses that shared world inside its existing character camera. All narration/audio/financial figures and silent Dario are unchanged. Validate in actual phone-size GitHub Actions before accepting; do not claim improvement until reviewing new media. Gradually reuse story environments when a real narrative justifies them; do not mandate a scene count or animation frequency.
