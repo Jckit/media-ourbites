@@ -37,3 +37,28 @@ Accept only if:
 3. Once this user-directed protagonist-specific change is reviewed, additional self-directed subjective iterations remain capped until fresh human feedback.
 
 **Implementation results and output hashes:** append after CI rerender and inspected artifacts, never beforehand.
+
+## Implemented and actually verified — 2026-10-28T11:02Z
+
+**Change batch (one coherent feature, three related files):**
+- `src/OurbitesHost.tsx`: add optional bounded `gazeX/gazeY` values (±12/±9 SVG units), moving both existing pupils only; **no** change to face outline, eyebrows, hair, clothing or pose/silhouette.
+- `src/CharacterStage.tsx`: pass these optional values through existing shared `StageActor` (default zero means other videos render unchanged).
+- `src/AnthropicCharacter.tsx`: interpolate host gaze up/right toward the S-1 during questioning, right/level toward Dario's accounting explanation, and smoothly return to forward-facing attention before the closing payoff. No edits to shared grip, Dario, captions, narration, finance, audio or voice settings.
+
+**Cloud verification:** [GitHub Actions #40676453311](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40676453311), commit `98000a836e1c51456b981873b8228ccefe89f813`, **success**. Python unit tests, character checks and `npm run typecheck` passed. The same workflow used isolated `git show` of **base SHA** for the before render, restored the branch sources for after, and rendered nine equal timestamps for each at **432×768** with exact source and output hashes in artifact `viewer-protagonist-before-after`. Isolated runner did not touch a personal workstation or push an export.
+
+The actual PNG artifacts were downloaded and **visually inspected** side-by-side, including close-ups of the fictional host's face. At frames 30, 100 and 150 the host's pupils visibly move up/right toward the filing; at frame 220 they remain rightward toward the explanation; at 310, 311 and 325 gaze stays steady through the original financing card interaction; at 450 and 499 pupils return to the exact pre-change forward positions. No new face/prop/source-caption overlap is visible in these sampled frames. Original financial labels and payoff remain on screen. No repair was needed.
+
+**Limited pixel-level comparison:** changes at frames 30/100/150/220/310/325 are localized to the host's eyes (approx. 257–312 changed pixels per frame, within host face). Frames **450 and 499 are byte-identical** before versus after, confirming restored forward gaze and unchanged payoff. Frame **311** has some additional raster differences outside the face (including the fading finance card), so no claim of full frame-by-frame motion identity is made there; the grip visually remains in position in the sample. Actual video continuous motion and audio **were not reviewed** by this CI pipeline, which produced phone-size stills only. This is visual/structural evidence, not a tested retention uplift or a fully approved master.
+
+Example exact SHA-256 output hashes (all nine in the artifact's `frame-sha256.txt`):
+- before/100: `ddf75838c31bc02968a12b23702c710800811680df9fbad974aa854cdcfb7d2f`; after/100: `ebe85974383d083082a5eef07ad1a6542d68eab26182d5da7e7465eb2b7f2412`
+- before/220: `7558a74f67e95d1c2e43c0ebef85170f94a4c9fc49c4f5633d4f7ff684dcc8bd`; after/220: `e73941af292f531bb7f7044a25262d24958b2e86182c9e211aa34e009b145099`
+- before/450 = after/450: `8a75f9eb215cb2feabeac5d86ecb6866565bda0a592ac5d42b09560c2bc08375`
+- before/499 = after/499: `3ba0993453c4455985c499aac9be2e86e6a5a44e85ac7596ce0a16d2a14e4f0`
+
+Result: **one human-directed protagonist expression/gaze refinement accepted for branch review**, not merged to main. Character visual attention is editorially estimated 3/4 in inspected moments (from prior 2/4), not a performance metric. The protagonist design and Dario likeness remain unapproved; their rights and final-media gates are untouched.
+
+**Cap accounting:** consume this October 28 explicit protagonist refinement direction once. Keep prior 3/3 independently accepted revisions; do not treat the hourly task prompt or this review as fresh human approval for further subjective changes. Technical defects may still be addressed if proven.
+
+**Backlog after implementation:** (1) continuous playback/Voice A listening and actual caption sync on local original audio, (2) verified phone-size legibility of remaining secondary financing caveat/prop, (3) any additional subjective host redesign requires fresh user response. Do not repeat the completed gaze, Dario interaction, payoff or grip work.
