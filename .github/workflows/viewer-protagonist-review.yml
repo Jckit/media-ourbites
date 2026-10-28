@@ -1,0 +1,158 @@
+name: Review protagonist before and after (PR)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/OurbitesHost.tsx'
+      - 'src/CharacterStage.tsx'
+      - 'src/AnthropicCharacter.tsx'
+      - '.github/workflows/viewer-protagonist-review.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout branch with base history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install pinned dependencies
+        run: npm ci --ignore-scripts
+      - name: Verify TypeScript and narrative guardrails
+        run: |
+          npm run typecheck
+          python3 -m unittest discover -s tests -v
+      - name: Frame and source integrity comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/viewer-pr/before out/viewer-pr/after
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+            cp "$f" "out/viewer-pr/after/$(basename "$f")"
+            git show "${{ github.event.pull_request.base.sha }}:$f" > "$f"
+          done
+          for f in 30 100 150 220 310 311 325 450 499; do
+            npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-$f.png" --frame="$f" --scale=0.4
+          done
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+            cp "out/viewer-pr/after/$(basename "$f")" "$f"
+          done
+          npm run typecheck
+          for f in 30 100 150 220 310 311 325 450 499; do
+            npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/after/frame-$f.png" --frame="$f" --scale=0.4
+          done
+          sha256sum out/viewer-pr/before/*.png out/viewer-pr/after/*.png > out/viewer-pr/frame-sha256.txt
+          git diff --check
+      - name: Export full phone-sized review draft and probe streams
+        shell: bash
+        run: |
+          set -euo pipefail
+          # This is a review artifact, not a verified listening or publication gate.
+          git diff --quiet "${{ github.event.pull_request.base.sha }}" HEAD -- \
+            src/anthropic-character-audio.json public/anthropic-character episodes/002/financials.json
+          npx remotion render src/index.tsx AnthropicCharacter \
+            out/viewer-pr/after/anthropic-character-review.mp4 \
+            --scale=0.4 --codec=h264 --audio-codec=aac --concurrency=2
+          # Ubuntu's hosted image may omit ffprobe even when Remotion encodes successfully.
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          ffprobe -v error -count_frames \
+            -show_entries stream=codec_type,codec_name,width,height,nb_read_frames:format=duration \
+            -of json out/viewer-pr/after/anthropic-character-review.mp4 \
+            > out/viewer-pr/review-probe.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("out/viewer-pr/review-probe.json").read_text())
+          streams = data["streams"]
+          video = next(s for s in streams if s["codec_type"] == "video")
+          audio = next(s for s in streams if s["codec_type"] == "audio")
+          duration = float(data["format"]["duration"])
+          assert video["codec_name"] == "h264", video
+          assert (video["width"], video["height"]) == (432, 768), video
+          assert int(video["nb_read_frames"]) == 500, video
+          assert audio["codec_name"] == "aac", audio
+          assert 16.4 <= duration <= 16.9, duration
+          print(f"Encoded review media: 500 frames, 432x768, {duration:.3f}s, H.264 + AAC")
+          print("Audio track exists; voice quality, pitch, sync and motion remain unreviewed.")
+          PY
+          # An AAC stream can exist while one or more narration clips are silent.
+          # Decode and measure signal in each expected clip window; this is NOT listening.
+          ffmpeg -hide_banner -loglevel error -y \
+            -i out/viewer-pr/after/anthropic-character-review.mp4 \
+            -vn -ac 1 -ar 16000 -c:a pcm_s16le out/viewer-pr/review-audio.wav
+          python3 - <<'PY'
+          from array import array
+          import json
+          import math
+          from pathlib import Path
+          import sys
+          import wave
+
+          manifest = json.loads(Path("src/anthropic-character-audio.json").read_text())
+          with wave.open("out/viewer-pr/review-audio.wav", "rb") as audio:
+              assert (audio.getnchannels(), audio.getsampwidth(), audio.getframerate()) == (1, 2, 16000)
+              rate = audio.getframerate()
+              samples = array("h")
+              samples.frombytes(audio.readframes(audio.getnframes()))
+          if sys.byteorder != "little":
+              samples.byteswap()
+          results = []
+          for index, clip in enumerate(manifest["clips"]):
+              # Trim only the first/last 0.2s to avoid expected clip-edge pauses.
+              start = round((clip["start"] + 0.2) / 1.1 * rate)
+              end = round((clip["start"] + clip["duration"] - 0.2) / 1.1 * rate)
+              assert 0 <= start < end <= len(samples), (index, start, end, len(samples))
+              window = samples[start:end]
+              rms = math.sqrt(sum(value * value for value in window) / len(window)) / 32768
+              peak = max(abs(value) for value in window) / 32768
+              rms_dbfs = 20 * math.log10(rms) if rms else -120
+              peak_dbfs = 20 * math.log10(peak) if peak else -120
+              results.append({
+                  "clip_index": index, "source_file": clip["file"],
+                  "window_seconds": [round(start / rate, 3), round(end / rate, 3)],
+                  "rms_dbfs": round(rms_dbfs, 2), "peak_dbfs": round(peak_dbfs, 2),
+              })
+              assert rms_dbfs > -45 and peak_dbfs > -30, (
+                  f"Missing or near-silent encoded narration clip {index}: "
+                  f"RMS {rms_dbfs:.1f} dBFS, peak {peak_dbfs:.1f} dBFS"
+              )
+          Path("out/viewer-pr/review-audio-signal.json").write_text(
+              json.dumps({"playback_speed": 1.1, "rms_min_dbfs": -45,
+                          "peak_min_dbfs": -30, "clips": results}, indent=2) + "\n"
+          )
+          print("Encoded audio signal present in all", len(results), "narration windows.")
+          print("This does NOT verify voice identity, original pitch, intelligibility or sync.")
+          PY
+          sha256sum out/viewer-pr/after/anthropic-character-review.mp4 \
+            > out/viewer-pr/review-sha256.txt
+      - name: Upload exact visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: viewer-protagonist-before-after
+          path: |
+            out/viewer-pr/before/frame-*.png
+            out/viewer-pr/after/frame-*.png
+            out/viewer-pr/frame-sha256.txt
+            out/viewer-pr/after/anthropic-character-review.mp4
+            out/viewer-pr/review-probe.json
+            out/viewer-pr/review-audio-signal.json
+            out/viewer-pr/review-sha256.txt
+          retention-days: 14
+          if-no-files-found: warn
+
+# This workflow compares exact same frames on isolated GitHub runners.
+# The MP4 stream probe is not an audio listening or full-motion review, art approval, or publication.

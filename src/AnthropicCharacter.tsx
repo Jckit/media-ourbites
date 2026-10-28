@@ -18,6 +18,13 @@ export const AnthropicCharacter:React.FC=()=>{
  const end=tween(t,resolve,resolve+0.7,0,1);
  const wallet=tween(t,1.6,2,0,1)*(1-tween(t,inspect,inspect+0.5,0,1));
  const pointing=open*(1-tween(t,operating,operating+0.4,0,1));
+ // Follow the filing while questioning, Dario's financial explanation next,
+ // then return gaze to the viewer as the payoff lands. Preserve body/hand motion.
+ const filingAttention=tween(t,0.45,1.1,0,1);
+ const accountingAttention=tween(t,operating,operating+0.5,0,1);
+ const viewerAttention=tween(t,resolve+1.25,resolve+1.7,0,1);
+ const hostGazeX=10*filingAttention*(1-viewerAttention);
+ const hostGazeY=(-7*(1-accountingAttention)+2*accountingAttention)*filingAttention*(1-viewerAttention);
  const pull=tween(t,resolve,resolve+1.2,0,1);
  const cardScale=0.65+pull*0.35;
  const cardTop=900+pull*220;
@@ -50,7 +57,7 @@ export const AnthropicCharacter:React.FC=()=>{
        <div style={{marginTop:35,padding:20,background:'#DBEEEA',opacity:reveal,transform:`translateX(${(1-reveal)*60}px)`}}><div style={{fontSize:25}}>OPERATING LOSS</div><div style={{fontSize:66,fontWeight:900,color:teal}}>${Math.abs(financials.h1_2026.operating_loss)}M</div></div>
      </FilingProp>
      </div>
-     <StageActor x={80+open*25} y={830} size={420} lean={recoil} pose={t<0.8?'neutral':t<1.6?'react':t<inspect?'neutral':t<operating?'think':'point'}/>
+     <StageActor x={80+open*25} y={830} size={420} lean={recoil} gazeX={hostGazeX} gazeY={hostGazeY} pose={t<0.8?'neutral':t<1.6?'react':t<inspect?'neutral':t<operating?'think':'point'}/>
      <svg viewBox="0 0 1080 1920" style={{position:'absolute',inset:0,width:1080,height:1920,pointerEvents:'none'}}>
        <g opacity={wallet} transform={`translate(${420+open*25} ${1170+(1-wallet)*50})`}>
          <path d="M8 25 V0 H80 V25" fill="#DBEEEA" stroke={teal} strokeWidth="6"/>
