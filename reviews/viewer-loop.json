@@ -3,19 +3,19 @@
   "entry": "src/index.tsx",
   "preview_url": "http://localhost:3000/AnthropicCharacter",
   "latest_draft": "out/anthropic-character-smooth-grip.mp4",
-  "last_review": "reviews/viewer/20261028T105800Z-cloud-protagonist.md",
+  "last_review": "reviews/viewer/20261028T115300Z-cloud-playback-evidence.md",
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "One explicit 2026-10-28 protagonist gaze refinement verified in cloud PR #1 by matching before/after 432x768 frames; not merged/approved. Earlier Dario/card/grip work preserved. Full video/audio inspection outstanding; do not count repeated automated wakes as new human art feedback.",
-  "last_status": "cloud_pr_protagonist_gaze_phone_frames_verified_unmerged",
+  "notes": "October 28 protagonist gaze improvement remains verified by nine phone-sized frame pairs in draft PR #1, unmerged/unapproved. The CI now exports a complete 432x768 H.264/AAC review MP4 (500 frames, 16.683s), with stream probe and SHA-256 artifact. Continuous playback, original-pitch Voice A listening and caption sync are not reviewed; no additional creative feedback is inferred.",
+  "last_status": "cloud_pr_phone_mp4_mux_verified_listening_pending",
   "last_verified_frame": "GitHub Actions artifact viewer-protagonist-before-after, run 40676453311, after/frame-220.png",
   "input_hashes": "reviews/viewer/20261028T094251Z-inputs.json",
   "output_hashes": "reviews/viewer/20261028T094251Z-outputs.json",
   "backlog": [
-    "Local continuous video/Voice A audio inspection remains unverified by this cloud still-only test",
-    "Secondary financing card/caveat phone-size readability: change only on a new observed defect",
-    "Protagonist direction consumed; any further purely subjective redesign awaits fresh human feedback."
+    "Play and listen to the full review MP4 locally: Voice A am_puck original pitch at 1.1x, caption sync, Dario grip and host gaze continuity",
+    "Check secondary financing caveat readability during actual playback; change only on a demonstrated defect",
+    "Protagonist October 28 direction consumed; further subjective changes require fresh human feedback."
   ],
   "last_human_direction": "Justin requested implementation-first feedback loop and purposeful Dario role on 2026-10-28; not final-media approval",
   "protagonist_oct28_direction_consumed": true,
@@ -29,5 +29,22 @@
     "review_scope": "nine paired 432x768 frames; no full audio or video playback",
     "approved_for_release": false,
     "merged_to_main": false
+  },
+  "cloud_playback_review": {
+    "pr": "https://github.com/jcbandc-arch/media-creator-outbites/pull/1",
+    "source_commit": "d81d5dd94a09e3a6c2c9698da0db8633953dd02e",
+    "actions_run": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40683964231",
+    "artifact_url": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40683964231/artifacts/12813693441",
+    "artifact_zip_sha256": "f838d5483f478ee2e4c61efed64c847987e23e372d01a426329d1aba6fb6b9b3",
+    "mp4_sha256_file": "review-sha256.txt",
+    "probe_file": "review-probe.json",
+    "frames": 500,
+    "width": 432,
+    "height": 768,
+    "duration_seconds": 16.683,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "continuous_playback_reviewed": false,
+    "audio_listening_reviewed": false
   }
 }
