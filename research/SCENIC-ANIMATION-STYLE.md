@@ -70,3 +70,13 @@ What feels more like an infographic:
 5. **Storyboards must specify**: who does what to which object, how the world changes, why the change teaches the viewer, then whether a chart is actually necessary.
 
 No imitation of copyrighted clips or scene assets. Reference URLs are for editorial research, not permission to reuse them.
+
+## First actual preview and one repair finding (frozen 2026-10-28)
+
+Reviewed full actual 432×768 output from [GitHub Actions 40696289269](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40696289269), artifact `viewer-protagonist-before-after` (ID 12820225204). Encoded 500 frames, H.264/AAC, 16.683 seconds; MP4 SHA-256 `0b6126877bbb3c630126f415ed5c42719861be58f8e5c2b72e57466f0e9cdd7c`. Python tests, TS checks and four decoded voice-signal checks passed; these don't constitute attentive human voice listening. Sampled actual MP4 at 0.6,1.8,3.2,4.8,6.6,8.4,10.2,12.6,15.6s.
+
+**Confirmed improvement:** characters now occupy a legible office space with window, desk, city depth and associated props while the filing remains the foreground focus. The original S-1 lines and financing card remain legible at sampled phone scale. This is a **simple animated backdrop**, not yet a fully cinematic multi-location story.
+
+**Observed visual defect that requires one repair:** the two new loose sheets remain suspended, unchanged in the space between host and Dario at 3.2s through 15.6s. They also appear during the filing's approach rather than only after the impact. This is accidental **perpetual decorative clutter** and contradicts the causal-animation goal. Fix only this new paper timeline: no pages before contact; brief ballistic arc after filing contact; settle visually toward desk and disappear by ~2s, leaving static table stack. Verify at t=0.6/1.8/3.2/12.6 and transition frames; other cast, props, audio, finance and captions must stay identical. At most one repair on this PR iteration.
+
+**Hold:** no measured improvement to viewer retention, no license/likeness/final-media approval, no guarantee this single room fully meets desired animation language. Future multi-shot character mechanics need separate review.
