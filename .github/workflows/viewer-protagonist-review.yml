@@ -165,6 +165,7 @@ jobs:
           python3 scripts/verify_caption_windows.py \
             --video out/viewer-pr/after/anthropic-character-review.mp4 \
             --manifest src/anthropic-character-audio.json \
+            --expected-frames 475 \
             --output out/viewer-pr/review-caption-windows.json
       - name: Upload exact visual evidence
         if: always()
