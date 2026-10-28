@@ -25,9 +25,15 @@ export const OfficeWorld: React.FC<{t: number}> = ({t}) => {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
   });
   const impact = Math.max(0, Math.min(impactRise, impactFall));
-  const paperSettle = interpolate(t, [0.85, 1.5], [0, 1], {
+  const sheetFlight = interpolate(t, [0.82, 1.72], [0, 1], {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
   });
+  const sheetVisible = interpolate(t, [0.72, 0.84], [0, 1], {
+    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+  }) * (1 - interpolate(t, [1.65, 1.95], [0, 1], {
+    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+  }));
+  const sheetArc = Math.sin(Math.PI * sheetFlight) * 72;
   const drift = interpolate(t, [0, 18.3], [0, -100], {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
   });
@@ -95,15 +101,15 @@ export const OfficeWorld: React.FC<{t: number}> = ({t}) => {
       <path d="M816 1355 C843 1356 844 1380 817 1377" fill="none" stroke={ink} strokeWidth="5"/>
 
       {/* Loose sheets briefly flutter from the filing impact, then settle. */}
-      <g opacity={enter}>
-        <g transform={'translate(' + (690 + impact * 34 - paperSettle * 8) + ' ' +
-          (1088 - impact * 125 + paperSettle * 10) + ') rotate(' + (-12 + impact * 24) + ')'}>
+      <g opacity={sheetVisible}>
+        <g transform={'translate(' + (690 + sheetFlight * 62) + ' ' +
+          (895 + sheetFlight * 470 - sheetArc) + ') rotate(' + (-12 + sheetFlight * 30) + ')'}>
           <rect x="-28" y="-23" width="58" height="70" rx="3" fill="#FFFEF8"
             stroke={ink} strokeWidth="3"/>
           <path d="M-17 -7 H15 M-17 4 H10 M-17 16 H7" stroke="#C3D3CE" strokeWidth="3"/>
         </g>
-        <g transform={'translate(' + (624 - impact * 67 + paperSettle * 6) + ' ' +
-          (1081 - impact * 83 + paperSettle * 8) + ') rotate(' + (10 - impact * 32) + ')'}>
+        <g transform={'translate(' + (624 - sheetFlight * 44) + ' ' +
+          (875 + sheetFlight * 480 - sheetArc * 0.7) + ') rotate(' + (10 - sheetFlight * 36) + ')'}>
           <rect x="-24" y="-20" width="49" height="60" rx="3" fill="#FFFEF8"
             stroke={ink} strokeWidth="3"/>
           <path d="M-14 -3 H14 M-14 12 H9" stroke={orange} strokeWidth="3"/>
