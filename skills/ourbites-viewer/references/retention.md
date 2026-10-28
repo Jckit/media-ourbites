@@ -17,3 +17,10 @@ Researched 2026-10-27. These inform editorial hypotheses; none proves an Ourbite
 ## Ourbites recommendations, not creator quotations
 
 Transfer clarity, character stakes, fulfilled promises and deliberate iteration. Do not copy spectacle budgets, shouting, arbitrary cuts-per-minute or universal retention targets. Preserve moments needed to understand accounting. Existing `research/COMPETITOR-FORMATS.md` supplies format hypotheses, not access to competitors' private analytics. Prioritize observed viewer friction over increasing a self-assigned score.
+
+## Current verification, 2026-10-28
+
+- Official [YouTube audience-retention report](https://support.google.com/youtube/answer/9314415) still describes **four** highlighted types: intros, top moments, spikes and dips. A spike can mean replay/share **or a confusing explanation that people replay**; never automatically reward a spike as success.
+- Official [YouTube Shorts feed analytics](https://support.google.com/youtube/answer/12942217?co=YOUTUBE._YTVideoType%3Dshorts&hl=en) distinguishes **shown in feed** and **how many chose to view** (viewed vs swiped away). Measure whether the *visual promise and first clear action* match the eventual payoff, instead of imposing arbitrary cut/transition quotas.
+- Official [Shorts counting changes](https://support.google.com/youtube/answer/10059070) show that raw Short starts and replays have counted as views since March 31, 2025, while engaged views remain available. Don't compare different measurement eras without qualification.
+- **Application to current unpublished AnthropicCharacter:** no Studio retention data exists for this draft. An expressive hybrid protagonist, purposeful prop interaction and clearer financial payoff are *hypotheses* to test with accurately compared frames/voice, and eventually with published analytics. Source checks are not proof of performance. See [protagonist review rubric](protagonist.md).
