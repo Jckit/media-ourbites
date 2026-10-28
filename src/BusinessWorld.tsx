@@ -13,10 +13,6 @@ export const OfficeWorld: React.FC<{t: number}> = ({t}) => {
   const teal = '#087E83';
   const orange = '#E97F48';
   const floor = '#D8CDBB';
-  const enter = interpolate(t, [0, 0.4], [0, 1], {
-    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
-  });
-
   // Same moment as the S-1's drop/recoil: nearby loose pages lift, then settle.
   const impactRise = interpolate(t, [0.72, 0.86], [0, 1], {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
