@@ -81,8 +81,10 @@ export const OfficeWorld: React.FC<{t: number}> = ({t}) => {
       <rect x="112" y="573" width="66" height="78" rx="5" fill="#D7E5E1"/>
       <path d="M123 600 H164 M123 619 H154" stroke={teal} strokeWidth="5" strokeLinecap="round"/>
 
-      {/* Desk in the middle distance: actors remain in front of it. */}
-      <rect x="467" y="1215" width="425" height="181" rx="15" fill="#DCD2C1"/>
+      {/* Recess the credenza/desk behind the characters: tabletop above their shoes,
+          legs finish well before the identity label at y=1468, even during zoom. */}
+      <g transform="translate(-25 -175)">
+        <rect x="467" y="1215" width="425" height="181" rx="15" fill="#DCD2C1"/>
       <path d="M486 1277 H870 M486 1321 H870" stroke="#B8AA96" strokeWidth="5"/>
       <rect x="480" y="1387" width="432" height="42" rx="10" fill="#B7A68E" stroke={ink} strokeWidth="6"/>
       <rect x="507" y="1424" width="28" height="72" fill="#A8967D"/>
@@ -95,17 +97,18 @@ export const OfficeWorld: React.FC<{t: number}> = ({t}) => {
       </g>
       <rect x="746" y="1340" width="70" height="50" rx="6" fill="#DBE8E3" stroke={ink} strokeWidth="5"/>
       <path d="M816 1355 C843 1356 844 1380 817 1377" fill="none" stroke={ink} strokeWidth="5"/>
+      </g>
 
-      {/* Loose sheets briefly flutter from the filing impact, then settle. */}
+      {/* Loose sheets briefly flutter from the filing impact, then settle onto the recessed desk. */}
       <g opacity={sheetVisible}>
         <g transform={'translate(' + (690 + sheetFlight * 62) + ' ' +
-          (895 + sheetFlight * 470 - sheetArc) + ') rotate(' + (-12 + sheetFlight * 30) + ')'}>
+          (895 + sheetFlight * 310 - sheetArc) + ') rotate(' + (-12 + sheetFlight * 30) + ')'}>
           <rect x="-28" y="-23" width="58" height="70" rx="3" fill="#FFFEF8"
             stroke={ink} strokeWidth="3"/>
           <path d="M-17 -7 H15 M-17 4 H10 M-17 16 H7" stroke="#C3D3CE" strokeWidth="3"/>
         </g>
         <g transform={'translate(' + (624 - sheetFlight * 44) + ' ' +
-          (875 + sheetFlight * 480 - sheetArc * 0.7) + ') rotate(' + (10 - sheetFlight * 36) + ')'}>
+          (875 + sheetFlight * 330 - sheetArc * 0.7) + ') rotate(' + (10 - sheetFlight * 36) + ')'}>
           <rect x="-24" y="-20" width="49" height="60" rx="3" fill="#FFFEF8"
             stroke={ink} strokeWidth="3"/>
           <path d="M-14 -3 H14 M-14 12 H9" stroke={orange} strokeWidth="3"/>
