@@ -3,18 +3,36 @@
   "entry": "src/index.tsx",
   "preview_url": "http://localhost:3000/AnthropicCharacter",
   "latest_draft": "out/anthropic-character-smooth-grip.mp4",
-  "last_review": "reviews/viewer/20261028T094251Z.md",
+  "last_review": "reviews/viewer/20261028T183628Z.md",
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "Fixed observed one-frame hand jump with a continuous reach into the shared card grip. Seven after frames inspected; TypeScript and export passed. Three accepted revisions since actual human feedback; hold additional subjective changes. Technical checks may continue; audio/full playback unreviewed.",
-  "last_status": "grip_discontinuity_fixed_partial_visual_verified",
+  "notes": "PR #2 remains open/draft on approved a5f5dad; saved artifact hashes unchanged. No source changes or duplicate review. Full playback/listening still pending.",
+  "last_status": "approved_pr2_head_unchanged",
   "last_verified_frame": "out/viewer-20261028T094251Z-after-311.png",
   "input_hashes": "reviews/viewer/20261028T094251Z-inputs.json",
   "output_hashes": "reviews/viewer/20261028T094251Z-outputs.json",
   "backlog": [
-    "Review full motion/audio; sampled grip discontinuity fixed",
-    "Supporting text/caveat hierarchy: await fresh human feedback before further subjective changes"
+    "Check newest source/PR state before local edits; avoid duplicating corrected PR #2",
+    "Full playback/listening still outstanding; no new subjective experiment budget"
   ],
-  "last_human_direction": "Justin requested implementation-first feedback loop and purposeful Dario role on 2026-10-28; not final-media approval"
+  "last_human_direction": "Justin requested implementation-first feedback loop and purposeful Dario role on 2026-10-28; not final-media approval",
+  "remote_merge_observation": {
+    "pr": "https://github.com/jcbandc-arch/media-creator-outbites/pull/1",
+    "merged": true,
+    "merge_commit": "dcbbeb76e396f7a62e30b5f0b074aa27fc7af674",
+    "head": "0020059b3d31ef53f1f503bc79c15c3126f68232",
+    "local_synced": false,
+    "artifact": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40691817248/artifacts/12816898919"
+  },
+  "last_integrity_check": "reviews/viewer/20261028T183628Z-hashes.json",
+  "pr2_review": {
+    "head": "a5f5dad45e90f077cf46af9ad969996035eaf48e",
+    "verdict": "approved",
+    "github_review_event": "COMMENT",
+    "review_id": 5686305186,
+    "artifact": "out/pr2-updated/artifact/after/anthropic-character-review.mp4",
+    "continuous_playback_reviewed": false,
+    "approved_for_publication": false
+  }
 }
