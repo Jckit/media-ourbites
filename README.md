@@ -144,3 +144,16 @@ npm run typecheck
 ```
 
 This Python guard validates scene/cast metadata, but does not inspect rendered pixels, validate a likeness, approve a face, or waive source-media rights. Final-release asset and editorial signoffs remain human.
+
+## Scheduled viewer improvement loop (20-minute local Windows option)
+
+The repo has a dedicated [viewer skill](skills/ourbites-viewer/SKILL.md), [protagonist-specific research rules](skills/ourbites-viewer/references/protagonist.md), [Codex cycle prompt](scripts/viewer-loop-prompt.md), and a guarded [Windows runner](scripts/viewer-loop-20m.ps1). The loop is **implementation-first**: one verified, bounded Remotion improvement per cycle (or an explicitly logged blocker), before/after phone-size review, hashes and no silent approvals. It preserves the hybrid character, Kokoro `am_puck` voice A and 1.1x playback. It won't push or publish.
+
+**Activation on your PC is required:** this GitHub commit does NOT install a task remotely. In your existing Windows PowerShell checkout, after reviewing local edits and pulling compatible latest commits:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-viewer-loop-task.ps1
+Get-ScheduledTaskInfo -TaskName 'Ourbites Viewer Loop'
+```
+
+This configures a current-user 20-minute Task Scheduler recurrence while your PC is on and you are signed in. Full setup, pause/resume/remove commands, concurrency safeguards and limitations: [viewer scheduling guide](skills/ourbites-viewer/SCHEDULING.md). ChatGPT's in-chat scheduler currently cannot create sub-hourly tasks; don't confuse a prepared local installer with an active cloud task.
