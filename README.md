@@ -157,3 +157,9 @@ Get-ScheduledTaskInfo -TaskName 'Ourbites Viewer Loop'
 ```
 
 This configures a current-user 20-minute Task Scheduler recurrence while your PC is on and you are signed in. Full setup, pause/resume/remove commands, concurrency safeguards and limitations: [viewer scheduling guide](skills/ourbites-viewer/SCHEDULING.md). ChatGPT's in-chat scheduler currently cannot create sub-hourly tasks; don't confuse a prepared local installer with an active cloud task.
+
+## Animation direction: illustrated stories, not perpetual infographics
+
+The 28 October 2026 creative direction is to show **characters performing events inside coherent 2D worlds** (e.g. office, storefront, factory) with contact, reactions, motivated camera movement and visible consequences. Keep exact business calculations as brief clear graphic beats. See [research/SCENIC-ANIMATION-STYLE.md](research/SCENIC-ANIMATION-STYLE.md) for reference research and a rendered baseline comparison.
+
+A first unapproved [`OfficeWorld` pilot](src/BusinessWorld.tsx) adds a layered business-office environment and filing-impact paper reaction to `AnthropicCharacter`. This is an original simplified 2D approach, not a licensed excerpt of another YouTube animation. It does **not** replace existing dialogue, Kokoro Voice A, financial numbers, the hybrid cast or human publication gates. Review the draft PR and actual frame comparisons before adopting it across episodes.
