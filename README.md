@@ -2,6 +2,14 @@
 
 A research-backed, local code foundation for original business explainers. Current public channel: https://www.youtube.com/@Ourbites. Confirmed brand: **Ourbites**. Editorial promise: **Bite-sized explanations of business.** Each episode explains one business move, how it works and why it matters. Earlier image drafts retain superseded branding and are visual references only.
 
+## Current status — 2026-10-28
+
+The production framework now includes a recurring **hybrid fictional host** ([source](src/OurbitesHost.tsx)), a shared 2D/2.5D office/storefront scene kit ([framework](src/framework/README.md)) and the narrated **AnthropicCharacter** draft with a 475-frame review export. Shared office integration is merged in [PR #10](https://github.com/jcbandc-arch/media-creator-outbites/pull/10); automatic still-fixture and caption-window checks passed, **but FW-06 remains in human visual/audio/factual/rights review**. Merging a PR or passing CI never approves final media.
+
+The optional **editorial paper-collage / digital cutout motion language** is documented in the [style guide](styles/OURBITES-EDITORIAL-PAPER-MOTION.md) and [motion skill](skills/ourbites-motion/SKILL.md), approved as *documentation* in [PR #11](https://github.com/jcbandc-arch/media-creator-outbites/pull/11). The paper-motion components, scene-director and modern transition primitives described there are **planned, not implemented**. [ROADMAP.md](ROADMAP.md) is the current task and gate tracker; the [repository cleanup audit](reviews/REPO-CLEANUP-2026-10-28.md) describes status reconciliation. Preserve local Codex work and reviewer decisions.
+
+The **selected production voice** is Kokoro **`am_puck` Voice A**, synthesis speed 1.0, **original pitch (0 semitones)** from [selected-voice.json](auditions/selected-voice.json); the existing composition uses **1.1× playback**. Do not substitute an audition candidate, pitch-shift, or regenerate WAVs during cleanup.
+
 ## Deliverables
 
 - `WORKFLOW.md`: current production loop, installed skills, and next implementation slice.
@@ -63,17 +71,17 @@ For a completed master, use a separate receipt and `--media path/to/final.mp4`. 
 | Source/claim/scene structure and unknown-reference checks | Automatic source collection and semantic fact checking |
 | 72-hour volatile-source check and one-publisher warnings | Publication-day manual recheck and independent corroboration where needed |
 | Script review artifact, editorial/final media receipts | Authenticated multiuser review, if a team eventually needs it |
-| Frame-driven diagrams, text and scene timing | Chosen illustrated style, layered assets and character system |
-| Pinned renderer dependencies; test-frame export | Final narration, audio mix, word alignment and synchronized captions |
+| Frame-driven diagrams, hybrid host/illustrated Dario, shared environment kit and staged review drafts | Reusable actor/prop action system and paper-motion primitives; production human art/rights approvals |
+| Pinned Remotion dependencies; 475-frame AnthropicCharacter review render with encoded narration and caption-presence QA | Human listening/intelligibility/pitch evaluation, word-level alignment and final media signoff |
 | Four independent style draft images | WanGP/ComfyUI/TTS model benchmarks and adapters |
 | Inspected existing FilmCraft caption interface | A business-specific FilmCraft base/template integration |
 | SOP and measurement specification | OAuth analytics, upload/scheduling, retry queue and dashboards |
 
-Do not add all pending work at once. Next build batch: selected style + one approved script + actual narration + one finished pilot. Measure the production effort before automating source ingestion or upload.
+Do not add all pending work at once. After FW-06's outstanding human media review, prioritize FW-07 reusable object/character anchors and one paper-collage motion primitive; validate reuse across two different mechanisms before generalizing to FW-08. Preserve the existing narrated draft, exact finance distinctions and human gates. Measure the production effort before automating source ingestion or upload.
 
 ## Local validation
 
-Nine Python tests passed, TypeScript passed, Remotion bundled and rendered four test stills covering the diagram types; these were visually inspected. Headless rendering needed execution outside the Codex process sandbox. The Studio server built successfully, but the in-app browser could not reach its localhost preview, so interactive preview verification remains incomplete. The tests cover stale/future sources, unsourced facts, unknown/duplicate claims, bad timings and invalidation after script/media edits. The model/backends were reviewed from documentation, not benchmarked. No paid APIs or model weights were installed. No real human approval receipt was fabricated.
+Current merged-main [standard Actions](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40771802365) and [shared-fixture Actions](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40771802212) passed on 2026-10-28. The fixture job renders six 432×768 office/storefront PNGs and compares shared lower reading zones, but cannot approve full-motion, audio, copyright or real-person likeness. The earlier pilot's four inspected diagram stills and browser limitation remain historical evidence; they are not the complete current validation scope. Actual local Windows render/Codex/voice environment must be checked separately. No human final-media approval is inferred.
 
 Keep secrets, private analytics, media masters and generated scratch files out of Git. The profile PDF remains in Downloads; the repository contains only task-relevant analysis rather than a copied personal dossier.
 
@@ -124,16 +132,16 @@ Local Kokoro voice audition paths:
 ```powershell
 .venv-voice/Scripts/python scripts/audition-anthropic.py --mode compare
 # After choosing and listening to a specific voice:
-.venv-voice/Scripts/python scripts/audition-anthropic.py --mode full --voice am_liam
+.venv-voice/Scripts/python scripts/audition-anthropic.py --mode full --voice am_liam  # optional DIFFERENT voice audition only; never overwrite selected Voice A
 ```
 
-The chosen voice above is only an **illustrative command argument**, not a recommendation or approval. These scripts create ignored local WAVs and measured scene durations; a human must choose a voice, listen, retime, and align captions before final production. Rendering, media rights, and publication remain gated by the existing SOP.
+The command above is an **optional historical audition example for an alternative voice**, not the selected episode voice. The selected voice is **Kokoro `am_puck` (A), original pitch, 1.1× video playback**, as recorded in [auditions/selected-voice.json](auditions/selected-voice.json). This cleanup does not rerender or resynthesize audio. Actual final voice listening/word-level sync, media rights, and publication remain gated by the SOP.
 
 ## Reusable character system — recurring Ourbites host + real-person illustrations
 
 The character stage is documented in [research/CHARACTER-ASSETS.md](research/CHARACTER-ASSETS.md), with machine-readable [protagonist](characters/protagonist/profile.json) and [Dario Amodei](characters/dario-amodei/profile.json) profiles. The **existing hybrid host** has been extracted into [src/OurbitesHost.tsx](src/OurbitesHost.tsx): one fictional face/silhouette with `neutral`, `explain`, `think`, `point`, and `react` poses. The owner can approve or revise its final appearance later; **provisional is not approved**.
 
-This shared character is present in the existing `OwnershipProof`, generic `BusinessShort`, and Anthropic `AnthropicShort` storyboards. The Anthropic host currently appears in `hook`, `operations`, and `payoff` scenes. A **Dario Amodei illustrated character is only planned**: no likeness/illustration is marked approved or shown in the renderer. Character-asset research belongs beside source/media research before final scene approval.
+This shared character is present in the existing `OwnershipProof`, generic `BusinessShort`, and Anthropic `AnthropicShort` storyboards. The Anthropic host currently appears in `hook`, `operations`, and `payoff` scenes. A **silent illustrated Dario Amodei component is implemented** in [src/DarioIllustration.tsx](src/DarioIllustration.tsx) and appears in the `AnthropicCharacter` review draft, including the existing accounting-card handoff. **His final likeness and publication use are not approved**; the implementation is not historical footage or his real voice. Character-asset research belongs beside source/media research before final scene approval.
 
 ```powershell
 python scripts/validate_character_cast.py episodes/002/episode.json
@@ -158,10 +166,12 @@ Get-ScheduledTaskInfo -TaskName 'Ourbites Viewer Loop'
 
 This configures a current-user 20-minute Task Scheduler recurrence while your PC is on and you are signed in. Full setup, pause/resume/remove commands, concurrency safeguards and limitations: [viewer scheduling guide](skills/ourbites-viewer/SCHEDULING.md). ChatGPT's in-chat scheduler currently cannot create sub-hourly tasks; don't confuse a prepared local installer with an active cloud task.
 
-## Animation direction: coherent illustrated 2D worlds
+## Animation direction: coherent illustrated 2D worlds and optional editorial paper motion
 
 Ourbites is moving beyond a mostly infographic appearance toward the **illustration and character-animation style** of accessible 2D explainers. This means consistent character designs, grounded visual settings, layered depth, uncluttered phone-size compositions and purposeful animation. The science "what-if" reference is **visual inspiration**, not a mandate for simulated consequences, multiple locations, rapid cuts or new editorial formats. Exact diagrams and financial labels remain important. See [research/SCENIC-ANIMATION-STYLE.md](research/SCENIC-ANIMATION-STYLE.md).
 
 The draft [`OfficeWorld` pilot](src/BusinessWorld.tsx) gives `AnthropicCharacter` a simple illustrated office instead of a blank cream stage. Optional loose-paper motion illustrates what Remotion can do, but isn't a requirement for other videos. PR #2 review identified furniture perspective and an illustrated-person label collision; both are subject to phone-size visual verification before merge. No changes to the chosen voice, financial values, cast, historic evidence or publication approvals are implied.
 
-**Optional visual blend (PR #2):** the requested reference is **low-poly animation**, but the intended Ourbites aesthetic is still the established flat 2D hybrid. We are testing small 2.5D/faceted-shading touches on scenery and props—not replacing the host, forcing 3D, or requiring event simulations. See [Ourbites Hybrid 2.5D](styles/OURBITES-HYBRID-2.5D.md). PR #2 remains draft pending visual review and clearance of the desk/label feedback.
+**Optional visual blend (PR #2):** the requested reference is **low-poly animation**, but the intended Ourbites aesthetic is still the established flat 2D hybrid. We are testing small 2.5D/faceted-shading touches on scenery and props—not replacing the host, forcing 3D, or requiring event simulations. See [Ourbites Hybrid 2.5D](styles/OURBITES-HYBRID-2.5D.md). [PR #2](https://github.com/jcbandc-arch/media-creator-outbites/pull/2) was merged after its visual integration checks; the later [FW-06 production integration](https://github.com/jcbandc-arch/media-creator-outbites/pull/10) was merged as well. The framework's visual dimensionality has been approved as an experiment, **not** as final episode media. Open human art/audio/factual/rights gates remain tracked in the roadmap.
+
+**New optional motion vocabulary:** [editorial paper-collage / mixed-media cutout animation](styles/OURBITES-EDITORIAL-PAPER-MOTION.md) with motivated object focus, layered evidence cards, kinetic typography, and smooth transitions is now documented. Use [ourbites-motion](skills/ourbites-motion/SKILL.md) for future implementations; this is **not** already a functional motion library, nor a required treatment for every scene. The protagonist identity, selected Voice A, 1.1× playback, source accuracy and final approval gates remain unchanged.
