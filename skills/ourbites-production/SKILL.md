@@ -72,3 +72,7 @@ For every shot, choose the visual treatment that best clarifies its fact or idea
 Use reusable original SVG environment layers, modest parallax where useful, and selectively animated actors and props. Avoid random background movement, cheap depth illusions, unnecessary noise, or claiming a cartoon shows actual historical footage. Review actual rendered frames at mobile resolution, including the whole zoom range. Human likeness, sourcing and final-media rights gates remain independent.
 
 **Feedback scope:** this is one separate visual-style pilot and PR-specific correction, not renewed authorization for unlimited protagonist-design changes. Code/test success alone does not prove viewer retention or visual signoff.
+
+## Optional low-poly visual influence, not a 3D conversion (2026-10-28)
+
+Read [styles/OURBITES-HYBRID-2.5D.md](../../styles/OURBITES-HYBRID-2.5D.md) before experimenting with faceted illustration. Justin clarified that **low-poly animation is his reference**, but he does **not** want a fully low-poly channel. Preserve the **hybrid 2D host and facial identity**. Borrow a limited number of flat-shaded polygonal planes for office furniture, skyline buildings or technical machinery, using the existing cream/navy/teal/orange palette. **Do not** add mandatory physics, event simulation, polygonized faces, camera spins or a Three.js dependency. Financial charts remain flat and legible. Judge each optional facet at 432×768; if it's just visual noise, omit it. This is art direction subject to human approval, not a proven retention technique.
