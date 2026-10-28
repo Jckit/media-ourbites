@@ -24,13 +24,13 @@ $after = @{}
 $tracked = @('src/OurbitesHost.tsx','src/AnthropicCharacter.tsx',
              'src/DarioIllustration.tsx','reviews/viewer-loop.json')
 try {
-    # Atomic CreateNew + exclusive file share prevents overlapping manual/scheduled runs.
+    # Atomic CreateNew owns the lock; allow read-only inspection of its owner/time by the Codex child.
     # Never override an existing lock belonging to another actor.
     try {
         $lock = [System.IO.File]::Open($lockPath,
             [System.IO.FileMode]::CreateNew,
             [System.IO.FileAccess]::ReadWrite,
-            [System.IO.FileShare]::None)
+            [System.IO.FileShare]::Read)
     }
     catch [System.IO.IOException] {
         throw 'Viewer loop already locked; skipped rather than deleting another actor lock'
