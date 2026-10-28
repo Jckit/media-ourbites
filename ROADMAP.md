@@ -22,7 +22,7 @@ Canonical shared task board. Goal: expressive existing hybrid characters with re
 | FW-06 | Adapt production office to shared kit without changing episode timing/claims | FW-05 | ready | unclaimed | Matched Anthropic before/after; retain narration, captions, feet, labels and payoff |
 | FW-07 | Reusable actor/prop actions: look, point, hold, handoff with explicit anchors | FW-06 | blocked | unclaimed | Demonstrate same action in two distinct mechanisms; no episode timestamps inside library |
 | FW-08 | Episode scene configuration and narration-driven beat adapter | FW-07 | blocked | unclaimed | New fixture changes data/config only; voice A, original pitch, 1.1x retained; captions tied to real word times |
-| FW-09 | Repeatable QA command and CI coverage for shared scene library | FW-04 | ready | unclaimed | Typecheck + deterministic fixture renders + safe-area regressions; retain manual audiovisual review |
+| FW-09 | Repeatable QA command and CI coverage for shared scene library | FW-04 | active | cloud viewer cycle 2026-10-28T19:45Z; branch `review/fw09-fixture-ci-20261028` from `a2f23775`; owns `.github/workflows/framework-fixtures.yml`, `ROADMAP.md`, `reviews/viewer/20261028T1945Z-fw09-fixture-ci.md` | Existing source guard merged via PR #8; adding PR-triggered 432x768 fixture renders and shared caption/label-strip regression, pending CI results and manual review |
 | FW-10 | Document authoring recipe and prove reuse on a second business topic | FW-06, FW-08, FW-09 | blocked | unclaimed | Record configuration/code effort, render evidence and remaining exceptions; no forced narrative structure |
 
 ## Current batch boundaries
