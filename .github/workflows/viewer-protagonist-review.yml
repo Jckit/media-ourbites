@@ -88,6 +88,54 @@ jobs:
           print(f"Encoded review media: 500 frames, 432x768, {duration:.3f}s, H.264 + AAC")
           print("Audio track exists; voice quality, pitch, sync and motion remain unreviewed.")
           PY
+          # An AAC stream can exist while one or more narration clips are silent.
+          # Decode and measure signal in each expected clip window; this is NOT listening.
+          ffmpeg -hide_banner -loglevel error -y \
+            -i out/viewer-pr/after/anthropic-character-review.mp4 \
+            -vn -ac 1 -ar 16000 -c:a pcm_s16le out/viewer-pr/review-audio.wav
+          python3 - <<'PY'
+          from array import array
+          import json
+          import math
+          from pathlib import Path
+          import sys
+          import wave
+
+          manifest = json.loads(Path("src/anthropic-character-audio.json").read_text())
+          with wave.open("out/viewer-pr/review-audio.wav", "rb") as audio:
+              assert (audio.getnchannels(), audio.getsampwidth(), audio.getframerate()) == (1, 2, 16000)
+              rate = audio.getframerate()
+              samples = array("h")
+              samples.frombytes(audio.readframes(audio.getnframes()))
+          if sys.byteorder != "little":
+              samples.byteswap()
+          results = []
+          for index, clip in enumerate(manifest["clips"]):
+              # Trim only the first/last 0.2s to avoid expected clip-edge pauses.
+              start = round((clip["start"] + 0.2) / 1.1 * rate)
+              end = round((clip["start"] + clip["duration"] - 0.2) / 1.1 * rate)
+              assert 0 <= start < end <= len(samples), (index, start, end, len(samples))
+              window = samples[start:end]
+              rms = math.sqrt(sum(value * value for value in window) / len(window)) / 32768
+              peak = max(abs(value) for value in window) / 32768
+              rms_dbfs = 20 * math.log10(rms) if rms else -120
+              peak_dbfs = 20 * math.log10(peak) if peak else -120
+              results.append({
+                  "clip_index": index, "source_file": clip["file"],
+                  "window_seconds": [round(start / rate, 3), round(end / rate, 3)],
+                  "rms_dbfs": round(rms_dbfs, 2), "peak_dbfs": round(peak_dbfs, 2),
+              })
+              assert rms_dbfs > -45 and peak_dbfs > -30, (
+                  f"Missing or near-silent encoded narration clip {index}: "
+                  f"RMS {rms_dbfs:.1f} dBFS, peak {peak_dbfs:.1f} dBFS"
+              )
+          Path("out/viewer-pr/review-audio-signal.json").write_text(
+              json.dumps({"playback_speed": 1.1, "rms_min_dbfs": -45,
+                          "peak_min_dbfs": -30, "clips": results}, indent=2) + "\n"
+          )
+          print("Encoded audio signal present in all", len(results), "narration windows.")
+          print("This does NOT verify voice identity, original pitch, intelligibility or sync.")
+          PY
           sha256sum out/viewer-pr/after/anthropic-character-review.mp4 \
             > out/viewer-pr/review-sha256.txt
       - name: Upload exact visual evidence
@@ -101,6 +149,7 @@ jobs:
             out/viewer-pr/frame-sha256.txt
             out/viewer-pr/after/anthropic-character-review.mp4
             out/viewer-pr/review-probe.json
+            out/viewer-pr/review-audio-signal.json
             out/viewer-pr/review-sha256.txt
           retention-days: 14
           if-no-files-found: warn
