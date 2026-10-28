@@ -1,0 +1,69 @@
+name: Review protagonist before and after (PR)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/OurbitesHost.tsx'
+      - 'src/CharacterStage.tsx'
+      - 'src/AnthropicCharacter.tsx'
+      - '.github/workflows/viewer-protagonist-review.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout branch with base history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install pinned dependencies
+        run: npm ci --ignore-scripts
+      - name: Verify TypeScript and narrative guardrails
+        run: |
+          npm run typecheck
+          python3 -m unittest discover -s tests -v
+      - name: Frame and source integrity comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/viewer-pr/before out/viewer-pr/after
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+            cp "$f" "out/viewer-pr/after/$(basename "$f")"
+            git show "${{ github.event.pull_request.base.sha }}:$f" > "$f"
+          done
+          for f in 30 100 150 220 310 311 325 450 499; do
+            npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-$f.png" --frame="$f" --scale=0.4
+          done
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+            cp "out/viewer-pr/after/$(basename "$f")" "$f"
+          done
+          npm run typecheck
+          for f in 30 100 150 220 310 311 325 450 499; do
+            npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/after/frame-$f.png" --frame="$f" --scale=0.4
+          done
+          sha256sum out/viewer-pr/before/*.png out/viewer-pr/after/*.png > out/viewer-pr/frame-sha256.txt
+          git diff --check
+      - name: Upload exact visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: viewer-protagonist-before-after
+          path: |
+            out/viewer-pr/before/frame-*.png
+            out/viewer-pr/after/frame-*.png
+            out/viewer-pr/frame-sha256.txt
+          retention-days: 14
+          if-no-files-found: warn
+
+# This workflow compares exact same frames on isolated GitHub runners.
+# It does not listen to the full audio, approve a character, or publish.
