@@ -67,6 +67,9 @@ export const OfficeWorld: React.FC<{t: number}> = ({t}) => {
         <path d="M738 696 V776 H1048 V706 L1014 681 L988 688 V635 L958 635
                  V693 L934 683 V666 L903 666 V708 L882 688 V613 L856 613
                  V699 L837 688 V646 H803 V706 L780 697 V673Z" fill="#A3B9BA"/>
+        {/* Two low-poly-inspired skyline facets add readable depth without changing our flat 2D character style. */}
+        <path d="M856 613 L869 628 V702 L856 699Z" fill="#86A8A8" opacity="0.7"/>
+        <path d="M958 635 L973 644 V693 L958 692Z" fill="#84A4A3" opacity="0.7"/>
         <path d="M746 737 H1044 V786 H746" fill="#B3C6C6" opacity="0.6"/>
       </g>
       <path d="M889 336 V778 M747 558 H1034" stroke={ink} strokeWidth="7"/>
@@ -85,8 +88,12 @@ export const OfficeWorld: React.FC<{t: number}> = ({t}) => {
           legs finish well before the identity label at y=1468, even during zoom. */}
       <g transform="translate(-25 -175)">
         <rect x="467" y="1215" width="425" height="181" rx="15" fill="#DCD2C1"/>
+        {/* Subtle planar shading: low-poly inspiration applied to scenery, never the host's face. */}
+        <path d="M862 1217 H890 V1394 H862Z" fill="#C7B9A5" opacity="0.50"/>
+        <path d="M469 1218 H490 L476 1394 H469Z" fill="#EEE6D8" opacity="0.65"/>
       <path d="M486 1277 H870 M486 1321 H870" stroke="#B8AA96" strokeWidth="5"/>
       <rect x="480" y="1387" width="432" height="42" rx="10" fill="#B7A68E" stroke={ink} strokeWidth="6"/>
+      <path d="M485 1389 H906 L892 1403 H499Z" fill="#E1D5C4" opacity="0.67"/>
       <rect x="507" y="1424" width="28" height="72" fill="#A8967D"/>
       <rect x="855" y="1424" width="28" height="72" fill="#A8967D"/>
 
