@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'src/framework/**'
+      # Framework markdown changes do not affect rendered geometry.
+      - '!src/framework/README.md'
       - 'src/OurbitesHost.tsx'
       - 'src/CharacterStage.tsx'
       - 'scripts/check_framework_layout.py'
@@ -13,6 +15,8 @@ on:
     branches: [main]
     paths:
       - 'src/framework/**'
+      # Framework markdown changes do not affect rendered geometry.
+      - '!src/framework/README.md'
       - 'src/OurbitesHost.tsx'
       - 'src/CharacterStage.tsx'
       - 'scripts/check_framework_layout.py'
