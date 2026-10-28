@@ -1,0 +1,47 @@
+import React from 'react';
+import {AbsoluteFill,Audio,Sequence,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
+import {CharacterStage,StageActor,FilingProp,tween} from './CharacterStage';
+import narration from './anthropic-character-audio.json';
+import financials from '../episodes/002/financials.json';
+import {playbackSpeed} from './story-motion';
+import {DarioIllustration} from './DarioIllustration';
+
+const ink='#142B38',teal='#087E83',orange='#E97F48';
+export const CHARACTER_FRAMES=Math.ceil(narration.duration*30/playbackSpeed);
+export const AnthropicCharacter:React.FC=()=>{
+ const frame=useCurrentFrame(),{fps}=useVideoConfig(),t=frame/fps*playbackSpeed;
+ const inspect=narration.clips[1].start,operating=narration.clips[2].start,resolve=narration.clips[3].start;
+ const drop=tween(t,0.15,0.8,-850,350);
+ const recoil=t<0.8?0:t<1.15?tween(t,0.8,1.15,0,-12):tween(t,1.15,1.6,-12,0);
+ const open=tween(t,inspect,inspect+0.7,0,1);
+ const reveal=tween(t,operating,operating+0.55,0,1);
+ const end=tween(t,resolve,resolve+0.7,0,1);
+ const caption=narration.clips.find(c=>t>=c.start&&t<c.start+c.duration);
+ return <AbsoluteFill style={{background:'#F4F0E6',color:ink,fontFamily:'Arial, sans-serif',overflow:'hidden'}}>
+   <div style={{position:'absolute',left:85,top:105,fontSize:32,letterSpacing:4,fontWeight:900}}>OURBITES</div>
+   <div style={{position:'absolute',left:85,top:165,fontSize:26,color:'#607078'}}>ILLUSTRATIVE SCENE · LIKENESS REVIEW PENDING</div>
+   <CharacterStage zoom={1+open*0.06-end*0.06} focusX={650} focusY={850}>
+     <div style={{position:'absolute',top:1435,left:0,width:1080,height:20,background:ink}}/>
+     <div style={{position:'absolute',top:1455,left:0,width:1080,height:100,background:'#D7CEBB'}}/>
+     <div style={{position:'absolute',left:280,top:0,transform:'scale(0.76)',transformOrigin:'top left'}}>
+     <FilingProp x={0} y={drop/0.76} angle={-5+open*7}>
+       <div style={{fontSize:38,fontWeight:900}}>ANTHROPIC</div>
+       <div style={{fontSize:24,marginTop:12}}>S-1 · H1 2026 · RECREATED EXCERPT</div>
+       <div style={{marginTop:48,fontSize:30}}>REPORTED NET LOSS</div>
+       <div style={{fontSize:100,fontWeight:900,color:orange,letterSpacing:-4}}>${(Math.abs(financials.h1_2026.net_loss)/1000).toFixed(2)}B</div>
+       <div style={{marginTop:24,height:4,background:ink}}/>
+       <div style={{marginTop:24,fontSize:30,opacity:open}}>That is not a cash-spending total.</div>
+       <div style={{marginTop:35,padding:20,background:'#DBEEEA',opacity:reveal,transform:`translateX(${(1-reveal)*60}px)`}}><div style={{fontSize:25}}>OPERATING LOSS</div><div style={{fontSize:66,fontWeight:900,color:teal}}>${Math.abs(financials.h1_2026.operating_loss)}M</div></div>
+     </FilingProp>
+     </div>
+     <StageActor x={80+open*25} y={830} size={420} lean={recoil} pose={t<0.8?'neutral':t<inspect?'react':t<operating?'think':'point'}/>
+     <div style={{position:'absolute',left:710-open*25,top:830,width:420,transform:`rotate(${-open*3+end*3}deg)`,transformOrigin:'50% 95%'}}><DarioIllustration gesture={open}/></div>
+     <div style={{position:'absolute',left:750,top:1468,fontSize:27,fontWeight:800}}>DARIO · ILLUSTRATION</div>
+     <div style={{position:'absolute',left:75,top:255,fontSize:57,fontWeight:900,opacity:t>0.85&&t<inspect?1:0,rotate:'-5deg'}}>That’s a lot of zeros.</div>
+     <div style={{position:'absolute',left:365,top:1120,width:350,boxSizing:'border-box',opacity:end,translate:`${(1-end)*120}px ${(1-end)*-180}px`,rotate:`${(1-end)*-12}deg`,background:ink,color:'white',padding:25,borderRadius:16}}><div style={{fontSize:25}}>FINANCING FAIR-VALUE CHANGE</div><div style={{fontSize:60,color:'#FFAE72',fontWeight:900}}>${(Math.abs(financials.h1_2026.convertible_financing_fair_value_change)/1000).toFixed(2)}B</div><div style={{fontSize:23}}>Largest component, not the whole gap.</div></div>
+   </CharacterStage>
+   <div style={{position:'absolute',left:85,right:85,top:1600,fontSize:43,lineHeight:1.25,fontWeight:650,textAlign:'center'}}>{caption?.text}</div>
+   <div style={{position:'absolute',left:85,bottom:75,fontSize:24,color:'#607078'}}>Source: episode 002 filing dataset · editorial review pending</div>
+   {narration.clips.map(c=><Sequence key={c.file} from={Math.round(c.start*fps/playbackSpeed)} durationInFrames={Math.ceil(c.duration*fps/playbackSpeed)}><Audio src={staticFile(c.file)} playbackRate={playbackSpeed}/></Sequence>)}
+ </AbsoluteFill>;
+};

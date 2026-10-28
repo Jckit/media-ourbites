@@ -148,3 +148,6 @@ Review `assets.json` and `shot-list.md` before contacting rights holders or prep
 5. Run `python scripts/validate_character_cast.py episodes/002/episode.json` during drafting. `--release` deliberately rejects unapproved host/real-person assets, but passing after approvals is only a **structural preflight**. Human editorial Gate B and final-media Gate C still review the entire video; neither may be forged.
 
 Casting details, identity source policy, required poses and current status: [research/CHARACTER-ASSETS.md](research/CHARACTER-ASSETS.md). Human approval is independent of TypeScript tests, media hashing, and GitHub Actions.
+
+## Character-led scene direction
+For each beat specify actor, action, prop, visible change and takeaway. Characters demonstrate the mechanism; charts supply precision when needed. Keep figures large enough for phone screens. Link beats with motivated gesture, prop movement or camera motion. Design previews may contain clearly labeled proposed likenesses when requested; publication still requires recorded human review.

@@ -3,33 +3,44 @@
     {
       "text": "You own ten of one hundred shares.",
       "start": 0,
-      "duration": 2.439092970521542,
+      "duration": 1.912,
       "file": "proof/voice-0.wav"
     },
     {
       "text": "The company issues twenty-five more.",
-      "start": 2.619092970521542,
-      "duration": 2.529160997732426,
+      "start": 2.092,
+      "duration": 2.1266666666666665,
       "file": "proof/voice-1.wav"
     },
     {
       "text": "Your ten shares now represent eight percent.",
-      "start": 5.328253968253968,
-      "duration": 2.8789569160997734,
+      "start": 4.398666666666667,
+      "duration": 2.4466666666666668,
       "file": "proof/voice-2.wav"
     },
     {
       "text": "Rude.",
-      "start": 8.387210884353742,
-      "duration": 1.0694331065759637,
+      "start": 7.025333333333334,
+      "duration": 0.8286666666666667,
       "file": "proof/voice-3.wav"
     },
     {
       "text": "Same shares. Smaller percentage. Not necessarily less value.",
-      "start": 9.636643990929706,
-      "duration": 5.65859410430839,
+      "start": 8.034,
+      "duration": 3.9306666666666668,
       "file": "proof/voice-4.wav"
     }
   ],
-  "duration": 15.875238095238096
+  "duration": 12.544666666666668,
+  "hook_duration": 2.4366666666666665,
+  "voice": {
+    "provider": "kokoro-onnx",
+    "model": "Kokoro v1.0",
+    "voice": "am_puck",
+    "language": "en-us",
+    "synthesis_speed": 1.0,
+    "pitch_shift_semitones": 0,
+    "reference": "auditions/A.wav",
+    "selected_by": "Justin"
+  }
 }

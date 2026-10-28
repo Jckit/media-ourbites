@@ -1,0 +1,32 @@
+import React from 'react';
+
+// Original vector interpretation of Justin's supplied concept, not event footage.
+// Shared geometry keeps the likeness stable while the arm changes pose.
+export const DarioIllustration: React.FC<{gesture?: number; hand?: {x: number; y: number}}> = ({gesture = 0, hand}) => (
+  <svg viewBox="0 0 360 520" width="100%" role="img" aria-label="Dario illustration, design draft">
+    <ellipse cx="180" cy="501" rx="105" ry="12" fill="#142B38" opacity="0.12"/>
+    <path d="M145 365 L140 480 M215 365 L230 480" stroke="#142B38" strokeWidth="34" strokeLinecap="round"/>
+    <path d="M120 484 H150 M216 484 H248" stroke="#142B38" strokeWidth="20" strokeLinecap="round"/>
+    <path d="M118 233 Q180 207 242 233 L255 380 H105 Z" fill="#243D4A" stroke="#142B38" strokeWidth="5"/>
+    <path d="M153 227 H207 L217 371 H142 Z" fill="#F4F0E6"/>
+    <path d="M151 233 L130 267 L150 282 L137 343 M210 233 L232 267 L214 282 L229 343" fill="none" stroke="#142B38" strokeWidth="5"/>
+    <path d="M235 248 Q280 310 245 350" fill="none" stroke="#243D4A" strokeWidth="25" strokeLinecap="round"/>
+    {hand ? <g>
+      <path d={`M120 248 Q60 ${Math.min(248, hand.y + 65)} ${hand.x} ${hand.y}`} fill="none" stroke="#243D4A" strokeWidth="25" strokeLinecap="round"/>
+      <ellipse cx={hand.x} cy={hand.y} rx="16" ry="20" fill="#EFB58F"/>
+    </g> : <g transform={`rotate(${gesture * 55} 120 248)`}>
+      <path d="M120 248 Q91 277 65 310" fill="none" stroke="#243D4A" strokeWidth="25" strokeLinecap="round"/>
+      <ellipse cx="62" cy="314" rx="16" ry="20" fill="#EFB58F"/>
+    </g>}
+    <path d="M163 195 V234 Q180 250 198 234 V195" fill="#EFB58F"/>
+    <ellipse cx="180" cy="143" rx="70" ry="88" fill="#F5C5A3" stroke="#142B38" strokeWidth="4"/>
+    <path d="M112 143 Q89 105 109 76 Q102 48 135 49 Q144 18 169 35 Q194 13 213 37 Q247 29 252 61 Q276 77 251 130 L240 96 Q214 106 205 77 Q180 105 160 79 Q140 111 119 105 Z" fill="#30302E"/>
+    <g fill="none" stroke="#142B38" strokeWidth="6">
+      <rect x="122" y="125" width="51" height="38" rx="15"/>
+      <rect x="188" y="125" width="51" height="38" rx="15"/>
+      <path d="M173 136 Q180 130 188 136 M111 128 L122 134 M239 134 L249 125"/>
+    </g>
+    <circle cx="150" cy="141" r="5" fill="#142B38"/><circle cx="209" cy="141" r="5" fill="#142B38"/>
+    <path d="M180 145 L174 169 L186 171 M159 188 Q180 198 200 187" fill="none" stroke="#A36C51" strokeWidth="4" strokeLinecap="round"/>
+  </svg>
+);

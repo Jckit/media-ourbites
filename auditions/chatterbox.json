@@ -1,0 +1,9 @@
+{
+  "voice": "bundled Chatterbox default",
+  "device": "cpu",
+  "seed": 42,
+  "exaggeration": 0.35,
+  "cfg_weight": 0.5,
+  "seconds": 18.16,
+  "elapsed_seconds": 179.7887187999986
+}

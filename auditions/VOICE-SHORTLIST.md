@@ -70,3 +70,6 @@ The independent episode script and narrative are in [episodes/002/episode.json](
 ```
 
 Full mode generates **rough per-scene WAVs** with measured durations under `out/voice-auditions/002/full-VOICE/`; it does not insert them into Remotion or approve a voice. Carefully listen, check names and figures, select final delivery speed and correct mispronunciations. Then retime the 82-second estimated storyboard and use actual word alignment for captions. **Do not** apply a second post-render acceleration on top of chosen TTS speed. Auditions and generated WAVs remain excluded from Git; no voice has been approved in this repository.
+
+## Selected voice
+Justin selected original A.wav: Kokoro am_puck, en-us, synthesis speed 1.0, no pitch shift. Preset: selected-voice.json. Pilot narration regenerated using generate-selected-voice.py. Existing 1.1x composition playback remains in effect; the audition itself was speed 1.0. Captions and issuance/reaction timing now follow the generated clip durations.

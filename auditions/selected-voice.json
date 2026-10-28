@@ -1,0 +1,10 @@
+{
+  "provider": "kokoro-onnx",
+  "model": "Kokoro v1.0",
+  "voice": "am_puck",
+  "language": "en-us",
+  "synthesis_speed": 1.0,
+  "pitch_shift_semitones": 0,
+  "reference": "auditions/A.wav",
+  "selected_by": "Justin"
+}

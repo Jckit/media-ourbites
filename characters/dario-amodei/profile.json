@@ -35,6 +35,8 @@
     "reviewer": null,
     "approved_at": null,
     "asset_sha256": null,
-    "notes": "The concept image generated in chat is not automatically an approved or committed asset."
-  }
+    "notes": "Justin requested continuation of the character-led draft. Original SVG interpretation of his supplied concept is shown only in the labeled AnthropicCharacter design preview. Likeness and publication approval remain pending; no approval receipt created."
+  },
+  "draft_implementation": "src/DarioIllustration.tsx",
+  "draft_composition": "AnthropicCharacter"
 }

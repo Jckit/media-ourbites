@@ -9,3 +9,6 @@
 **Illustration plan:** flattened 2D vector editorial portrait; navy, teal, warm cream and restrained orange; neutral, explain and thoughtful pose variants generated from a **single fixed likeness**. Reference material must not be committed or distributed unless its rights permit it. Generated character art must be reviewed for identity and factual depiction before becoming available to the renderer.
 
 **Current status:** research/character direction documented. No approved base PNG, approved expression variants, rig or historical quotation exists in this folder.
+
+## Design preview v2 — 2026-10-27
+Identity source rechecked: Anthropic leadership page names Dario Amodei as co-founder and CEO. Appearance reference for this draft is Justin's supplied illustrated concept (curly dark hair, glasses, navy jacket, cream shirt), not an independently verified current portrait. Original geometry: src/DarioIllustration.tsx; shared face/body with an interpolated arm. Glasses and likeness remain review points. No source photograph copied. AnthropicCharacter is an explicitly labeled illustrative design preview, not an approved episode asset or a recreation of an actual interaction.

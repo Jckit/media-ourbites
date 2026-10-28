@@ -1,0 +1,20 @@
+{
+  "composition": "AnthropicCharacter",
+  "entry": "src/index.tsx",
+  "preview_url": "http://localhost:3000/AnthropicCharacter",
+  "latest_draft": "out/anthropic-character-smooth-grip.mp4",
+  "last_review": "reviews/viewer/20261028T094251Z.md",
+  "accepted_revisions_since_human_feedback": 3,
+  "max_subjective_revisions_without_human_feedback": 3,
+  "lock_path": "reviews/viewer-loop.lock",
+  "notes": "Fixed observed one-frame hand jump with a continuous reach into the shared card grip. Seven after frames inspected; TypeScript and export passed. Three accepted revisions since actual human feedback; hold additional subjective changes. Technical checks may continue; audio/full playback unreviewed.",
+  "last_status": "grip_discontinuity_fixed_partial_visual_verified",
+  "last_verified_frame": "out/viewer-20261028T094251Z-after-311.png",
+  "input_hashes": "reviews/viewer/20261028T094251Z-inputs.json",
+  "output_hashes": "reviews/viewer/20261028T094251Z-outputs.json",
+  "backlog": [
+    "Review full motion/audio; sampled grip discontinuity fixed",
+    "Supporting text/caveat hierarchy: await fresh human feedback before further subjective changes"
+  ],
+  "last_human_direction": "Justin requested implementation-first feedback loop and purposeful Dario role on 2026-10-28; not final-media approval"
+}

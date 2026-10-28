@@ -1,0 +1,29 @@
+{
+  "clips": [
+    {
+      "text": "Eighty billion dollars. That is a lot of zeros.",
+      "start": 0,
+      "duration": 2.966666666666667,
+      "file": "anthropic-character/0.wav"
+    },
+    {
+      "text": "But wait. This is reported net loss, not a cash receipt.",
+      "start": 3.2666666666666666,
+      "duration": 3.4106666666666667,
+      "file": "anthropic-character/1.wav"
+    },
+    {
+      "text": "The operating loss? Six hundred ninety-three million. Still serious.",
+      "start": 6.977333333333333,
+      "duration": 4.091333333333333,
+      "file": "anthropic-character/2.wav"
+    },
+    {
+      "text": "Most of the gap comes from accounting changes on financing. Read the pieces, not just the headline.",
+      "start": 11.368666666666666,
+      "duration": 6.23,
+      "file": "anthropic-character/3.wav"
+    }
+  ],
+  "duration": 18.298666666666666
+}

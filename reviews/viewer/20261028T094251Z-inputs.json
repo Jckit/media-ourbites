@@ -1,0 +1,62 @@
+[
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\AnthropicCharacter.tsx",
+    "Hash": "5DD200CED9A1C2A6E8CA35472F410D7338D821932B1A9147247B6100E77CFB10"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\AnthropicShort.tsx",
+    "Hash": "A05A918554C1F53670B1F08D5A9BF901EF3D1F4058A9DF3A9F7D727A0FF5F6BB"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\CharacterStage.tsx",
+    "Hash": "B85A3A0BE8AF885DA2A63867622C764051D8063D3FF1C533913B09600B6712B6"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\DarioIllustration.tsx",
+    "Hash": "C3BDC0CE5A784CA76844B93C64A3C8ED713A6A9288AD5409D16AE8CC058A0478"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\index.tsx",
+    "Hash": "1D961224022EFED328A2D784293D52C5EB9E280B8584070FE6196E84E1DC114F"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\OurbitesHost.tsx",
+    "Hash": "4FD060AA875F2587E6AA0ED73C04170039DEA06FB5756829D083184A60C15F36"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\OwnershipProof.tsx",
+    "Hash": "FD958B4E14E907966EE00285F4911D0C395FB184C457389629455F264BAE68AA"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\ReviewedMediaInsert.tsx",
+    "Hash": "4D40CDF57E496CBC6D8FEAA8503FBEE00DA07145E1D79FAE6B6B4237862227EB"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\story-motion.tsx",
+    "Hash": "3A6A6888820A031242D2B67211D5874D4019B1A1CFE0D92EFD2DDB2992A805E8"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\src\\anthropic-character-audio.json",
+    "Hash": "21192AC00FF4AC211535DF18C3C45BE21C5CF4BF88EDC58592C586162C3F4A9C"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\episodes\\002\\financials.json",
+    "Hash": "09517BD85D6BC734A967F68071D2928EC3F995B7C2BEEDDF4152BBE2EE6EF104"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\public\\anthropic-character\\0.wav",
+    "Hash": "446D55E2E10FBDBE887B6326CF90BF0C3A2A91EBA47B61A2A73CEFAC392D6E45"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\public\\anthropic-character\\1.wav",
+    "Hash": "443CC5E75F661254B79644E7A053F7397863F910CDD5D6FE025084B181FE13A6"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\public\\anthropic-character\\2.wav",
+    "Hash": "146432968158507976C93202EAEDB155382C0A317B5A33E32FE37896A997C873"
+  },
+  {
+    "Path": "C:\\Users\\Justin\\Documents\\ChatGPT\\Businesses\\business-and-chats\\public\\anthropic-character\\3.wav",
+    "Hash": "587CF22D3F5214A3216CFD1141E2BEAF936DACE96C8106FC155FE79B1A6302AD"
+  }
+]

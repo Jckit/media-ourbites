@@ -1,9 +1,10 @@
 import React from 'react';
+import narration from './proof-audio.json';
 import {AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 
 export const playbackSpeed=1.1;
 export const useStoryClock=()=>{const {fps}=useVideoConfig(); return {fps:fps/playbackSpeed};};
-export const storyTiming={hook:5, bridge:0.6};
+export const storyTiming={hook:Math.max(3.4,narration.hook_duration+0.4), bridge:0.6};
 export const motionClamp={extrapolateLeft:'clamp',extrapolateRight:'clamp',easing:Easing.inOut(Easing.cubic)} as const;
 
 // Scenes retain global time: transition overlap never changes narration offsets.

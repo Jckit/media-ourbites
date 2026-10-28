@@ -1,0 +1,20 @@
+{
+  "src\\anthropic-approved-media.json": "59f8dc3b8790528e9f4236830b1400c119f06a9625e25a99cbcc8b503c718fd9",
+  "src\\anthropic-character-audio.json": "21192ac00ff4ac211535df18c3c45be21c5cf4bf88edc58592c586162c3f4a9c",
+  "src\\AnthropicCharacter.tsx": "3641661734eb08ca7e75a08547c9f22704cae6c6fba439defd541f19c854e1f0",
+  "src\\AnthropicShort.tsx": "a05a918554c1f53670b1f08d5a9bf901ef3d1f4058a9df3a9f7d727a0ff5f6bb",
+  "src\\CharacterStage.tsx": "b85a3a0be8af885da2a63867622c764051d8063d3ff1c533913b09600b6712b6",
+  "src\\DarioIllustration.tsx": "aae57f54c8cd3c2dbf50167715b29cc7c6931a9641f2b970627cc84d47342218",
+  "src\\index.tsx": "1d961224022efed328a2d784293d52c5eb9e280b8584070fe6196e84e1dc114f",
+  "src\\OurbitesHost.tsx": "4fd060aa875f2587e6aa0ed73c04170039dea06fb5756829d083184a60c15f36",
+  "src\\ownership-state.ts": "6c033079234a4784ec2380dfedc08d1807a6115eeae2102707532262fcf281e6",
+  "src\\OwnershipProof.tsx": "fd958b4e14e907966ee00285f4911d0c395fb184c457389629455f264bae68aa",
+  "src\\proof-audio.json": "913ea0a6dc901a523916f4b1edee0fc166a75d923b76ea410d16b7a29811d0f9",
+  "src\\ReviewedMediaInsert.tsx": "4d40cdf57e496cbc6d8feaa8503fbee00da07145e1d79fae6b6b4237862227eb",
+  "src\\story-motion.tsx": "3a6a6888820a031242d2b67211d5874d4019b1a1cfe0d92efd2ddb2992a805e8",
+  "public\\anthropic-character\\0.wav": "446d55e2e10fbdbe887b6326cf90bf0c3a2a91eba47b61a2a73cefac392d6e45",
+  "public\\anthropic-character\\1.wav": "443cc5e75f661254b79644e7a053f7397863f910cdd5d6fe025084b181fe13a6",
+  "public\\anthropic-character\\2.wav": "146432968158507976c93202eaedb155382c0a317b5a33e32fe37896a997c873",
+  "public\\anthropic-character\\3.wav": "587cf22d3f5214a3216cfd1141e2beaf936dace96c8106fc155fe79b1a6302ad",
+  "episodes\\002\\financials.json": "09517bd85d6bc734a967f68071d2928ec3f995b7c2beeddf4152bbe2ee6ef104"
+}

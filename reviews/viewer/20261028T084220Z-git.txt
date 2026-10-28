@@ -1,0 +1,31 @@
+ M SOP.md
+ M WORKFLOW.md
+ M auditions/VOICE-SHORTLIST.md
+ M characters/dario-amodei/profile.json
+ M characters/dario-amodei/references.md
+ M public/proof/hook.wav
+ M public/proof/voice-0.wav
+ M public/proof/voice-1.wav
+ M public/proof/voice-2.wav
+ M public/proof/voice-3.wav
+ M public/proof/voice-4.wav
+ M scripts/generate-proof-voice.ps1
+ M skills/ourbites-production/SKILL.md
+ M src/OwnershipProof.tsx
+ M src/index.tsx
+ M src/proof-audio.json
+ M src/story-motion.tsx
+?? REVIEW-2026-10-27.md
+?? auditions/chatterbox-requirements-lock.txt
+?? auditions/chatterbox.json
+?? auditions/selected-voice.json
+?? episodes/002/CHARACTER-REVISION.md
+?? public/anthropic-character/
+?? reviews/
+?? scripts/generate-anthropic-character-voice.py
+?? scripts/generate-selected-voice.py
+?? skills/ourbites-viewer/
+?? src/AnthropicCharacter.tsx
+?? src/CharacterStage.tsx
+?? src/DarioIllustration.tsx
+?? src/anthropic-character-audio.json
