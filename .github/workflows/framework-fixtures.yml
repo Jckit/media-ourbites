@@ -1,0 +1,100 @@
+name: Review shared Ourbites framework fixtures
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/framework/**'
+      - 'src/OurbitesHost.tsx'
+      - 'src/CharacterStage.tsx'
+      - 'scripts/check_framework_layout.py'
+      - '.github/workflows/framework-fixtures.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/framework/**'
+      - 'src/OurbitesHost.tsx'
+      - 'src/CharacterStage.tsx'
+      - 'scripts/check_framework_layout.py'
+      - '.github/workflows/framework-fixtures.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fixtures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install pinned dependencies
+        run: npm ci --ignore-scripts
+      - name: Verify existing source layout guard and TypeScript
+        run: |
+          python3 scripts/check_framework_layout.py
+          npm run typecheck
+      - name: Render matching 432x768 fixture stills
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/framework-ci
+          for spec in FrameworkOffice:office FrameworkStorefront:storefront; do
+            IFS=: read -r composition preset <<< "$spec"
+            for frame in 0 120 239; do
+              npx remotion still src/index.tsx "$composition" \
+                "out/framework-ci/${preset}-frame-${frame}.png" \
+                --frame="$frame" --scale=0.4
+            done
+          done
+      - name: Check matched lower reading zones and save hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          for frame in 0 120 239; do
+            for preset in office storefront; do
+              file="out/framework-ci/${preset}-frame-${frame}.png"
+              dimensions="$(ffprobe -v error -select_streams v:0 \
+                -show_entries stream=width,height -of csv=p=0 "$file")"
+              if [[ "$dimensions" != "432,768" ]]; then
+                echo "::error::Unexpected fixture dimensions for $file: $dimensions"
+                exit 1
+              fi
+            done
+            # labelY=1480 maps to y=592 in 0.4-scale output. These two
+            # environments must leave the shared lower reading strip unchanged.
+            # This comparison does NOT prove the text is readable or unobscured
+            # by content common to both fixtures; a human still inspects PNGs.
+            office="$(ffmpeg -v error -i "out/framework-ci/office-frame-${frame}.png" \
+              -vf "crop=432:176:0:592" -f rawvideo -pix_fmt rgb24 - | sha256sum | cut -d' ' -f1)"
+            storefront="$(ffmpeg -v error -i "out/framework-ci/storefront-frame-${frame}.png" \
+              -vf "crop=432:176:0:592" -f rawvideo -pix_fmt rgb24 - | sha256sum | cut -d' ' -f1)"
+            if [[ "$office" != "$storefront" ]]; then
+              echo "::error::Different label/caption pixels between office and storefront at frame $frame"
+              exit 1
+            fi
+            echo "PASS: identical cross-preset lower reading strip at frame $frame"
+          done
+          sha256sum out/framework-ci/*.png > out/framework-ci/sha256.txt
+          cat out/framework-ci/sha256.txt
+      - name: Attach actual phone-size fixtures for manual visual review
+        uses: actions/upload-artifact@v4
+        with:
+          name: ourbites-framework-fixtures
+          path: out/framework-ci/
+          retention-days: 14
+          if-no-files-found: error
+
+# Synthetic silent previews: this workflow does not verify continuous motion,
+# voice, real-episode timing, financial claims, audience retention or art approval.
+# It never publishes media or calls a generative service.
