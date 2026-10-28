@@ -30,7 +30,7 @@ Official sources checked 2026-10-28: [YouTube retention moments](https://support
 - ZIP SHA-256: `4b1eecf53a0198d9daf6ba5e89cee51de741ae5453e5f57d0d36724b2bdf7f4b`.
 - Exact rendered MP4 SHA-256: `19031ae17ffb1d2840c3c432a84dad3968ce2e9a8af404c0b84628fe2ec9b4a7` (not bit-identical to prior render; no media code changed).
 - Audio manifest SHA-256: `e2845dadb80c423ed07676d6eda12ce10809764b3cc90f5102a2502a57fb2e3c`.
-- New script Git blob SHA: read from PR file metadata; workflow Git blob `5b68df3113571b70513569c412396e50956645e3`.
+- New script Git blob SHA: `f41e17c9e1f71130b3bea8033d1e98c854251775`; workflow Git blob `5b68df3113571b70513569c412396e50956645e3`.
 - Existing source baseline main `dcbbeb76e396f7a62e30b5f0b074aa27fc7af674`, no `src/*.tsx`, WAV, narration manifest, financial or character design changes.
 
 Downloaded **new** 432×768 frame pairs and inspected matched frames **30,100,150,220,310,311,325,450,499**. Eight pairs are pixel-identical; frame **311** has minor render-raster differences around filing/card/host, but a full-size side-by-side inspection found no meaningful geometry, caption, grip or financial text change. Also visually inspected 34 decoded 2-fps MP4 frames from the new render. **No continuous real-time playback or listening** occurred. The deliberate *local* negative-control manifest shift (first clip start +0.25 story seconds) produced **12 untolerated mismatches** and exit code 1, while the original prior MP4 passed 500/500 frames. This verifies the detector catches that gross offset; it does not certify all timing faults.
