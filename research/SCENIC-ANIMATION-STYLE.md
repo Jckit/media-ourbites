@@ -1,6 +1,6 @@
 # Scenario-led animated scenes: from moving infographics to a living story world
 
-Research and implementation brief — **2026-10-28**. User direction: use more **illustrated action, environmental animation and physical cause/effect** in the spirit of science "what if" videos ("what happens if oxygen disappears for a minute"), while retaining a **simpler 2D Ourbites hybrid** rather than hiring a 3D animation studio. This is fresh *animation-language feedback*, distinct from the previously consumed protagonist-gaze revision; it does not authorize changing financial facts, Voice A, third-party clip licensing or publication approvals.
+Research and implementation brief — **2026-10-28**. User direction: adopt the **illustrated 2D animation style and feel** of accessible science "what if" explainers (e.g. what happens if oxygen disappears), while retaining a simpler Ourbites hybrid design. **Clarification from PR #2:** this is an animation STYLE reference, not a requirement to simulate events, tell cause/effect stories, or use multiple locations. This is fresh *animation-language feedback*, distinct from the previously consumed protagonist-gaze revision; it does not authorize changing financial facts, Voice A, third-party clip licensing or publication approvals.
 
 ## Best-matching public references / limitations
 
@@ -11,7 +11,7 @@ Research and implementation brief — **2026-10-28**. User direction: use more *
 - [YouTube retention reports](https://support.google.com/youtube/answer/9314415) distinguish top moments, dips and spikes; spikes may indicate **confusion**, and private audience behavior is unavailable for competitor channels. No specific "scenic animation" uplift is proven.
 - [Remotion interpolation](https://www.remotion.dev/docs/interpolate), [spring](https://www.remotion.dev/docs/spring) and [compositions](https://www.remotion.dev/docs/composition) allow deterministic 2D layered actions without new heavyweight 3D or external art software.
 
-**Style inference, not verified timing analysis of the exact video:** 2D scenarios explain by staging people, buildings and consequences in connected spaces. A small narrative state change (object hits table, character reaches, machine responds) can communicate more than a row of animated text boxes. Ourbites can adopt *that grammar* without reproducing the competitor's drawings, palette, characters, timing or soundtrack.
+**Style inference, not verified timing analysis of the exact video:** cohesive 2D illustration uses stable character designs, understandable spaces, foreground/background depth, readable acting and intentional transitions. Prop interactions and reactions are one useful option when they fit the script—not a required story structure. Ourbites can adopt this *visual language* without reproducing the competitor's specific artwork, narrative formula, camera timing or soundtrack.
 
 ## What the current Ourbites video actually shows
 
@@ -29,22 +29,22 @@ What feels more like an infographic:
 - Camera zoom and small gesture changes are not complemented by environmental action. The audience reads rather than watches causes unfold.
 - The bright empty vertical background emphasizes isolated information cards, not a setting where the filing has consequences.
 
-**Diagnosis:** the problem is primarily **staging and world reaction**, not a lack of physics simulation or the number of animated elements.
+**Diagnosis:** the problem is primarily **thin spatial staging and limited character/world design**, not a lack of simulation, extra physics or faster editing.
 
 ## Proposed Ourbites animation grammar
 
-| Production layer | Existing tendency | New default where narratively justified |
+| Production layer | Existing tendency | Optional scenic-style treatment |
 | --- | --- | --- |
 | Story space | Clean background and chart/title panels | A simple reusable place (office, trading desk, factory, product interface, storefront), with floor, foreground, background and depth |
-| Action | Numbers reveal; character occasionally points | Actor wants something → interacts with a prop → prop changes state → other actor responds |
-| Camera | Mostly static, one mild zoom | Motivate slow push/tracking by the character's discovery or a moving object; keep mobile-safe reading zones |
-| Environments | Nearly blank, generic | 2–4 original SVG environment modules with subtle depth and grounded objects; no expensive 3D requirement |
-| Physicality | Filing floats, shapes appear | Attach objects to surfaces, indicate contact/impact, grounded shadows, subtle reaction and settling; **no gratuitous perpetual bouncing** |
-| Data | Large cards with captions | Use original, precise charts only at the moment an equation must be clear, then return to visible character consequences |
-| Transitions | Cut/title fade | Prop handoff, object match cut, camera follows a consequential object or character look |
+| Action | Numbers reveal; character occasionally points | More expressive but stable characters; hand/object interactions only where they help illustrate the narration |
+| Camera | Mostly static, one mild zoom | Stable framing or a subtle motivated camera move; maintain mobile-safe reading zones during zoom |
+| Environments | Nearly blank, generic | Reuse original SVG environments when useful; no required number of rooms, locations or 3D assets |
+| Physicality | Filing floats, shapes appear | Plausible feet/furniture placement, spatial layers and grounding; incidental impact/reaction motion is **optional**, never obligatory |
+| Data | Large cards with captions | Keep exact, prominent charts/text whenever the explanation needs precision; balance with illustrated context rather than banning cards |
+| Transitions | Cut/title fade | Static transitions, prop handoffs and camera moves are all acceptable; pick the least distracting approach for the explanation |
 | Real media | Candidate external footage | Actual historic moments if verified/cleared; avoid using generated reenactments as fake actual footage |
 
-**Practical 2D/2.5D recipe:** flat vectors + layered perspective/parallax + frames that establish place + one contact/reaction + tight close-up for the relevant fact. This is *limited animation* with purposeful action, not elaborate rotoscoping, 3D simulation or imported footage.
+**Practical 2D/2.5D options:** flat vectors, consistent palettes, layered depth, clean silhouettes, and restrained frame-driven gestures; optionally add parallax, prop contact or a close-up when it improves clarity. This is *limited illustration animation*, with no required simulated reactions, 3D or multi-location structure.
 
 ## Pilot: office world reacts to the S-1
 
@@ -55,7 +55,7 @@ What feels more like an infographic:
 ## Acceptance criteria before declaring the new layer successful
 
 1. Compare exactly the approved baseline frames at **0.6, 1.8, 3.2, 4.8, 6.6, 8.4, 10.2, 12.6 and 15.6 seconds** to the new full-rendered `AnthropicCharacter` at 432×768, and inspect video around the actual paper impact.
-2. Scene has unmistakable place/depth and a **causal** reaction to the filing entering; no text/face/caption overlap, no claim implied by added decoration.
+2. Scene has coherent illustrated depth; the **optional** filing-paper reaction in this particular pilot is brief and readable. No furniture/feet identity confusion, text/face/caption overlap or claim implied by decoration.
 3. New backdrop is drawn with local original vectors and does not compete visually with the numbers, silhouette or captions.
 4. Original finance dataset, Voice A audio/1.1x playback, full 500 frames, animation timings, Dario's silent role, and human source/likeness/rights/publication gates stay unchanged.
 5. Run npm typecheck and Python tests; compare actual render frames and ideally the full MP4 (do not claim an actual retention uplift or human approval).
@@ -63,11 +63,11 @@ What feels more like an infographic:
 
 ## Future development priorities, not automatically approved
 
-1. **Scene templates**: 2D office, storefront, server center, factory, boardroom; each needs actor/prop/environment/effect anchors and safe-area checks.
+1. **Optional reusable scene templates**: 2D office, storefront, server center, factory, boardroom; use only as many as an episode needs and check actor/label safe areas.
 2. **Actor rigs**: reusable look-at, reach, grip, walk, seated and react actions as *stable state machines*; avoid changing faces between render frames.
-3. **Motivated multi-shot staging**: wide establish → medium action → close mechanism → medium consequence; never random cutting quota.
+3. **Optional shot variation**: wide/medium/close-up as beneficial for viewer comprehension; one coherent location and held shots are also valid.
 4. **Better sonic storytelling**: licensed prop impacts and room tone, optional; keep original voice and audio approvals intact.
-5. **Storyboards must specify**: who does what to which object, how the world changes, why the change teaches the viewer, then whether a chart is actually necessary.
+5. **Storyboard shot planning**: identify illustration/background, focal actor or fact, action *if any*, mobile-safe labels, and the communication goal. State a physical reaction only if the scene actually uses one.
 
 No imitation of copyrighted clips or scene assets. Reference URLs are for editorial research, not permission to reuse them.
 
@@ -87,6 +87,12 @@ After the single bounded causal-paper repair, [GitHub Actions run 40696947388](h
 
 **Real decoded-media inspection:** sampled the repaired full MP4 at **0.60, 0.95, 1.25, 1.80, 2.25, 3.20, 6.60, 12.60 and 15.60 seconds** at 432×768 (reduced to a visual contact sheet). The sheets are **absent before impact**, show briefly alongside the host's recoil at 0.95–1.25s, and are **gone by 1.80s and all following sampled moments**. The initial accidental perpetual floating-sheet defect has been corrected. The added physical office environment is visibly behind characters and financial props, with no observed text, face or caption occlusion in sampled views. Long-term character silhouette and Dario's separate quiet role are preserved.
 
-**Important qualification:** this completes one **scenic set dressing + causal environmental response** proof, but the actual Anthropic short is still a **single-room, mostly explanatory interaction**. This is one stage toward the requested richer scene-led format, **not equivalent** to a professionally produced multi-scene 2D/3D what-if episode. No exact-source video was copied, no visitor-retention improvement proven, no independent listen-through verified original voice identity/pitch, no character likeness/final-media/publication approval obtained. Future meaningful upgrades should emphasize new action-specific locations and actual character/object scene changes rather than larger decorative scenery.
+**Important qualification:** this completes one **scenic set dressing + causal environmental response** proof, but the actual Anthropic short is still a **single-room, mostly explanatory interaction**. This is one stage toward the requested richer scene-led format, **not equivalent** to a professionally produced multi-scene 2D/3D what-if episode. No exact-source video was copied, no visitor-retention improvement proven, no independent listen-through verified original voice identity/pitch, no character likeness/final-media/publication approval obtained. Future meaningful upgrades should improve consistent 2D illustration, spatial clarity and readable acting, using extra locations or prop reactions **only when helpful**, not as a success requirement.
 
-**Remaining:** review full playback and voice/captions with human eyes and ears, test two more types of business world scenes if the pilot is approved, and preserve source/rights gates. The PR remains a **draft** for Justin's review, not merged automatically.
+**Remaining:** review full playback and voice/captions with human eyes and ears, consider further illustrative 2D settings only if the pilot is approved and a later story benefits from them, and preserve source/rights gates. The PR remains a **draft** for Justin's review, not merged automatically.
+
+## PR #2 reviewer clarification — 2026-10-28 16:11 UTC
+
+The [requested-changes review](https://github.com/jcbandc-arch/media-creator-outbites/pull/2#pullrequestreview-5685881194) explicitly distinguishes **animation style** from simulated physical consequences. The normative guidance and table above now reflect that clarification. Older prototype observations below remain a factual record of what was originally tested, **not a requirement for future episodes**. Coherent illustrated 2D staging, stable characters, perspective, and readable source/identity labels through zoom are the evaluation criteria; contact/impact/camera movement is optional.
+
+The reviewer also found a genuine perspective collision at phone-size frames 100 and 220: the desktop appeared level with Dario's shoes and the right desk leg interfered with the `DARIO · ILLUSTRATION` label. The repair moves only the furniture and its on-surface props into a recessed background plane (plus sheet landing coordination), without moving actors, changing voice, changing financials or creating new scenes. Verification criteria and timestamped evidence are frozen in [reviews/viewer/20261028T161108Z-pr2-review-fixes.md](../reviews/viewer/20261028T161108Z-pr2-review-fixes.md). Do not merge until the revised same-frame render has been inspected.
