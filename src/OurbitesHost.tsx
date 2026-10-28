@@ -13,6 +13,9 @@ type HostProps = {
   height?: number;
   /** Slight entrance animation only; no perpetual bobbing. */
   animate?: boolean;
+  /** Small signed SVG-unit offsets; the head and silhouette never rotate. */
+  gazeX?: number;
+  gazeY?: number;
 };
 
 const ink = '#142B38';
@@ -22,6 +25,7 @@ const orange = '#E97F48';
 
 export const OurbitesHost: React.FC<HostProps> = ({
   pose = 'neutral', doubt, width = 330, height = 477, animate = false,
+  gazeX = 0, gazeY = 0,
 }) => {
   const frame = useCurrentFrame();
   const entrance = animate
@@ -32,6 +36,9 @@ export const OurbitesHost: React.FC<HostProps> = ({
   const explaining = pose === 'explain';
   const thinking = pose === 'think';
   const reacting = pose === 'react';
+  // A restrained glance cues the next relevant business prop without morphing the face.
+  const pupilX = Math.max(-12, Math.min(12, gazeX));
+  const pupilY = Math.max(-9, Math.min(9, gazeY));
 
   // Every pose has the same head, torso, limbs, hair tuft and colors.
   // Only the arm paths, eyebrows, mouth and optional question mark change.
@@ -62,8 +69,8 @@ export const OurbitesHost: React.FC<HostProps> = ({
         <path d="M130 65 L164 20 L176 75 Z" fill={ink}/>
         <path d={'M128 109 Q140 ' + (96 + 12 * skeptical) + ' 153 108'} fill="none"/>
         <path d={reacting ? 'M202 102 Q218 85 237 102' : 'M204 108 Q218 95 232 108'} fill="none"/>
-        <circle cx="144" cy="139" r="6"/>
-        <circle cx="219" cy="139" r="6"/>
+        <circle cx={144 + pupilX} cy={139 + pupilY} r="6"/>
+        <circle cx={219 + pupilX} cy={139 + pupilY} r="6"/>
         <path d={reacting ? 'M174 187 Q184 170 196 187'
           : 'M165 183 Q182 ' + (199 - 22 * skeptical) + ' 200 183'} fill="none"/>
         {thinking && <circle cx="153" cy="203" r="8" fill={paper}/>}
