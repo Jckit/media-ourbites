@@ -7,17 +7,18 @@
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "FW-02–04 implemented and six phone-size stills inspected; silent previews exported. Production media unchanged. Framework previews are separate from latest_draft. See ROADMAP.md; FW-05 human style review pending; FW-09 QA tooling ready. Continuous motion not reviewed.",
+  "notes": "Local-run output pointers and last_review are historical and deliberately retained; no access to current Windows checkout or its private media. Remote main has FW-05 approved for shared scene balance, FW-06 RoomShell + 475-frame caption QA merged but human final media review pending, FW-09 source/fixture CI merged with continuous-motion/audio review still pending, and FW-M00 paper-collage MOTION DOCUMENTATION approved/merged. See ROADMAP.md and reviews/REPO-CLEANUP-2026-10-28.md. No new protagonist-design approval is implied.",
   "last_status": "framework_prototype_implemented_stills_verified_style_review_pending",
   "last_verified_frame": "out/viewer-20261028T094251Z-after-311.png",
   "input_hashes": "reviews/viewer/20261028-framework-batch1-inputs.json",
   "output_hashes": "reviews/viewer/20261028-framework-batch1-outputs.json",
   "backlog": [
-    "FW-05: human style balance review of office/storefront prototypes",
-    "FW-09: repeatable shared-library QA command/CI",
-    "FW-06 onward: production adapter/actions/timing after dependencies"
+    "FW-06: review merged production adapter via actual full-motion playback/listening and human factual/rights/style gate; merge does not equal final approval.",
+    "FW-09: extend continuous-motion/transition and narrated audiovisual QA; current static fixture CI is working.",
+    "FW-07: blocked pending FW-06 human acceptance; then implement reusable anchored prop/actor actions and first paper-collage motion primitive.",
+    "FW-08/FW-10: after FW-07, add episode-driven shot choreography and demonstrate reuse on a second business mechanism."
   ],
-  "last_human_direction": "2026-10-28: Justin clarified primary objective is reusable high-level framework for all future episodes, not Anthropic-only improvements; low-poly influence is optional visual styling",
+  "last_human_direction": "2026-10-28: Justin approved framework dimensionality (FW-05) and separately approved documentation PR #11 for 2D-first editorial paper-collage motion; neither approves final episode artwork nor resets the prior 3/3 self-directed protagonist cap. Focus on reusable framework across future episodes.",
   "objective": "Reusable Ourbites production/animation framework for future episodes; Anthropic is a test fixture",
   "framework_direction": "reviews/FRAMEWORK-DIRECTION.md",
   "framework_acceptance": "Validate shared features in Anthropic and a meaningfully different episode/scenario or labeled synthetic fixture",
@@ -26,5 +27,15 @@
   "framework_previews": [
     "out/framework-batch1/office.mp4",
     "out/framework-batch1/storefront.mp4"
-  ]
+  ],
+  "remote_framework_status": {
+    "checked_main_commit": "bd5cca9ea90ff2e34e666820dc709361d01e1482",
+    "status_reconciled_at_utc": "2026-10-28",
+    "FW-05": "done (framework scene balance approval only)",
+    "FW-06": "review (production code/QA merged; full human media/style/rights/factual gate open)",
+    "FW-07": "blocked by FW-06 human acceptance",
+    "FW-09": "review (fixture QA merged, continuous motion/audio coverage open)",
+    "FW-M00": "done (paper-collage documentation PR #11 approved/merged; animation implementation not done)",
+    "last_remote_review": "reviews/viewer/20261028T2052Z-caption-frame-count-contract.md"
+  }
 }
