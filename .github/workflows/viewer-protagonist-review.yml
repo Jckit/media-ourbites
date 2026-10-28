@@ -42,14 +42,16 @@ jobs:
             cp "$f" "out/viewer-pr/after/$(basename "$f")"
             git show "${{ github.event.pull_request.base.sha }}:$f" > "$f"
           done
-          for f in 18 25 30 45 60 100 150 220 310 311 325 450 499; do
+          for f in 18 25 30 45 60 100 150 220 310 311 325 450 465 470 474; do
             npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-$f.png" --frame="$f" --scale=0.4
           done
+          # Baseline-only end frame demonstrates the removed silent hold.
+          npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-499.png" --frame=499 --scale=0.4
           for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
             cp "out/viewer-pr/after/$(basename "$f")" "$f"
           done
           npm run typecheck
-          for f in 18 25 30 45 60 100 150 220 310 311 325 450 499; do
+          for f in 18 25 30 45 60 100 150 220 310 311 325 450 465 470 474; do
             npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/after/frame-$f.png" --frame="$f" --scale=0.4
           done
           sha256sum out/viewer-pr/before/*.png out/viewer-pr/after/*.png > out/viewer-pr/frame-sha256.txt
@@ -83,10 +85,10 @@ jobs:
           duration = float(data["format"]["duration"])
           assert video["codec_name"] == "h264", video
           assert (video["width"], video["height"]) == (432, 768), video
-          assert int(video["nb_read_frames"]) == 500, video
+          assert int(video["nb_read_frames"]) == 475, video
           assert audio["codec_name"] == "aac", audio
-          assert 16.4 <= duration <= 16.9, duration
-          print(f"Encoded review media: 500 frames, 432x768, {duration:.3f}s, H.264 + AAC")
+          assert 15.7 <= duration <= 16.0, duration
+          print(f"Encoded review media: 475 frames, 432x768, {duration:.3f}s, H.264 + AAC")
           print("Audio track exists; voice quality, pitch, sync and motion remain unreviewed.")
           PY
           # An AAC stream can exist while one or more narration clips are silent.
@@ -130,9 +132,25 @@ jobs:
                   f"Missing or near-silent encoded narration clip {index}: "
                   f"RMS {rms_dbfs:.1f} dBFS, peak {peak_dbfs:.1f} dBFS"
               )
+          # Verify the actual encoded tail, not merely a declared timeline length.
+          # A 50ms RMS window conservatively bounds the final active speech sample.
+          tail_step = round(rate * 0.05)
+          last_active_end = None
+          for offset in range(0, len(samples), tail_step):
+              window = samples[offset:offset + tail_step]
+              energy = math.sqrt(sum(value * value for value in window) / len(window)) / 32768
+              if energy > 10 ** (-38 / 20):
+                  last_active_end = min(offset + len(window), len(samples)) / rate
+          assert last_active_end is not None, "No audible-level signal in encoded output"
+          trailing_silence_seconds = len(samples) / rate - last_active_end
+          assert trailing_silence_seconds < 0.5, (
+              f"Unexpected final silence: {trailing_silence_seconds:.3f}s >= 0.5s"
+          )
           Path("out/viewer-pr/review-audio-signal.json").write_text(
               json.dumps({"playback_speed": 1.1, "rms_min_dbfs": -45,
-                          "peak_min_dbfs": -30, "clips": results}, indent=2) + "\n"
+                          "peak_min_dbfs": -30, "clips": results,
+                          "trailing_silence_seconds_upper_bound": round(trailing_silence_seconds, 3),
+                          "tail_rms_threshold_dbfs": -38}, indent=2) + "\n"
           )
           print("Encoded audio signal present in all", len(results), "narration windows.")
           print("This does NOT verify voice identity, original pitch, intelligibility or sync.")
