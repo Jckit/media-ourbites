@@ -3,17 +3,17 @@
   "entry": "src/index.tsx",
   "preview_url": "http://localhost:3000/AnthropicCharacter",
   "latest_draft": "out/anthropic-character-smooth-grip.mp4",
-  "last_review": "reviews/viewer/20261028T124931Z-cloud-audio-signal.md",
+  "last_review": "reviews/viewer/20261028T135429Z-cloud-caption-windows.md",
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "Draft PR #1 preserves the single consumed October 28 host-gaze refinement. Four expected 1.1x narration windows now pass decoded audio-signal presence checks on the full 432x768 MP4; this is not audio listening, original-pitch verification, caption synchronization or continuous-motion approval. All prior subjective caps and human gates remain in force.",
-  "last_status": "cloud_pr_per_clip_audio_signal_verified_listening_pending",
+  "notes": "Protagonist gaze PR #1 was merged into main dcbbeb7 on 2026-10-28 13:15Z; the single October 28 host design direction remains consumed and the 3/3 subjective cap remains. Draft PR #3 adds rendered 432x768 caption-window pixel-presence QA: 454 visible/46 absent frames and zero mismatches in CI. This is NOT word-level sync, original-pitch listening, continuous-motion review or approval.",
+  "last_status": "cloud_caption_window_presence_verified_pr3_draft",
   "last_verified_frame": "GitHub Actions artifact viewer-protagonist-before-after, run 40676453311, after/frame-220.png",
   "input_hashes": "reviews/viewer/20261028T094251Z-inputs.json",
   "output_hashes": "reviews/viewer/20261028T094251Z-outputs.json",
   "backlog": [
-    "Listen to the exact PR review MP4 against original Kokoro am_puck Voice A at 1.1x; verify intelligibility, pitch and caption sync",
+    "Listen to the exact new PR #3 MP4 against original Kokoro am_puck Voice A at 1.1x; verify pitch, intelligibility and word-level caption synchronization (pixel-presence QA alone is insufficient)",
     "Review continuous Dario grip/host gaze motion and remaining secondary financing caveat readability; change only for demonstrated defects",
     "Protagonist October 28 direction consumed once; further subjective changes require fresh human feedback. Human likeness/factual/rights/final-media approvals remain pending."
   ],
@@ -28,7 +28,9 @@
     "artifact": "viewer-protagonist-before-after",
     "review_scope": "nine paired 432x768 frames; no full audio or video playback",
     "approved_for_release": false,
-    "merged_to_main": false
+    "merged_to_main": true,
+    "merge_commit_sha": "dcbbeb76e396f7a62e30b5f0b074aa27fc7af674",
+    "merged_at": "2026-10-28T13:15:48Z"
   },
   "cloud_playback_review": {
     "pr": "https://github.com/jcbandc-arch/media-creator-outbites/pull/1",
@@ -69,6 +71,36 @@
     "all_four_windows_passed": true,
     "voice_pitch_listening_verified": false,
     "continuous_playback_reviewed": false,
+    "approved_for_release": false
+  },
+  "cloud_caption_window_check": {
+    "pr": "https://github.com/jcbandc-arch/media-creator-outbites/pull/3",
+    "draft": true,
+    "merged_to_main": false,
+    "source_commit": "1b01863274d37958f38fcb318f1ba10a993b7dc7",
+    "baseline_main_commit": "dcbbeb76e396f7a62e30b5f0b074aa27fc7af674",
+    "actions_run": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40701177180",
+    "artifact_url": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40701177180/artifacts/12821782168",
+    "artifact_zip_sha256": "4b1eecf53a0198d9daf6ba5e89cee51de741ae5453e5f57d0d36724b2bdf7f4b",
+    "mp4_sha256": "19031ae17ffb1d2840c3c432a84dad3968ce2e9a8af404c0b84628fe2ec9b4a7",
+    "manifest_sha256": "e2845dadb80c423ed07676d6eda12ce10809764b3cc90f5102a2502a57fb2e3c",
+    "script_git_blob_sha": "f41e17c9e1f71130b3bea8033d1e98c854251775",
+    "workflow_git_blob_sha": "5b68df3113571b70513569c412396e50956645e3",
+    "frames": 500,
+    "caption_visible_frames": 454,
+    "caption_absent_frames": 46,
+    "per_clip_expected_and_observed_frames": [
+      81,
+      93,
+      111,
+      169
+    ],
+    "untolerated_mismatches": 0,
+    "negative_control_shift_detected": true,
+    "caption_words_verified": false,
+    "word_level_sync_verified": false,
+    "continuous_playback_reviewed": false,
+    "audio_listening_reviewed": false,
     "approved_for_release": false
   }
 }
