@@ -55,7 +55,7 @@ Example exact SHA-256 output hashes (all nine in the artifact's `frame-sha256.tx
 - before/100: `ddf75838c31bc02968a12b23702c710800811680df9fbad974aa854cdcfb7d2f`; after/100: `ebe85974383d083082a5eef07ad1a6542d68eab26182d5da7e7465eb2b7f2412`
 - before/220: `7558a74f67e95d1c2e43c0ebef85170f94a4c9fc49c4f5633d4f7ff684dcc8bd`; after/220: `e73941af292f531bb7f7044a25262d24958b2e86182c9e211aa34e009b145099`
 - before/450 = after/450: `8a75f9eb215cb2feabeac5d86ecb6866565bda0a592ac5d42b09560c2bc08375`
-- before/499 = after/499: `3ba0993453c4455985c499aac9be2e86e6a5a44e85ac7596ce0a16d2a14e4f0`
+- before/499 = after/499: `3ba0993453c4455985c499aac9be5be144f3bdf5669aae3a18dca0e774260460`
 
 Result: **one human-directed protagonist expression/gaze refinement accepted for branch review**, not merged to main. Character visual attention is editorially estimated 3/4 in inspected moments (from prior 2/4), not a performance metric. The protagonist design and Dario likeness remain unapproved; their rights and final-media gates are untouched.
 
