@@ -21,3 +21,18 @@ Downloaded successful [Actions artifact 12816778529](https://github.com/jcbandc-
 Official sources checked 2026-10-28: [YouTube retention moments](https://support.google.com/youtube/answer/9314415?hl=en), [Shorts feed analytics](https://support.google.com/youtube/answer/12942217?co=YOUTUBE._YTVideoType%3Dshorts&hl=en), and [Remotion audio guidance](https://www.remotion.dev/docs/using-audio). They motivate reviewing the opening and audio/caption experience, but do not establish a causal retention benefit from this QA test.
 
 **Result:** pending branch implementation and CI. No media or art approval is implied.
+
+## Verified outcome — 2026-10-28T13:59Z
+
+**One bounded technical QA feature verified on draft [PR #3](https://github.com/jcbandc-arch/media-creator-outbites/pull/3), not merged.** [Actions run 40701177180](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40701177180) completed **success** on head commit `1b01863274d37958f38fcb318f1ba10a993b7dc7`. TypeScript, **33 Python tests**, nine paired baseline/PR 432×768 stills, full **500-frame H.264/AAC** review export and all four prior decoded audio-signal checks passed. The new `scripts/verify_caption_windows.py` check decoded the **actual output MP4** and found **454 caption-visible frames, 46 caption-absent frames, zero mismatches**, with clip coverages **81/81, 93/93, 111/111 and 169/169**. It records every interval, SHA-256 and strict boundary tolerance in `review-caption-windows.json`.
+
+[Verified artifact 12821782168](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40701177180/artifacts/12821782168) downloaded and inspected:
+- ZIP SHA-256: `4b1eecf53a0198d9daf6ba5e89cee51de741ae5453e5f57d0d36724b2bdf7f4b`.
+- Exact rendered MP4 SHA-256: `19031ae17ffb1d2840c3c432a84dad3968ce2e9a8af404c0b84628fe2ec9b4a7` (not bit-identical to prior render; no media code changed).
+- Audio manifest SHA-256: `e2845dadb80c423ed07676d6eda12ce10809764b3cc90f5102a2502a57fb2e3c`.
+- New script Git blob SHA: read from PR file metadata; workflow Git blob `5b68df3113571b70513569c412396e50956645e3`.
+- Existing source baseline main `dcbbeb76e396f7a62e30b5f0b074aa27fc7af674`, no `src/*.tsx`, WAV, narration manifest, financial or character design changes.
+
+Downloaded **new** 432×768 frame pairs and inspected matched frames **30,100,150,220,310,311,325,450,499**. Eight pairs are pixel-identical; frame **311** has minor render-raster differences around filing/card/host, but a full-size side-by-side inspection found no meaningful geometry, caption, grip or financial text change. Also visually inspected 34 decoded 2-fps MP4 frames from the new render. **No continuous real-time playback or listening** occurred. The deliberate *local* negative-control manifest shift (first clip start +0.25 story seconds) produced **12 untolerated mismatches** and exit code 1, while the original prior MP4 passed 500/500 frames. This verifies the detector catches that gross offset; it does not certify all timing faults.
+
+**Remaining backlog unchanged in substance:** listen to exact rendered audio against original Kokoro `am_puck` Voice A for intelligibility/pitch and word-level caption alignment; watch continuous hand/prop/gaze motion; assess secondary caveat legibility and human likeness/financial-source/rights/final-media approval. The standing October 28 protagonist feedback is **not** re-consumed, the 3/3 subjective cap remains, and no release, publish or approval is authorized. YouTube retention uplift is unknown.
