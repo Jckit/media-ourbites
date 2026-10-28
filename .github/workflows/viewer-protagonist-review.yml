@@ -138,6 +138,14 @@ jobs:
           PY
           sha256sum out/viewer-pr/after/anthropic-character-review.mp4 \
             > out/viewer-pr/review-sha256.txt
+      - name: Verify caption visibility against narration windows
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_caption_windows.py \
+            --video out/viewer-pr/after/anthropic-character-review.mp4 \
+            --manifest src/anthropic-character-audio.json \
+            --output out/viewer-pr/review-caption-windows.json
       - name: Upload exact visual evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -150,6 +158,7 @@ jobs:
             out/viewer-pr/after/anthropic-character-review.mp4
             out/viewer-pr/review-probe.json
             out/viewer-pr/review-audio-signal.json
+            out/viewer-pr/review-caption-windows.json
             out/viewer-pr/review-sha256.txt
           retention-days: 14
           if-no-files-found: warn
