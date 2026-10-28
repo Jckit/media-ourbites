@@ -69,3 +69,11 @@ This is a distinct narrative test from Tesla ownership: rapid revenue growth →
 
 ## Character-led preview v2 (2026-10-27)
 AnthropicCharacter now stages the recurring host and a provisional Dario SVG together. The filing falls between them; host reacts, Dario gestures, then a financing prop moves into their shared space. Voice A and 1.1x timing remain. Dario design is an original interpretation of Justin's supplied concept, not verified historical imagery. Likeness/final media approval remain pending. This preview does not change the separate AnthropicShort episode cast or authorize publication.
+
+## Illustrated 2D animation style direction (28 October 2026; clarified in PR #2)
+
+After PR #1 merged, Justin requested that Ourbites feel closer to the **illustrated animation style** of a "what-if oxygen disappears" video, with more coherent drawn environments and motion than plain infographic cards. [The style study](research/SCENIC-ANIMATION-STYLE.md) records the reference and limits.
+
+**Review clarification on PR #2:** this is a VISUAL STYLE reference, **not** a request for simulation, mandatory cause/effect stories, or multiple locations in every Short. The Ourbites news-led business narrative, factual graphics and pacing remain as before. Build a consistent hybrid visual world using clean 2D backgrounds, readable props, dimensional layering and meaningful movement only when it helps. Static scenes and exact-number charts are still valid.
+
+The draft PR adds a reusable original `OfficeWorld` to `AnthropicCharacter`, with optional paper motion at the filing drop. The reviewer also identified desk depth and Dario label interference; the revised furniture now sits behind the characters, above their feet and away from the label. Verify new phone-sized frames at 30,100,220,450,499 and through the zoom. Never infer performance, art approval or licensing rights from successful CI.
