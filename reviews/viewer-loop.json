@@ -3,18 +3,28 @@
   "entry": "src/index.tsx",
   "preview_url": "http://localhost:3000/AnthropicCharacter",
   "latest_draft": "out/anthropic-character-smooth-grip.mp4",
-  "last_review": "reviews/viewer/20261028T094251Z.md",
+  "last_review": "reviews/viewer/20261028-framework-batch1.md",
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "Fixed observed one-frame hand jump with a continuous reach into the shared card grip. Seven after frames inspected; TypeScript and export passed. Three accepted revisions since actual human feedback; hold additional subjective changes. Technical checks may continue; audio/full playback unreviewed.",
-  "last_status": "grip_discontinuity_fixed_partial_visual_verified",
+  "notes": "FW-02–04 implemented and six phone-size stills inspected; silent previews exported. Production media unchanged. Framework previews are separate from latest_draft. See ROADMAP.md; FW-05 human style review pending; FW-09 QA tooling ready. Continuous motion not reviewed.",
+  "last_status": "framework_prototype_implemented_stills_verified_style_review_pending",
   "last_verified_frame": "out/viewer-20261028T094251Z-after-311.png",
-  "input_hashes": "reviews/viewer/20261028T094251Z-inputs.json",
-  "output_hashes": "reviews/viewer/20261028T094251Z-outputs.json",
+  "input_hashes": "reviews/viewer/20261028-framework-batch1-inputs.json",
+  "output_hashes": "reviews/viewer/20261028-framework-batch1-outputs.json",
   "backlog": [
-    "Review full motion/audio; sampled grip discontinuity fixed",
-    "Supporting text/caveat hierarchy: await fresh human feedback before further subjective changes"
+    "FW-05: human style balance review of office/storefront prototypes",
+    "FW-09: repeatable shared-library QA command/CI",
+    "FW-06 onward: production adapter/actions/timing after dependencies"
   ],
-  "last_human_direction": "Justin requested implementation-first feedback loop and purposeful Dario role on 2026-10-28; not final-media approval"
+  "last_human_direction": "2026-10-28: Justin clarified primary objective is reusable high-level framework for all future episodes, not Anthropic-only improvements; low-poly influence is optional visual styling",
+  "objective": "Reusable Ourbites production/animation framework for future episodes; Anthropic is a test fixture",
+  "framework_direction": "reviews/FRAMEWORK-DIRECTION.md",
+  "framework_acceptance": "Validate shared features in Anthropic and a meaningfully different episode/scenario or labeled synthetic fixture",
+  "roadmap": "ROADMAP.md",
+  "framework_batch": "FW-02/FW-03/FW-04",
+  "framework_previews": [
+    "out/framework-batch1/office.mp4",
+    "out/framework-batch1/storefront.mp4"
+  ]
 }

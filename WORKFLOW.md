@@ -1,5 +1,9 @@
 # Ourbites working flow
 
+## Shared framework task tracking
+
+Use [ROADMAP.md](ROADMAP.md) as the canonical reusable-animation task board. Agents and editors claim an ID and file scope before editing, follow its dependency/status rules, and attach render/check evidence before marking implementation done. Read it alongside `reviews/viewer-loop.json`; a scheduled wake does not reopen completed work or bypass a pending human style review.
+
 Updated 27 October 2026. We will refine this against actual episodes.
 
 ## Current batch

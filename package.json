@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
+    "render:framework:office": "remotion render src/index.tsx FrameworkOffice out/framework-batch1/office.mp4 --scale=0.4 --concurrency=2",
+    "render:framework:storefront": "remotion render src/index.tsx FrameworkStorefront out/framework-batch1/storefront.mp4 --scale=0.4 --concurrency=2",
     "studio": "remotion studio src/index.tsx --no-open",
     "typecheck": "tsc --noEmit",
     "render:draft": "remotion render src/index.tsx BusinessShort out/merger-draft.mp4 --props=examples/merger.json --concurrency=2",
