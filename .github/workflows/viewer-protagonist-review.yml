@@ -8,6 +8,7 @@ on:
       - 'src/CharacterStage.tsx'
       - 'src/AnthropicCharacter.tsx'
       - 'src/BusinessWorld.tsx'
+      - 'src/framework/scene-kit.tsx'
       - '.github/workflows/viewer-protagonist-review.yml'
 
 permissions:
@@ -38,7 +39,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out/viewer-pr/before out/viewer-pr/after
-          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx src/BusinessWorld.tsx src/framework/scene-kit.tsx; do
             cp "$f" "out/viewer-pr/after/$(basename "$f")"
             git show "${{ github.event.pull_request.base.sha }}:$f" > "$f"
           done
@@ -47,7 +48,7 @@ jobs:
           done
           # Baseline-only end frame demonstrates the removed silent hold.
           npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-499.png" --frame=499 --scale=0.4
-          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx src/BusinessWorld.tsx src/framework/scene-kit.tsx; do
             cp "out/viewer-pr/after/$(basename "$f")" "$f"
           done
           npm run typecheck
