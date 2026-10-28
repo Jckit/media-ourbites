@@ -7,7 +7,7 @@
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "Draft PR #1 preserves the single consumed October 28 host-gaze refinement. Four expected 1.1x narration windows now pass decoded audio-signal presence checks on the full 432x768 MP4; this is not audio listening, original-pitch verification, caption synchronization or continuous-motion approval. All prior subjective caps and human gates remain in force.",
+  "notes": "PR #1 merged on 2026-10-28T13:15:48Z at dcbbeb76e396f7a62e30b5f0b074aa27fc7af674; the October 28 host-gaze refinement remains consumed once. Four expected 1.1x narration windows passed decoded audio-signal presence checks on the full 432x768 MP4; this is not listening, original-pitch verification, caption word synchronization or continuous-motion approval. PR #2 scenic animation and PR #3 caption QA remain separate draft reviews. Prior subjective caps and all human gates remain in force.",
   "last_status": "cloud_pr_per_clip_audio_signal_verified_listening_pending",
   "last_verified_frame": "GitHub Actions artifact viewer-protagonist-before-after, run 40676453311, after/frame-220.png",
   "input_hashes": "reviews/viewer/20261028T094251Z-inputs.json",
@@ -28,7 +28,9 @@
     "artifact": "viewer-protagonist-before-after",
     "review_scope": "nine paired 432x768 frames; no full audio or video playback",
     "approved_for_release": false,
-    "merged_to_main": false
+    "merged_to_main": true,
+    "merge_commit_sha": "dcbbeb76e396f7a62e30b5f0b074aa27fc7af674",
+    "merged_at": "2026-10-28T13:15:48Z"
   },
   "cloud_playback_review": {
     "pr": "https://github.com/jcbandc-arch/media-creator-outbites/pull/1",
