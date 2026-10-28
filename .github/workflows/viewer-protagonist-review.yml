@@ -53,6 +53,38 @@ jobs:
           done
           sha256sum out/viewer-pr/before/*.png out/viewer-pr/after/*.png > out/viewer-pr/frame-sha256.txt
           git diff --check
+      - name: Export full phone-sized review draft and probe streams
+        shell: bash
+        run: |
+          set -euo pipefail
+          # This is a review artifact, not a verified listening or publication gate.
+          git diff --quiet "${{ github.event.pull_request.base.sha }}" HEAD -- \
+            src/anthropic-character-audio.json public/anthropic-character episodes/002/financials.json
+          npx remotion render src/index.tsx AnthropicCharacter \
+            out/viewer-pr/after/anthropic-character-review.mp4 \
+            --scale=0.4 --codec=h264 --audio-codec=aac --concurrency=2
+          ffprobe -v error -count_frames \
+            -show_entries stream=codec_type,codec_name,width,height,nb_read_frames:format=duration \
+            -of json out/viewer-pr/after/anthropic-character-review.mp4 \
+            > out/viewer-pr/review-probe.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("out/viewer-pr/review-probe.json").read_text())
+          streams = data["streams"]
+          video = next(s for s in streams if s["codec_type"] == "video")
+          audio = next(s for s in streams if s["codec_type"] == "audio")
+          duration = float(data["format"]["duration"])
+          assert video["codec_name"] == "h264", video
+          assert (video["width"], video["height"]) == (432, 768), video
+          assert int(video["nb_read_frames"]) == 500, video
+          assert audio["codec_name"] == "aac", audio
+          assert 16.4 <= duration <= 16.9, duration
+          print(f"Encoded review media: 500 frames, 432x768, {duration:.3f}s, H.264 + AAC")
+          print("Audio track exists; voice quality, pitch, sync and motion remain unreviewed.")
+          PY
+          sha256sum out/viewer-pr/after/anthropic-character-review.mp4 \
+            > out/viewer-pr/review-sha256.txt
       - name: Upload exact visual evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -62,8 +94,11 @@ jobs:
             out/viewer-pr/before/frame-*.png
             out/viewer-pr/after/frame-*.png
             out/viewer-pr/frame-sha256.txt
+            out/viewer-pr/after/anthropic-character-review.mp4
+            out/viewer-pr/review-probe.json
+            out/viewer-pr/review-sha256.txt
           retention-days: 14
           if-no-files-found: warn
 
 # This workflow compares exact same frames on isolated GitHub runners.
-# It does not listen to the full audio, approve a character, or publish.
+# The MP4 stream probe is not an audio listening or full-motion review, art approval, or publication.
