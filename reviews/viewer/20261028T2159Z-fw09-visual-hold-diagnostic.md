@@ -27,3 +27,14 @@ The PR #13 production caption report remains 449 visible frames / 475, zero unto
 ## Outcome
 
 Pending implementation, tests and exact source/output hashes. Append results; do not rewrite the frozen rationale.
+
+
+## Verified technical outcome — 2026-10-28 22:03 UTC
+
+**Bounded source change:** new standalone `scripts/report_visual_holds.py` (Git blob `4824c033a5a287f369c9862c83f3889e285f4b69`, local SHA-256 `d1b66092531ca16f0d5a7cc01844705db10acb300761152b5a70b34bc6707146`) and three pure interval tests in `tests/test_visual_holds.py` (Git blob `981914981c47cb8bd10015a08e9f26449f549d9f`). No third-party Python packages; `ffmpeg`/`ffprobe` required for a real render. Source and test Git blobs were independently checked against the exact locally executed bytes.
+
+**Actual output:** ran `python scripts/report_visual_holds.py --video <downloaded-review.mp4> --output <report.json>` on the verified 475-frame MP4 above. It decoded all 475 frames and reported the four frozen intervals exactly. The portable [JSON report](20261028T2159Z-visual-holds.json) is byte-identical to local output: Git blob `3b1841896a79007c16defe54abefead6913ca2e5`, SHA-256 `695253a27fd620189a4939a43a579df6d60597ac03c4a0f861707bf7efe7f69c`. No video was re-rendered because **no visual or audio source changed**; this is a tool verification against an existing actual phone-size render, not a new animated before/after.
+
+**Checks:** local `python -m unittest discover -s tests -v` for the three new tests passed, Python syntax compilation passed, and [GitHub Actions standard validation run 40776624988](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40776624988) passed on exact code/test commit `84b00e38336e39e71bb4d3306074e31c3691fa94`: Python editorial/media tests, cast/rights registry checks, PowerShell parsing and TypeScript. Evidence-only commits after that code/test head do not modify runtime/test code; verify final PR head CI separately.
+
+**Coverage and decision:** 0.5-second visual contact sheet plus the Dario/card transition at frames 300–390 and final 474 inspected at 432×768; grayscale frame-difference coverage is all frames but cannot judge motion aesthetics, easing, narration quality, or audio pitch. The long static holds are **diagnostic evidence**, not proven flaws. No new creative iteration is authorized; the 3/3 cap stays. FW-06 remains `review` and FW-07 remains `blocked` pending human acceptance. This PR is draft, not a release or media approval. The next editorial change, if approved, must use a concrete anchored action and a **fresh** same-timestamp before/after render and playback/listening review.
