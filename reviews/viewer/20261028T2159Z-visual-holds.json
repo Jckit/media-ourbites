@@ -4,7 +4,7 @@
     432,
     768
   ],
-  "fps": 30,
+  "fps": 30.0,
   "decoded_frames": 475,
   "crop_xywh": [
     0,
@@ -18,7 +18,7 @@
   ],
   "gray_pixel_delta_threshold": 3,
   "max_changed_pixels_per_pair": 10,
-  "minimum_span_seconds": 1,
+  "minimum_span_seconds": 1.0,
   "low_motion_spans": [
     {
       "start_frame": 114,
