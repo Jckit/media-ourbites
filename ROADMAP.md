@@ -24,6 +24,7 @@ Canonical shared task board. Goal: expressive existing hybrid characters with re
 | FW-08 | Episode scene configuration and narration-driven beat adapter | FW-07 | blocked | unclaimed | New fixture changes data/config only; voice A, original pitch, 1.1x retained; captions tied to real word times |
 | FW-09 | Repeatable QA command and CI coverage for shared scene library | FW-04 | review | CI implementation ownership released; independent PR #9 `review/fw09-fixture-ci-20261028` from `a2f23775`; reviewer read-only | CI [run 40757354494](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40757354494) passed six 432×768 PNG renders, layout guard, typecheck, 0/120/239 cross-preset reading-strip checks; [hashes/review](reviews/viewer/20261028T1945Z-fw09-fixture-ci.md); manual visual signoff and full-motion coverage pending |
 | FW-10 | Document authoring recipe and prove reuse on a second business topic | FW-06, FW-08, FW-09 | blocked | unclaimed | Record configuration/code effort, render evidence and remaining exceptions; no forced narrative structure |
+| FW-M00 | Document optional editorial paper-collage motion language and map into FW-07/FW-08; no runtime changes | — | review | Cloud doc owner released; `design/editorial-paper-motion-20261028` from `5d847ca3`; scope: this roadmap, style spec, production/viewer/motion skills, framework README | [Style contract](styles/OURBITES-EDITORIAL-PAPER-MOTION.md), [authoring skill](skills/ourbites-motion/SKILL.md), production/viewer routing and roadmap mapping drafted from user-supplied 9.731s reel; documentation/CI checks pending; human signoff for future art remains independent |
 
 ## Current batch boundaries
 
@@ -35,3 +36,16 @@ No purchase, publication, push, merge or final-media approval is implied by a co
 
 FW-02–04: [review](reviews/viewer/20261028-framework-batch1.md), [office](out/framework-batch1/office.mp4), [storefront](out/framework-batch1/storefront.mp4). Six phone-size stills inspected; TypeScript and exports passed. Continuous motion remains unreviewed; fixtures are silent. Implementation ownership released after validation.
 
+
+## New optional motion language: editorial paper collage (2026-10-28)
+
+Justin supplied a screen recording of an animated editorial collage reel and explicitly clarified that **3D is not required**. The intended motion vocabulary is layered paper cards, evidence/photo layouts, magnifier focus, fold/torn-edge reveals, kinetic typography and **smooth, object-led transitions**. It is a **selectable 2D-first shot treatment** alongside existing scenic hybrid illustration and precise financial charts, **not** a new protagonist design, default template for every episode, new retention claim or media release approval.
+
+Canonical references:
+- **Creative contract / motion and transition rules:** [styles/OURBITES-EDITORIAL-PAPER-MOTION.md](styles/OURBITES-EDITORIAL-PAPER-MOTION.md)
+- **How to implement/review reusable actions:** [skills/ourbites-motion/SKILL.md](skills/ourbites-motion/SKILL.md), routed through production and viewer skills.
+- **Code/API ownership:** [src/framework/README.md](src/framework/README.md), with prospective modules clearly marked *not implemented*.
+
+**Implementation order:** finish FW-06's existing production and caption-verification gate (separate [draft PR #10](https://github.com/jcbandc-arch/media-creator-outbites/pull/10)); during **FW-07**, build a minimal anchored document/focus/reveal action and demonstrate it on two distinct objects/scenarios without changing the canonical host; during **FW-08**, add declarative beat timing and two purposeful transition types, retiming to actual narration; extend **FW-09** to inspect adjacent transition frames and safe areas; use **FW-10** to test scenic + paper-collage + precise-data shots in a second business topic.
+
+**Initial visual acceptance:** at 432×768, inspect entry/focus/reveal/exit *and adjacent frames*, show no object/hand discontinuity, preserve caption/source safe areas and recognizable actor identity, and use original/rights-cleared paper graphics. Continuous playback and audio listening remain separately required on narrated drafts. New motion-art direction is for human review; the old 3/3 protagonist subjective-revision cap is not reset.
