@@ -14,7 +14,7 @@ on:
 permissions:
   contents: read
 
-# Centralized review contract for this currently approved composition duration.
+# Centralized CI contract for the currently verified draft composition length.
 # When changing the production timing, update this *single* value and its
 # selected inspection frames after remeasuring the actual narration.
 env:
