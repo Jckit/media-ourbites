@@ -3,19 +3,19 @@
   "entry": "src/index.tsx",
   "preview_url": "http://localhost:3000/AnthropicCharacter",
   "latest_draft": "out/anthropic-character-smooth-grip.mp4",
-  "last_review": "reviews/viewer/20261028T115300Z-cloud-playback-evidence.md",
+  "last_review": "reviews/viewer/20261028T124931Z-cloud-audio-signal.md",
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "October 28 protagonist gaze improvement remains verified by nine phone-sized frame pairs in draft PR #1, unmerged/unapproved. The CI now exports a complete 432x768 H.264/AAC review MP4 (500 frames, 16.683s), with stream probe and SHA-256 artifact. Continuous playback, original-pitch Voice A listening and caption sync are not reviewed; no additional creative feedback is inferred.",
-  "last_status": "cloud_pr_phone_mp4_mux_verified_listening_pending",
+  "notes": "Draft PR #1 preserves the single consumed October 28 host-gaze refinement. Four expected 1.1x narration windows now pass decoded audio-signal presence checks on the full 432x768 MP4; this is not audio listening, original-pitch verification, caption synchronization or continuous-motion approval. All prior subjective caps and human gates remain in force.",
+  "last_status": "cloud_pr_per_clip_audio_signal_verified_listening_pending",
   "last_verified_frame": "GitHub Actions artifact viewer-protagonist-before-after, run 40676453311, after/frame-220.png",
   "input_hashes": "reviews/viewer/20261028T094251Z-inputs.json",
   "output_hashes": "reviews/viewer/20261028T094251Z-outputs.json",
   "backlog": [
-    "Play and listen to the full review MP4 locally: Voice A am_puck original pitch at 1.1x, caption sync, Dario grip and host gaze continuity",
-    "Check secondary financing caveat readability during actual playback; change only on a demonstrated defect",
-    "Protagonist October 28 direction consumed; further subjective changes require fresh human feedback."
+    "Listen to the exact PR review MP4 against original Kokoro am_puck Voice A at 1.1x; verify intelligibility, pitch and caption sync",
+    "Review continuous Dario grip/host gaze motion and remaining secondary financing caveat readability; change only for demonstrated defects",
+    "Protagonist October 28 direction consumed once; further subjective changes require fresh human feedback. Human likeness/factual/rights/final-media approvals remain pending."
   ],
   "last_human_direction": "Justin requested implementation-first feedback loop and purposeful Dario role on 2026-10-28; not final-media approval",
   "protagonist_oct28_direction_consumed": true,
@@ -46,5 +46,29 @@
     "audio_codec": "aac",
     "continuous_playback_reviewed": false,
     "audio_listening_reviewed": false
+  },
+  "cloud_audio_signal_check": {
+    "pr": "https://github.com/jcbandc-arch/media-creator-outbites/pull/1",
+    "workflow_commit": "f382b8b7e592792bdc3d94ee272492b35dfa9cda",
+    "actions_run": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40691160665",
+    "artifact_url": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40691160665/artifacts/12816778529",
+    "artifact_zip_sha256": "a87d5eeb7edfb7dcc75002edc993bc24e1965fb3516a8c4dcadf47de4f083068",
+    "mp4_sha256": "793f48ccfbe36e0ab92605275eb19c9abf4db280e0eda6e294152c71d2efb568",
+    "decoded_clip_rms_dbfs": [
+      -20.82,
+      -20.6,
+      -23.99,
+      -23.23
+    ],
+    "decoded_clip_peak_dbfs": [
+      -4.05,
+      -4.14,
+      -4.08,
+      -4.12
+    ],
+    "all_four_windows_passed": true,
+    "voice_pitch_listening_verified": false,
+    "continuous_playback_reviewed": false,
+    "approved_for_release": false
   }
 }
