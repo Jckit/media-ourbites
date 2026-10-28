@@ -8,7 +8,11 @@ import {DarioIllustration} from './DarioIllustration';
 import {OfficeWorld} from './BusinessWorld';
 
 const ink='#142B38',teal='#087E83',orange='#E97F48';
-export const CHARACTER_FRAMES=Math.ceil(narration.duration*30/playbackSpeed);
+// The actual scenic review MP4 has 1.106s of final silence after the last word.
+// Trim 0.9 source seconds, retaining ~0.25s of post-speech payoff hold.
+// Re-measure this value if the narration WAVs or manifest change.
+const VERIFIED_FINAL_SILENCE_TRIM_SOURCE_SECONDS=0.9;
+export const CHARACTER_FRAMES=Math.ceil((narration.duration-VERIFIED_FINAL_SILENCE_TRIM_SOURCE_SECONDS)*30/playbackSpeed);
 export const AnthropicCharacter:React.FC=()=>{
  const frame=useCurrentFrame(),{fps}=useVideoConfig(),t=frame/fps*playbackSpeed;
  const inspect=narration.clips[1].start,operating=narration.clips[2].start,resolve=narration.clips[3].start;
