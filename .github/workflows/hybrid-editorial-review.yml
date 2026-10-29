@@ -1,0 +1,84 @@
+name: Review FW-07B unified hybrid-editorial motion prototype
+
+on:
+  pull_request:
+    paths:
+      - 'src/framework/HybridEditorialPrototype.tsx'
+      - 'src/index.tsx'
+      - '.github/workflows/hybrid-editorial-review.yml'
+      - 'tests/test_hybrid_editorial_prototype.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hybrid-editorial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out exact source
+        uses: actions/checkout@v4
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install pinned packages
+        run: npm ci --ignore-scripts
+      - name: Verify TypeScript, inherited layout and story tests
+        run: |
+          npm run typecheck
+          python3 scripts/check_framework_layout.py
+          python3 -m unittest discover -s tests -v
+      - name: Export real phone-size silent review video
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/hybrid-editorial-ci
+          npx remotion render src/index.tsx HybridEditorialPrototype             out/hybrid-editorial-ci/hybrid-editorial-prototype.mp4             --scale=0.4 --codec=h264 --concurrency=2
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+          path=Path('out/hybrid-editorial-ci/hybrid-editorial-prototype.mp4')
+          raw=subprocess.check_output(['ffprobe','-v','error','-count_frames',
+            '-show_entries','stream=codec_name,codec_type,width,height,nb_read_frames,r_frame_rate:format=duration',
+            '-of','json',str(path)],text=True)
+          probe=json.loads(raw)
+          video=next(s for s in probe['streams'] if s['codec_type']=='video')
+          assert video['codec_name']=='h264', probe
+          assert (video['width'],video['height']) == (432,768), probe
+          assert int(video['nb_read_frames']) == 300, probe
+          assert video['r_frame_rate'] == '30/1', probe
+          assert abs(float(probe['format']['duration'])-10.0)<0.1, probe
+          assert not any(s['codec_type']=='audio' for s in probe['streams']), probe
+          Path('out/hybrid-editorial-ci/probe.json').write_text(json.dumps(probe,indent=2)+'\n')
+          print('PASS: encoded H.264, 432x768, 300 frames, 30fps, 10s, no audio')
+          PY
+      - name: Export all motion boundary frames and contact sheet
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/hybrid-editorial-ci/frames
+          video=out/hybrid-editorial-ci/hybrid-editorial-prototype.mp4
+          frames=(0 12 26 40 54 65 82 96 111 122 137 151 168 185 196 205 219 232 247 260 274 299)
+          for n in "${frames[@]}"; do
+            ffmpeg -v error -i "$video" -vf "select=eq(n\\,$n)" -vsync vfr               -frames:v 1 "out/hybrid-editorial-ci/frames/frame-$n.png"
+          done
+          # Contact sheet is explicitly a static timeline index, not proof of motion.
+          ffmpeg -v error -i "$video" -vf "fps=2,scale=216:384,tile=5x4"             -frames:v 1 out/hybrid-editorial-ci/phone-timeline.jpg
+          sha256sum "$video" src/framework/HybridEditorialPrototype.tsx             src/OurbitesHost.tsx src/AnthropicCharacter.tsx             > out/hybrid-editorial-ci/source-media-sha256.txt
+          sha256sum out/hybrid-editorial-ci/frames/*.png             > out/hybrid-editorial-ci/frames-sha256.txt
+          git diff --check
+      - name: Attach complete video and review frames
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fw07b-hybrid-editorial-phone-preview
+          path: out/hybrid-editorial-ci/
+          retention-days: 14
+          if-no-files-found: warn
+
+# A green render proves technical validity only. Full human style, pacing,
+# continuous visual, source and publication acceptance remain separate.
