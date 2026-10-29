@@ -106,20 +106,50 @@ const Office: React.FC<{time:number}> = ({time}) => {
 };
 
 const Notebook: React.FC = () => <g>
-  <rect width={1080} height={1920} fill="#E8DFD1"/>
-  <path d="M0 1420 H1080 V1920 H0Z" fill="#CCB9A0"/>
-  <g transform="translate(58 355) rotate(-2 540 560)">
-    <rect x={20} y={20} width={982} height={850} rx={19} fill={c.ink} opacity={0.16}/>
-    <rect width={982} height={850} rx={19} fill={c.ivory} stroke={c.ink} strokeWidth={5}/>
-    <rect x={46} y={0} width={17} height={850} fill={c.orange} opacity={0.63}/>
-    {Array.from({length:11},(_,i)=><path key={i} d={'M90 '+(125+i*60)+' H932'}
-      stroke="#D3D9CF" strokeWidth={3}/>)}
-    {Array.from({length:8},(_,i)=><circle key={i} cx={31} cy={93+i*95}
-      r={9} fill="#C5B69E" stroke={c.ink} strokeWidth={2}/>)}
+  {/* Incoming scene: a warm, illustrated counter with a real-size notepad,
+      not a full-screen rectangle pretending to be a slide. */}
+  <rect width={1080} height={1920} fill="#D8E7E2"/>
+  <rect x={0} y={0} width={1080} height={680} fill="#D7E6DF"/>
+  <path d="M0 687 H1080 V1920 H0Z" fill="#D2B89A"/>
+  <path d="M0 692 H1080" stroke="#B89B78" strokeWidth={13}/>
+  <path d="M0 905 H1080 M0 1180 H1080 M0 1430 H1080" stroke="#B69A79" strokeWidth={3} opacity={0.35}/>
+  <g transform="translate(264 473) rotate(-5 370 365)">
+    <rect x={19} y={27} width={713} height={742} rx={14} fill={c.ink} opacity={0.16}/>
+    <rect width={713} height={742} rx={14} fill="#FFFCF3" stroke={c.ink} strokeWidth={5}/>
+    <rect x={27} width={22} height={742} fill={c.orange} opacity={0.42}/>
+    <path d="M90 93 H650" stroke={c.teal} strokeWidth={10} strokeLinecap="round" opacity={0.62}/>
+    {Array.from({length:8},(_,i)=><path key={i} d={'M83 '+(170+i*68)+' H650'}
+      stroke="#CBD6CD" strokeWidth={3}/>)}
+    {Array.from({length:7},(_,i)=><circle key={i} cx={29} cy={116+i*94}
+      r={8} fill="#B8AF9F" stroke={c.ink} strokeWidth={1}/>)}
+    <text x={98} y={143} fontSize={37} fontWeight={850} fill={c.gray} letterSpacing={2}>
+      WHAT THE SHOP KEPT
+    </text>
   </g>
-  <Tape x={749} y={356} angle={6} w={115}/>
-  <Tape x={177} y={1102} angle={-12} w={103}/>
-</g>;
+  {/* Scattered shop objects have positions, overlaps and shadows. */}
+  <g transform="translate(825 1105) rotate(14)">
+    <rect x={8} y={14} width={166} height={238} rx={16} fill={c.ink} opacity={0.16}/>
+    <rect width={166} height={238} rx={16} fill="#507D76" stroke={c.ink} strokeWidth={5}/>
+    <rect x={20} y={22} width={126} height={62} rx={7} fill="#E1F0E7"/>
+    <text x={83} y={66} textAnchor="middle" fontSize={39} fontWeight={900} fill={c.ink}>35</text>
+    {[0,1,2].map(row=>[0,1,2].map(col=><rect key={row*3+col}
+      x={24+col*44} y={107+row*42} width={31} height={28} rx={6} fill="#D8E6D8"/>))}
+  </g>
+  <g transform="translate(815 680) rotate(7)">
+    <rect x={14} y={20} width={156} height={220} fill={c.ink} opacity={0.12}/>
+    <rect width={156} height={220} fill={c.ivory} stroke="#C6BCA8" strokeWidth={3}/>
+    <path d="M18 50 H132 M18 83 H125 M18 116 H137 M18 149 H97" stroke="#AEBAB3" strokeWidth={7}/>
+    <path d="M18 184 H138" stroke={c.orange} strokeWidth={8}/>
+  </g>
+  <g transform="translate(190 1308) rotate(-19)">
+    <rect width={270} height={28} rx={14} fill={c.ink} opacity={0.13} transform="translate(9 13)"/>
+    <rect width={268} height={27} rx={13} fill={c.orange} stroke="#C66C43" strokeWidth={3}/>
+    <path d="M225 2 L273 14 L225 25Z" fill="#F0DEB6"/>
+    <path d="M260 11 L276 14 L260 17Z" fill={c.ink}/>
+  </g>
+  <Tape x={701} y={478} angle={7} w={111}/>
+  <Tape x={358} y={1130} angle={-13} w={99}/>
+</g>
 
 export const HybridEditorialPrototype:React.FC=()=>{
   const frame=useCurrentFrame();
@@ -171,7 +201,7 @@ export const HybridEditorialPrototype:React.FC=()=>{
       </defs>
       <Office time={t}/>
       <rect width={1080} height={1920} fill={'url(#'+clipId+'_fibres)'} opacity={0.30}/>
-      <g opacity={1-curve(t,6.4,7.35)}>
+      <g opacity={1-curve(t,3.6,6.7)*0.67-curve(t,6.4,7.35)*0.33}>
         {/* The only held folio originates exactly at the existing host's pointing hand. */}
         <g transform={'translate('+folioGrip.x+' '+folioGrip.y+') rotate('+folioAngle+') scale('+folioScale+')'}>
           <rect x={11} y={-516} width={450} height={516} fill={c.ink} opacity={0.19} transform="translate(15 19)"/>
@@ -200,6 +230,18 @@ export const HybridEditorialPrototype:React.FC=()=>{
           <g transform={'scale('+(1-2*open)+',1)'}>
             <rect y={-516} width={450} height={516} rx={8} fill="#E1D3BC"
               stroke={c.ink} strokeWidth={4} opacity={1-open*0.89}/>
+          </g>
+          {/* The closed folio starts as a purposeful physical cover, not a blank
+              slab; cover printing departs with the hinge as the page opens. */}
+          <g opacity={1-open}>
+            <path d="M30 -483 H418" stroke={c.ink} strokeWidth={8} opacity={0.3}/>
+            <rect x={41} y={-432} width={347} height={72} rx={5} fill={c.teal}/>
+            <text x={58} y={-380} fontSize={43} fontWeight={900} fill={c.ivory}
+              letterSpacing={2}>SHOP REPORT</text>
+            <text x={45} y={-292} fontSize={64} fontWeight={900} fill={c.ink}>OPEN THE</text>
+            <text x={45} y={-220} fontSize={64} fontWeight={900} fill={c.ink}>NUMBERS</text>
+            <rect x={43} y={-172} width={345} height={9} rx={4} fill={c.orange}/>
+            <path d="M43 -125 H346 M43 -93 H295" stroke="#A39B8F" strokeWidth={8}/>
           </g>
         </g>
       </g>
