@@ -1,5 +1,8 @@
 # Ourbites Hybrid 2.5D: optional low-poly influence
 
+> **Direction update 2026-10-29:** This remains a *background geometry and identity reference*. The new primary creative contract is [Ourbites Hybrid Editorial Animation](OURBITES-HYBRID-EDITORIAL.md), combining the **existing** hybrid host, restrained illustrated space and tactile editorial paper actions as **one style**, not converting the character into low-poly/3D or separate slide sequences.
+
+
 **Status:** design experiment awaiting visual approval (2026-10-28). **Not** a mandate to convert the channel to low-poly/3D or re-illustrate the recurring host.
 
 ## Creative brief
