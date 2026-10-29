@@ -43,24 +43,24 @@ def check_sources(kit: str, preview: str, host: str, stage: str) -> None:
             "Host bounding box must fit within the frame")
     # Fail closed if the host's SVG leg geometry changes: a constant-only
     # actorY check cannot notice when the actual foot endpoints move.
-    viewbox = re.search(r'viewBox="0 0 (\\d+) (\\d+)"', host)
+    viewbox = re.search(r'viewBox="0 0 (\d+) (\d+)"', host)
     require(viewbox is not None, "Missing numeric host SVG viewBox")
     svg_width, svg_height = (int(v) for v in viewbox.groups())
     legs = re.search(
-        r'<path\\s+d="M\\d+\\s+\\d+\\s+L\\d+\\s+(\\d+)\\s+H\\d+\\s+'
-        r'M\\d+\\s+\\d+\\s+L\\d+\\s+(\\d+)\\s+H\\d+"\\s+fill="none"',
+        r'<path\s+d="M\d+\s+\d+\s+L\d+\s+(\d+)\s+H\d+\s+'
+        r'M\d+\s+\d+\s+L\d+\s+(\d+)\s+H\d+"\s+fill="none"',
         host,
     )
     require(legs is not None, "Host leg path changed: review grounding geometry")
     left_foot_y, right_foot_y = (int(v) for v in legs.groups())
     require(left_foot_y == right_foot_y, "Host feet must be level before anchoring")
 
-    scale = re.search(r'height=\\{size\\s*\\*\\s*(\\d+)\\s*/\\s*(\\d+)\\}', stage)
+    scale = re.search(r'height=\{size\s*\*\s*(\d+)\s*/\s*(\d+)\}', stage)
     require(scale is not None, "StageActor host height scale changed: review grounding")
     require(tuple(int(v) for v in scale.groups()) == (svg_height, svg_width),
             "StageActor height ratio must match the host SVG viewBox")
 
-    anchor = re.search(r"actorY\\s*:\\s*(\\d+)\\s*-\\s*(\\d+)\\s*\\*\\s*(\\d+)\\s*/\\s*(\\d+)", kit)
+    anchor = re.search(r"actorY\s*:\s*(\d+)\s*-\s*(\d+)\s*\*\s*(\d+)\s*/\s*(\d+)", kit)
     require(anchor is not None, "Host actorY must explicitly anchor SVG feet to the floor")
     floor, foot_y, actor_size, width = (int(v) for v in anchor.groups())
     require((floor, foot_y, actor_size, width) ==
