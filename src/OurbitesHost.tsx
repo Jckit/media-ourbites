@@ -79,16 +79,24 @@ export const OurbitesHost: React.FC<HostProps> = ({
     : rightArm;
   const leftMark = (p:HostPose) => p==='think'||p==='react' ? 1 : 0;
   const rightMark = (p:HostPose) => p==='point'||p==='explain' ? 1 : 0;
-  const face = (p:HostPose,opacity:number) => {
+  // Morph facial curves once rather than crossfading two opaque ink drawings:
+  // a dual-face blend produced gray/ghosted eyebrows and mouth at mid-gesture.
+  const faceMetrics = (p:HostPose) => {
     const react=p==='react';
-    const doubtAmount=Math.max(0,Math.min(1,doubt ?? (react ? 1 : 0)));
-    return <g opacity={opacity}>
-      <path d={'M128 109 Q140 '+(96+12*doubtAmount)+' 153 108'} fill="none"/>
-      <path d={react ? 'M202 102 Q218 85 237 102' : 'M204 108 Q218 95 232 108'} fill="none"/>
-      <path d={react ? 'M174 187 Q184 170 196 187'
-        : 'M165 183 Q182 '+(199-22*doubtAmount)+' 200 183'} fill="none"/>
-    </g>;
+    const d=Math.max(0,Math.min(1,doubt ?? (react ? 1 : 0)));
+    return {
+      leftBrowY:96+12*d,
+      browStartX:react?202:204, browStartY:react?102:108,
+      browControlY:react?85:95, browEndX:react?237:232,
+      browEndY:react?102:108,
+      mouthStartX:react?174:165, mouthStartY:react?187:183,
+      mouthControlX:react?184:182, mouthControlY:react?170:199-22*d,
+      mouthEndX:react?196:200, mouthEndY:react?187:183,
+    };
   };
+  const faceFrom=faceMetrics(poseFrom ?? pose), faceTo=faceMetrics(pose);
+  const fm=(key:keyof ReturnType<typeof faceMetrics>) =>
+    blending ? lerp(faceFrom[key],faceTo[key]) : faceTo[key];
   const symbol = (p:HostPose,opacity:number) => (p==='think'||p==='react') && (
     <text x="283" y="85" opacity={opacity} fontSize="68" fontWeight="850"
       fill={p==='react' ? orange : teal}>{p==='think' ? '?' : '!'}</text>
@@ -113,7 +121,12 @@ export const OurbitesHost: React.FC<HostProps> = ({
         <circle cx="180" cy="145" r="97" fill={paper}/>
         <path d="M130 65 L164 20 L176 75 Z" fill={ink}/>
 
-        {blending ? <>{face(poseFrom!,1-blend)}{face(pose,blend)}</> : face(pose,1)}
+        <path d={'M128 109 Q140 '+fm('leftBrowY')+' 153 108'} fill="none"/>
+        <path d={'M'+fm('browStartX')+' '+fm('browStartY')+
+          ' Q218 '+fm('browControlY')+' '+fm('browEndX')+' '+fm('browEndY')} fill="none"/>
+        <path d={'M'+fm('mouthStartX')+' '+fm('mouthStartY')+
+          ' Q'+fm('mouthControlX')+' '+fm('mouthControlY')+' '+
+          fm('mouthEndX')+' '+fm('mouthEndY')} fill="none"/>
         <circle cx={144 + pupilX} cy={139 + pupilY} r="6"/>
         <circle cx={219 + pupilX} cy={139 + pupilY} r="6"/>
         {blending ? <>
