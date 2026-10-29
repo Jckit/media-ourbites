@@ -139,8 +139,9 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const actorX=105-190*actorShift+200*actorReturn;
   const actorY=780+36*actorShift-36*actorReturn;
   const hand={x:actorX+337*485/360,y:actorY+163*485/360};
-  const wrist={x:554,y:1000};
-  const folioGrip=point(wrist,{x:635,y:1190},lift);
+  // The folio is attached to the actual shared host pointing-hand anchor
+  // until the authored release, rather than an unrelated visual position.
+  const folioGrip=point(hand,{x:635,y:1190},lift);
   const folioScale=mix(0.83,1.00,lift);
   const folioAngle=mix(-11,-2,lift);
   const focusGone=curve(t,4.7,6.0);
