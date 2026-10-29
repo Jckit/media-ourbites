@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill,Audio,Sequence,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
 import {CharacterStage,StageActor,FilingProp,tween} from './CharacterStage';
 import narration from './anthropic-character-audio.json';
+import captionCues from './anthropic-caption-cues.json';
 import financials from '../episodes/002/financials.json';
 import {playbackSpeed} from './story-motion';
 import {DarioIllustration} from './DarioIllustration';
@@ -44,7 +45,13 @@ export const AnthropicCharacter:React.FC=()=>{
    x:restingHand.x+reach*((gripX-darioX)*360/420-restingHand.x),
    y:restingHand.y+reach*((gripY-830)*360/420-restingHand.y),
  }:undefined;
- const caption=narration.clips.find(c=>t>=c.start&&t<c.start+c.duration);
+ // Narration and exact spoken wording stay untouched; split only the on-screen reading load.
+ // Cue ends are fractions of the original WAV clip duration, not separate audio segments.
+ const activeClip=narration.clips.findIndex(c=>t>=c.start&&t<c.start+c.duration);
+ const activeNarration=activeClip<0?undefined:narration.clips[activeClip];
+ const caption=activeNarration
+   ? captionCues.clips[activeClip].find(c=>(t-activeNarration.start)/activeNarration.duration<c.until)?.text
+   : undefined;
  return <AbsoluteFill style={{background:'#F4F0E6',color:ink,fontFamily:'Arial, sans-serif',overflow:'hidden'}}>
    <CharacterStage zoom={1+open*0.06-end*0.06} focusX={650} focusY={850}>
      {/* World space and characters share the camera transform. Original vector set dressing reacts to the falling filing. */}
@@ -67,10 +74,6 @@ export const AnthropicCharacter:React.FC=()=>{
          <rect width="105" height="68" y="20" rx="10" fill="#A96A43" stroke={ink} strokeWidth="7"/>
          <path d="M75 43 H110 V68 H75 Z" fill="#E9B98E" stroke={ink} strokeWidth="5"/>
        </g>
-       <g opacity={pointing}>
-         <path d="M720 1110 L570 510" stroke={orange} strokeWidth="8" strokeLinecap="round"/>
-         <circle cx="570" cy="510" r="12" fill={orange}/>
-       </g>
      </svg>
      <div style={{position:'absolute',left:darioX,top:830,width:420}}><DarioIllustration gesture={open} hand={hand}/></div>
      <div style={{position:'absolute',left:750,top:1468,fontSize:27,fontWeight:800}}>DARIO · ILLUSTRATION</div>
@@ -81,7 +84,7 @@ export const AnthropicCharacter:React.FC=()=>{
    {/* Keep review metadata above the opaque world, but below the source footer and outside moving props/captions. */}
    <div style={{position:'absolute',left:85,top:1768,fontSize:32,letterSpacing:4,fontWeight:900,whiteSpace:'nowrap'}}>OURBITES</div>
    <div style={{position:'absolute',left:310,top:1775,fontSize:26,color:'#607078',whiteSpace:'nowrap'}}>ILLUSTRATIVE SCENE · LIKENESS REVIEW PENDING</div>
-   <div style={{position:'absolute',left:85,right:85,top:1600,fontSize:43,lineHeight:1.25,fontWeight:650,textAlign:'center'}}>{caption?.text}</div>
+   <div style={{position:'absolute',left:85,right:85,top:1600,fontSize:53,lineHeight:1.12,fontWeight:750,textAlign:'center'}}>{caption}</div>
    <div style={{position:'absolute',left:85,bottom:75,fontSize:24,color:'#607078'}}>Source: episode 002 filing dataset · editorial review pending</div>
    {narration.clips.map(c=><Sequence key={c.file} from={Math.round(c.start*fps/playbackSpeed)} durationInFrames={Math.ceil(c.duration*fps/playbackSpeed)}><Audio src={staticFile(c.file)} playbackRate={playbackSpeed}/></Sequence>)}
  </AbsoluteFill>;
