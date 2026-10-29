@@ -33,3 +33,20 @@ At the same moments, captions show the complete clip text for the full 3.4s segm
 ## Result
 
 Pending actual implementation, test results and user viewing decision. This is a reviewable technical correction, not a claimed retention improvement.
+
+
+## Verified bounded implementation and review output — 2026-10-29
+
+**Code commit before review-only evidence updates:** `5acbc2a909ae619dae0169c98bd98acb33b0297a`. New `src/anthropic-caption-cues.json` contains 11 total timed phrases across the original 4 WAV clips, no word substitutions, all within 36 characters/6 words; all per-clip end fractions are ascending and end at 1. `src/AnthropicCharacter.tsx` no longer contains the orphaned `M720 1110 L570 510` SVG path or orange endpoint circle, but retains the existing orange *label highlight*. The caption display uses `fontSize:53` in the same protected caption band. New `tests/test_anthropic_caption_cues.py` verifies exact aggregate narrator text, cue coverage, density and pointer absence.
+
+**Passed GitHub Actions (exact code/test commit):**
+- [Standard source, editorial and TypeScript CI 40841376820](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40841376820) **success**, including the four new cue tests.
+- [Full production comparison CI 40841376909](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40841376909) **success**: before/after at 15 matching 432×768 frames, actual H.264/AAC phone-sized render, decoded audio signal in all four original narration windows, 475-frame probe and strict caption pixel-presence gate. [Downloaded source artifact 12883311008](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40841376909/artifacts/12883311008), exact ZIP SHA-256 `9afab4665533031ac8cbac4c2e0c86bb99889132b56bf1f9ce3830e8e3524924`.
+
+**Independently inspected real video/artifacts, not just source:** Candidate `after/anthropic-character-review.mp4` SHA-256 `b0a74e927c1b2fcc200b8359e7e79d36d684a124605e92cb7bd69cb9554dbeab`, 475 frames at 30fps 432×768, 15.851s. The decoded 16kHz mono PCM SHA-256 of **both baseline and candidate** is identical `f7e6c2eed3d358823b07cee88c5e88ac5a846c5512d3c6e231a4e22b5dd90a`, proving decoded soundtrack equality (but not actual listening or word-level sync). Caption report SHA matches candidate video, **449 visible / 475**, zero untolerated or tolerated boundary mismatches. Clip coverage **81/81, 93/93, 111/111, 164/164**.
+
+Independently visually sampled the candidate at **0.4, 1.8, 3.2, 3.75, 4.0, 4.3, 4.9, 5.65, 6.5, 7.2, 8.1, 9.6, 10.45, 11.4, 12.2, 13.5, 14.4, 15.3s** plus paired before/after at **3.3, 3.75, 4.0, 4.5, 5.3, 6.0s**. **The orange connector is visibly gone** at 4.0s; Dario's real SVG arm/hand stays, and the net-loss label highlight remains. The reading band displays one short phrase rather than the full 3–6s sentence; no observed collisions with lower persistent metadata or labels. For all 15 exact matched CI PNG pairs, y=705–767 pixels were **identical**; all art changes above y=635 are confined to the deleted connector region (x195–365,y180–480 at 432×768). The established handoff frames 310/311/325 and payoff remain source-identical except the intended caption text.
+
+**Review limitations / next step:** The timing fractions are authored estimates within fixed real clip durations. Neither passing pixel caption QA nor SHA-identical audio proves exact phrase-to-word alignment, naturalness, or full-motion judgement. User must **watch and listen** to the corrected draft, including the line removal around 4s and all caption changes, before FW-06 can be called accepted. This remains **scenic hybrid**, *not* the separate FW-07/FW-08 editorial paper-collage animation style. No fresh approval of host redesign or real-person illustration, no claim that the numerical story is approved for publication or retention improved. Human factual, licensing, likeness and final publication gates remain untouched.
+
+**Result: technically verified corrective candidate, awaits human viewing.** Implementation file ownership released; draft PR #21 is for review only. Do not mark FW-06 done or unblock FW-07 yet.
