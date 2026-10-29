@@ -1,0 +1,45 @@
+{
+  "video_sha256": "98bbc179695fa4a5c2a0a486107f157a2b6128ccf26fb7ca92f18cf650258ccf",
+  "source_dimensions": [
+    432,
+    768
+  ],
+  "fps": 30.0,
+  "decoded_frames": 475,
+  "crop_xywh": [
+    0,
+    0,
+    432,
+    592
+  ],
+  "analysis_dimensions": [
+    216,
+    296
+  ],
+  "gray_pixel_delta_threshold": 3,
+  "max_changed_pixels_per_pair": 10,
+  "minimum_span_seconds": 1.0,
+  "low_motion_spans": [
+    {
+      "start_frame": 114,
+      "end_frame": 190,
+      "duration_seconds": 2.533
+    },
+    {
+      "start_frame": 206,
+      "end_frame": 249,
+      "duration_seconds": 1.433
+    },
+    {
+      "start_frame": 259,
+      "end_frame": 293,
+      "duration_seconds": 1.133
+    },
+    {
+      "start_frame": 357,
+      "end_frame": 474,
+      "duration_seconds": 3.9
+    }
+  ],
+  "limitations": "Low-motion is measured after grayscale downsampling, excluding the lower reading zone. Compression noise and crop/threshold choices affect spans. This does not assess storytelling, movement quality, voice, or audience retention."
+}
