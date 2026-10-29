@@ -1,0 +1,39 @@
+# FW-09 — adjacent transition-frame fixture QA (frozen before implementation)
+
+**UTC finding frozen:** 2026-10-28T22:57Z. **Exact latest main:** `8733f54b6b704ffd1331f5c5639f09567a5f61af`; independent branch `review/fw09-transition-boundary-fixtures-20261028`. No access to Justin's private Windows worktree, local WAVs or uncommitted Codex edits. PR #14 already owns a separate rendered-video motion-hold diagnostic; this change does not modify it.
+
+## Evidence and one selected feature
+
+**Observed source/CI coverage gap (not an observed video defect):** `src/framework/FrameworkPreview.tsx` changes its parcel label from ORDER to READY at `t >= 3.1` with `t = frame / 30 * 1.1`, so the first READY frame is **85**. Existing `.github/workflows/framework-fixtures.yml` renders only frames **0, 120, 239**, missing the adjacent frames **84, 85, 86** around this deterministic text/prop state boundary. Its existing cross-preset lower-strip comparison is valid for the sampled frames but cannot detect problems during that boundary. Existing fixture PNGs were visually reviewed at 0/120/239 in `reviews/viewer/20261028T1945Z-fw09-fixture-ci.md`; no current 84–86 images have been inspected, so this is a **QA blind spot**, not a claimed discontinuity or retention problem.
+
+**Selected one bounded technical change:** extend the *existing* fixture workflow's shared frame sample list from `0 120 239` to `0 84 85 86 120 239` for both office/storefront. Reuse exactly the same Remotion still, dimensions, lower reading-zone equality and artifact hash checks; no new animation, narrator, visual identity, financials, caption or media-rights logic. The three adjacent frames form a minimal before/boundary/after sequence, not a cut-frequency target.
+
+**Source inputs:** `.github/workflows/framework-fixtures.yml` blob `1f8d98cb5c01d9a3555366a6dca39884285f1a7e`; `src/framework/FrameworkPreview.tsx` `aee34cf4f6d736ffb9234f1f675b47a8433117bb`; `src/framework/scene-kit.tsx` `37e012b7c0e523d3e9a855c93077eea163f2c0ec`; `src/OurbitesHost.tsx` `e8065f5080b95e3a17c5d76dcf4e5a9cadd0e260`; finance `5af2c4ec3810e5b14672afe0489af03e5c5ca53a`; narration manifest `58465eb9e82f4000e050484c01b486261790eeb4`.
+
+## Acceptance criteria
+
+1. A PR from exact main changes only the fixture CI workflow and this review; `src/**`, audio and financial source blobs unchanged.
+2. Passing Actions fixture run renders **12 PNGs** at 432×768, two presets × frames `0,84,85,86,120,239`; all images and SHA-256 manifest uploaded.
+3. Existing lower-zone cross-preset equality checks pass for all six frames, with no weakening of existing gates. Standard validation remains green.
+4. Inspect **both** 84/85/86 phone-size sequences from the actual artifact for intended ORDER→READY label change, stable host identity and no visible jump/collision in sampled frames. If artifact download/inspection is unavailable, mark only code/CI verification, not visual acceptance.
+5. Record actual run IDs, artifact/output hashes, inspected coverage, unresolved continuous playback/audio and human media/rights/style/factual gates. No invented retention uplift or final art approval.
+
+**Primary guidance checked 2026-10-28:** [YouTube retention moments](https://support.google.com/youtube/answer/9314415) and [Shorts feed viewed-versus-swiped](https://support.google.com/youtube/answer/12942217?co=YOUTUBE._YTVideoType%3Dshorts&hl=en) require actual audience data; neither makes stillness or a one-frame label change inherently bad. [Remotion `--frame`](https://www.remotion.dev/docs/options/frame) and [`--scale`](https://www.remotion.dev/docs/options/scale) document exact deterministic still sampling.
+
+## Result
+
+The following verification supersedes the initial pending status. FW-06 remains in human media review, FW-07 blocked; 3/3 protagonist subjective revision cap unchanged. No new protagonist design permission inferred.
+
+## Verified outcome — 2026-10-28T23:00Z
+
+**Reviewable implementation:** draft [PR #15](https://github.com/jcbandc-arch/media-creator-outbites/pull/15), tested head `4baba5a51e78bfb9211f2fc4f20f975f871b2b06` (exact main base `8733f54b6b704ffd1331f5c5639f09567a5f61af`). Workflow blob changed from `1f8d98cb5c01d9a3555366a6dca39884285f1a7e` to `227b9ee68a5890e90239c6dafc4c808768c71e25`. Only this CI workflow and the review file changed. The main production, host, stage, audio, finance and preview source blobs listed above remain unchanged. No merge or release.
+
+- [Fixture CI run 40783873731](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40783873731) **passed** pinned npm installation, source layout guard, TypeScript, **12 Remotion 432×768 stills**, frame dimension probes, six cross-preset lower reading-zone equality comparisons and SHA-256 manifest/artifact upload.
+- [Standard validation run 40783873712](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40783873712) **passed** Python tests, cast/media registry guards, PowerShell parsing and TypeScript.
+- [Actual Actions artifact 12857329856](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40783873731/artifacts/12857329856) downloaded and independently SHA-256 verified: ZIP `a50cd6874af2b88ee0cce59c129fe67e2506beb1f87e23c8f7954134d7c30af4`, equal to GitHub's artifact digest. All 12 PNG hashes independently match `sha256.txt`. The prior merged-main [fixture artifact 12852493717](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40771802212/artifacts/12852493717) ZIP `4bb0870385d5ea44b67df1bdc2bde1c5d7cd0c5fc892b601bc5ef0ee75fd6132` was also downloaded and verified. The **six shared frames 0/120/239 are pixel-identical before/after** for both environments.
+- New PNG SHA-256: office frame 84 `0b1e3b1745f65fe5e4d6be985eb9089c83b30e1348998764561fbfce8b299b7f`, frame 85 and 86 each `54621f59de3964fec1a2070517d87785462cfb3e2fbc7144b7c8db11a0d5bd28`; storefront frame 84 `ea3d5194a7b52b8fc82b8c6dcbc07a57c0e280491815f0058e812eba3859515f`, frame 85 and 86 each `e9d966449b6d71807a15e00380f330f6926f9d6aaf0d8400a3ad1eec6d60d406`. Existing 0/120/239 PNG hashes are retained in artifact's manifest.
+- **Actual phone-size inspection:** independently decoded and viewed all six 84/85/86 PNGs together, both presets. At frame 84 parcel reads **ORDER** and caption **A simple order.**; at 85 both change to **READY** and **The order is ready.**; frame 86 is pixel-identical to 85. The cream head/navy tuft/teal torso/ink limbs remain recognizable, floor contact and parcel/furniture layers stay coherent, and no sampled label/host/caption collision was visible. The 84→85 switch is an **instantaneous authored state change**, not a smooth animated morph; this is observed fixture behavior, not proof of a defect or a request for unapproved redesign. The decoded RGB lower strip `x=0..431,y=592..767` is byte-identical across office/storefront at all three new frames. Contact sheet SHA-256 `73145a74e754c5cad0ea55c7c5cb37d4eaabf5661cd86c5f060c830e07c79149` (inspection artifact not committed).
+- **Coverage limits:** Still samples establish boundary states and pixel comparisons, not continuous motion, voice listening, word timing or audience retention. The fixtures are silent. Existing production video has **not** been changed or rendered anew in this PR, so this is verified **QA coverage**, not a verified creative animation improvement. Human review/merge remains required; FW-06 final episode media/voice/factual/rights/style approval still open; FW-07 remains blocked. Protagonist subjective cap stays 3/3. No purchase, publish or approval claim.
+
+**Next unresolved backlog:** PR #15 human code/merge review; separate PR #14 scene-motion diagnostic review; FW-06 human continuous playback and original-pitch Voice A listening; then, only after approval, FW-07 anchored reusable actions and optional editorial paper-collage motion. Do not auto-merge or infer approval from passing CI.
+
