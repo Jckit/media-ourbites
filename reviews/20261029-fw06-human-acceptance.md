@@ -1,0 +1,30 @@
+# FW-06 human acceptance — scenic production integration and corrected review animation
+
+**Decision recorded:** 2026-10-29. **Status:** **ACCEPTED for FW-06 framework/visual-playback purposes**, **not** approved for public release, licensing, factual publication or real-person likeness use.
+
+## Authority and exact scope
+
+After reviewing the corrected 15.85-second Ourbites Anthropic draft, the user wrote in this conversation: **"approved. update roadmap etc."** This follows their prior feedback that (1) an orange connector from Dario's hand toward the reported net loss around 4 seconds looked wrong, (2) initial whole-sentence captions were too long, and (3) shorter captions were out of sync. The updated draft resolved the pointer and used 12 shorter phrases with measured pause-based timings. This response is explicit human **acceptance of that latest revised animation for the reusable framework gate FW-06**, including viewer-perceived caption timing and visual balance.
+
+**It is not** a blanket endorsement of the old unsynchronized candidate, a release authorization, a rights/likeness or factual signoff, proof of YouTube retention improvement, nor authorization to redesign the established character. The optional editorial paper-collage/kinetic typography animation system is **still not implemented**; its style spec was approved as a separate documentation direction in PR #11. It belongs to FW-07/FW-08.
+
+## Verified artifact and repository provenance
+
+- Production room-shell adapter: [merged PR #10](https://github.com/jcbandc-arch/media-creator-outbites/pull/10). The subsequent orphaned orange SVG pointer removal, shortened captions and pause-timed cue corrections: [merged PR #21](https://github.com/jcbandc-arch/media-creator-outbites/pull/21). On recording this decision, `main` had commit `9620684aeb558578bfac3256bc74677003054163`, and [standard validation on merged main](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40844414020) was green.
+- Last actual production review on the final code commit `a3ae20028067c27eae989a6ca1a838ffe19514f4`: [before/after + rendered media + caption/audio CI run 40843248112](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40843248112) **passed**; [standard TypeScript/Python validation 40843248143](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40843248143) **passed**.
+- Source artifact: [production review ZIP #12883742600](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40843248112/artifacts/12883742600), SHA-256 `50b8adf6752d35dc441dd27212a728d509a3af06525f21ec814bc25cea00e32a`. Candidate H.264/AAC MP4 SHA-256 `4a1d66783b2093662eaac7f2b43b73717122f8d1c900cfcfdb0cb74e15b9707d`. **432×768, 30 fps, 475 frames, 15.851 s.**
+- Four original `am_puck` Voice A narration clips, original pitch, 1.1× composition playback: decoded 16-kHz mono PCM SHA-256 `f7e6c2eed3d358823b07cee88c5e88ac5a846c5512d3c6e231a4e22b5dd90a` **identical** to the prior candidate. All four encoded signal windows present; caption pixel-presence report **449/475 visible, zero untolerated mismatches**. These automated checks validate engineering constraints, *not* independently verify exact word alignment or human listening; human acceptance here is the separate viewer judgment.
+- The eight short-caption switch frames were inspected on the encoded draft at **39, 103, 142, 221, 270, 362, 414, 444**, after replacing proportion-based cue changes with measured quiet regions of the exact 24-kHz narration WAVs. The stray orange pointer was removed, while the intended net-loss label highlight remains.
+- Historical finding and earlier corrective evidence: [orange pointer/too-long captions](viewer/20261029T0817Z-fw06-orange-line-short-captions.md); [caption drift and source-WAV pause-based correction](viewer/20261029T0909Z-fw06-caption-sync-pause-measurement.md).
+
+## Roadmap decision
+
+1. **FW-06 → `done`.** Shared scenic RoomShell is integrated into the real narrated episode. The user reviewed the corrected media and **approved this framework/animation gate**. No requirement to redo the same player review for FW-07; existing FW-06 source, narration and financial math remain untouched.
+2. **FW-07 → `ready`.** Eligible to be claimed as a **new isolated task** following `ROADMAP.md` ownership and the [ourbites-motion skill](../skills/ourbites-motion/SKILL.md). Its first candidate is a **2D-first original paper-document → anchored focus/magnifier → excerpt-card** animation action with motivated, eased transitions. Prove the exact reuse contract with two meaningfully distinct content mechanisms (e.g. a filing vs. a receipt) and compare adjacent frames / motion at 432×768. Keep the host recognizable and continue strict caption/source safe areas. Start with a synthetic fixture or isolated scene, rather than rewriting the approved Anthropic episode.
+3. **FW-08 stays `blocked` on FW-07; FW-09 remains `review`; FW-10 stays dependency-blocked.** FW-M00 paper-collage *documentation* remains `done`, not the code implementation.
+4. **No public-release gate changes.** Factual verification, citation and source media rights, real-person likeness, continuous final export/media approvals and publishing permission remain separately required. The user's approval is **not** a `pipeline.py approve` receipt and does not authenticate a final media master.
+5. **No subjective protagonist cap reset.** The `reviews/viewer-loop.json` 3/3 limit remains intact; this acceptance allows the *separate FW-07 task* to implement the already requested new paper-motion framework under new scope, not unlimited revisions to the protagonist.
+
+## Change limitations
+
+This is a documentary decision and state reconciliation only. No edits to `src/AnthropicCharacter.tsx`, `src/OurbitesHost.tsx`, `src/CharacterStage.tsx`, `src/anthropic-caption-cues.json`, WAV, financials, episode claim text or media are authorized or included in this acceptance-record change. No artifact is published.
