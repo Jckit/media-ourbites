@@ -7,7 +7,7 @@ description: Design, implement and review reusable Ourbites 2D-first motion comp
 
 ## Authority and inputs
 
-Start from the **latest current repository/branch**, read `ROADMAP.md`, [the editorial paper-collage motion language](../../styles/OURBITES-EDITORIAL-PAPER-MOTION.md), [Ourbites hybrid/2.5D identity](../../styles/OURBITES-HYBRID-2.5D.md), [Ourbites production](../ourbites-production/SKILL.md) and any current scene/PR review. Honor file owners, the existing viewer-loop lock and pending dependencies. Do **not** overwrite a pending FW-06 implementation or treat a recurring automation as fresh aesthetic approval.
+Start from the **latest current repository/branch**, read `ROADMAP.md`, [the editorial paper-collage motion language](../../styles/OURBITES-EDITORIAL-PAPER-MOTION.md), [Ourbites hybrid/2.5D identity](../../styles/OURBITES-HYBRID-2.5D.md), [Ourbites production](../ourbites-production/SKILL.md) and any current scene/PR review. Honor file owners, the existing viewer-loop lock and pending dependencies. **FW-06 was accepted by the user on 2026-10-29 for the corrected scenic framework prototype** ([evidence](../../reviews/20261029-fw06-human-acceptance.md)); **FW-07 is ready**, but must be claimed on an independent branch before editing. Do **not** modify that accepted Anthropic episode as a prerequisite to new paper-motion fixtures or treat a recurring automation as fresh aesthetic approval.
 
 **Purpose:** make visual ideas reusable across episodes and scenes. A shot may choose `scenic`, `editorial-paper` or `precise-data`. This skill governs how motion is implemented once the shot plan establishes **what the viewer needs to learn**; it does not prescribe a story formula or force motion into every shot.
 
@@ -37,6 +37,6 @@ The Instagram reference is provided only as observed stylistic inspiration; **ne
 
 Propose a **document → magnifier focus → excerpt card** interaction on a paper/evidence-board setting, sharing anchor and camera intent. Prove the same motion with two different kinds of content, then add paper-edge or shared-element transitions only if the first action reads well on a phone.
 
-**FW-07** owns reusable actions/attachment anchors and first motion components; **FW-08** owns narration-driven choreography, optional shot treatment selection and transitions; **FW-09** expands QA; **FW-10** proves reuse in a second real business mechanism. FW-06 remains a separate production integration dependency.
+**FW-07 is ready, not yet implemented**: it owns reusable actions/attachment anchors and the first paper-motion component. **FW-08** owns narration-driven choreography, treatment selection and smooth transitions; **FW-09** expands QA; **FW-10** proves reuse in a second real business mechanism. FW-06's scenic production integration is **complete and human accepted only within its framework gate**; it is not a release approval or fresh subjective protagonist redesign authorization.
 
 For exact aesthetic terms, focal hierarchy, suggested prototype timings, transition types and prohibited imitations, follow the canonical [style spec](../../styles/OURBITES-EDITORIAL-PAPER-MOTION.md).
