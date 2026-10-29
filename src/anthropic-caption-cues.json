@@ -1,59 +1,60 @@
 {
+  "timingBasis": "measured_pauses_in_committed_source_wav_2026-10-29",
   "clips": [
     [
       {
         "text": "Eighty billion dollars.",
-        "until": 0.55
+        "startSourceSeconds": 0
       },
       {
         "text": "That is a lot of zeros.",
-        "until": 1
+        "startSourceSeconds": 1.42
       }
     ],
     [
       {
         "text": "But wait.",
-        "until": 0.18
+        "startSourceSeconds": 0
       },
       {
         "text": "This is reported net loss,",
-        "until": 0.66
+        "startSourceSeconds": 0.5
       },
       {
         "text": "not a cash receipt.",
-        "until": 1
+        "startSourceSeconds": 1.94
       }
     ],
     [
       {
         "text": "The operating loss?",
-        "until": 0.27
+        "startSourceSeconds": 0
       },
       {
         "text": "Six hundred ninety-three million.",
-        "until": 0.79
+        "startSourceSeconds": 1.1
       },
       {
         "text": "Still serious.",
-        "until": 1
+        "startSourceSeconds": 2.9
       }
     ],
     [
       {
         "text": "Most of the gap comes from",
-        "until": 0.31
+        "startSourceSeconds": 0
       },
       {
         "text": "accounting changes on financing.",
-        "until": 0.65
+        "startSourceSeconds": 1.87
       },
       {
         "text": "Read the pieces,",
-        "until": 0.8
+        "startSourceSeconds": 3.78
       },
       {
         "text": "not just the headline.",
-        "until": 1
+        "startSourceSeconds": 4.9
       }
     ]
   ]
