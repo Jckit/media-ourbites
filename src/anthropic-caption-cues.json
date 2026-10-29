@@ -1,0 +1,60 @@
+{
+  "clips": [
+    [
+      {
+        "text": "Eighty billion dollars.",
+        "until": 0.55
+      },
+      {
+        "text": "That is a lot of zeros.",
+        "until": 1
+      }
+    ],
+    [
+      {
+        "text": "But wait.",
+        "until": 0.18
+      },
+      {
+        "text": "This is reported net loss,",
+        "until": 0.66
+      },
+      {
+        "text": "not a cash receipt.",
+        "until": 1
+      }
+    ],
+    [
+      {
+        "text": "The operating loss?",
+        "until": 0.27
+      },
+      {
+        "text": "Six hundred ninety-three million.",
+        "until": 0.79
+      },
+      {
+        "text": "Still serious.",
+        "until": 1
+      }
+    ],
+    [
+      {
+        "text": "Most of the gap comes from",
+        "until": 0.31
+      },
+      {
+        "text": "accounting changes on financing.",
+        "until": 0.65
+      },
+      {
+        "text": "Read the pieces,",
+        "until": 0.8
+      },
+      {
+        "text": "not just the headline.",
+        "until": 1
+      }
+    ]
+  ]
+}
