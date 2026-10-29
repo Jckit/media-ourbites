@@ -46,8 +46,6 @@ export const AnthropicCharacter:React.FC=()=>{
  }:undefined;
  const caption=narration.clips.find(c=>t>=c.start&&t<c.start+c.duration);
  return <AbsoluteFill style={{background:'#F4F0E6',color:ink,fontFamily:'Arial, sans-serif',overflow:'hidden'}}>
-   <div style={{position:'absolute',left:85,top:105,fontSize:32,letterSpacing:4,fontWeight:900}}>OURBITES</div>
-   <div style={{position:'absolute',left:85,top:165,fontSize:26,color:'#607078'}}>ILLUSTRATIVE SCENE · LIKENESS REVIEW PENDING</div>
    <CharacterStage zoom={1+open*0.06-end*0.06} focusX={650} focusY={850}>
      {/* World space and characters share the camera transform. Original vector set dressing reacts to the falling filing. */}
      <OfficeWorld t={t}/>
@@ -80,6 +78,9 @@ export const AnthropicCharacter:React.FC=()=>{
      <div style={{position:'absolute',left:85,right:85,top:255,fontSize:44,lineHeight:1.15,whiteSpace:'nowrap',fontWeight:900,color:teal,textAlign:'center',opacity:tween(t,resolve+1.2,resolve+1.65,0,1)}}>Reported loss is not cash spent.</div>
      <div style={{position:'absolute',left:gripX-350*cardScale,top:cardTop,width:350,boxSizing:'border-box',opacity:tween(t,resolve,resolve+0.2,0,1),scale:cardScale,transformOrigin:'top left',background:ink,color:'white',padding:25,borderRadius:16}}><div style={{fontSize:28}}>FINANCING FAIR-VALUE CHANGE</div><div style={{fontSize:60,color:'#FFAE72',fontWeight:900}}>${(Math.abs(financials.h1_2026.convertible_financing_fair_value_change)/1000).toFixed(2)}B</div><div style={{fontSize:28}}>Largest component, not the whole gap.</div></div>
    </CharacterStage>
+   {/* Keep review metadata above the opaque world, but below the source footer and outside moving props/captions. */}
+   <div style={{position:'absolute',left:85,top:1768,fontSize:32,letterSpacing:4,fontWeight:900,whiteSpace:'nowrap'}}>OURBITES</div>
+   <div style={{position:'absolute',left:310,top:1775,fontSize:26,color:'#607078',whiteSpace:'nowrap'}}>ILLUSTRATIVE SCENE · LIKENESS REVIEW PENDING</div>
    <div style={{position:'absolute',left:85,right:85,top:1600,fontSize:43,lineHeight:1.25,fontWeight:650,textAlign:'center'}}>{caption?.text}</div>
    <div style={{position:'absolute',left:85,bottom:75,fontSize:24,color:'#607078'}}>Source: episode 002 filing dataset · editorial review pending</div>
    {narration.clips.map(c=><Sequence key={c.file} from={Math.round(c.start*fps/playbackSpeed)} durationInFrames={Math.ceil(c.duration*fps/playbackSpeed)}><Audio src={staticFile(c.file)} playbackRate={playbackSpeed}/></Sequence>)}
