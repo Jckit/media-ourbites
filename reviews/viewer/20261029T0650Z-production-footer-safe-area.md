@@ -21,3 +21,22 @@ The **previous** PR #19 was closed and rolled back after moving the overlays to 
 ## Outcome
 
 Pending exact candidate CI render and independent matched-frame inspection. Do not mark verified or accepted from source alone.
+
+## Verified technical outcome — 2026-10-29T06:55Z
+
+**One source change accepted for technical review, not final art approval.** Moved the two unchanged authored labels from behind the opaque stage to a static bottom metadata strip **after** `CharacterStage` at world-space y=1768/1775. Retained original font sizes, colors, literal text, footer, camera, actors, finances, audio and narration. New `src/AnthropicCharacter.tsx` Git blob `0077c1188ab7f45920f353a6fb1a2fab29daaf61` (from `784895e3b01b6cd94a1ce76d55d6f5514edb754e`); code commit `4193174992fcc80c35ac3b5d14716b473d4d25ae`.
+
+**CI on exact source commit:** [production before/after review run 40831683118](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40831683118) **passed** TypeScript, Python tests, 15 paired Remotion stills, 475-frame 432×768 H.264/AAC render, all four encoded audio signal windows, exact length and caption verification. [Standard validation run 40831683059](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40831683059) **passed**. [Review artifact 12878064785](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40831683118/artifacts/12878064785) ZIP SHA-256 `914dbc927b070fd66803055584a80745844016f1b6b5c92006ca2f981e61c4f8`, matching GitHub's recorded artifact digest.
+
+**Independent media inspection:** downloaded the exact artifact and independently inspected actual before/after 432×768 PNG pairs at frames 18,25,30,45,60,100,150,220,310,311,325,450,465,470,474, including the previous collision frame 18 and payoff frame 474. The restored metadata is **visible and legible**, x=34–388, y=709–719; it is below the baseline's last dark caption row y=701 (measured across all 475 decoded baseline frames), and above the source footer beginning around y=729. The moving filing, Dario, host and caption content are not obscured. In **13/15** exact Remotion still pairs, all pixels outside the new y=705–726 metadata strip are identical; frames 25 and 30 have 703 and 70 tiny off-strip pixel changes, respectively, with 90 and zero pixels exceeding 24/255 channel difference, limited to thin moving-object edges (rasterization). No authored off-strip change or visible regression detected.
+
+Decoded and compared **all 475 frames** of baseline/candidate MP4s with a >40/255 per-channel threshold: only 370 off-strip pixel differences across 89 frames (max 23 in any frame), scattered codec/raster noise; no sustained off-strip visual change. This framewise computation **does not substitute for human continuous playback**.
+
+- Baseline MP4 SHA-256: `9da80f6c95cb60f360a085e61651e677200a92af4b53ea683123957242fe5ac5`.
+- Candidate MP4 SHA-256: `de07f7a1e688de54b0c915c0ce38713404694b1fba6382efab6da12ce10809764b3cc90f5102a2502a57fb2e3c`; 475 frames / 30 fps / 15.851 s / 432×768.
+- Independently decoded both to mono 16-kHz signed 16-bit PCM; SHA-256 **identical** `f7e6c2eed3d358823b07cee88c5e88ac5a846c5512d3c6e231a4e22b5dd90a`. Audio content not changed, but voice identity, intelligibility, pitch and audiovisual sync **not verified by listening**.
+- Caption checker: **449 expected visible frames, 26 absent frames, zero mismatches**. Its pixel crop extends through y=709, so the metadata does not spuriously trigger missing-window captions.
+
+**Review boundary:** The metadata now occupies the static lower footer rather than a top-of-frame brand header. This resolves the observed invisibility/collision defect without claiming a final approved graphic treatment. The labels are review notices, not approval receipts. Human judgment may prefer a different eventual placement, but the prior upper-corner variants failed and were not reused. The protagonist's subjective cap remains 3/3; no protagonist design or Dario interaction was edited.
+
+**Unresolved backlog:** FW-06 requires human full audiovisual playback/listening, style/likeness, factual and rights acceptance; FW-07 actor/prop primitives remain blocked until that gate. Further work on continuous-motion QA and existing independent FW-09 draft PRs #14–#18 stays separate. No measured retention gain, merge, release or YouTube publishing. Draft [PR #20](https://github.com/jcbandc-arch/media-creator-outbites/pull/20) remains open for human review.
