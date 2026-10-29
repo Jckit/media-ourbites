@@ -167,6 +167,19 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const payoff=curve(t,8.0,8.65,out);
   const actorReturn=curve(t,7.1,8.2);
   const actorShift=curve(t,2.9,4.4);
+  // Short, frame-driven interpolation between the four EXISTING host poses.
+  // This repairs single-frame limb teleports; it does not add a new gesture.
+  const poseBeats=[
+    {at:1.15,from:'point',to:'react'},
+    {at:2.25,from:'react',to:'point'},
+    {at:5.6,from:'point',to:'think'},
+    {at:7.45,from:'think',to:'point'},
+  ] as const;
+  const poseChange=poseBeats.find(b=>t>=b.at-0.12 && t<=b.at+0.12);
+  const hostPose=poseChange?.to ?? (t<1.15?'point':t<2.25?'react':t<5.6?'point':t<7.45?'think':'point');
+  const hostPoseBlend=poseChange ? curve(t,poseChange.at-0.12,poseChange.at+0.12) : undefined;
+  const hostGazeX=t<3 ? mix(9,-7,curve(t,2.85,3.15))
+    : mix(-7,9,curve(t,6.85,7.15));
   const actorX=105-190*actorShift+200*actorReturn;
   const actorY=780+36*actorShift-36*actorReturn;
   const hand={x:actorX+337*485/360,y:actorY+163*485/360};
@@ -334,8 +347,8 @@ export const HybridEditorialPrototype:React.FC=()=>{
     {/* Existing hybrid host inside the same illustrated space — no new character art. */}
     <div style={{position:'absolute',left:actorX,top:actorY,width:485,zIndex:2}}>
       <StageActor x={0} y={0} size={485}
-        pose={t<1.15?'point':t<2.25?'react':t<5.6?'point':t<7.45?'think':'point'}
-        gazeX={t<3?9:t<7?-7:9} gazeY={-4} lean={t<1.8?mix(-4,0,intro):0}/>
+        pose={hostPose} poseFrom={poseChange?.from} poseBlend={hostPoseBlend}
+        gazeX={hostGazeX} gazeY={-4} lean={t<1.8?mix(-4,0,intro):0}/>
     </div>
     {/* The receipt/annotations have their own safe reading zone; no narration captions exist. */}
     <div style={{position:'absolute',left:72,top:86,display:'flex',gap:15,alignItems:'center',
