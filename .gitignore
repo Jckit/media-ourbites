@@ -11,3 +11,6 @@ models/
 auditions/*.wav
 .venv-chatterbox/
 public/approved/
+
+# Local Windows Task Scheduler / Codex exclusive lock; never commit an active owner.
+reviews/viewer-loop.lock

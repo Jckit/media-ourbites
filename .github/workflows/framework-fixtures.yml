@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'src/framework/**'
+      # Framework markdown changes do not affect rendered geometry.
+      - '!src/framework/README.md'
       - 'src/OurbitesHost.tsx'
       - 'src/CharacterStage.tsx'
       - 'scripts/check_framework_layout.py'
@@ -13,6 +15,8 @@ on:
     branches: [main]
     paths:
       - 'src/framework/**'
+      # Framework markdown changes do not affect rendered geometry.
+      - '!src/framework/README.md'
       - 'src/OurbitesHost.tsx'
       - 'src/CharacterStage.tsx'
       - 'scripts/check_framework_layout.py'
@@ -40,6 +44,8 @@ jobs:
         run: |
           python3 scripts/check_framework_layout.py
           npm run typecheck
+      # 84/85/86 straddle the ORDER-to-READY state boundary (t=3.1s on the 1.1x story clock).
+      # These are adjacent-frame visual-review samples, not a required cut cadence.
       - name: Render matching 432x768 fixture stills
         shell: bash
         run: |
@@ -47,7 +53,7 @@ jobs:
           mkdir -p out/framework-ci
           for spec in FrameworkOffice:office FrameworkStorefront:storefront; do
             IFS=: read -r composition preset <<< "$spec"
-            for frame in 0 120 239; do
+            for frame in 0 84 85 86 120 239; do
               npx remotion still src/index.tsx "$composition" \
                 "out/framework-ci/${preset}-frame-${frame}.png" \
                 --frame="$frame" --scale=0.4
@@ -61,7 +67,7 @@ jobs:
             sudo apt-get update -qq
             sudo apt-get install -y -qq ffmpeg
           fi
-          for frame in 0 120 239; do
+          for frame in 0 84 85 86 120 239; do
             for preset in office storefront; do
               file="out/framework-ci/${preset}-frame-${frame}.png"
               dimensions="$(ffprobe -v error -select_streams v:0 \

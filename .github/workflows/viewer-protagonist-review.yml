@@ -8,10 +8,17 @@ on:
       - 'src/CharacterStage.tsx'
       - 'src/AnthropicCharacter.tsx'
       - 'src/BusinessWorld.tsx'
+      - 'src/framework/scene-kit.tsx'
       - '.github/workflows/viewer-protagonist-review.yml'
 
 permissions:
   contents: read
+
+# Centralized CI contract for the currently verified draft composition length.
+# When changing the production timing, update this *single* value and its
+# selected inspection frames after remeasuring the actual narration.
+env:
+  ANTHROPIC_REVIEW_FRAMES: '475'
 
 jobs:
   compare:
@@ -38,20 +45,21 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out/viewer-pr/before out/viewer-pr/after
-          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+          review_frames=(18 25 30 45 60 100 150 220 310 311 325 450 465 470 "$((ANTHROPIC_REVIEW_FRAMES - 1))")
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx src/BusinessWorld.tsx src/framework/scene-kit.tsx; do
             cp "$f" "out/viewer-pr/after/$(basename "$f")"
             git show "${{ github.event.pull_request.base.sha }}:$f" > "$f"
           done
-          for f in 18 25 30 45 60 100 150 220 310 311 325 450 465 470 474; do
+          for f in "${review_frames[@]}"; do
             npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-$f.png" --frame="$f" --scale=0.4
           done
-          # Baseline-only end frame demonstrates the removed silent hold.
-          npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/before/frame-499.png" --frame=499 --scale=0.4
-          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx; do
+          # Last sampled frame derives from the single reviewed-duration contract.
+          # The previous obsolete frame 499 was removed after the shorter ending.
+          for f in src/OurbitesHost.tsx src/CharacterStage.tsx src/AnthropicCharacter.tsx src/BusinessWorld.tsx src/framework/scene-kit.tsx; do
             cp "out/viewer-pr/after/$(basename "$f")" "$f"
           done
           npm run typecheck
-          for f in 18 25 30 45 60 100 150 220 310 311 325 450 465 470 474; do
+          for f in "${review_frames[@]}"; do
             npx remotion still src/index.tsx AnthropicCharacter "out/viewer-pr/after/frame-$f.png" --frame="$f" --scale=0.4
           done
           sha256sum out/viewer-pr/before/*.png out/viewer-pr/after/*.png > out/viewer-pr/frame-sha256.txt
@@ -77,6 +85,7 @@ jobs:
             > out/viewer-pr/review-probe.json
           python3 - <<'PY'
           import json
+          import os
           from pathlib import Path
           data = json.loads(Path("out/viewer-pr/review-probe.json").read_text())
           streams = data["streams"]
@@ -85,10 +94,12 @@ jobs:
           duration = float(data["format"]["duration"])
           assert video["codec_name"] == "h264", video
           assert (video["width"], video["height"]) == (432, 768), video
-          assert int(video["nb_read_frames"]) == 475, video
+          reviewed_frames = int(os.environ["ANTHROPIC_REVIEW_FRAMES"])
+          assert int(video["nb_read_frames"]) == reviewed_frames, video
           assert audio["codec_name"] == "aac", audio
-          assert 15.7 <= duration <= 16.0, duration
-          print(f"Encoded review media: 475 frames, 432x768, {duration:.3f}s, H.264 + AAC")
+          expected_duration = reviewed_frames / 30
+          assert abs(duration - expected_duration) <= 0.2, (duration, expected_duration)
+          print(f"Encoded review media: {reviewed_frames} frames, 432x768, {duration:.3f}s, H.264 + AAC")
           print("Audio track exists; voice quality, pitch, sync and motion remain unreviewed.")
           PY
           # An AAC stream can exist while one or more narration clips are silent.
@@ -164,6 +175,7 @@ jobs:
           python3 scripts/verify_caption_windows.py \
             --video out/viewer-pr/after/anthropic-character-review.mp4 \
             --manifest src/anthropic-character-audio.json \
+            --expected-frames "$ANTHROPIC_REVIEW_FRAMES" \
             --output out/viewer-pr/review-caption-windows.json
       - name: Upload exact visual evidence
         if: always()

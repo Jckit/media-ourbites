@@ -1,5 +1,6 @@
 import React from 'react';
 import {interpolate} from 'remotion';
+import {RoomShell} from './framework/scene-kit';
 
 /**
  * Original flat 2D environment for explanatory business scenes.
@@ -8,11 +9,9 @@ import {interpolate} from 'remotion';
  * All timing is driven by the existing narration timeline in source seconds.
  */
 export const OfficeWorld: React.FC<{t: number}> = ({t}) => {
-  const paper = '#F4F0E6';
   const ink = '#142B38';
   const teal = '#087E83';
   const orange = '#E97F48';
-  const floor = '#D8CDBB';
   // Same moment as the S-1's drop/recoil: nearby loose pages lift, then settle.
   const impactRise = interpolate(t, [0.72, 0.86], [0, 1], {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
@@ -49,10 +48,12 @@ export const OfficeWorld: React.FC<{t: number}> = ({t}) => {
         </clipPath>
       </defs>
 
-      {/* Subtle wall planes create place and depth, not a new title card. */}
+      {/* Shared approved room shell is behind the bespoke episode scenery.
+          Keep the production's original heavy floor horizon; only the recessed
+          wall planes are newly visible. Actors, captions and timing stay above it. */}
+      <RoomShell floorLineColor={ink} floorLineWidth={10}/>
+      {/* Production-specific architectural accents and props stay unchanged. */}
       <path d="M0 345 L1080 345 M0 905 L1080 905" stroke="#E4DBCD" strokeWidth="4"/>
-      <rect x="0" y="1420" width="1080" height="500" fill={floor}/>
-      <path d="M0 1420 H1080" stroke={ink} strokeWidth="10"/>
 
       {/* Window with restrained moving sky; same native 2D world, no stock B-roll. */}
       <rect x="731" y="321" width="318" height="470" rx="12" fill="#E5E9E5" stroke={ink} strokeWidth="9"/>

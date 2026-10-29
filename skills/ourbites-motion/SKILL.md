@@ -1,0 +1,42 @@
+---
+name: ourbites-motion
+description: Design, implement and review reusable Ourbites 2D-first motion components, paper-collage cutout sequences, kinetic typography, object interactions and motivated modern transitions within Remotion. Use after production has chosen a shot treatment; do not invent episode facts, alter canonical characters or approve final art.
+---
+
+# Ourbites motion authoring
+
+## Authority and inputs
+
+Start from the **latest current repository/branch**, read `ROADMAP.md`, [the editorial paper-collage motion language](../../styles/OURBITES-EDITORIAL-PAPER-MOTION.md), [Ourbites hybrid/2.5D identity](../../styles/OURBITES-HYBRID-2.5D.md), [Ourbites production](../ourbites-production/SKILL.md) and any current scene/PR review. Honor file owners, the existing viewer-loop lock and pending dependencies. Do **not** overwrite a pending FW-06 implementation or treat a recurring automation as fresh aesthetic approval.
+
+**Purpose:** make visual ideas reusable across episodes and scenes. A shot may choose `scenic`, `editorial-paper` or `precise-data`. This skill governs how motion is implemented once the shot plan establishes **what the viewer needs to learn**; it does not prescribe a story formula or force motion into every shot.
+
+## Keep the channel recognizable
+
+The recurring host stays the existing cream circular head, angular navy tuft, teal torso and thin ink limbs, with deliberate face/gaze/gesture. This user direction adds a **paper/collage motion treatment**, not new permission for repeated subjective protagonist redesign. Preserve current hand/grip continuity, Dario's silence, narration at original-pitch `am_puck` Voice A / 1.1x, actual word-caption timing, precise business values and caveats, source/rights gates and human final-media review.
+
+The Instagram reference is provided only as observed stylistic inspiration; **never** copy or redistribute its original graphics, branded images, typography layouts, textures or audio.
+
+## Implementation boundary
+
+- Reuse `src/framework/scene-kit.tsx`, `src/CharacterStage.tsx` and `src/OurbitesHost.tsx` rather than writing a new unrelated graphics pipeline. The proposed `src/framework/motion`, `src/framework/visuals` and `src/framework/transitions` modules in the style document **do not yet exist**; create only the minimum that a claimed roadmap task needs.
+- Split **graphic primitives** (e.g., a paper card or circle), **frame-driven behaviors** (enter, focus, hold, unfold, exit), **anchors/ownership** (which object a hand or focus follows), and **episode beats** (the authored what/when). Avoid embedding topic data, script wording, source timestamps or branded assets inside shared primitives.
+- Choose a single focal target and keep foreground, caption and source safe areas outside unstable scene camera transforms. Define parent-child coordinates and z-order explicitly to prevent object/hand teleportation and label collisions.
+- Build smooth, **motivated** transitions such as focus-to-document, paper-edge reveal, shared-card morph, directional slide or short dissolve. Do not use random transitions, constant jitter, indiscriminate spring bounce, ungrounded 3D or artificial cut-frequency quotas.
+- Implement deterministic animation in Remotion using `useCurrentFrame()`, `interpolate()`, `Easing` or `spring()`. Respect installed package versions and licenses. If introducing `@remotion/transitions`, verify availability first; **scene overlaps shorten total timeline duration** and require explicit narrated timing treatment.
+
+## Delivery contract for a small batch
+
+1. **Freeze** the source/visual finding, exact branch/source hashes, user direction and acceptance before changing code. This skill itself is not a new subjective revision permit.
+2. Add **one coherent reusable motion primitive or transition** with typed props and a clearly documented API. Keep episode facts and identity outside the library.
+3. Demonstrate **two meaningfully different uses** (e.g. an accounting filing and a shop receipt), using existing synthetic fixtures or safe new synthetic compositions. Do not merely recolor the identical example.
+4. Render matched **432×768** preview frames before, during and after action boundaries, including adjacent frames; inspect actual animations in continuous playback when possible. Run typecheck, existing numerical/audio/source guards and relevant fixture regression CI. Log source/output hashes, open QA gaps and reviewer decision. A still proves a sampled frame, not easing or playback quality.
+5. Preserve human art, likeness, rights, factual and publication gates. Technical success or pleasing movement is **not measured Shorts retention improvement**. Report unverified aspects honestly and leave the task in `review` if needed.
+
+## First candidate batch (not yet implemented)
+
+Propose a **document → magnifier focus → excerpt card** interaction on a paper/evidence-board setting, sharing anchor and camera intent. Prove the same motion with two different kinds of content, then add paper-edge or shared-element transitions only if the first action reads well on a phone.
+
+**FW-07** owns reusable actions/attachment anchors and first motion components; **FW-08** owns narration-driven choreography, optional shot treatment selection and transitions; **FW-09** expands QA; **FW-10** proves reuse in a second real business mechanism. FW-06 remains a separate production integration dependency.
+
+For exact aesthetic terms, focal hierarchy, suggested prototype timings, transition types and prohibited imitations, follow the canonical [style spec](../../styles/OURBITES-EDITORIAL-PAPER-MOTION.md).
