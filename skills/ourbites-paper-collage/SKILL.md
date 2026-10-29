@@ -5,6 +5,11 @@ description: Author original Ourbites editorial paper-collage scenes and reusabl
 
 # Ourbites paper-collage authoring
 
+## Unified channel direction — hybrid editorial, not slide collage
+
+**2026-10-29 new explicit human direction:** the previous standalone paper-focus previews looked too PowerPoint-like. The required style is **[Ourbites Hybrid Editorial Animation](../../styles/OURBITES-HYBRID-EDITORIAL.md)**—our **existing** hybrid character is inside one illustrated space and **handles the paper**. A physical folio can unfold, split into cutouts, transform the scene, and return to an explanatory payoff; do not treat a static corkboard, magnifier or paper-colored rectangles as the visual goal. The existing host geometry is unchanged. The first dedicated FW-07B rendered prototype needs human style acceptance **before** extraction into a library.
+
+
 Make original paper objects behave as connected editorial cutouts. Explain a business idea through a composed scene, focal hierarchy and purposeful object movement. Tape and torn edges alone do not establish the style. This is a production recipe; no sample video, fixed duration or exact imitation is required.
 
 ## Choose the explanation before the effect
