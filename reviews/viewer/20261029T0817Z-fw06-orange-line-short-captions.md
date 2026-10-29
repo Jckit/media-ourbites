@@ -37,7 +37,7 @@ Pending actual implementation, test results and user viewing decision. This is a
 
 ## Verified bounded implementation and review output — 2026-10-29
 
-**Code commit before review-only evidence updates:** `5acbc2a909ae619dae0169c98bd98acb33b0297a`. New `src/anthropic-caption-cues.json` contains 11 total timed phrases across the original 4 WAV clips, no word substitutions, all within 36 characters/6 words; all per-clip end fractions are ascending and end at 1. `src/AnthropicCharacter.tsx` no longer contains the orphaned `M720 1110 L570 510` SVG path or orange endpoint circle, but retains the existing orange *label highlight*. The caption display uses `fontSize:53` in the same protected caption band. New `tests/test_anthropic_caption_cues.py` verifies exact aggregate narrator text, cue coverage, density and pointer absence.
+**Code commit before review-only evidence updates:** `5acbc2a909ae619dae0169c98bd98acb33b0297a`. New `src/anthropic-caption-cues.json` contains 12 total timed phrases across the original 4 WAV clips, no word substitutions, all within 36 characters/6 words; all per-clip end fractions are ascending and end at 1. `src/AnthropicCharacter.tsx` no longer contains the orphaned `M720 1110 L570 510` SVG path or orange endpoint circle, but retains the existing orange *label highlight*. The caption display uses `fontSize:53` in the same protected caption band. New `tests/test_anthropic_caption_cues.py` verifies exact aggregate narrator text, cue coverage, density and pointer absence.
 
 **Passed GitHub Actions (exact code/test commit):**
 - [Standard source, editorial and TypeScript CI 40841376820](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40841376820) **success**, including the four new cue tests.
