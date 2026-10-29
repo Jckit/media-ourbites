@@ -26,5 +26,14 @@
   "framework_previews": [
     "out/framework-batch1/office.mp4",
     "out/framework-batch1/storefront.mp4"
-  ]
+  ],
+  "last_framework_check": {
+    "remote_commit": "8733f54b6b704ffd1331f5c5639f09567a5f61af",
+    "output_hashes": null,
+    "media_inspected": false,
+    "review": "reviews/viewer/20261029T075141Z.md",
+    "input_hashes": "reviews/viewer/20261029T075141Z-inputs.json",
+    "status": "deferred_newer_remote_work_and_existing_human_gate",
+    "local_commit": "5d847ca"
+  }
 }
