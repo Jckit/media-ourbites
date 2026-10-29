@@ -44,3 +44,17 @@ Analyzed the **actual prior PR #21 H.264/AAC review MP4** with FFmpeg: `b0a74e92
 ## Result
 
 Pending new code/CI and verified playback samples.
+
+
+## Further source-WAV check, before runtime edit
+
+Read the **four exact committed 24kHz mono PCM WAVs** through GitHub's base64 source blobs (not re-encoding or resynthesizing), and measured 20ms RMS envelopes around each proposed cut. Source Git blobs: `0.wav=51fd2ced`, `1.wav=064cd6e2`, `2.wav=873cb5fe`, `3.wav=bba669bf`. The originally selected 1.94 source-seconds for clip 3 fell into active speech (-17dBFS), so the more reliable targets below are in the *actual quiet inter-phrase regions* (around -28dBFS or lower). Use these **refined** source-WAV pause boundaries rather than the initial approximate frame candidates above:
+
+| Clip | New phrase start offsets in **source WAV seconds**, relative to clip start | Approx displayed frame at 30fps/1.1× |
+| --- | --- | --- |
+| 0 | 0, **1.42** | 0, 39 |
+| 1 | 0, **0.50**, **1.94** | clip start, ~103, ~142 |
+| 2 | 0, **1.10**, **2.90** | clip start, ~220, ~269 |
+| 3 | 0, **1.87**, **3.78**, **4.90** | clip start, ~361, ~413, ~444 |
+
+Cue starts align with quiet audio gaps rather than active voiced peaks; the *actual* rendered frame threshold is `ceil((manifestClipStart + cueStartSourceSeconds)*30 / 1.1)` for the first frame at or after source cue time. Tests should check exact numbers from each original WAV, ensure near-silent intervals (20ms RMS <= -24dBFS) and preserve words without altering narration. These are phonetic **pause approximations**, not a transcript-timing model. The source WAV is the stronger evidence than the compressed AAC envelope, hence this refinement *before code edits*.
