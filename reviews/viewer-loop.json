@@ -37,5 +37,12 @@
     "FW-09": "review (fixture QA merged, continuous motion/audio coverage open)",
     "FW-M00": "done (paper-collage documentation PR #11 approved/merged; animation implementation not done)",
     "last_remote_review": "reviews/viewer/20261028T2052Z-caption-frame-count-contract.md"
+  },
+  "isolated_framework_handoff": {
+    "status": "FW-07 document-focus subset implemented; review pending; do not duplicate",
+    "review": "reviews/viewer/20261029T094712Z-paper-focus.md",
+    "coverage": "Sampled encoded stills; two silent fixtures; continuous playback and production integration pending",
+    "path": "C:/Users/Justin/.codex/visualizations/2026/10/27/01a17f26-c0b4-74f0-9864-1e8adff7c567/ourbites-paper-focus",
+    "branch": "codex/fw07-paper-focus-20261029"
   }
 }
