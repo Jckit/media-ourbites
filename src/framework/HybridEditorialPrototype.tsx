@@ -258,7 +258,7 @@ export const HybridEditorialPrototype:React.FC=()=>{
     {/* Existing hybrid host inside the same illustrated space — no new character art. */}
     <div style={{position:'absolute',left:actorX,top:actorY,width:485,zIndex:2}}>
       <StageActor x={0} y={0} size={485}
-        pose={t<1.15?'neutral':t<2.25?'react':t<5.6?'point':t<7.45?'think':'point'}
+        pose={t<1.15?'point':t<2.25?'react':t<5.6?'point':t<7.45?'think':'point'}
         gazeX={t<3?9:t<7?-7:9} gazeY={-4} lean={t<1.8?mix(-4,0,intro):0}/>
     </div>
     {/* The receipt/annotations have their own safe reading zone; no narration captions exist. */}
