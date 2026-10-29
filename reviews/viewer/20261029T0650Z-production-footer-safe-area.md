@@ -33,8 +33,8 @@ Pending exact candidate CI render and independent matched-frame inspection. Do n
 Decoded and compared **all 475 frames** of baseline/candidate MP4s with a >40/255 per-channel threshold: only 370 off-strip pixel differences across 89 frames (max 23 in any frame), scattered codec/raster noise; no sustained off-strip visual change. This framewise computation **does not substitute for human continuous playback**.
 
 - Baseline MP4 SHA-256: `9da80f6c95cb60f360a085e61651e677200a92af4b53ea683123957242fe5ac5`.
-- Candidate MP4 SHA-256: `de07f7a1e688de54b0c915c0ce38713404694b1fba6382efab6da12ce10809764b3cc90f5102a2502a57fb2e3c`; 475 frames / 30 fps / 15.851 s / 432×768.
-- Independently decoded both to mono 16-kHz signed 16-bit PCM; SHA-256 **identical** `f7e6c2eed3d358823b07cee88c5e88ac5a846c5512d3c6e231a4e22b5dd90a`. Audio content not changed, but voice identity, intelligibility, pitch and audiovisual sync **not verified by listening**.
+- Candidate MP4 SHA-256: `de07f7a1e688de54b0c915c0ce38713404694b1fba6382efab6da714ad60e8b5`; 475 frames / 30 fps / 15.851 s / 432×768.
+- Independently decoded both to mono 16-kHz signed 16-bit PCM; SHA-256 **identical** `f7e6c2eed3d358823b07cee88c5e88ac5a846c5512d3c6e231a4e22b5dded90a`. Audio content not changed, but voice identity, intelligibility, pitch and audiovisual sync **not verified by listening**.
 - Caption checker: **449 expected visible frames, 26 absent frames, zero mismatches**. Its pixel crop extends through y=709, so the metadata does not spuriously trigger missing-window captions.
 
 **Review boundary:** The metadata now occupies the static lower footer rather than a top-of-frame brand header. This resolves the observed invisibility/collision defect without claiming a final approved graphic treatment. The labels are review notices, not approval receipts. Human judgment may prefer a different eventual placement, but the prior upper-corner variants failed and were not reused. The protagonist's subjective cap remains 3/3; no protagonist design or Dario interaction was edited.
