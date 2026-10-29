@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-29T21:23:18.044729+00:00",
+  "base": "51e5f44e098c58f719890b99788b4fc84c39abc8",
+  "inputs_git_blob_sha256": {
+    "src/framework/HybridEditorialPrototype.tsx": "10e8faf17cde46010036ccc0a98478ff8105d35662ae076f16476147977c5aaf",
+    "src/OurbitesHost.tsx": "594aa8fac10712ce8fae691ef67bbbd8d839154c73fa837bf163d29034bda1b5",
+    "src/AnthropicCharacter.tsx": "622f74288d69f820dbc9dfc96dfa7ad0516e7e5d3e596a64663290c9dcf4c089",
+    "src/index.tsx": "ee87ae97a5e22f1fe97f22e1a7efaed13a5875ccf2f55ee06a6272d99f2295ce"
+  },
+  "outputs_working_file_sha256": {
+    "src/framework/HybridEditorialPrototype.tsx": "986baf1f0447b207a53ce39c421a42623421fc4c36023bb400b6aa65195a7707",
+    "src/OurbitesHost.tsx": "82010425e0b462006f78062a04f665d0e8fede11706ba349038b0aaaf545699a",
+    "src/AnthropicCharacter.tsx": "aa8e92025531310efbb503fffd70edd42688bbf2b1c40ca45be996ab5381b5df",
+    "src/index.tsx": "90579dfee83e1d9e7b73104f7007f7b8dbe971e8f4c2e2f15b7b49a5ee2a0e13"
+  },
+  "media_sha256": {
+    "out\\pr30-flair\\before.mp4": "a05ba60345690479b1b6c1f4f23c35cf5292e7adcfa47b50c7a774826318fcb5",
+    "out\\pr30-flair\\after.mp4": "ae3d502c2aaa8b0b7ce25dc223efebab327db7c10028aa7c93f480562e2d8240"
+  },
+  "checks": [
+    "TypeScript pass",
+    "54 Python tests pass",
+    "framework layout pass",
+    "432x768 300 frames 30fps 10s H264 silent",
+    "protected source git diffs empty"
+  ],
+  "coverage": "Decoded all frames; inspected matched samples and adjacent boundaries; live Studio playback exercised with sampled screenshots only. Continuous motion perception and audio not assessed.",
+  "repair": "Removed simultaneous source/result label opacity during convergence; reviewed frames 177,180,182,185,188,190."
+}

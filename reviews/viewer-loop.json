@@ -3,17 +3,17 @@
   "entry": "src/index.tsx",
   "preview_url": "http://localhost:3000/AnthropicCharacter",
   "latest_draft": "out/anthropic-character-smooth-grip.mp4",
-  "last_review": "reviews/viewer/20261029-fw07-unified-hybrid-editorial-direction.md",
+  "last_review": "reviews/viewer/20261029-pr30-editorial-flair.md",
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "FW-07B unified character-led hybrid/paper style prototype is technically rendered/verified (300 frames, 432x768, 10s, silent, sha256 0d0cac9255f37f35b9d87255013a461e0316d3edef1567d31b3ec1ad73699348) at CI 40953258396 with 22/22 verified PNGs, but user has NOT approved aesthetic, pace, legibility or resemblance. No protagonist redesign. Earlier FW-07 flat paper-focus examples were rejected as too PowerPoint-like. FW-07C reuse and FW-08 narration still blocked; approved FW-06 and final publication gates unchanged.",
-  "last_status": "fw07b_unified_hybrid_editorial_render_verified_human_style_review_pending",
+  "notes": "PR30 updated under fresh explicit human request for reference/new-skill flair. Warm shop evidence surface, staggered type, stronger payoff, repaired label dissolve. Local render verified; sampled visual coverage only. Human playback/style gate remains. Existing host and production episodes untouched.",
+  "last_status": "pr30_editorial_flair_rendered_human_playback_review_pending",
   "last_verified_frame": "out/viewer-20261028T094251Z-after-311.png",
   "input_hashes": "reviews/viewer/20261029T094712Z-inputs.json",
   "output_hashes": "reviews/viewer/20261029T094712Z-outputs.json",
   "backlog": [
-    "FW-07B: HUMAN STYLE REVIEW NEEDED — watch actual 10s silent `HybridEditorialPrototype` MP4 from Actions 40953258396/artifacts/12932571845. Evaluate character/folio handoff, paper folds, semantic cutout convergence, paper-edge scene change, overall hybrid-editorial feel and mobile readability. Do not infer style success from 22 sampled PNGs or green CI.",
+    "FW-07B: Review PR30 updated local out/pr30-flair/after.mp4 for style resemblance and normal-speed pacing. See reviews/viewer/20261029-pr30-editorial-flair.md; no human visual approval recorded.",
     "FW-07C: BLOCKED until a human approves FW-07B look; then extract visually accepted components and demonstrate a distinct business mechanism. Preserve earlier `DocumentFocus` as possible technical source, not compulsory slide composition.",
     "FW-08: BLOCKED until FW-07C; build a configurable shot director and sync only to actual approved source audio/word cues; no new time fractions.",
     "FW-09: REVIEW; extend repeatable transition/host safe-area and real continuous audiovisual checks; current silent fixture does not prove narration sync.",
@@ -50,5 +50,34 @@
   "last_local_review_provenance": {
     "last_review": "reviews/viewer/20261028-framework-batch1.md",
     "last_status": "framework_prototype_implemented_stills_verified_style_review_pending"
+  },
+  "pr30_flair_review": {
+    "utc": "2026-10-29T21:23:18.044729+00:00",
+    "base": "51e5f44e098c58f719890b99788b4fc84c39abc8",
+    "inputs_git_blob_sha256": {
+      "src/framework/HybridEditorialPrototype.tsx": "10e8faf17cde46010036ccc0a98478ff8105d35662ae076f16476147977c5aaf",
+      "src/OurbitesHost.tsx": "594aa8fac10712ce8fae691ef67bbbd8d839154c73fa837bf163d29034bda1b5",
+      "src/AnthropicCharacter.tsx": "622f74288d69f820dbc9dfc96dfa7ad0516e7e5d3e596a64663290c9dcf4c089",
+      "src/index.tsx": "ee87ae97a5e22f1fe97f22e1a7efaed13a5875ccf2f55ee06a6272d99f2295ce"
+    },
+    "outputs_working_file_sha256": {
+      "src/framework/HybridEditorialPrototype.tsx": "986baf1f0447b207a53ce39c421a42623421fc4c36023bb400b6aa65195a7707",
+      "src/OurbitesHost.tsx": "82010425e0b462006f78062a04f665d0e8fede11706ba349038b0aaaf545699a",
+      "src/AnthropicCharacter.tsx": "aa8e92025531310efbb503fffd70edd42688bbf2b1c40ca45be996ab5381b5df",
+      "src/index.tsx": "90579dfee83e1d9e7b73104f7007f7b8dbe971e8f4c2e2f15b7b49a5ee2a0e13"
+    },
+    "media_sha256": {
+      "out\\pr30-flair\\before.mp4": "a05ba60345690479b1b6c1f4f23c35cf5292e7adcfa47b50c7a774826318fcb5",
+      "out\\pr30-flair\\after.mp4": "ae3d502c2aaa8b0b7ce25dc223efebab327db7c10028aa7c93f480562e2d8240"
+    },
+    "checks": [
+      "TypeScript pass",
+      "54 Python tests pass",
+      "framework layout pass",
+      "432x768 300 frames 30fps 10s H264 silent",
+      "protected source git diffs empty"
+    ],
+    "coverage": "Decoded all frames; inspected matched samples and adjacent boundaries; live Studio playback exercised with sampled screenshots only. Continuous motion perception and audio not assessed.",
+    "repair": "Removed simultaneous source/result label opacity during convergence; reviewed frames 177,180,182,185,188,190."
   }
 }

@@ -71,37 +71,37 @@ const Cutout: React.FC<{
   </g>;
 };
 
-const Office: React.FC<{time:number}> = ({time}) => {
-  const drift=curve(time,0,5);
+/** Original shop exhibit, authored as paper art rather than a source photograph.
+ * The board belongs to the room; only its exhibits move into the reading plane. */
+const ShopBoard: React.FC<{time:number; textureId:string}> = ({time,textureId}) => {
+  const arrive=curve(time,0,0.7,out);
+  const recess=curve(time,1.5,2.5);
   return <g>
-    <rect width={1080} height={1920} fill={c.paper}/>
-    <path d="M0 365 H1080 V1410 H0Z" fill="#EEE9DF"/>
-    <path d="M0 1410 H1080 V1920 H0Z" fill={c.sand}/>
-    <path d="M0 1410 H1080" stroke="#B2A189" strokeWidth={6}/>
-    <g transform={'translate('+(drift*-30)+' 0)'}>
-      <path d="M615 435 H997 V885 H615Z" fill={c.ink} opacity={0.17} transform="translate(13 14)"/>
-      <rect x={615} y={435} width={382} height={450} rx={8} fill={c.ivory} stroke={c.ink} strokeWidth={9}/>
-      <rect x={637} y={460} width={337} height={402} fill="#CDE0DC"/>
-      <path d="M637 815 V718 H673 V630 H720 V696 H773 V603 H818 V744 H862 V665 H906 V612 H955 V815Z" fill="#9CBDB4"/>
-      <path d="M647 815 V730 H667 V660 H705 V740 H748 V697 H784 V815Z" fill="#7FA6A1" opacity={0.53}/>
-      <path d="M805 460 V864 M637 665 H974" stroke={c.ivory} strokeWidth={12}/>
-      <path d="M669 580 Q715 545 773 567" fill="none" stroke={c.ivory} strokeWidth={10} opacity={0.5}/>
+    <rect x={32} y={182} width={1016} height={1114} rx={12} fill="#523F32"/>
+    <rect x={45} y={195} width={990} height={1088} rx={7} fill="#967350"/>
+    <rect x={45} y={195} width={990} height={1088} fill={'url(#'+textureId+')'} opacity={0.8}/>
+    <path d="M52 204 H1028 M52 204 V1275" fill="none" stroke="#C3A77E" strokeWidth={5}/>
+    <g opacity={1-recess*0.65} transform={'translate(100 '+mix(550,515,arrive)+') rotate(-7)'}>
+      <path d="M8 15 H280 V287 H8Z" fill={c.ink} opacity={0.22}/>
+      <path d="M0 0 H272 V270 H0Z" fill={c.ivory}/>
+      <rect x={15} y={17} width={242} height={190} fill="#D5E3D8"/>
+      <path d="M46 94 H230 V190 H46Z" fill="#EACF9D" stroke={c.ink} strokeWidth={3}/>
+      <path d="M34 89 L59 55 H218 L242 89Z" fill={c.teal}/>
+      <path d="M34 89 H242 V108 H34Z" fill={c.ivory}/>
+      {[0,1,2,3,4].map(i=><path key={i} d={'M'+(34+i*42)+' 89 h21 v19 h-21Z'} fill={c.orange}/>)}
+      <rect x={65} y={124} width={81} height={48} fill={c.teal}/>
+      <rect x={167} y={120} width={42} height={70} fill={c.ink}/>
+      <text x={136} y={246} textAnchor="middle" fontFamily="Georgia, serif" fontStyle="italic" fontSize={31} fill={c.ink}>A little shop</text>
+      <circle cx={136} cy={8} r={10} fill={c.orange} stroke={c.ink} strokeWidth={2}/>
     </g>
-    <g>
-      <path d="M555 1190 H1022 V1265 H555Z" fill="#B8A489"/>
-      <path d="M535 1165 L997 1120 L1040 1201 L572 1247Z" fill="#E8D6B8" stroke={c.ink} strokeWidth={5}/>
-      <path d="M605 1240 V1410 M985 1202 V1410" stroke="#A89373" strokeWidth={25}/>
-      <path d="M824 1095 L895 1050 L953 1113 L880 1150Z" fill={c.sage} stroke={c.ink} strokeWidth={4}/>
-      <path d="M850 1082 L870 1038 L895 1070" fill="none" stroke={c.teal} strokeWidth={9}/>
-      <ellipse cx={560} cy={1414} rx={185} ry={16} fill={c.ink} opacity={0.08}/>
+    <g opacity={0.45*(1-recess)} transform="translate(825 465) rotate(9)">
+      <path d="M5 8 H155 V222 H5Z" fill={c.ink} opacity={0.3}/>
+      <path d="M0 0 H150 V212 H0Z" fill={c.ivory}/>
+      <path d="M23 37 H126 M23 72 H115 M23 107 H126 M23 142 H105" stroke={c.gray} strokeWidth={8}/>
+      <path d="M23 178 H126" stroke={c.orange} strokeWidth={10}/>
+      <Tape x={40} y={-10} angle={-6} w={72}/>
     </g>
-    <g transform="translate(110 500)">
-      <rect width={240} height={38} rx={6} fill={c.ink}/>
-      <path d="M30 38 V73 M201 38 V73" stroke={c.ink} strokeWidth={8}/>
-      <rect x={54} y={-25} width={72} height={25} fill={c.orange}/>
-      <path d="M54 -25 H126 V-51 H54Z" fill={c.gold}/>
-      <rect x={144} y={-47} width={42} height={47} fill={c.teal}/>
-    </g>
+    <path d="M0 1408 H1080" stroke="#A58A68" strokeWidth={9}/>
   </g>;
 };
 
@@ -175,9 +175,9 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const folioGrip=point(hand,{x:635,y:1190},lift);
   const folioScale=mix(0.83,1.00,lift);
   const folioAngle=mix(-11,-2,lift);
-  // Keep both semantic cutouts visible into the actual paper-scene handoff;
-  // they must not disappear a full second before the new note arrives.
-  const focusGone=curve(t,6.10,6.65);
+  // Release the old labels before the result arrives: overlapping translucent
+  // amounts read as one corrupted number during the paper handoff.
+  const focusGone=curve(t,5.90,6.05);
   const salesFrom={x:folioGrip.x+55,y:folioGrip.y-390};
   const costFrom={x:folioGrip.x+40,y:folioGrip.y-214};
   const salesTo={x:170,y:575};
@@ -200,11 +200,23 @@ export const HybridEditorialPrototype:React.FC=()=>{
       aria-label="Synthetic shop mechanism: hybrid host handles paper, separates sales and costs, reveals profit">
       <defs>
         <clipPath id={clipId}><path d={tear}/></clipPath>
+        <pattern id={clipId+'_board'} width={47} height={53} patternUnits="userSpaceOnUse">
+          <path d="M3 8 l8 -2 M28 31 l10 3 M10 47 l4 -3" stroke="#D7B989" strokeWidth={2} opacity={0.4}/>
+          <circle cx={35} cy={12} r={2} fill="#503A26" opacity={0.25}/>
+          <circle cx={17} cy={27} r={1.5} fill="#F5D7AA" opacity={0.5}/>
+        </pattern>
         <pattern id={clipId+'_fibres'} width={100} height={100} patternUnits="userSpaceOnUse">
           <path d="M5 17 L30 14 M71 62 L83 61 M41 90 L49 88" stroke="#C2B69E" strokeWidth={2} opacity={0.25}/>
         </pattern>
       </defs>
-      <Office time={t}/>
+      <rect width={1080} height={1920} fill={c.paper}/>
+      <path d="M0 1410 H1080 V1920 H0Z" fill={c.sand}/>
+      <ShopBoard time={t} textureId={clipId+'_board'}/>
+      <g>
+        <path d="M605 1240 V1410 M985 1202 V1410" stroke="#A89373" strokeWidth={25}/>
+        <path d="M535 1165 L997 1120 L1040 1201 L572 1247Z" fill="#E8D6B8" stroke={c.ink} strokeWidth={5}/>
+        <path d="M572 1247 L1040 1201 V1220 L572 1266Z" fill="#B8A489"/>
+      </g>
       <rect width={1080} height={1920} fill={'url(#'+clipId+'_fibres)'} opacity={0.30}/>
       {/* The physical folio relinquishes the information as its two cutouts
           detach, removing unreadable ghost text behind the active slips. */}
@@ -276,7 +288,7 @@ export const HybridEditorialPrototype:React.FC=()=>{
       {/* The paper surface replaces the room by a single animated, jagged edge. */}
       <g clipPath={'url(#'+clipId+')'}><Notebook/></g>
       {/* One emerging result card follows the same focal relationship into the new surface. */}
-      <g opacity={curve(t,6.05,6.55)*(1-curve(t,9.82,10))}>
+      <g opacity={curve(t,6.05,6.35)}>
         <Paper x={receiptPos.x} y={receiptPos.y} w={432} h={288} fill="#FFF7E8" rotation={mix(8,-4,settle)} shadow={16}>
           <rect x={21} y={30} width={390} height={43} rx={3} fill={c.orange}/>
           <text x={37} y={61} fontSize={28} fontWeight={900} letterSpacing={2} fill={c.ink}>AFTER THE COSTS</text>
@@ -292,20 +304,31 @@ export const HybridEditorialPrototype:React.FC=()=>{
         <path d="M935 1074 L973 1068 L959 1114" fill="none" stroke={c.orange} strokeWidth={13}
           strokeLinecap="round" strokeLinejoin="round"/>
       </g>
-      <g opacity={curve(t,0,0.8)*(1-curve(t,2.7,3.3))}>
-        <text x={84} y={275} fontSize={59} fontWeight={900} letterSpacing={-1} fill={c.ink}>A BIG NUMBER.</text>
-        <text x={84} y={352} fontSize={65} fontWeight={900} letterSpacing={-2} fill={c.teal}>BUT HOW MUCH</text>
-        <text x={84} y={429} fontSize={65} fontWeight={900} letterSpacing={-2} fill={c.teal}>DO WE KEEP?</text>
+      {/* Selected words enter once, then hold; typography carries the question. */}
+      <g opacity={1-curve(t,2.7,3.1)}>
+        <g transform={'translate(86 '+mix(300,285,curve(t,0,0.35,out))+')'}>
+          <text fontSize={83} fontWeight={900} letterSpacing={-3} fill={c.ivory}>BIG SALES.</text>
+        </g>
+        <g opacity={curve(t,0.3,0.55)} transform={'translate(88 '+mix(390,379,curve(t,0.3,0.65,out))+')'}>
+          <text fontFamily="Georgia, serif" fontStyle="italic" fontSize={70} fill="#FFE2A8">But what stays?</text>
+          <path d="M2 20 Q240 35 470 15" fill="none" stroke={c.orange} strokeWidth={9}
+            strokeLinecap="round" strokeDasharray="480" strokeDashoffset={480*(1-curve(t,0.65,1.0))}/>
+        </g>
       </g>
-      <g opacity={curve(t,3.7,4.2)*(1-curve(t,6.3,6.8))}>
-        <text x={91} y={286} fontSize={77} fontWeight={900} letterSpacing={-3} fill={c.ink}>SPLIT THE</text>
-        <text x={91} y={377} fontSize={90} fontWeight={900} letterSpacing={-3} fill={c.teal}>RECEIPT.</text>
+      <g opacity={curve(t,3.35,3.65)*(1-curve(t,6.3,6.6))}>
+        <text x={90} y={288} fontFamily="Georgia, serif" fontStyle="italic" fontSize={65} fill={c.ivory}>Follow the</text>
+        <g transform={'translate(86 '+mix(418,405,curve(t,3.55,3.9,out))+') rotate(-2)'}>
+          <path d="M-10 -92 H495 L485 22 H-15Z" fill={c.orange}/>
+          <text fontSize={105} fontWeight={900} letterSpacing={-4} fill={c.ink}>MONEY.</text>
+        </g>
       </g>
-      <g opacity={curve(t,7.25,8.15)}>
-        <text x={90} y={246} fontSize={70} fontWeight={900} letterSpacing={-2} fill={c.ink}>SALES ARE NOT</text>
-        <text x={90} y={340} fontSize={93} fontWeight={900} letterSpacing={-3} fill={c.teal}>PROFIT.</text>
-        <path d="M90 365 H515" stroke={c.orange} strokeWidth={12} strokeLinecap="round"
-          strokeDasharray="425" strokeDashoffset={425*(1-payoff)}/>
+      <g opacity={curve(t,7.25,7.65)}>
+        <text x={90} y={253} fontFamily="Georgia, serif" fontStyle="italic" fontSize={68} fill={c.ink}>Sales are not</text>
+        <g transform={'translate(85 '+mix(399,383,curve(t,7.55,7.95,out))+') rotate(-2)'}>
+          <text fontSize={130} fontWeight={900} letterSpacing={-5} fill={c.teal}>PROFIT.</text>
+          <path d="M3 24 Q240 38 505 16" fill="none" stroke={c.orange} strokeWidth={13} strokeLinecap="round"
+            strokeDasharray="510" strokeDashoffset={510*(1-payoff)}/>
+        </g>
       </g>
     </svg>
     {/* Existing hybrid host inside the same illustrated space — no new character art. */}
@@ -323,7 +346,7 @@ export const HybridEditorialPrototype:React.FC=()=>{
     <div style={{position:'absolute',left:78,right:78,top:1568,height:4,background:c.ink,opacity:0.35}}/>
     <div style={{position:'absolute',left:78,right:78,top:1590,fontSize:35,lineHeight:1.2,
       textAlign:'center',fontWeight:800,color:c.ink}}>
-      {t<3?'One animated world. One question.':t<7?'The page separates its own pieces.':'120 sales − 85 costs = 35 left.'}
+      {t<3?'A shop takes in 120.':t<7?'Costs take their share.':'120 sales − 85 costs = 35 left.'}
     </div>
     <div style={{position:'absolute',left:78,right:78,top:1765,fontSize:25,letterSpacing:2,
       textAlign:'center',fontWeight:800,color:c.gray}}>
