@@ -45,12 +45,17 @@ export const AnthropicCharacter:React.FC=()=>{
    x:restingHand.x+reach*((gripX-darioX)*360/420-restingHand.x),
    y:restingHand.y+reach*((gripY-830)*360/420-restingHand.y),
  }:undefined;
- // Narration and exact spoken wording stay untouched; split only the on-screen reading load.
- // Cue ends are fractions of the original WAV clip duration, not separate audio segments.
+ // The on-screen phrases use measured source-WAV pause offsets, NOT fractions
+ // of a clip's total duration. t is already in original (pre-1.1x) audio seconds.
+ // The soundtrack, narrator words and clip timing remain unchanged.
  const activeClip=narration.clips.findIndex(c=>t>=c.start&&t<c.start+c.duration);
  const activeNarration=activeClip<0?undefined:narration.clips[activeClip];
+ const clipSourceSeconds=activeNarration?t-activeNarration.start:0;
  const caption=activeNarration
-   ? captionCues.clips[activeClip].find(c=>(t-activeNarration.start)/activeNarration.duration<c.until)?.text
+   ? captionCues.clips[activeClip].reduce(
+       (visible,cue)=>clipSourceSeconds>=cue.startSourceSeconds?cue.text:visible,
+       '',
+     )
    : undefined;
  return <AbsoluteFill style={{background:'#F4F0E6',color:ink,fontFamily:'Arial, sans-serif',overflow:'hidden'}}>
    <CharacterStage zoom={1+open*0.06-end*0.06} focusX={650} focusY={850}>
