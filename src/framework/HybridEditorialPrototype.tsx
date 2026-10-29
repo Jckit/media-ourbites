@@ -174,7 +174,9 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const folioGrip=point(hand,{x:635,y:1190},lift);
   const folioScale=mix(0.83,1.00,lift);
   const folioAngle=mix(-11,-2,lift);
-  const focusGone=curve(t,4.7,6.0);
+  // Keep both semantic cutouts visible into the actual paper-scene handoff;
+  // they must not disappear a full second before the new note arrives.
+  const focusGone=curve(t,6.35,7.35);
   const salesFrom={x:folioGrip.x+55,y:folioGrip.y-390};
   const costFrom={x:folioGrip.x+40,y:folioGrip.y-214};
   const salesTo={x:170,y:575};
@@ -208,12 +210,14 @@ export const HybridEditorialPrototype:React.FC=()=>{
           <rect y={-516} width={450} height={516} rx={9} fill={c.ivory} stroke={c.ink} strokeWidth={5}/>
           <path d="M0 -483 H450 V-456 H0Z" fill={c.gold}/>
           <path d="M0 -253 H450" stroke={c.ink} strokeWidth={2} opacity={0.15}/>
+          <g opacity={curve(t,2.30,2.68)}>
           <text x={45} y={-418} fontSize={33} fontWeight={900} letterSpacing={3} fill={c.gray}>SHOP NOTES</text>
           <text x={42} y={-333} fontSize={60} fontWeight={900} fill={c.ink}>HOW MUCH</text>
           <text x={42} y={-269} fontSize={64} fontWeight={900} fill={c.ink}>REMAINS?</text>
           <path d="M42 -218 H405 M42 -181 H338 M42 -144 H383" stroke="#B9C5BE" strokeWidth={9} strokeLinecap="round"/>
           <circle cx={335} cy={-83} r={42} fill={c.orange} opacity={0.92}/>
           <text x={335} y={-69} textAnchor="middle" fontSize={41} fontWeight={900} fill={c.ivory}>?</text>
+          </g>
           <g opacity={open}>
             <path d="M0 -516 H-450 V0 H0Z" fill={c.ink} opacity={0.18} transform="translate(16 18)"/>
             <path d="M0 -516 H-450 V0 H0Z" fill="#FFF8EC" stroke={c.ink} strokeWidth={4}/>
@@ -233,7 +237,7 @@ export const HybridEditorialPrototype:React.FC=()=>{
           </g>
           {/* The closed folio starts as a purposeful physical cover, not a blank
               slab; cover printing departs with the hinge as the page opens. */}
-          <g opacity={1-open}>
+          <g opacity={1-curve(t,1.8,2.28)}>
             <path d="M30 -483 H418" stroke={c.ink} strokeWidth={8} opacity={0.3}/>
             <rect x={41} y={-432} width={347} height={72} rx={5} fill={c.teal}/>
             <text x={58} y={-380} fontSize={43} fontWeight={900} fill={c.ivory}
