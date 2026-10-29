@@ -40,3 +40,7 @@ Propose a **document → magnifier focus → excerpt card** interaction on a pap
 **FW-07 is ready, not yet implemented**: it owns reusable actions/attachment anchors and the first paper-motion component. **FW-08** owns narration-driven choreography, treatment selection and smooth transitions; **FW-09** expands QA; **FW-10** proves reuse in a second real business mechanism. FW-06's scenic production integration is **complete and human accepted only within its framework gate**; it is not a release approval or fresh subjective protagonist redesign authorization.
 
 For exact aesthetic terms, focal hierarchy, suggested prototype timings, transition types and prohibited imitations, follow the canonical [style spec](../../styles/OURBITES-EDITORIAL-PAPER-MOTION.md).
+
+## Paper-collage authoring route
+
+For editorial-paper shots, use [ourbites-paper-collage](../ourbites-paper-collage/SKILL.md) for composition and adaptable animation recipes. It does not require a sample clip or a fixed seven-second sequence. This motion skill retains responsibility for implementation, anchors and verification.
