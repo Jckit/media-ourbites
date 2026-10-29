@@ -161,6 +161,7 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const sales=curve(t,3.0,4.15);
   const costs=curve(t,3.55,4.65);
   const compare=curve(t,4.55,5.6);
+  const merge=curve(t,5.55,6.55);
   const note=curve(t,6.3,7.45);
   const settle=curve(t,7.45,8.45);
   const payoff=curve(t,8.0,8.65,out);
@@ -176,14 +177,16 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const folioAngle=mix(-11,-2,lift);
   // Keep both semantic cutouts visible into the actual paper-scene handoff;
   // they must not disappear a full second before the new note arrives.
-  const focusGone=curve(t,6.35,7.35);
+  const focusGone=curve(t,6.10,6.65);
   const salesFrom={x:folioGrip.x+55,y:folioGrip.y-390};
   const costFrom={x:folioGrip.x+40,y:folioGrip.y-214};
   const salesTo={x:170,y:575};
   const costTo={x:620,y:790};
-  const salesPos=point(salesFrom,salesTo,sales);
-  const costsPos=point(costFrom,costTo,costs);
-  const receiptPos=point({x:820,y:1020},{x:548,y:896},settle);
+  // Detached slips converge in shared world coordinates and visually become
+  // a single paper result instead of disappearing before a new slide appears.
+  const salesPos=point(point(salesFrom,salesTo,sales),{x:595,y:795},merge);
+  const costsPos=point(point(costFrom,costTo,costs),{x:595,y:832},merge);
+  const receiptPos=point({x:595,y:795},{x:548,y:896},settle);
   const clipId=React.useId().replace(/:/g,'_');
   const wipeEdge=-90+1270*note;
   const tear='M-40 -40 H'+wipeEdge+
@@ -203,7 +206,9 @@ export const HybridEditorialPrototype:React.FC=()=>{
       </defs>
       <Office time={t}/>
       <rect width={1080} height={1920} fill={'url(#'+clipId+'_fibres)'} opacity={0.30}/>
-      <g opacity={1-curve(t,3.6,6.7)*0.67-curve(t,6.4,7.35)*0.33}>
+      {/* The physical folio relinquishes the information as its two cutouts
+          detach, removing unreadable ghost text behind the active slips. */}
+      <g opacity={1-curve(t,3.1,4.45)}>
         {/* The only held folio originates exactly at the existing host's pointing hand. */}
         <g transform={'translate('+folioGrip.x+' '+folioGrip.y+') rotate('+folioAngle+') scale('+folioScale+')'}>
           <rect x={11} y={-516} width={450} height={516} fill={c.ink} opacity={0.19} transform="translate(15 19)"/>
@@ -263,8 +268,10 @@ export const HybridEditorialPrototype:React.FC=()=>{
         <path d="M480 840 Q530 905 585 866" stroke={c.ink} strokeWidth={12} fill="none"
           strokeLinecap="round" strokeDasharray="19 16"/>
         <path d="M569 850 L585 867 L558 879" fill="none" stroke={c.ink} strokeWidth={11} strokeLinecap="round"/>
-        <rect x={320} y={1040} width={473} height={100} rx={46} fill={c.ink}/>
-        <text x={556} y={1105} fill={c.ivory} textAnchor="middle" fontSize={45} fontWeight={800}>WHAT IS LEFT?</text>
+        {/* One hand-drawn connective mark, not a third labeled slide panel. */}
+        <path d="M435 1082 Q534 1108 645 1070" fill="none" stroke={c.orange}
+          strokeWidth={13} strokeLinecap="round" strokeDasharray="260"
+          strokeDashoffset={260*(1-compare)}/>
       </g>
       {/* The paper surface replaces the room by a single animated, jagged edge. */}
       <g clipPath={'url(#'+clipId+')'}><Notebook/></g>
