@@ -191,6 +191,9 @@ export const HybridEditorialPrototype:React.FC=()=>{
   // Release the old labels before the result arrives: overlapping translucent
   // amounts read as one corrupted number during the paper handoff.
   const focusGone=curve(t,5.90,6.05);
+  // Release the folio's printed information before the detached slips become
+  // readable; keep the physical pages and their shared hand anchor intact.
+  const sourceTextRelease=curve(t,3.2,3.55);
   const salesFrom={x:folioGrip.x+55,y:folioGrip.y-390};
   const costFrom={x:folioGrip.x+40,y:folioGrip.y-214};
   const salesTo={x:170,y:575};
@@ -240,7 +243,7 @@ export const HybridEditorialPrototype:React.FC=()=>{
           <rect y={-516} width={450} height={516} rx={9} fill={c.ivory} stroke={c.ink} strokeWidth={5}/>
           <path d="M0 -483 H450 V-456 H0Z" fill={c.gold}/>
           <path d="M0 -253 H450" stroke={c.ink} strokeWidth={2} opacity={0.15}/>
-          <g opacity={curve(t,2.30,2.68)}>
+          <g opacity={curve(t,2.30,2.68)*(1-sourceTextRelease)}>
           <text x={45} y={-418} fontSize={33} fontWeight={900} letterSpacing={3} fill={c.gray}>SHOP NOTES</text>
           <text x={42} y={-333} fontSize={60} fontWeight={900} fill={c.ink}>HOW MUCH</text>
           <text x={42} y={-269} fontSize={64} fontWeight={900} fill={c.ink}>REMAINS?</text>
@@ -252,12 +255,14 @@ export const HybridEditorialPrototype:React.FC=()=>{
             <path d="M0 -516 H-450 V0 H0Z" fill={c.ink} opacity={0.18} transform="translate(16 18)"/>
             <path d="M0 -516 H-450 V0 H0Z" fill="#FFF8EC" stroke={c.ink} strokeWidth={4}/>
             <path d="M0 -516 V0" stroke={c.ink} strokeWidth={9}/>
+            <g opacity={1-sourceTextRelease}>
             <path d="M-420 -435 H-36 M-420 -405 H-60 M-420 -110 H-40" stroke="#B6C8BE" strokeWidth={7} strokeLinecap="round"/>
             <rect x={-408} y={-348} width={322} height={137} rx={7} fill="#DCF0E8"/>
             <text x={-389} y={-305} fontSize={27} fontWeight={800} fill={c.teal}>SALES RECEIPTS</text>
             <text x={-389} y={-248} fontSize={61} fontWeight={900} fill={c.ink}>+120</text>
             <rect x={-408} y={-189} width={322} height={65} rx={7} fill="#F8DEBD"/>
             <text x={-388} y={-146} fontSize={31} fontWeight={900} fill={c.ink}>COSTS · 85</text>
+            </g>
             <Tape x={-314} y={-521} angle={3} w={104}/>
           </g>
           {/* Flap physically hinges open along the folio spine before its contents detach. */}
