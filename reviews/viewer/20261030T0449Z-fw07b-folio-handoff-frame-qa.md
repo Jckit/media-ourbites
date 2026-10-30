@@ -1,0 +1,23 @@
+# FW-07B — protect observed folio-print release with matched-frame QA
+
+**Frozen UTC:** 2026-10-30 04:49Z, before workflow source edit. **Latest remote main checked:** `8a0e634a0ff9bfb857ceca887f4dbf7979fc501e`. **Base:** exact PR #33 head `4b2eb7416e8059a5fc040136076ac23d4b579c3b`, branch `review/fw07b-folio-label-release-20261030`; this is an isolated stacked branch, not a main edit. The Windows checkout, uncommitted Codex work and original reference recording are unavailable.
+
+## Observed evidence and one narrow QA gap
+
+Actual user-attached **before** 432×768 H.264 silent video SHA-256 `86a46cbf155680e0d69e1f0245fb423cb1c66cb7367b3c28032697173d5b10e8` and **after** SHA-256 `e9ef7886fa115da68dd2de810fa9cb49040c0bfb77dde5d87770a0ea9f78ddfe` both decode at 300 frames/30fps/10 seconds. The after hash matches the exact PR #33 verified CI output. The before has competing source-folio words beneath the sales/cost slips during frames 104–120; the after releases those words, while keeping the physical folio. This is a *technical duplicate-reading defect already fixed in PR #33*, not a new art request. The after video's 23-point phone-size timeline and selected full-size frames 100–230 were independently inspected during this run; no new clear defect was established.
+
+The current hybrid review workflow blob `c835c1b584c9fd7e2893d29731d2feff3a325fe2` exports 37 frames including 96, 111, 122, 137, 151 but **does not include the matched 100/104/108/112/116/120/124/128 transition samples** used to verify the exact source-label fix. Thus a future review artifact can miss the crucial onset and release sequence. The workflow already renders the complete encoded MP4 and hashes its sampled frames; the missing samples are a reproducible coverage gap, not an observed regression.
+
+## One bounded source change and acceptance
+
+Change **only** the existing `.github/workflows/hybrid-editorial-review.yml` sampled-frame list: include **90, 100, 104, 108, 112, 116, 120, 124, 128, 136, 150** alongside all existing frames, retaining sorted unique order. Total **48 frames**. Leave all runtime/host/scene code, original synthetic 120−85=35, narration, source financials, workflow trigger paths, full MP4 render, validation and SHA manifests untouched. Do not invent an automated aesthetic metric.
+
+Pass when (1) exact-head GitHub CI validates and renders H.264 432×768, 300 frames, 10s, silent; (2) artifact contains all 48 frame PNGs and each matches its SHA manifest; (3) the 11 newly sampled phone-size frames show the expected *existing* PR #33 release behavior, with no new visual regression compared to the already verified after video at matching frames; (4) source/output hashes are logged. If artifact cannot be inspected, mark this only partially verified. No second art revision or protagonist-cap reset.
+
+## Gates and limitations
+
+FW-07B remains **in human style/pacing/readability review**, not art-approved; FW-07C and FW-08 blocked. The 3/3 subjective revision cap remains consumed. Original-pitch Kokoro `am_puck` Voice A/1.1×, silent illustrated Dario, net loss ≠ cash spending, operating loss ≠ cash burn, other charges, rights/likeness and final-media/publication approval are unchanged. The user-supplied Instagram recording is reference-only and not available for direct comparison in this run. This QA improvement cannot establish retention improvement. Official YouTube retention/Shorts metrics require real published-viewer data: https://support.google.com/youtube/answer/9314415 and https://support.google.com/youtube/answer/12942217. Remotion frame-driven rendering: https://www.remotion.dev/docs/flickering.
+
+## Result
+
+Pending implementation, exact-code CI, artifact inspection and hash recording.
