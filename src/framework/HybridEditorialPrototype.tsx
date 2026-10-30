@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 import {StageActor} from '../CharacterStage';
 import {scenePalette} from './scene-kit';
+import {samplePaperFlight, type PaperFlightPlan} from './paper-flight';
 
 /**
  * FW-07B creative style test: one evolving illustrated world with folded,
@@ -13,6 +14,18 @@ import {scenePalette} from './scene-kit';
  * Trial timings are local seconds, not guessed narration cue boundaries.
  */
 export const HYBRID_EDITORIAL_FRAMES = 300;
+
+// Shot-owned source/flight/destination anchors; amounts stay in this fixture.
+const RESULT_FLIGHT: PaperFlightPlan = {
+  poses: [
+    {at:6.2,x:595,y:795,angle:8},
+    {at:6.45,x:611,y:810,angle:12}, // slight anticipation before the lift
+    {at:6.95,x:430,y:620,angle:-12},
+    {at:7.85,x:548,y:888,angle:-5},
+    {at:8.1,x:548,y:896,angle:-4},
+  ],
+  unfold:[6.55,7.7],
+};
 
 const c = {
   ...scenePalette,
@@ -162,8 +175,6 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const costs=curve(t,3.55,4.65);
   const compare=curve(t,4.55,5.6);
   const merge=curve(t,5.55,6.55);
-  const note=curve(t,6.3,7.45);
-  const settle=curve(t,7.45,8.45);
   const payoff=curve(t,8.0,8.65,out);
   const actorReturn=curve(t,7.1,8.2);
   const actorShift=curve(t,2.9,4.4);
@@ -202,20 +213,20 @@ export const HybridEditorialPrototype:React.FC=()=>{
   // a single paper result instead of disappearing before a new slide appears.
   const salesPos=point(point(salesFrom,salesTo,sales),{x:595,y:795},merge);
   const costsPos=point(point(costFrom,costTo,costs),{x:595,y:832},merge);
-  const receiptPos=point({x:595,y:795},{x:548,y:896},settle);
+  const flight=samplePaperFlight(t,RESULT_FLIGHT);
+  const receiptPos={x:flight.x,y:flight.y};
+  // The incoming surface is physically scaled from the SAME moving slip bounds.
+  // It opens behind the slip, so its edge and cast shadow cannot drift away.
+  const page={x:flight.x*(1-flight.open),y:flight.y*(1-flight.open),
+    w:mix(432,1080,flight.open),h:mix(288,1920,flight.open)};
   const clipId=React.useId().replace(/:/g,'_');
-  const wipeEdge=-90+1270*note;
-  const tear='M-40 -40 H'+wipeEdge+
-    ' L'+(wipeEdge-18)+' 200 L'+(wipeEdge+9)+' 395 L'+(wipeEdge-15)+' 587'+
-    ' L'+(wipeEdge+16)+' 775 L'+(wipeEdge-10)+' 980 L'+(wipeEdge+12)+' 1170'+
-    ' L'+(wipeEdge-17)+' 1380 L'+(wipeEdge+10)+' 1590 L'+(wipeEdge-8)+' 1930 H-40Z';
 
   return <AbsoluteFill style={{background:c.paper,fontFamily:'Arial, sans-serif',overflow:'hidden'}}>
     <svg viewBox="0 0 1080 1920" width={1080} height={1920}
       style={{position:'absolute',inset:0}} role="img"
       aria-label="Synthetic shop mechanism: hybrid host handles paper, separates sales and costs, reveals profit">
       <defs>
-        <clipPath id={clipId}><path d={tear}/></clipPath>
+        <clipPath id={clipId}><rect width={1080} height={1920}/></clipPath>
         <pattern id={clipId+'_board'} width={47} height={53} patternUnits="userSpaceOnUse">
           <path d="M3 8 l8 -2 M28 31 l10 3 M10 47 l4 -3" stroke="#D7B989" strokeWidth={2} opacity={0.4}/>
           <circle cx={35} cy={12} r={2} fill="#503A26" opacity={0.25}/>
@@ -303,11 +314,20 @@ export const HybridEditorialPrototype:React.FC=()=>{
           strokeWidth={13} strokeLinecap="round" strokeDasharray="260"
           strokeDashoffset={260*(1-compare)}/>
       </g>
-      {/* The paper surface replaces the room by a single animated, jagged edge. */}
-      <g clipPath={'url(#'+clipId+')'}><Notebook/></g>
+      {/* The result pulls its backing sheet open; page, edge and shadow share
+          one transform. No detached full-screen wipe or ghost amount layers. */}
+      {t>=6.35 && <g transform={'translate('+page.x+' '+page.y+') rotate('+(flight.angle*(1-flight.open))+')'}>
+        <rect x={12*(1-flight.open)} y={22*(1-flight.open)} width={page.w} height={page.h}
+          fill={c.ink} opacity={0.22*(1-flight.open)}/>
+        <g transform={'scale('+(page.w/1080)+' '+(page.h/1920)+')'} clipPath={'url(#'+clipId+')'}>
+          <Notebook/>
+        </g>
+        <path d={'M'+(page.w-95*(1-flight.open))+' 0 L'+page.w+' '+(95*(1-flight.open))+' V0Z'}
+          fill="#F4E6CE" stroke={c.ink} strokeWidth={2*(1-flight.open)}/>
+      </g>}
       {/* One emerging result card follows the same focal relationship into the new surface. */}
       <g opacity={curve(t,6.05,6.35)}>
-        <Paper x={receiptPos.x} y={receiptPos.y} w={432} h={288} fill="#FFF7E8" rotation={mix(8,-4,settle)} shadow={16}>
+        <Paper x={receiptPos.x} y={receiptPos.y} w={432} h={288} fill="#FFF7E8" rotation={flight.angle} shadow={mix(25,12,flight.open)}>
           <rect x={21} y={30} width={390} height={43} rx={3} fill={c.orange}/>
           <text x={37} y={61} fontSize={28} fontWeight={900} letterSpacing={2} fill={c.ink}>AFTER THE COSTS</text>
           <text x={37} y={196} fontSize={122} fontWeight={900} letterSpacing={-7} fill={c.ink}>35</text>
@@ -340,9 +360,9 @@ export const HybridEditorialPrototype:React.FC=()=>{
           <text fontSize={105} fontWeight={900} letterSpacing={-4} fill={c.ink}>MONEY.</text>
         </g>
       </g>
-      <g opacity={curve(t,7.25,7.65)}>
+      <g opacity={curve(t,7.8,8.1)}>
         <text x={90} y={253} fontFamily="Georgia, serif" fontStyle="italic" fontSize={68} fill={c.ink}>Sales are not</text>
-        <g transform={'translate(85 '+mix(399,383,curve(t,7.55,7.95,out))+') rotate(-2)'}>
+        <g transform={'translate(85 '+mix(399,383,curve(t,7.95,8.25,out))+') rotate(-2)'}>
           <text fontSize={130} fontWeight={900} letterSpacing={-5} fill={c.teal}>PROFIT.</text>
           <path d="M3 24 Q240 38 505 16" fill="none" stroke={c.orange} strokeWidth={13} strokeLinecap="round"
             strokeDasharray="510" strokeDashoffset={510*(1-payoff)}/>

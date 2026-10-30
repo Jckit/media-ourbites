@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'src/framework/HybridEditorialPrototype.tsx'
+      - 'src/framework/paper-flight.ts'
+      - 'tests/paper-flight.test.mjs'
       - 'src/OurbitesHost.tsx'
       - 'src/CharacterStage.tsx'
       - 'src/index.tsx'
@@ -31,6 +33,7 @@ jobs:
       - name: Verify TypeScript, inherited layout and story tests
         run: |
           npm run typecheck
+          node --experimental-strip-types tests/paper-flight.test.mjs
           python3 scripts/check_framework_layout.py
           python3 -m unittest discover -s tests -v
       - name: Export real phone-size silent review video
