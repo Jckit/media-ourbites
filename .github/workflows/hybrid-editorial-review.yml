@@ -70,7 +70,8 @@ jobs:
           video=out/hybrid-editorial-ci/hybrid-editorial-prototype.mp4
           # Actual previously observed host pose transitions: 34/35, 67/68, 167/168, 223/224.
           # Keep neighboring frames so a future host-only edit cannot silently skip visual QA.
-          frames=(0 12 26 33 34 35 36 40 54 65 66 67 68 69 82 96 111 122 137 151 166 167 168 169 185 196 205 219 222 223 224 225 232 247 260 274 299)
+          # Include matched folio-print release frames 90–150 (PR #33), alongside host pose boundaries.
+          frames=(0 12 26 33 34 35 36 40 54 65 66 67 68 69 82 90 96 100 104 108 111 112 116 120 122 124 128 136 137 150 151 166 167 168 169 185 196 205 219 222 223 224 225 232 247 260 274 299)
           for n in "${frames[@]}"; do
             ffmpeg -v error -i "$video" -vf "select=eq(n\\,$n)" -vsync vfr               -frames:v 1 "out/hybrid-editorial-ci/frames/frame-$n.png"
           done
