@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-31",
+  "policy": "Human-accepted Remotion recipes only. Candidate sketches are not library entries.",
+  "accepted": [],
+  "candidates": [
+    {"id":"object-led-continuity","title":"Receipt to result","status":"awaiting-human-direction","inspiration":["Barty-Bart/explainer-engaging"],"media_location":"ChatGPT conversation artifact; not in repository","review":"accept / revise / reject"},
+    {"id":"editorial-number-reveal","title":"Business mechanism typography","status":"awaiting-human-direction","inspiration":["charlie947/vox-explainer","charlie947/motion-effects"],"media_location":"ChatGPT conversation artifact; not in repository","review":"accept / revise / reject"}
+  ]
+}
