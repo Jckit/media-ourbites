@@ -37,3 +37,13 @@ Prioritize distinctive art-directed layouts, designed typography, character/obje
 ## First action
 
 Justin reviews A and B **as directions, not production samples**. Choose one to develop into a fully rendered Remotion candidate before accepting any library implementation. Existing FW-07B draft art is still under human review; no pre-existing PR is implicitly approved.
+
+## Human direction review — 2026-10-31
+
+Justin reviewed the **low-fidelity direction sketches**, not production-ready Remotion animations:
+
+- **A / Object-led continuity: DEVELOP.** Direction approved for a higher-quality implementation only. Not accepted into the motion library.
+- **B / Editorial number reveal: REJECT.** Do not develop or register it as an accepted recipe.
+- Additional notes: none. The explicit instruction was: “Treat this as direction feedback only; do not accept low-fidelity sketches as production-ready library entries.”
+
+**Next single work item:** produce a fully art-directed **Object-led continuity** Remotion sample using the existing hybrid Ourbites host, with the receipt visibly continuous from origin to result. Start with three intentional style frames, then build a 5–8-second phone-size preview with designed material layering, credible source/landing occlusion, differentiated timing, a distinct final composition and no independent full-screen wipe. Preserve numerical and identity constraints. Render and inspect normal-speed motion plus adjacent frames, run checks, log hashes, and present the video for **separate Accept / Revise / Reject**. Keep `accepted: []` until Justin explicitly approves the completed sample. Do not modify FW-07B stacked PRs, merge or publish.
