@@ -4,7 +4,30 @@
   "policy": "Human-accepted Remotion recipes only. Candidate sketches are not library entries.",
   "accepted": [],
   "candidates": [
-    {"id":"object-led-continuity","title":"Receipt to result","status":"awaiting-human-direction","inspiration":["Barty-Bart/explainer-engaging"],"media_location":"ChatGPT conversation artifact; not in repository","review":"accept / revise / reject"},
-    {"id":"editorial-number-reveal","title":"Business mechanism typography","status":"awaiting-human-direction","inspiration":["charlie947/vox-explainer","charlie947/motion-effects"],"media_location":"ChatGPT conversation artifact; not in repository","review":"accept / revise / reject"}
+    {
+      "id": "object-led-continuity",
+      "title": "Receipt to result",
+      "status": "direction-approved-build-required",
+      "inspiration": [
+        "Barty-Bart/explainer-engaging"
+      ],
+      "media_location": "ChatGPT conversation artifact; not in repository",
+      "review": "accept / revise / reject",
+      "direction_review": "2026-10-31: develop; low-fidelity sketch NOT accepted into library",
+      "next_action": "Build one original Remotion production-quality candidate; render and ask for separate acceptance review"
+    },
+    {
+      "id": "editorial-number-reveal",
+      "title": "Business mechanism typography",
+      "status": "direction-rejected",
+      "inspiration": [
+        "charlie947/vox-explainer",
+        "charlie947/motion-effects"
+      ],
+      "media_location": "ChatGPT conversation artifact; not in repository",
+      "review": "accept / revise / reject",
+      "direction_review": "2026-10-31: reject; do not develop or add to library",
+      "next_action": "Archive direction; no production implementation"
+    }
   ]
 }
