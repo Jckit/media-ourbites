@@ -7,14 +7,16 @@
     {
       "id": "object-led-continuity",
       "title": "Receipt to result",
-      "status": "direction-approved-build-required",
+      "status": "remotion-source-implemented-render-unverified",
       "inspiration": [
         "Barty-Bart/explainer-engaging"
       ],
       "media_location": "ChatGPT conversation artifact; not in repository",
       "review": "accept / revise / reject",
       "direction_review": "2026-10-31: develop; low-fidelity sketch NOT accepted into library",
-      "next_action": "Build one original Remotion production-quality candidate; render and ask for separate acceptance review"
+      "next_action": "Wait for CI MP4, inspect actual 7s continuous motion and sampled frames; fix only verified defects, then human review. No automatic acceptance.",
+      "source": "src/framework/motion-library/ObjectLedContinuityCandidate.tsx",
+      "composition": "MotionCandidateObjectContinuity"
     },
     {
       "id": "editorial-number-reveal",
