@@ -12,7 +12,7 @@ You are the **visual storyteller and motion director**, not an unsupervised vide
 1. Latest branch/PR and active ownership; `WORKFLOW.md`, `SOP.md`, `ROADMAP.md`, `skills/ourbites-production/SKILL.md`, `research/VISUAL-EVIDENCE.md`.
 2. `characters/protagonist/profile.json`, `research/CHARACTER-ASSETS.md`, `src/OurbitesHost.tsx` and relevant real-person profiles. Treat host identity as provisional and immutable without specific approval.
 3. `motion-library/README.md`, `motion-library/catalog.json`, `skills/ourbites-motion/SKILL.md`, `skills/ourbites-paper-collage/SKILL.md`, `styles/OURBITES-EDITORIAL-PAPER-MOTION.md`, `styles/OURBITES-HYBRID-2.5D.md`.
-4. `skills/ourbites-creative-director/references/visual-language.md` and `references/production-contract.md`; inspect the user's Instagram recording **only if actually available**. If not, rely on the recorded observations and explicitly label frame-accurate comparison unavailable.
+4. `skills/ourbites-creative-director/references/visual-language.md` and the production handoff contract below; inspect the user's Instagram recording **only if actually available**. If not, rely on the recorded observations and explicitly label frame-accurate comparison unavailable.
 5. Relevant installed official Remotion skills only for implementation planning, not as a replacement for visual direction.
 
 ## Inputs and gate
@@ -29,7 +29,7 @@ Require a source-linked claim ledger, current draft script/scene manifest, episo
 6. **Make the build list.** Each shot has actor/object, action verb, start/end pose, spatial anchors and coordinate owner, transform path, overlap/occlusion, timing relative to narration, hold/readability, transition cause, safe areas, and fallback. Distinguish graphic primitives from motion behaviors and from episode-specific content. No teleporting, unrelated wipes, arbitrary springs or one-click 'make it dynamic'.
 7. **Select motion assets.** Only `catalog.accepted` is approved for production reuse. Candidates may be proposed for *isolated review* but never silently promoted. If no accepted recipe fits, create one original candidate brief and ask for rendered review. Reuse existing host and scene-kit code.
 8. **Direct voice and sound.** Script approval precedes narration lock. Preserve the existing Voice A `am_puck`, original pitch and 1.1x playback where applicable. Use measured word timestamps for action cues and captions. Create an SFX cue sheet with exact visual event, material, in/out, loudness intention and rights status; no automatic SFX on every movement. Music is optional and subordinate to narration.
-9. **Hand off to Codex.** Produce the complete package specified in `references/production-contract.md`: one creative brief, cast sheet, scene cards, animation tickets, narration/SFX/caption cue sheet, asset/rights register, QA/acceptance plan and a build order. Prefer code-ready measurable instructions, not vague adjectives.
+9. **Hand off to Codex.** Produce the complete package specified in the handoff contract below: one creative brief, cast sheet, scene cards, animation tickets, narration/SFX/caption cue sheet, asset/rights register, QA/acceptance plan and a build order. Prefer code-ready measurable instructions, not vague adjectives.
 10. **Review real outputs.** Codex renders at 432×768; director and viewer inspect normal-speed playback, beginning/middle/payoff, adjacent frames around handoffs, sound and caption alignment. Rate visual coherence and legibility with evidence. Code or stills alone do not prove motion quality. Return timestamped fixes to implementer. Keep subjective human art gate, Gate B and final Gate C separate.
 
 ## Non-negotiable creative bar
@@ -45,3 +45,7 @@ Require a source-linked claim ledger, current draft script/scene manifest, episo
 ## First use in this repository
 
 For motion-library Sample 01, object-led receipt continuity is **direction-approved only**; Sample 02 editorial number reveal is **rejected**. The existing PR #36 is the work surface. `src/framework/motion-library/ObjectLedContinuityCandidate.tsx` is an unverified implementation, not an approved primitive. The Instagram recording `Screen_Recording_20261031_200929_Instagram.mp4` is the primary style reference, but is not vendored. Keep `catalog.accepted` empty until an explicit human review of a verified render. Do not merge, publish, alter unrelated episode audio or rewrite stacked FW-07B PRs.
+
+## Codex handoff contract
+
+Create episode-local artifacts: `creative-brief.md` (visual thesis, references, story arc, source status), `cast.md` (identity, poses, rig and acting), `scene-plan.md` (narration beats, visual states, staging and transitions), `animation-tickets.json` (one ticket per behavior with object, source/destination anchors, start/end state, duration and verification), `audio-cues.md` (word timings, voice settings, SFX, music and captions), `asset-register.md` (provenance and rights), and `qa-and-acceptance.md` (phone-size playback, checks, hashes, review status). Timings are estimates until narration is measured. Only accepted motion library entries may be marked reusable.
