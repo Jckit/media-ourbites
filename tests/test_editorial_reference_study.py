@@ -42,7 +42,7 @@ class EditorialReferenceStudyTests(unittest.TestCase):
     def test_revised_direction_is_explicit_and_requires_real_visual_review(self):
         self.assertIn("80% supplied reference, 20% original", STYLE)
         self.assertIn("technically correct Bézier curve", STYLE)
-        self.assertIn("normal speed", STYLE)
+        self.assertIn("natural speed", STYLE)
 
 if __name__ == "__main__":
     unittest.main()
