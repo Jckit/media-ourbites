@@ -5,6 +5,9 @@ description: Design authored motion curves, object paths, contact, masks and cam
 
 # Ourbites motion craft
 
+**Priority (2026-11-01): 80% reference-led editorial motion vs 20% original hybrid identity.** Use the supplied reference's *motion and layout grammar*, not its original assets. Prioritize choreographed spatial paths, varied temporal easing, graphic/type masks, energetic yet readable offsets and visual match cuts. Less detailed static illustration is fine; simplified animation is not. Keep protagonist appearances purposeful and secondary. Do not use the old shop folio as the default. Verify the encoded **continuous 1× animation** before calling a motion candidate visually acceptable.
+# Ourbites motion craft
+
 A selective HyperFrames-derived design adapter, implemented with Remotion. No HyperFrames runtime, GSAP, CLI, registry or templates are required.
 
 Keep the workflow: Research → Script → Creative Director → Motion Design → Codex/Remotion → Narration/SFX/Captions → Render → Viewer Review. Timing estimates become measured audio cues before narration lock.
