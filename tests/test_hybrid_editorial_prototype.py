@@ -33,6 +33,16 @@ class HybridEditorialPrototypeTests(unittest.TestCase):
         self.assertNotIn("Math.random",SCENE)
         self.assertNotIn("requestAnimationFrame",SCENE)
 
+    def test_existing_host_pose_handoffs_are_interpolated(self):
+        host=(ROOT/"src/OurbitesHost.tsx").read_text(encoding="utf-8")
+        stage=(ROOT/"src/CharacterStage.tsx").read_text(encoding="utf-8")
+        self.assertIn("poseFrom={poseChange?.from}",SCENE)
+        self.assertIn("poseBlend={hostPoseBlend}",SCENE)
+        self.assertIn("const hostGazeX=",SCENE)
+        self.assertIn("const leftPath=blending",host)
+        self.assertIn("const faceMetrics =",host)
+        self.assertIn("poseFrom={poseFrom} poseBlend={poseBlend}",stage)
+
     def test_canonical_style_requires_user_art_review(self):
         self.assertIn("Ourbites Hybrid Editorial Animation",STYLE)
         self.assertIn("not too PowerPoint-like",STYLE)

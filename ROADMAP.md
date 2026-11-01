@@ -64,3 +64,5 @@ The earliest document-focus and subsequent stacked paper handoffs (#23 and #25â€
 PR30 flair pass: Codex owns HybridEditorialPrototype.tsx and reviews/viewer/20261029-pr30-editorial-flair.md on codex/pr30-editorial-flair at 2026-10-29T21:18:45.4181875Z; user explicitly requested style refinement. FW-07 stays review pending actual human playback judgment.
 
 PR30 flair pass verified: [review](reviews/viewer/20261029-pr30-editorial-flair.md). Ownership released; FW-07B remains review. Local 432x768/300-frame render, TypeScript and 54 tests passed; continuous human playback/style acceptance still needed.
+
+FW-07B new paper-turn direction draft: codex/paper-turn-art-direction, based on PR34 e6dff7b. [Review and remaining style gate](reviews/viewer/20261030-paper-turn-draft.md). Scope: isolated sample, small trajectory helper, regression check and CI routing. Implementation ownership released; human direction review pending, FW-07C/FW-08 remain blocked.

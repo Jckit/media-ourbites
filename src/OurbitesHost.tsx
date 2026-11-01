@@ -16,6 +16,9 @@ type HostProps = {
   /** Small signed SVG-unit offsets; the head and silhouette never rotate. */
   gazeX?: number;
   gazeY?: number;
+  /** Optional transition between existing poses; omitted preserves legacy drawing. */
+  poseFrom?: HostPose;
+  poseBlend?: number;
 };
 
 const ink = '#142B38';
@@ -25,7 +28,7 @@ const orange = '#E97F48';
 
 export const OurbitesHost: React.FC<HostProps> = ({
   pose = 'neutral', doubt, width = 330, height = 477, animate = false,
-  gazeX = 0, gazeY = 0,
+  gazeX = 0, gazeY = 0, poseFrom, poseBlend,
 }) => {
   const frame = useCurrentFrame();
   const entrance = animate
@@ -49,6 +52,56 @@ export const OurbitesHost: React.FC<HostProps> = ({
     : explaining ? 'M236 255 Q286 283 328 212'
     : reacting ? 'M236 255 Q288 206 323 152'
     : 'M236 255 Q295 305 325 315';
+  // An optional mechanical continuity correction: interpolate existing arm
+  // geometry without inventing any new pose or changing default renders.
+  const blending = poseFrom !== undefined && poseBlend !== undefined;
+  const blend = Math.max(0,Math.min(1,poseBlend ?? 1));
+  const lerp = (a:number,b:number) => a + (b-a)*blend;
+  const leftPoints = (p:HostPose) => p==='think'
+    ? {cx:93,cy:286,ex:106,ey:309,hx:153,hy:203}
+    : p==='react' ? {cx:55,cy:210,ex:61,ey:161,hx:61,hy:161}
+    : {cx:68,cy:301,ex:108,ey:325,hx:108,hy:325};
+  const rightPoints = (p:HostPose) => p==='point'
+    ? {cx:284,cy:204,ex:337,ey:163,hx:337,hy:163}
+    : p==='explain' ? {cx:286,cy:283,ex:328,ey:212,hx:328,hy:212}
+    : p==='react' ? {cx:288,cy:206,ex:323,ey:152,hx:323,hy:152}
+    : {cx:295,cy:305,ex:325,ey:315,hx:325,hy:315};
+  const fromLeft=leftPoints(poseFrom ?? pose), toLeft=leftPoints(pose);
+  const fromRight=rightPoints(poseFrom ?? pose), toRight=rightPoints(pose);
+  const leftPath=blending
+    ? 'M122 255 Q'+lerp(fromLeft.cx,toLeft.cx)+' '+lerp(fromLeft.cy,toLeft.cy)+' '
+      +lerp(fromLeft.ex,toLeft.ex)+' '+lerp(fromLeft.ey,toLeft.ey)
+      +' L'+lerp(fromLeft.hx,toLeft.hx)+' '+lerp(fromLeft.hy,toLeft.hy)
+    : leftArm;
+  const rightPath=blending
+    ? 'M236 255 Q'+lerp(fromRight.cx,toRight.cx)+' '+lerp(fromRight.cy,toRight.cy)+' '
+      +lerp(fromRight.ex,toRight.ex)+' '+lerp(fromRight.ey,toRight.ey)
+    : rightArm;
+  const leftMark = (p:HostPose) => p==='think'||p==='react' ? 1 : 0;
+  const rightMark = (p:HostPose) => p==='point'||p==='explain' ? 1 : 0;
+  // Morph facial curves once rather than crossfading two opaque ink drawings:
+  // a dual-face blend produced gray/ghosted eyebrows and mouth at mid-gesture.
+  const faceMetrics = (p:HostPose) => {
+    const react=p==='react';
+    const d=Math.max(0,Math.min(1,doubt ?? (react ? 1 : 0)));
+    return {
+      leftBrowY:96+12*d,
+      browStartX:react?202:204, browStartY:react?102:108,
+      browControlY:react?85:95, browEndX:react?237:232,
+      browEndY:react?102:108,
+      mouthStartX:react?174:165, mouthStartY:react?187:183,
+      mouthControlX:react?184:182, mouthControlY:react?170:199-22*d,
+      mouthEndX:react?196:200, mouthEndY:react?187:183,
+    };
+  };
+  const faceFrom=faceMetrics(poseFrom ?? pose), faceTo=faceMetrics(pose);
+  const fm=(key:keyof ReturnType<typeof faceMetrics>) =>
+    blending ? lerp(faceFrom[key],faceTo[key]) : faceTo[key];
+  const symbol = (p:HostPose,opacity:number) => (p==='think'||p==='react') && (
+    <text x="283" y="85" opacity={opacity} fontSize="68" fontWeight="850"
+      fill={p==='react' ? orange : teal}>{p==='think' ? '?' : '!'}</text>
+  );
+
 
   return (
     <svg
@@ -63,28 +116,36 @@ export const OurbitesHost: React.FC<HostProps> = ({
       <g stroke={ink} strokeWidth="9" strokeLinecap="round" strokeLinejoin="round">
         <path d="M145 355 L135 475 H105 M215 355 L228 475 H257" fill="none"/>
         <path d="M125 235 Q100 290 120 350 Q180 380 240 350 L235 235" fill={teal}/>
-        <path d={leftArm} fill="none"/>
-        <path d={rightArm} fill="none"/>
+        <path d={leftPath} fill="none"/>
+        <path d={rightPath} fill="none"/>
         <circle cx="180" cy="145" r="97" fill={paper}/>
         <path d="M130 65 L164 20 L176 75 Z" fill={ink}/>
-        <path d={'M128 109 Q140 ' + (96 + 12 * skeptical) + ' 153 108'} fill="none"/>
-        <path d={reacting ? 'M202 102 Q218 85 237 102' : 'M204 108 Q218 95 232 108'} fill="none"/>
+
+        <path d={'M128 109 Q140 '+fm('leftBrowY')+' 153 108'} fill="none"/>
+        <path d={'M'+fm('browStartX')+' '+fm('browStartY')+
+          ' Q218 '+fm('browControlY')+' '+fm('browEndX')+' '+fm('browEndY')} fill="none"/>
+        <path d={'M'+fm('mouthStartX')+' '+fm('mouthStartY')+
+          ' Q'+fm('mouthControlX')+' '+fm('mouthControlY')+' '+
+          fm('mouthEndX')+' '+fm('mouthEndY')} fill="none"/>
         <circle cx={144 + pupilX} cy={139 + pupilY} r="6"/>
         <circle cx={219 + pupilX} cy={139 + pupilY} r="6"/>
-        <path d={reacting ? 'M174 187 Q184 170 196 187'
-          : 'M165 183 Q182 ' + (199 - 22 * skeptical) + ' 200 183'} fill="none"/>
-        {thinking && <circle cx="153" cy="203" r="8" fill={paper}/>}
-        {pointing && <circle cx="337" cy="163" r="6" fill={paper}/>}
-        {explaining && <circle cx="328" cy="212" r="10" fill={paper}/>}
-        {reacting && <circle cx="61" cy="161" r="10" fill={paper}/>}
+        {blending ? <>
+          <circle cx={lerp(fromLeft.hx,toLeft.hx)} cy={lerp(fromLeft.hy,toLeft.hy)}
+            r={lerp(poseFrom==='think'?8:10,pose==='think'?8:10)} fill={paper}
+            opacity={lerp(leftMark(poseFrom!),leftMark(pose))}/>
+          <circle cx={lerp(fromRight.hx,toRight.hx)} cy={lerp(fromRight.hy,toRight.hy)}
+            r={lerp(poseFrom==='explain'?10:6,pose==='explain'?10:6)} fill={paper}
+            opacity={lerp(rightMark(poseFrom!),rightMark(pose))}/>
+        </> : <>
+          {thinking && <circle cx="153" cy="203" r="8" fill={paper}/>}
+          {pointing && <circle cx="337" cy="163" r="6" fill={paper}/>}
+          {explaining && <circle cx="328" cy="212" r="10" fill={paper}/>}
+          {reacting && <circle cx="61" cy="161" r="10" fill={paper}/>}
+        </>}
       </g>
-      {(thinking || reacting) && (
-        <g>
-          <text x="283" y="85" fontSize="68" fontWeight="850" fill={reacting ? orange : teal}>
-            {thinking ? '?' : '!'}
-          </text>
-        </g>
-      )}
+      <g>
+        {blending ? <>{symbol(poseFrom!,1-blend)}{symbol(pose,blend)}</> : symbol(pose,1)}
+      </g>
     </svg>
   );
 };

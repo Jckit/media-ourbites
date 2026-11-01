@@ -4,6 +4,10 @@ on:
   pull_request:
     paths:
       - 'src/framework/HybridEditorialPrototype.tsx'
+      - 'src/framework/paper-flight.ts'
+      - 'tests/paper-flight.test.mjs'
+      - 'src/OurbitesHost.tsx'
+      - 'src/CharacterStage.tsx'
       - 'src/index.tsx'
       - '.github/workflows/hybrid-editorial-review.yml'
       - 'tests/test_hybrid_editorial_prototype.py'
@@ -29,6 +33,7 @@ jobs:
       - name: Verify TypeScript, inherited layout and story tests
         run: |
           npm run typecheck
+          node --experimental-strip-types tests/paper-flight.test.mjs
           python3 scripts/check_framework_layout.py
           python3 -m unittest discover -s tests -v
       - name: Export real phone-size silent review video
@@ -66,7 +71,10 @@ jobs:
           set -euo pipefail
           mkdir -p out/hybrid-editorial-ci/frames
           video=out/hybrid-editorial-ci/hybrid-editorial-prototype.mp4
-          frames=(0 12 26 40 54 65 82 96 111 122 137 151 168 185 196 205 219 232 247 260 274 299)
+          # Actual previously observed host pose transitions: 34/35, 67/68, 167/168, 223/224.
+          # Keep neighboring frames so a future host-only edit cannot silently skip visual QA.
+          # Include matched folio-print release frames 90–150 (PR #33), alongside host pose boundaries.
+          frames=(0 12 26 33 34 35 36 40 54 65 66 67 68 69 82 90 96 100 104 108 111 112 116 120 122 124 128 136 137 150 151 166 167 168 169 185 196 205 219 222 223 224 225 232 247 260 274 299)
           for n in "${frames[@]}"; do
             ffmpeg -v error -i "$video" -vf "select=eq(n\\,$n)" -vsync vfr               -frames:v 1 "out/hybrid-editorial-ci/frames/frame-$n.png"
           done
