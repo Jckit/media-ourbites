@@ -36,7 +36,7 @@ class AnthropicEditorialSampleTests(unittest.TestCase):
         self.assertIn('financials.h1_2026.net_loss', SCENE)
         self.assertIn('financials.h1_2026.operating_loss', SCENE)
         self.assertIn('financials.h1_2026.convertible_financing_fair_value_change', SCENE)
-        self.assertIn("Reported", SCENE.capitalize() if False else SCENE)
+        self.assertIn("REPORTED", SCENE)
         self.assertIn("CASH SPENT", SCENE)
 
 if __name__ == '__main__':
