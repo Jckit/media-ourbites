@@ -24,6 +24,12 @@ Secondary technique references, not installed or copied:
 
 **Host acting:** keep the canonical cream head/navy tuft/teal torso/ink limbs and meaningful acting. The host can be foregrounded, support in a corner or temporarily leave during a document/UI close-up. Do not keep it fixed in the same spot or require a desk/room in each shot.
 
+## Caption and motion variation system
+
+Words enter one by one at their **measured narration timing** (gentle fade plus tiny settle, not a full phrase popping in). Group words into preplanned readable lines; reserve space for later words so typography does not continually reflow. Highlight only semantic terms. A person name can shift to an editorial italic with an active underline; a company name can use an authentic **approved** asset or a distinct text fallback without pretending it is an official logo. Captions are screen-space and safe-area protected. Consistency beats a random effect per word.
+
+A little organic variation is helpful in background halftone/pattern density, tape/sticker rotation and stagger of purely decorative details. Derive it from a **stable seed** (`episode ID + scene ID + semantic asset ID`) to keep renders and human QA reproducible. Never apply randomness to source data, numbers, word cue timing or essential object-path continuity. Use deliberate controlled variation and authored speed curves; deterministic noise does **not** create natural animation on its own.
+
 ## Review questions
 
 1. Can a viewer identify the focal object at phone size within the first meaningful beat?
