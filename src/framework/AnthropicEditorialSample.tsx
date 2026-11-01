@@ -45,7 +45,7 @@ narration.clips.forEach((clip,ci)=>phrases.clips[ci].forEach((phrase,pi)=>{
     current+=dur;
   });
 }));
-const previewTrack={timingBasis:'provisional-phrase-anchored' as const,words:provisionalWords};
+export const anthropicProvisionalWordTrack={timingBasis:'provisional-phrase-anchored' as const,words:provisionalWords};
 const Header:React.FC<{label:string;t:number;dark?:boolean}>=({label,t,dark})=><>
   <div style={style(78,64,{fontSize:36,fontWeight:950,letterSpacing:2,
     color:dark?C.white:C.ink})}>OURBITES
@@ -217,7 +217,7 @@ export const AnthropicEditorialSample:React.FC=()=>{
     <div style={style(65,1490,{width:950,height:241,
       background:'rgba(251,250,245,0.97)',borderTop:'3px solid #DBE1DE',
       borderRadius:12,zIndex:90})}/>
-    <WordCaptionOverlay track={previewTrack} sourceTimeSeconds={t} top={1538}/>
+    <WordCaptionOverlay track={anthropicProvisionalWordTrack} sourceTimeSeconds={t} top={1538}/>
     <div style={style(72,1812,{fontSize:22,color:C.muted,
       fontWeight:850,zIndex:110})}>
       ANTHROPIC S-1 · H1 2026 · ORIGINAL RECREATED GRAPHICS
