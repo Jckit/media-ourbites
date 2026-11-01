@@ -19,12 +19,19 @@ export const HYBRID_EDITORIAL_FRAMES = 300;
 const RESULT_FLIGHT: PaperFlightPlan = {
   poses: [
     {at:6.2,x:595,y:795,angle:8},
-    {at:6.45,x:611,y:810,angle:12}, // slight anticipation before the lift
-    {at:6.95,x:430,y:620,angle:-12},
-    {at:7.85,x:548,y:888,angle:-5},
-    {at:8.1,x:548,y:896,angle:-4},
+    {at:6.45,x:611,y:810,angle:12}, // brief anticipation
+    {at:7.85,x:548,y:888,angle:-5}, // continuous flight comes to contact
+    {at:8.1,x:548,y:896,angle:-4}, // small independent contact settle
   ],
+  // Spatial handles define the arc; timing handles change velocity along it.
+  // Unlike interpolating each waypoint, nothing stops at the middle of the flight.
+  travel:{
+    startAt:6.45,endAt:7.85,
+    control1:{x:305,y:365},control2:{x:380,y:775},
+    timing:[0.38,0.02,0.23,1],
+  },
   unfold:[6.55,7.7],
+  unfoldTiming:[0.26,0.02,0.18,1], // quicker fold, longer settle than the travel
 };
 
 const c = {
@@ -171,10 +178,12 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const intro=curve(t,0.2,1.0,out);
   const lift=curve(t,1.15,2.15);
   const open=curve(t,1.8,2.95);
-  const sales=curve(t,3.0,4.15);
-  const costs=curve(t,3.55,4.65);
-  const compare=curve(t,4.55,5.6);
-  const merge=curve(t,5.55,6.55);
+  // Distinct roles get distinct temporal curves: the scene should not move like
+  // five presentation items on one global ease-in-out preset.
+  const sales=curve(t,3.0,4.15,Easing.bezier(0.22,0.0,0.32,1));
+  const costs=curve(t,3.55,4.65,Easing.bezier(0.34,0.0,0.24,1));
+  const compare=curve(t,4.55,5.6,Easing.bezier(0.16,0.56,0.31,1));
+  const merge=curve(t,5.55,6.55,Easing.bezier(0.43,0.02,0.27,1));
   const payoff=curve(t,8.0,8.65,out);
   const actorReturn=curve(t,7.1,8.2);
   const actorShift=curve(t,2.9,4.4);
@@ -327,7 +336,7 @@ export const HybridEditorialPrototype:React.FC=()=>{
       </g>}
       {/* One emerging result card follows the same focal relationship into the new surface. */}
       <g opacity={curve(t,6.05,6.35)}>
-        <Paper x={receiptPos.x} y={receiptPos.y} w={432} h={288} fill="#FFF7E8" rotation={flight.angle} shadow={mix(25,12,flight.open)}>
+        <Paper x={receiptPos.x} y={receiptPos.y} w={432} h={288} fill="#FFF7E8" rotation={flight.angle} shadow={12+22*flight.elevation}>
           <rect x={21} y={30} width={390} height={43} rx={3} fill={c.orange}/>
           <text x={37} y={61} fontSize={28} fontWeight={900} letterSpacing={2} fill={c.ink}>AFTER THE COSTS</text>
           <text x={37} y={196} fontSize={122} fontWeight={900} letterSpacing={-7} fill={c.ink}>35</text>
