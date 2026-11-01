@@ -5,6 +5,8 @@ on:
     paths:
       - 'src/framework/HybridEditorialPrototype.tsx'
       - 'src/framework/EditorialReferenceStudy.tsx'
+      - 'src/framework/AnthropicEditorialSample.tsx'
+      - 'tests/test_anthropic_editorial_sample.py'
       - 'tests/test_editorial_reference_study.py'
       - 'src/framework/paper-flight.ts'
       - 'src/framework/captions/**'
@@ -122,6 +124,37 @@ jobs:
           sha256sum out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
             src/framework/EditorialReferenceStudy.tsx \
             > out/hybrid-editorial-ci/editorial-reference-sha256.txt
+      - name: Render narrated Anthropic 80-20 episode sample
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx remotion render src/index.tsx AnthropicEditorialSample \
+            out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+            --scale=0.4 --codec=h264 --concurrency=2
+          ffprobe -v error -count_frames -show_entries \
+            stream=codec_name,codec_type,nb_read_frames,width,height,r_frame_rate:format=duration \
+            -of json out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+            > out/hybrid-editorial-ci/anthropic-editorial-probe.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('out/hybrid-editorial-ci/anthropic-editorial-probe.json'))
+          v=next(x for x in d['streams'] if x['codec_type']=='video')
+          assert v['codec_name']=='h264' and (v['width'],v['height'])==(432,768)
+          assert int(v['nb_read_frames'])==475 and v['r_frame_rate']=='30/1'
+          assert any(x['codec_type']=='audio' for x in d['streams']), 'Narration missing'
+          assert abs(float(d['format']['duration'])-15.85)<0.25
+          PY
+          ffmpeg -v error -i out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+            -vf "fps=2,scale=216:384,tile=5x8" -frames:v 1 \
+            out/hybrid-editorial-ci/anthropic-editorial-timeline.jpg
+          for frame in 0 25 58 88 98 125 152 185 211 250 275 310 344 380 416 454 474; do
+            ffmpeg -v error -i out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+              -vf "select=eq(n\\,$frame)" -vsync vfr -frames:v 1 \
+              "out/hybrid-editorial-ci/anthropic-editorial-frame-${frame}.png"
+          done
+          sha256sum out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+            src/framework/AnthropicEditorialSample.tsx \
+            > out/hybrid-editorial-ci/anthropic-editorial-sha256.txt
       - name: Render silent word-level caption fixture
         shell: bash
         run: |
