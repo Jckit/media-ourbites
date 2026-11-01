@@ -6,6 +6,9 @@ on:
       - 'src/framework/HybridEditorialPrototype.tsx'
       - 'src/framework/EditorialReferenceStudy.tsx'
       - 'src/framework/AnthropicEditorialSample.tsx'
+      - 'src/framework/AnthropicEditorialMotionV2.tsx'
+      - 'src/framework/motion/BurningCashMetaphor.tsx'
+      - 'tests/test_anthropic_motion_v2.py'
       - 'tests/test_anthropic_editorial_sample.py'
       - 'tests/test_editorial_reference_study.py'
       - 'src/framework/paper-flight.ts'
@@ -155,6 +158,38 @@ jobs:
           sha256sum out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
             src/framework/AnthropicEditorialSample.tsx \
             > out/hybrid-editorial-ci/anthropic-editorial-sha256.txt
+      - name: Render Anthropic 90-10 character-led motion sample
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx remotion render src/index.tsx AnthropicEditorialMotionV2 \
+            out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+            --scale=0.4 --codec=h264 --concurrency=2
+          ffprobe -v error -count_frames -show_entries \
+            stream=codec_name,codec_type,nb_read_frames,width,height,r_frame_rate:format=duration \
+            -of json out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+            > out/hybrid-editorial-ci/anthropic-motion-90-10-probe.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('out/hybrid-editorial-ci/anthropic-motion-90-10-probe.json'))
+          v=next(s for s in d['streams'] if s['codec_type']=='video')
+          assert v['codec_name']=='h264' and (v['width'],v['height'])==(432,768)
+          assert int(v['nb_read_frames'])==475 and v['r_frame_rate']=='30/1'
+          assert any(s['codec_type']=='audio' for s in d['streams']),'narration not encoded'
+          assert abs(float(d['format']['duration'])-15.85)<0.25
+          PY
+          ffmpeg -v error -i out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+            -vf "fps=2,scale=216:384,tile=5x8" -frames:v 1 \
+            out/hybrid-editorial-ci/anthropic-motion-90-10-timeline.jpg
+          for frame in 0 22 47 78 99 126 151 178 211 250 282 322 352 387 413 449 474; do
+            ffmpeg -v error -i out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+              -vf "select=eq(n\\,$frame)" -vsync vfr -frames:v 1 \
+              "out/hybrid-editorial-ci/anthropic-motion-v2-frame-${frame}.png"
+          done
+          sha256sum out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+            src/framework/AnthropicEditorialMotionV2.tsx \
+            src/framework/motion/BurningCashMetaphor.tsx \
+            > out/hybrid-editorial-ci/anthropic-motion-v2-sha256.txt
       - name: Render silent word-level caption fixture
         shell: bash
         run: |
