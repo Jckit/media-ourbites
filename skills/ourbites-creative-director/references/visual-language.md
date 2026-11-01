@@ -2,6 +2,8 @@
 
 ## Creative north star
 
+**Human direction, 2026-11-01:** The supplied reference reel is now the **lead style**, and the previous scenic/hybrid compositions are secondary. The existing protagonist remains canon but should not determine every scene's layout. The user explicitly found the current animations and transitions too PowerPoint-like, even after the paper treatments. Aim for a hand-directed editorial explainer, not an illustrated slideshow with better easing.
+
 Produce original, authored, modern editorial motion graphics with a handcrafted After Effects-level **sense of direction** using Remotion. The user-supplied Instagram screen recording (`Screen_Recording_20261031_200929_Instagram.mp4`) is the **primary benchmark**; it is not in Git and no exact frame-by-frame inspection is claimed here. Recorded observations: composed off-white layouts, occasional textured evidence-board opening, assertive sans-serif headings with contrasting serif/italic accents, sparse red annotation, presenter reactions, paper/screenshots in layers, purposeful type and object choreography. The goal is not to copy its frames, creator assets, typography or soundtrack.
 
 Secondary technique references, not installed or copied:
@@ -10,17 +12,17 @@ Secondary technique references, not installed or copied:
 
 ## Art-direction grammar
 
-**Visual thesis:** establish a question visually, transform one meaningful relationship, show the consequence. Select a scene treatment intentionally: scenic illustrated world, editorial-paper collage, or exact numerical diagram. Do not flatten all three into the same boxed UI.
+**Visual thesis:** establish a question visually, transform one meaningful relationship, show the consequence. Default to editorial motion (purposeful, varied type/layout/evidence choreography). Scenic illustration, paper collage and exact numerical diagrams are selectable instruments, not competing full-channel styles or mandatory backdrops.
 
-**Composition:** one primary focal subject; quiet support; readable foreground, midground and background; intentional off-center staging; meaningful depth, contact and shadows; avoid stacks of generic rectangular cards. Typography is part of the composition, not a subtitle substitute. Limit simultaneous reading demands.
+**Composition:** use the reference's bold contrast of warm white space, assertive dark sans headlines, occasional expressive serif italics and carefully chosen warm red editorial annotations. Mix genuinely different editorial arrangements: evidence-board collage, clean typographic field, annotated actual UI, character-plus-object and precise-data close-ups. Avoid a fixed illustrated room, stacks of generic rectangles or permanent mascot placement. Preserve an obvious visual hierarchy and legible phone-size source/caption areas.
 
-**Motion:** write key poses and transitions first. Establish cause (character reaches, document is pulled, camera follows, data becomes evidence), travel, landing and a hold. Coordinate hands and gaze with a shared anchor; maintain one semantic object identity. Use carefully authored easing and timing, not universal bouncy springs. Vary pace by cognitive load.
+**Motion:** author spatial and temporal Bézier handles **separately**. Spatial curves control the path; a time remap controls how fast the object traverses it. Do not apply identical smoothstep ramps to every waypoint: intermediate stops look robotic. Preserve velocity and direction at connected transitions, with fast accents, slower thoughtful tracks, offsets, anticipation, follow-through and reading holds. Stagger related graphic elements with intent. Character gaze/hand and connected objects follow one semantic anchor; visible objects should feel choreographed rather than floated in and out.
 
-**Paper material:** visible fold/edge, credible extraction and occlusion, physically motivated shadow and landing. Tape and texture are accents, not proof of style. Clean typography may replace a paper treatment for precise values.
+**Paper material:** optional physical treatment: hinges, attached backs, credible shadows, source contact, and purposeful landing. A receipt must not simply scale into a full-screen slide. Prefer a motivated object-match transition or a clean cut aligned to the motion path when that reads better. Texture is not style; use it sparingly.
 
 **Hybrid dimensionality:** original 2D/2.5D layers, subtle planes and parallax; optional restrained low-poly shading for objects/environment, never forced 3D or faceted faces.
 
-**Host acting:** readable silhouette, eye line, intention, gesture, reaction and recovery. The host must interact with the explanatory mechanism rather than appear as a tiny decorative mascot. Keep canonical cream head/navy tuft/teal torso/ink limbs.
+**Host acting:** keep the canonical cream head/navy tuft/teal torso/ink limbs and meaningful acting. The host can be foregrounded, support in a corner or temporarily leave during a document/UI close-up. Do not keep it fixed in the same spot or require a desk/room in each shot.
 
 ## Review questions
 
@@ -30,7 +32,9 @@ Secondary technique references, not installed or copied:
 4. Does character acting make the mechanism easier to understand?
 5. Can the viewer read each numerical label, caveat and caption without competing layers?
 6. Do the three style frames feel like one directed film, not unrelated templates?
-7. Is the motion itself verified by continuous playback, not inferred from screenshots?
-8. Are the visual claims, source media and rights status accurate?
+7. Is motion *and its changing velocity* verified through actual continuous playback, not inferred from screenshots? Do intermediate points stall? Do all assets share the same preset curve?
+8. Do graphics and transitions resemble a handcrafted editorial film rather than scaled or fading presentation cards?
+9. Does the protagonist's placement serve the visual idea rather than dominate every frame?
+10. Are the visual claims, source media and rights status accurate?
 
 No score is an actual retention prediction. Human art acceptance remains required.
