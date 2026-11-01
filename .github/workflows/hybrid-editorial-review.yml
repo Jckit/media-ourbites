@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'src/framework/HybridEditorialPrototype.tsx'
+      - 'src/framework/EditorialReferenceStudy.tsx'
+      - 'tests/test_editorial_reference_study.py'
       - 'src/framework/paper-flight.ts'
       - 'src/framework/captions/**'
       - 'src/framework/motion/seeded-variation.ts'
@@ -89,6 +91,37 @@ jobs:
           sha256sum "$video" src/framework/HybridEditorialPrototype.tsx             src/OurbitesHost.tsx src/AnthropicCharacter.tsx             > out/hybrid-editorial-ci/source-media-sha256.txt
           sha256sum out/hybrid-editorial-ci/frames/*.png             > out/hybrid-editorial-ci/frames-sha256.txt
           git diff --check
+      - name: Render 80-percent reference-first editorial motion study
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx remotion render src/index.tsx EditorialReferenceStudy \
+            out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+            --scale=0.4 --codec=h264 --concurrency=2
+          ffprobe -v error -count_frames -select_streams v:0 \
+            -show_entries stream=codec_name,nb_read_frames,width,height,r_frame_rate -of json \
+            out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+            > out/hybrid-editorial-ci/editorial-reference-probe.json
+          python3 - <<'PY'
+          import json
+          p='out/hybrid-editorial-ci/editorial-reference-probe.json'
+          v=json.load(open(p))['streams'][0]
+          assert v['codec_name']=='h264'
+          assert (v['width'],v['height'])==(432,768)
+          assert int(v['nb_read_frames'])==300
+          assert v['r_frame_rate']=='30/1'
+          PY
+          ffmpeg -v error -i out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+            -vf "fps=2,scale=216:384,tile=5x4" -frames:v 1 \
+            out/hybrid-editorial-ci/editorial-reference-80-20-timeline.jpg
+          for frame in 0 18 37 55 66 79 94 115 131 145 156 176 192 209 220 235 255 272 288 299; do
+            ffmpeg -v error -i out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+              -vf "select=eq(n\\,$frame)" -vsync vfr -frames:v 1 \
+              "out/hybrid-editorial-ci/editorial-reference-frame-${frame}.png"
+          done
+          sha256sum out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+            src/framework/EditorialReferenceStudy.tsx \
+            > out/hybrid-editorial-ci/editorial-reference-sha256.txt
       - name: Render silent word-level caption fixture
         shell: bash
         run: |
