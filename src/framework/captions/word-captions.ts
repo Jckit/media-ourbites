@@ -55,7 +55,7 @@ export const validateWordCaptionTrack = (track: WordCaptionTrack) => {
       currentLine = w.lineId;
     }
     if (w.logoAsset && (w.semantic !== 'company' || !w.logoApproved ||
-      /^(https?:|\/|\.\.)/i.test(w.logoAsset) || !/^[\w./-]+$/.test(w.logoAsset))) {
+      /^(https?:|\/|\.\.)/i.test(w.logoAsset) || w.logoAsset.split('/').some(segment=>!segment || segment==='..' || segment==='.') || !/^[\w./-]+$/.test(w.logoAsset))) {
       throw new Error('Company logo needs approved local media provenance');
     }
     previousStart = w.startSourceSeconds;
