@@ -3,7 +3,6 @@ import {AnthropicCharacter,CHARACTER_FRAMES} from './AnthropicCharacter';
 import {PaperFocusPreview} from './framework/PaperFocusPreview';
 import {HybridEditorialPrototype,HYBRID_EDITORIAL_FRAMES} from './framework/HybridEditorialPrototype';
 import {WordCaptionPreview, WORD_CAPTION_PREVIEW_FRAMES} from './framework/captions/WordCaptionPreview';
-import {ObjectLedContinuityCandidate, OBJECT_CONTINUITY_FRAMES} from './framework/motion-library/ObjectLedContinuityCandidate';
 import {FrameworkPreview} from './framework/FrameworkPreview';
 import React from 'react';
 import {AbsoluteFill, Composition, Sequence, interpolate, registerRoot, useCurrentFrame, useVideoConfig} from 'remotion';
