@@ -1,5 +1,8 @@
 # Ourbites editorial paper-collage motion language
 
+> **Style direction update 2026-10-29:** This document retains paper-motion vocabulary as a **supporting reference**, not an independent full-channel or PowerPoint-like slide style. The primary unified direction is [Ourbites Hybrid Editorial Animation](OURBITES-HYBRID-EDITORIAL.md): preserve the existing animated hybrid host **inside the environment**, have physical-ish paper objects be handled, opened, separated and carry the explanation between scenes. The earlier document-focus preview was rejected by the user as too slide-like. Do not mistake its technical success for artistic acceptance.
+
+
 **Status:** user-requested **optional art and motion direction**, documented 2026-10-28 for future review and implementation. **Not implemented**, not a replacement brand identity, not approval of any new artwork/episode, and not a demonstrated retention method.
 
 **Working name:** **Editorial Paper-Collage Motion** (also: *digital cutout / mixed-media editorial motion graphics* with *kinetic typography*). "Paper animation" is a useful shorthand. **Do not call this literal stop-motion animation** unless it is actually photographed frame by frame; the reference is a screen-rendered collage/cutout treatment. It is **2D-first**; simple planar depth is optional, not a 3D conversion.

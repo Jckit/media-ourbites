@@ -5,6 +5,11 @@ description: Design, implement and review reusable Ourbites 2D-first motion comp
 
 # Ourbites motion authoring
 
+## New unified visual contract (2026-10-29)
+
+Read the canonical [hybrid editorial style](../../styles/OURBITES-HYBRID-EDITORIAL.md) **first** for new FW-07 animation work. Following explicit human feedback, separate paper-focus boards alone are **not** the desired style: stage the **same hybrid protagonist** in a cohesive illustrated environment and use tactile paper objects to move the explanation through space. Old `DocumentFocus` and stacked FW-07 paper variants are implementation evidence, not approved aesthetics. New strategy: **one visually convincing prototype → human approval → reusable motion components in a second scenario → FW-08**. Do not escalate self-directed protagonist redesigns or override the 3/3 cap.
+
+
 ## Authority and inputs
 
 Start from the **latest current repository/branch**, read `ROADMAP.md`, [the editorial paper-collage motion language](../../styles/OURBITES-EDITORIAL-PAPER-MOTION.md), [Ourbites hybrid/2.5D identity](../../styles/OURBITES-HYBRID-2.5D.md), [Ourbites production](../ourbites-production/SKILL.md) and any current scene/PR review. Honor file owners, the existing viewer-loop lock and pending dependencies. **FW-06 was accepted by the user on 2026-10-29 for the corrected scenic framework prototype** ([evidence](../../reviews/20261029-fw06-human-acceptance.md)); **FW-07 is ready**, but must be claimed on an independent branch before editing. Do **not** modify that accepted Anthropic episode as a prerequisite to new paper-motion fixtures or treat a recurring automation as fresh aesthetic approval.

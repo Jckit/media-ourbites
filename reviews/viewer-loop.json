@@ -3,49 +3,81 @@
   "entry": "src/index.tsx",
   "preview_url": "http://localhost:3000/AnthropicCharacter",
   "latest_draft": "out/anthropic-character-smooth-grip.mp4",
-  "last_review": "reviews/viewer/20261029T1047Z-fw07-human-visual-feedback.md",
+  "last_review": "reviews/viewer/20261029-pr30-editorial-flair.md",
   "accepted_revisions_since_human_feedback": 3,
   "max_subjective_revisions_without_human_feedback": 3,
   "lock_path": "reviews/viewer-loop.lock",
-  "notes": "Human reviewed filing and receipt FW-07 previews: movement smooth yes; readability unsure; paper-collage style no. One bounded tactile paper-focus reveal revision requested; previous Codex sampled-frame QA remains historical, not full visual acceptance. FW-07 stays review; no publication approval.",
-  "last_status": "fw07_human_review_smooth_yes_readability_unsure_paper_style_no_visual_revision_required",
+  "notes": "PR30 updated under fresh explicit human request for reference/new-skill flair. Warm shop evidence surface, staggered type, stronger payoff, repaired label dissolve. Local render verified; sampled visual coverage only. Human playback/style gate remains. Existing host and production episodes untouched.",
+  "last_status": "pr30_editorial_flair_rendered_human_playback_review_pending",
   "last_verified_frame": "out/viewer-20261028T094251Z-after-311.png",
   "input_hashes": "reviews/viewer/20261029T094712Z-inputs.json",
   "output_hashes": "reviews/viewer/20261029T094712Z-outputs.json",
   "backlog": [
-    "FW-07: VISUAL REVISION REQUIRED. On isolated Codex branch improve the existing DocumentFocus as one tactile layered-paper focus/reveal primitive: reveal/enlarge previously hard-to-read information; preserve anchored row-to-excerpt continuity and existing smooth motion. Demonstrate in filing and receipt; matched 432x768 before/after frames plus continuous playback and checks; request fresh human visual review.",
-    "FW-07: Readability unresolved. Verify focus hierarchy, type size, excerpt reveal, host and caption/source/footer safe areas at phone size; do not mark approved from sampled frames.",
-    "FW-08: BLOCKED pending FW-07 visual acceptance; no automatic scene choreography or narrator changes.",
-    "FW-09: REVIEW; extend QA to continuous motion and new transition safe areas without assuming stylistic approval.",
-    "Anthropic publication remains separately gated on independent financial fact/source, real-person likeness, third-party rights, and authenticated final media approval."
+    "FW-07B: Review PR30 updated local out/pr30-flair/after.mp4 for style resemblance and normal-speed pacing. See reviews/viewer/20261029-pr30-editorial-flair.md; no human visual approval recorded.",
+    "FW-07C: BLOCKED until a human approves FW-07B look; then extract visually accepted components and demonstrate a distinct business mechanism. Preserve earlier `DocumentFocus` as possible technical source, not compulsory slide composition.",
+    "FW-08: BLOCKED until FW-07C; build a configurable shot director and sync only to actual approved source audio/word cues; no new time fractions.",
+    "FW-09: REVIEW; extend repeatable transition/host safe-area and real continuous audiovisual checks; current silent fixture does not prove narration sync.",
+    "FW-06 accepted scenic Anthropic video unchanged. Anthropic publication still separately GATED on financial facts, Dario likeness, source media rights and authenticated final media/publication approval."
   ],
-  "last_human_direction": "2026-10-29: After reviewing the pause-timed 12-phrase corrected Anthropic draft (no stray orange pointer), user replied 'approved. update roadmap etc.' Accepts FW-06 scenic-animation/visual-and-caption-timing milestone only. Start FW-07 as independently claimed editorial paper-collage motion framework work; do not treat the older scenic prototype as already paper-collage. No future protagonist redesign approval and no automatic publication; prior 3/3 self-directed cap remains unchanged. 2026-10-29 FW-07 filing/receipt human review: smooth movement yes, readability unsure, paper-collage style no, notes none. This rejects current FW-07 visual treatment, not FW-06 or the host identity; permits a bounded FW-07 paper-focus visual correction, not a protagonist cap reset or publication approval.",
+  "last_human_direction": "2026-10-29: After reviewing the pause-timed 12-phrase corrected Anthropic draft (no stray orange pointer), user replied 'approved. update roadmap etc.' Accepts FW-06 scenic-animation/visual-and-caption-timing milestone only. Start FW-07 as independently claimed editorial paper-collage motion framework work; do not treat the older scenic prototype as already paper-collage. No future protagonist redesign approval and no automatic publication; prior 3/3 self-directed cap remains unchanged. 2026-10-29 FW-07 filing/receipt human review: smooth movement yes, readability unsure, paper-collage style no, notes none. This rejects current FW-07 visual treatment, not FW-06 or the host identity; permits a bounded FW-07 paper-focus visual correction, not a protagonist cap reset or publication approval. 2026-10-29 NEW instruction: 'Not desired, its too powerpointy indeed. Its like we need to start over and pick a style.' then 'Because we started with the hybrid style, I think we just need to level it out and go with the hybrid and paper collage animation style.' then 'Execute.' This is a new FW-07 style implementation directive; keep original hybrid protagonist and stop slide-like standalone paper demos. Prototype visuals still require human acceptance.",
   "objective": "Reusable Ourbites production/animation framework for future episodes; Anthropic is a test fixture",
   "framework_direction": "reviews/FRAMEWORK-DIRECTION.md",
   "framework_acceptance": "Validate shared features in Anthropic and a meaningfully different episode/scenario or labeled synthetic fixture",
   "roadmap": "ROADMAP.md",
-  "framework_batch": "FW-07 document-focus subset",
+  "framework_batch": "FW-07B unified hybrid-editorial visual candidate",
   "framework_previews": [
     "out/paper-focus/filing.mp4",
-    "out/paper-focus/receipt.mp4"
+    "out/paper-focus/receipt.mp4",
+    "out/hybrid-editorial-ci/hybrid-editorial-prototype.mp4"
   ],
   "remote_framework_status": {
-    "checked_main_commit": "9620684aeb558578bfac3256bc74677003054163",
-    "status_reconciled_at_utc": "2026-10-29T08:49:48Z",
+    "checked_main_commit": "8a0e634a0ff9bfb857ceca887f4dbf7979fc501e",
+    "status_reconciled_at_utc": "2026-10-29",
     "FW-05": "done (shared framework dimensionality choice only)",
     "FW-06": "done (corrected PR #21 merged, automated review green, user accepted 2026-10-29 for animated prototype; publication gates remain separate)",
-    "FW-07": "ready (unclaimed: next reusable paper-cutout/collage action and smooth transition proof on two mechanisms)",
-    "FW-08": "blocked (FW-07 dependency)",
+    "FW-07": "review (unified hybrid editorial style + 10s synthetic video technically passed, but human style/pacing/legibility decision outstanding; FW-07C reuse blocked)",
+    "FW-08": "blocked by FW-07B human visual acceptance and FW-07C reusable second-mechanism proof",
     "FW-09": "review (existing fixture/grounding/transition QA; future full-motion evidence still required)",
     "FW-10": "blocked (FW-08 and FW-09)",
     "FW-M00": "done (editorial paper-motion style documentation approved PR #11; code primitives not implemented)",
-    "last_remote_review": "reviews/20261029-fw06-human-acceptance.md",
+    "last_remote_review": "reviews/viewer/20261029-fw07-unified-hybrid-editorial-direction.md",
     "latest_accepted_review_artifact": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40843248112/artifacts/12883742600",
     "latest_accepted_video_sha256": "4a1d66783b2093662eaac7f2b43b73717122f8d1c900cfcfdb0cb74e15b9707d",
-    "human_approval_scope": "framework animation and perceived cue sync; excludes final public-media, factual, rights and likeness approval"
+    "human_approval_scope": "FW-06 scenic approved; FW-07 unified hybrid-paper creative direction specified but FW-07B example NOT yet accepted.",
+    "latest_candidate_video_sha256": "0d0cac9255f37f35b9d87255013a461e0316d3edef1567d31b3ec1ad73699348",
+    "latest_candidate_artifact": "https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40953258396/artifacts/12932571845"
   },
   "last_local_review_provenance": {
     "last_review": "reviews/viewer/20261028-framework-batch1.md",
     "last_status": "framework_prototype_implemented_stills_verified_style_review_pending"
+  },
+  "pr30_flair_review": {
+    "utc": "2026-10-29T21:23:18.044729+00:00",
+    "base": "51e5f44e098c58f719890b99788b4fc84c39abc8",
+    "inputs_git_blob_sha256": {
+      "src/framework/HybridEditorialPrototype.tsx": "10e8faf17cde46010036ccc0a98478ff8105d35662ae076f16476147977c5aaf",
+      "src/OurbitesHost.tsx": "594aa8fac10712ce8fae691ef67bbbd8d839154c73fa837bf163d29034bda1b5",
+      "src/AnthropicCharacter.tsx": "622f74288d69f820dbc9dfc96dfa7ad0516e7e5d3e596a64663290c9dcf4c089",
+      "src/index.tsx": "ee87ae97a5e22f1fe97f22e1a7efaed13a5875ccf2f55ee06a6272d99f2295ce"
+    },
+    "outputs_working_file_sha256": {
+      "src/framework/HybridEditorialPrototype.tsx": "986baf1f0447b207a53ce39c421a42623421fc4c36023bb400b6aa65195a7707",
+      "src/OurbitesHost.tsx": "82010425e0b462006f78062a04f665d0e8fede11706ba349038b0aaaf545699a",
+      "src/AnthropicCharacter.tsx": "aa8e92025531310efbb503fffd70edd42688bbf2b1c40ca45be996ab5381b5df",
+      "src/index.tsx": "90579dfee83e1d9e7b73104f7007f7b8dbe971e8f4c2e2f15b7b49a5ee2a0e13"
+    },
+    "media_sha256": {
+      "out\\pr30-flair\\before.mp4": "a05ba60345690479b1b6c1f4f23c35cf5292e7adcfa47b50c7a774826318fcb5",
+      "out\\pr30-flair\\after.mp4": "ae3d502c2aaa8b0b7ce25dc223efebab327db7c10028aa7c93f480562e2d8240"
+    },
+    "checks": [
+      "TypeScript pass",
+      "54 Python tests pass",
+      "framework layout pass",
+      "432x768 300 frames 30fps 10s H264 silent",
+      "protected source git diffs empty"
+    ],
+    "coverage": "Decoded all frames; inspected matched samples and adjacent boundaries; live Studio playback exercised with sampled screenshots only. Continuous motion perception and audio not assessed.",
+    "repair": "Removed simultaneous source/result label opacity during convergence; reviewed frames 177,180,182,185,188,190."
   }
 }
