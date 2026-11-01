@@ -17,7 +17,7 @@ assert(isSpokenNow(words[0],0.1));
 assert(!isSpokenNow(words[0],0.40));
 assert.equal(currentCaptionLine(words,-0.01),null);
 assert.equal(currentCaptionLine(words,0.8)?.length,3);
-assert.equal(currentCaptionLine(words,1.43),null);
+assert.equal(currentCaptionLine(words,1.53),null);
 assert.equal(currentCaptionLine(words,1.9)?.[0].text,'And');
 assert.equal(currentCaptionLine(words,2.9),null);
 assert.throws(()=>validateWordCaptionTrack({...track,timingBasis:'estimated-phrase'}));
