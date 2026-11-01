@@ -126,13 +126,10 @@ const ShopBoard: React.FC<{time:number; textureId:string}> = ({time,textureId}) 
 };
 
 const Notebook: React.FC = () => <g>
-  {/* Incoming scene: a warm, illustrated counter with a real-size notepad,
-      not a full-screen rectangle pretending to be a slide. */}
-  <rect width={1080} height={1920} fill="#D8E7E2"/>
-  <rect x={0} y={0} width={1080} height={680} fill="#D7E6DF"/>
-  <path d="M0 687 H1080 V1920 H0Z" fill="#D2B89A"/>
-  <path d="M0 692 H1080" stroke="#B89B78" strokeWidth={13}/>
-  <path d="M0 905 H1080 M0 1180 H1080 M0 1430 H1080" stroke="#B69A79" strokeWidth={3} opacity={0.35}/>
+  {/* Secondary document in a clean editorial composition, not a full-slide panel. */}
+  <rect width={1080} height={1920} fill="#FCFBF7"/>
+  <path d="M65 490 H1015 M65 1338 H1015" stroke={c.ink} strokeWidth={2} opacity={0.10}/>
+  <path d="M85 540 V1290 M995 540 V1290" stroke={c.gray} strokeWidth={2} opacity={0.10}/>
   <g transform="translate(264 473) rotate(-5 370 365)">
     <rect x={19} y={27} width={713} height={742} rx={14} fill={c.ink} opacity={0.16}/>
     <rect width={713} height={742} rx={14} fill="#FFFCF3" stroke={c.ink} strokeWidth={5}/>
@@ -147,7 +144,7 @@ const Notebook: React.FC = () => <g>
     </text>
   </g>
   {/* Scattered shop objects have positions, overlaps and shadows. */}
-  <g transform="translate(825 1105) rotate(14)">
+  <g transform="translate(825 1105) rotate(14)" opacity={0.8}>
     <rect x={8} y={14} width={166} height={238} rx={16} fill={c.ink} opacity={0.16}/>
     <rect width={166} height={238} rx={16} fill="#507D76" stroke={c.ink} strokeWidth={5}/>
     <rect x={20} y={22} width={126} height={62} rx={7} fill="#E1F0E7"/>
@@ -187,6 +184,11 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const payoff=curve(t,8.0,8.65,out);
   const actorReturn=curve(t,7.1,8.2);
   const actorShift=curve(t,2.9,4.4);
+  // An editorial field replaces the heavily illustrated board; prop and type
+  // continue over it. The return surface is a separate composition, not a
+  // rectangle scaled from a receipt into a full screen.
+  const editorialField=curve(t,3.10,3.42,Easing.bezier(0.35,0.02,0.68,1));
+  const notebookReveal=curve(t,7.15,7.66,Easing.bezier(0.17,0.56,0.31,1));
   // Short, frame-driven interpolation between the four EXISTING host poses.
   // This repairs single-frame limb teleports; it does not add a new gesture.
   const poseBeats=[
@@ -224,10 +226,8 @@ export const HybridEditorialPrototype:React.FC=()=>{
   const costsPos=point(point(costFrom,costTo,costs),{x:595,y:832},merge);
   const flight=samplePaperFlight(t,RESULT_FLIGHT);
   const receiptPos={x:flight.x,y:flight.y};
-  // The incoming surface is physically scaled from the SAME moving slip bounds.
-  // It opens behind the slip, so its edge and cast shadow cannot drift away.
-  const page={x:flight.x*(1-flight.open),y:flight.y*(1-flight.open),
-    w:mix(432,1080,flight.open),h:mix(288,1920,flight.open)};
+  // One logical receipt remains in flight while the next composition cuts
+  // beneath it. No expanding full-frame paper rectangle or detached wipe.
   const clipId=React.useId().replace(/:/g,'_');
 
   return <AbsoluteFill style={{background:c.paper,fontFamily:'Arial, sans-serif',overflow:'hidden'}}>
@@ -246,14 +246,20 @@ export const HybridEditorialPrototype:React.FC=()=>{
         </pattern>
       </defs>
       <rect width={1080} height={1920} fill={c.paper}/>
-      <path d="M0 1410 H1080 V1920 H0Z" fill={c.sand}/>
-      <ShopBoard time={t} textureId={clipId+'_board'}/>
-      <g>
-        <path d="M605 1240 V1410 M985 1202 V1410" stroke="#A89373" strokeWidth={25}/>
-        <path d="M535 1165 L997 1120 L1040 1201 L572 1247Z" fill="#E8D6B8" stroke={c.ink} strokeWidth={5}/>
-        <path d="M572 1247 L1040 1201 V1220 L572 1266Z" fill="#B8A489"/>
+      <g opacity={1-editorialField}>
+        <path d="M0 1410 H1080 V1920 H0Z" fill={c.sand}/>
+        <ShopBoard time={t} textureId={clipId+'_board'}/>
+        <g>
+          <path d="M605 1240 V1410 M985 1202 V1410" stroke="#A89373" strokeWidth={25}/>
+          <path d="M535 1165 L997 1120 L1040 1201 L572 1247Z" fill="#E8D6B8" stroke={c.ink} strokeWidth={5}/>
+          <path d="M572 1247 L1040 1201 V1220 L572 1266Z" fill="#B8A489"/>
+        </g>
+        <rect width={1080} height={1920} fill={'url(#'+clipId+'_fibres)'} opacity={0.30}/>
       </g>
-      <rect width={1080} height={1920} fill={'url(#'+clipId+'_fibres)'} opacity={0.30}/>
+      <g opacity={editorialField}>
+        <rect width={1080} height={1920} fill="#FAF9F5"/>
+        <path d="M90 492 H990 M90 1270 H990" stroke={c.ink} strokeWidth={2} opacity={0.12}/>
+      </g>
       {/* The physical folio relinquishes the information as its two cutouts
           detach, removing unreadable ghost text behind the active slips. */}
       <g opacity={1-curve(t,3.1,4.45)}>
@@ -323,17 +329,9 @@ export const HybridEditorialPrototype:React.FC=()=>{
           strokeWidth={13} strokeLinecap="round" strokeDasharray="260"
           strokeDashoffset={260*(1-compare)}/>
       </g>
-      {/* The result pulls its backing sheet open; page, edge and shadow share
-          one transform. No detached full-screen wipe or ghost amount layers. */}
-      {t>=6.35 && <g transform={'translate('+page.x+' '+page.y+') rotate('+(flight.angle*(1-flight.open))+')'}>
-        <rect x={12*(1-flight.open)} y={22*(1-flight.open)} width={page.w} height={page.h}
-          fill={c.ink} opacity={0.22*(1-flight.open)}/>
-        <g transform={'scale('+(page.w/1080)+' '+(page.h/1920)+')'} clipPath={'url(#'+clipId+')'}>
-          <Notebook/>
-        </g>
-        <path d={'M'+(page.w-95*(1-flight.open))+' 0 L'+page.w+' '+(95*(1-flight.open))+' V0Z'}
-          fill="#F4E6CE" stroke={c.ink} strokeWidth={2*(1-flight.open)}/>
-      </g>}
+      {/* An editorial match-composition: the moving receipt remains above the
+          emerging notebook. Screen changes behind it, not via a scaled page. */}
+      {t>=7.15 && <g opacity={notebookReveal}><Notebook/></g>}
       {/* One emerging result card follows the same focal relationship into the new surface. */}
       <g opacity={curve(t,6.05,6.35)}>
         <Paper x={receiptPos.x} y={receiptPos.y} w={432} h={288} fill="#FFF7E8" rotation={flight.angle} shadow={12+22*flight.elevation}>
@@ -379,7 +377,8 @@ export const HybridEditorialPrototype:React.FC=()=>{
       </g>
     </svg>
     {/* Existing hybrid host inside the same illustrated space — no new character art. */}
-    <div style={{position:'absolute',left:actorX,top:actorY,width:485,zIndex:2}}>
+    <div style={{position:'absolute',left:actorX,top:actorY,width:485,zIndex:2,
+      opacity:1-curve(t,3.1,3.55)+curve(t,8.15,8.7)}}>
       <StageActor x={0} y={0} size={485}
         pose={hostPose} poseFrom={poseChange?.from} poseBlend={hostPoseBlend}
         gazeX={hostGazeX} gazeY={-4} lean={t<1.8?mix(-4,0,intro):0}/>
