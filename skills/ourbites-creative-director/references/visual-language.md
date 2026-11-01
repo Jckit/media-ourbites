@@ -1,5 +1,13 @@
 # Ourbites visual direction: editorial motion, not slideware
 
+## Mandatory reference balance (human correction, 2026-11-01)
+
+**Target: ~80% user-supplied Instagram sample visual/motion grammar, ~20% original Ourbites hybrid identity.** Qualitative design weighting, not a timeline timer or an instruction to trace copyrighted frames. The previous hybrid shop-board → folio → notebook sample remains too visually close to a presentation despite smoother paper motion. Do **not** propose it again as the new style with only easing changes.
+
+Available sample recording has been inspected at an indexed timeline level: a short dark layered collage opening gives way to mostly clean light backgrounds; bold dark sans copy with occasional warm-red italic/serif accents; lightweight UI/screenshots, annotated highlights, selectively red callouts, small bottom presenter, brisk multi-pace cut/reveal sequences and changing focal layouts. Its power is **editing and choreography, not illustration complexity**. The demo should prove 3 clearly different editorial compositions, purposeful typography acting as scene structure, short rests for comprehension, graphic-object tracking across motivated cuts, and an occasional recognizable Ourbites host. The existing room/folio is not the default.
+
+**Motion must be explicitly directed, not merely smoothed:** distinguish spatial Bézier path from temporal easing; avoid still points at waypoint joins; alternate quick accents, longer travel and reading holds; independent timings for foreground/object/annotation/camera/host. Evaluate continuity of position, speed, direction, occlusion and focal hierarchy at adjacent frames and at 1× playback. A full-screen panel scaling up is a failed transition even if it follows a Bézier arc.
+
 ## Creative north star
 
 **Human direction, 2026-11-01:** The supplied reference reel is now the **lead style**, and the previous scenic/hybrid compositions are secondary. The existing protagonist remains canon but should not determine every scene's layout. The user explicitly found the current animations and transitions too PowerPoint-like, even after the paper treatments. Aim for a hand-directed editorial explainer, not an illustrated slideshow with better easing.
