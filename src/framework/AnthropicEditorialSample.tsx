@@ -133,14 +133,19 @@ export const AnthropicEditorialSample:React.FC=()=>{
         <StageActor x={0} y={0} size={322} pose={t<5?'point':'explain'}
           gazeX={10} gazeY={-4} lean={lerp(-4,1,ease(t,4.14,4.82,move))}/>
       </div>
-      <div style={style(86,1210,{width:896,height:123,background:C.ink,
-        color:C.white,borderRadius:13,boxShadow:'11px 14px 0 #DBE4E0',
-        opacity:distinction,transform:'translateY('+(1-distinction)*70+'px)'})}>
-        <div style={{fontSize:28,margin:'16px 0 0 28px',fontWeight:850,
-          color:'#A8D7D1'}}>NOT THE SAME AS</div>
-        <div style={{fontSize:51,textAlign:'right',margin:'-9px 26px 0 0',
-          fontWeight:950}}>CASH SPENT.</div>
-      </div>
+      {/* Editorial ink annotation instead of a slide-like opaque bar that
+          would obscure the protagonist's torso and arm. */}
+      <div style={style(464,1239,{opacity:distinction,
+        transform:'translateY('+(1-distinction)*46+'px)',
+        fontFamily:'Georgia,serif',fontStyle:'italic',
+        fontSize:58,color:C.red,whiteSpace:'nowrap'})}>not cash spent.</div>
+      <svg viewBox="0 0 1080 1920" style={{position:'absolute',inset:0,
+        width:'100%',height:'100%',pointerEvents:'none'}}>
+        <path d="M468 1323 C635 1330 790 1312 947 1323" fill="none"
+          stroke={C.red} strokeWidth={10} strokeLinecap="round"
+          strokeDasharray="560"
+          strokeDashoffset={560*(1-distinction)}/>
+      </svg>
     </>)}
     {/* 3 — Same story, more precise graphic comparison; no generic moving cards. */}
     {scene(c,C.white,<>
