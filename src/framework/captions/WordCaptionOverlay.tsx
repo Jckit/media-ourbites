@@ -4,7 +4,8 @@ import {currentCaptionLine, isSpokenNow, wordOpacity, type WordCaptionCue, type 
 
 /** In the screen-space lower third, outside camera and paper transforms. */
 export const WordCaptionOverlay: React.FC<{
-  track: WordCaptionTrack;
+  /** Rendering accepts provisional preview words; only validateWordCaptionTrack grants production-readiness. */
+  track: Pick<WordCaptionTrack,'words'>;
   sourceTimeSeconds: number;
   /** For footage with actual VO: pass sourceTimeSeconds=frame/fps*playbackSpeed. */
   top?: number;
