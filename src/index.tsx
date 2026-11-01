@@ -1,3 +1,4 @@
+import {ObjectLedContinuityCandidate, OBJECT_CONTINUITY_FRAMES} from './framework/motion-library/ObjectLedContinuityCandidate';
 import {AnthropicCharacter,CHARACTER_FRAMES} from './AnthropicCharacter';
 import {PaperFocusPreview} from './framework/PaperFocusPreview';
 import {HybridEditorialPrototype,HYBRID_EDITORIAL_FRAMES} from './framework/HybridEditorialPrototype';

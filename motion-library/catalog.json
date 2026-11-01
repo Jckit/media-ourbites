@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "updated": "2026-11-01",
+  "policy": "Human-accepted Remotion recipes only. Candidate sketches are not library entries.",
+  "accepted": [],
+  "candidates": [
+    {
+      "id": "object-led-continuity",
+      "title": "Receipt to result",
+      "status": "rendered-sampled-frames-verified-human-review-pending",
+      "inspiration": [
+        "Barty-Bart/explainer-engaging"
+      ],
+      "media_location": "ChatGPT conversation artifact; not in repository",
+      "review": "accept / revise / reject",
+      "direction_review": "2026-10-31: develop; low-fidelity sketch NOT accepted into library",
+      "next_action": "Human normal-speed playback/style review of the 7s sample; no library acceptance. Local matched frames verified; continuous motion not assessed.",
+      "source": "src/framework/motion-library/ObjectLedContinuityCandidate.tsx",
+      "composition": "MotionCandidateObjectContinuity"
+    },
+    {
+      "id": "editorial-number-reveal",
+      "title": "Business mechanism typography",
+      "status": "direction-rejected",
+      "inspiration": [
+        "charlie947/vox-explainer",
+        "charlie947/motion-effects"
+      ],
+      "media_location": "ChatGPT conversation artifact; not in repository",
+      "review": "accept / revise / reject",
+      "direction_review": "2026-10-31: reject; do not develop or add to library",
+      "next_action": "Archive direction; no production implementation"
+    }
+  ]
+}

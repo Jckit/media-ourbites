@@ -1,0 +1,69 @@
+# Ourbites editorial motion library — REVIEW INTAKE ONLY
+
+Status: **candidate intake; no animation approved for the production library**. Owner: human art direction. Last checked: 2026-10-31. Branch based on main `8a0e634a0ff9bfb857ceca887f4dbf7979fc501e`; this proposal intentionally does not modify FW-07B/PR #30–35 or existing host and episode code.
+
+## Purpose
+
+Curate **actual, authored, reviewed** motion recipes instead of accumulating generic scene templates. A skill describes how to produce a style; a library entry is an original, reusable animation with verified code, rendered evidence and human acceptance. Never confuse an attractive still with motion approval. Maintain the hybrid fictional host (cream round head, navy angular tuft, teal torso, thin limbs) and original-pitch Kokoro am_puck Voice A at 1.1×, exact financial distinctions, and rights/factual/likeness/final approval gates.
+
+## External technique donors (reference only, not installed or vendored)
+
+1. [charlie947/motion-graphics-skills](https://github.com/charlie947/motion-graphics-skills) — MIT per its public README; examine `vox-explainer`, `motion-effects`, `reference-to-motion`, `brand-intake`. Adopt source-first editorial composition, intentional kinetic hierarchy, anti-generic design critique. **Do not import its sample brand, copy or scene layout.** Its HTML/HyperFrames workflow is not an automatic replacement for pinned Remotion.
+2. [Barty-Bart/motion-graphics](https://github.com/Barty-Bart/motion-graphics) — MIT per its public README; examine `explainer-engaging`, a single hero element travelling between stations. Adopt shared-object continuity and camera/anchor logic; not its generic product-demo UI or synthetic music. Its browser/Playwright/ffmpeg renderer is a separate implementation choice.
+
+Upstream licenses and exact versions must be checked before copying any code/assets; this proposal imports **no third-party code**. Do not blindly install all skills into the project or local Codex directory; choose minimal relevant skills after code/security/dependency review. Existing canonical Ourbites skills: `skills/ourbites-motion/SKILL.md`, `skills/ourbites-paper-collage/SKILL.md`, `skills/ourbites-viewer/SKILL.md`.
+
+## Candidate samples for first review (NOT accepted library entries)
+
+**A. Object-led continuity:** receipt/filing becomes the result. The object remains spatially identifiable from source to destination, with readable source → motion → landing, occlusion and actor attention. Inspired by the *technique* of `explainer-engaging`. 5–8 s, 9:16, original synthetic `120 - 85 = 35` shop numbers only.
+
+**B. Editorial number reveal:** typography, red annotation and grouped values reveal a business mechanism in meaningful sequence; no generic slide wipe, arbitrary random spring or floating text. Inspired by `vox-explainer` and `motion-effects`. 5–8 s, 9:16, same explicitly synthetic numbers.
+
+The **initial low-fidelity 5-second review sketches** were generated outside the repo in ChatGPT on 2026-10-31 as `ourbites-motion-study-continuity.mp4` (SHA256 `6b58cd1f19baf8cee23bb6d04e76ae8a40226851911d1f40f1a4dafc50cd1ae9`) and `ourbites-motion-study-editorial.mp4` (SHA256 `903d76db66a35eff9383b7bf02e2cb9eca37db2802de5592abc6b04a446b652e`). Both are 432×768, 24fps, 120-frame silent **design sketches** drawn with Pillow/OpenCV, not Remotion/Claude skill execution, not licensed sample re-creations and **not production-ready**. These media files are conversation artifacts, not committed repo files or verified portable CI artifacts. The host drawing is a rough identity placeholder, not a replacement for `OurbitesHost.tsx`. Do not accept them into the production library without a proper Remotion build and explicit human review.
+
+## Review protocol — one candidate at a time
+
+1. Select one candidate and freeze a creative brief: lesson, focal target, layout, three key poses, anchors, choreography, typography and material hierarchy. Preserve existing protagonist identity. Do not code a generic template first.
+2. Produce an **original** 432×768 Remotion draft, with three keyframes and a 5–8-second continuous MP4. Compare actual normal-speed playback and phone-size adjacent frames against the brief. Log source and output hashes and relevant TS/numerical/layout tests. No generic AI-generated claims, no copied media.
+3. Ask Justin **for each sample separately**: **Accept into library / Revise sample / Reject sample**, plus optional notes on craftsmanship, natural motion, graphics and transition quality. **No response means pending**, not approval.
+4. Only on explicit **Accept**: extract a typed reusable primitive into `src/framework/motion-library/<id>/` with sample adapter, metadata, accepted render hash, owner/date, safe areas, dependencies, and two distinct fixtures. Add entry to `catalog.json` with `status: accepted`. Keep human art approval distinct from final episode publishing.
+5. On **Revise**: keep in `candidates/` or separate PR, iterate one design issue and re-render; on **Reject**: log reason in review register and do not merge candidate into library. Rejection is useful feedback, not a license to add another automatically.
+6. Never auto-merge a draft; the library is a controlled set of approved techniques, not a dump of experiments. Respect FW-07B current PR #30–35 and its existing approval gate; FW-08 remains blocked until authorized.
+
+## Design bar
+
+Prioritize distinctive art-directed layouts, designed typography, character/object causal action, intentionally varied timing, material-aware layering, source/destination object continuity, meaningful transitions and clean mobile reading. Reject: uniform rectangular UI cards, full-screen wipes independent of scene objects, incidental paper textures, indiscriminate springs and random bounces, and unmotivated rapid cuts. The paper collage is an optional treatment; clean editorial motion is equally valid.
+
+## First action
+
+Justin reviews A and B **as directions, not production samples**. Choose one to develop into a fully rendered Remotion candidate before accepting any library implementation. Existing FW-07B draft art is still under human review; no pre-existing PR is implicitly approved.
+
+## Human direction review — 2026-10-31
+
+Justin reviewed the **low-fidelity direction sketches**, not production-ready Remotion animations:
+
+- **A / Object-led continuity: DEVELOP.** Direction approved for a higher-quality implementation only. Not accepted into the motion library.
+- **B / Editorial number reveal: REJECT.** Do not develop or register it as an accepted recipe.
+- Additional notes: none. The explicit instruction was: “Treat this as direction feedback only; do not accept low-fidelity sketches as production-ready library entries.”
+
+**Next single work item:** produce a fully art-directed **Object-led continuity** Remotion sample using the existing hybrid Ourbites host, with the receipt visibly continuous from origin to result. Start with three intentional style frames, then build a 5–8-second phone-size preview with designed material layering, credible source/landing occlusion, differentiated timing, a distinct final composition and no independent full-screen wipe. Preserve numerical and identity constraints. Render and inspect normal-speed motion plus adjacent frames, run checks, log hashes, and present the video for **separate Accept / Revise / Reject**. Keep `accepted: []` until Justin explicitly approves the completed sample. Do not modify FW-07B stacked PRs, merge or publish.
+
+## User-supplied visual reference — 2026-10-31
+
+Justin supplied `Screen_Recording_20261031_200929_Instagram.mp4` in ChatGPT as a **primary creative reference** for this library. This reference must inform the visual direction of every proposed motion sample, especially the approved-for-development Object-led continuity sample. It is a **reference**, not an approved reusable animation, and the uploaded video bytes are **not stored in Git** or available automatically to local Codex.
+
+**Observed style vocabulary from the recording:** deliberately composed editorial layouts; clean off-white/cream backgrounds mixed with an opening textured evidence-board treatment; strong sans-serif headlines and contrasting italic serif accents; selective red marks and annotations; illustrated presenter reactions; layered screens/papers/graphics; object-led scene continuity; purposeful camera/typography choreography. The style is broader than paper collage—do not make every scene a corkboard, a generic card or a template wipe. The goal is the designed, hand-keyframed feel of a polished After Effects motion piece, achievable with original Remotion code.
+
+**Review use:** show source-derived stylistic criteria alongside original keyframes and the 432×768 rendered sample. Explicitly assess composition, object continuity, motion timing, typography, graphic sophistication and transition quality. Record differences honestly; don't claim exact reproduction or approval from the reference alone. The external Instagram reel and creator's artwork/audio must not be copied, committed, redistributed or embedded into exports without permission. Keep the source recording private; local Codex needs the user to provide the file separately if frame-accurate comparison is required. This is user-approved inspiration for design study, **not** copyright clearance.
+
+## HyperFrames adapter validation — 2026-11-01
+
+Pre-edit evidence: Sample 01 at ae4f01c28dae2ce5935fb081cb58a098e6030266; source SHA256 727f78f4730f1980bd6622c30bd07307e658eb6a949bf9f5487463e698ae4175. Actual baseline MP4 decoded at 432×768; inspected frames 60, 105, 145 and 195. At 6.5s the receipt obscures 35 and LEFT OVER and retains an elevated shadow.
+
+Acceptance: one continuous receipt; authored lift/travel/contact with shadow returning to contact; complete arithmetic and payoff visible in final hold; unchanged 210-frame duration, host, palette and illustrative labeling. One bounded landing correction, no catalog acceptance. Baseline/after media: out/hyperframes-adapter/. Continuous playback and audio review remain unassessed (silent fixture).
+
+Result: landing now reserves space above 35 / LEFT OVER, uses an authored travel curve, and returns shadow/elevation to contact. Matched frames 60/105/145/195 and after contact neighbors 127–129/156–158 were inspected at 432×768. Final arithmetic/payoff is visible. TypeScript, skill frontmatter, local reference links, decoded dimensions/count and actual trajectory finite/displacement/settle checks pass. A full-frame byte-equality hold check was discarded: encoded pixels and the existing animated host are not a valid test of prop stability; numerical prop state is constant from frame 157. No continuous-playback/audio claim or reference-video match claim. Tiny receipt metadata and broader art direction remain human-review considerations. This validates one sample integration, not a newly accepted reusable animation primitive; catalog.accepted remains empty.
+
+- `src/framework/motion-library/ObjectLedContinuityCandidate.tsx` SHA256 `b3d7033853a01177fda3c04d8348c2f23bdad99bf56d82df041d7914f26d0b58`
+- `out/hyperframes-adapter/before.mp4` SHA256 `1c74b1f4b2996b48854ed62d64f427f6c8c76f5365399f1207908489bc2a5736`
+- `out/hyperframes-adapter/after.mp4` SHA256 `2db83e98a83ded871dbcd25f1f8eb52c1e91cb27234ecb7d4284c87aafa4a918`

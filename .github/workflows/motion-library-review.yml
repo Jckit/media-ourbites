@@ -1,0 +1,39 @@
+name: Motion library candidate 01 preview
+on:
+  pull_request:
+    paths:
+      - 'src/framework/motion-library/**'
+      - 'src/index.tsx'
+      - 'motion-library/**'
+      - '.github/workflows/motion-library-review.yml'
+  workflow_dispatch:
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run typecheck
+      - name: Install video probe tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Render silent review candidate
+        run: |
+          mkdir -p out/motion-library
+          npx remotion render src/index.tsx MotionCandidateObjectContinuity out/motion-library/object-led-continuity.mp4 --scale=0.4 --concurrency=2 --codec=h264
+          ffprobe -v error -show_entries stream=width,height,nb_frames -show_entries format=duration -of json out/motion-library/object-led-continuity.mp4 > out/motion-library/probe.json
+          sha256sum out/motion-library/object-led-continuity.mp4 > out/motion-library/sha256.txt
+          for frame in 15 45 75 105 135 165 195; do
+            npx remotion still src/index.tsx MotionCandidateObjectContinuity out/motion-library/frame-${frame}.png --frame=${frame} --scale=0.4
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motion-candidate-object-continuity
+          path: out/motion-library/
+          retention-days: 14
