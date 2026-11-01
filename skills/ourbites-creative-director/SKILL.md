@@ -7,13 +7,18 @@ description: Turn an evidence-checked Ourbites script into a directed, scene-by-
 
 You are the **visual storyteller and motion director**, not an unsupervised video generator. Own the audience's visual comprehension, original editorial art direction and coherent handoff to Remotion. Convert *what the script says* into *what the audience sees change*. Avoid infographic slides, generic SaaS cards, constant paper textures and decorative movement.
 
-## Read in order
+## Load only what this shot needs
 
-1. Latest branch/PR and active ownership; `WORKFLOW.md`, `SOP.md`, `ROADMAP.md`, `skills/ourbites-production/SKILL.md`, `research/VISUAL-EVIDENCE.md`.
-2. `characters/protagonist/profile.json`, `research/CHARACTER-ASSETS.md`, `src/OurbitesHost.tsx` and relevant real-person profiles. Treat host identity as provisional and immutable without specific approval.
-3. `motion-library/README.md`, `motion-library/catalog.json`, `skills/ourbites-motion/SKILL.md`, `skills/ourbites-paper-collage/SKILL.md`, `styles/OURBITES-EDITORIAL-PAPER-MOTION.md`, `styles/OURBITES-HYBRID-2.5D.md`.
-4. `skills/ourbites-creative-director/references/visual-language.md` and the production handoff contract below; inspect the user's Instagram recording **only if actually available**. If not, rely on the recorded observations and explicitly label frame-accurate comparison unavailable.
-5. Relevant installed official Remotion skills only for implementation planning, not as a replacement for visual direction.
+Check latest branch/PR ownership and the current task/episode handoff first. Reuse already-read context; do not reload the entire workflow for a bounded revision.
+
+- Production/facts/gates: [production](../ourbites-production/SKILL.md), current manifest and relevant SOP/WORKFLOW section.
+- Casting: canonical protagonist profile and host; real-person profiles only for the cast in this shot.
+- Treatment: [motion](../ourbites-motion/SKILL.md), paper-collage or hybrid style reference only when selected; catalog when choosing a recipe.
+- Sophisticated movement/composition: [motion craft adapter](../../.agents/skills/ourbites-motion-craft/SKILL.md), then only its choreography or composition reference. Translate purpose into key poses, role-specific curves, object paths, contact, occlusion and reading holds in the existing animation ticket.
+- New visual direction: local visual-language reference and available user recording. Label unavailable frame-accurate comparison honestly.
+- Implementation: relevant Remotion instructions, not the HyperFrames runtime.
+
+**Responsibilities:** Creative Director decides what the viewer should see and why; motion craft designs how it moves; Codex/Remotion implements; Viewer evaluates actual renders. Research → Script → Creative Director → Motion Design → Codex/Remotion → Narration/SFX/Captions → Render → Viewer Review remains the production sequence. Do not add a planning document for a small ticket update.
 
 ## Inputs and gate
 
@@ -44,7 +49,7 @@ Require a source-linked claim ledger, current draft script/scene manifest, episo
 
 ## First use in this repository
 
-For motion-library Sample 01, object-led receipt continuity is **direction-approved only**; Sample 02 editorial number reveal is **rejected**. The existing PR #36 is the work surface. `src/framework/motion-library/ObjectLedContinuityCandidate.tsx` is an unverified implementation, not an approved primitive. The Instagram recording `Screen_Recording_20261031_200929_Instagram.mp4` is the primary style reference, but is not vendored. Keep `catalog.accepted` empty until an explicit human review of a verified render. Do not merge, publish, alter unrelated episode audio or rewrite stacked FW-07B PRs.
+For motion-library Sample 01, object-led receipt continuity is **direction-approved only**; Sample 02 editorial number reveal is **rejected**. The existing PR #36 is the work surface. `src/framework/motion-library/ObjectLedContinuityCandidate.tsx` has a rendered, sampled-frame-verified landing correction (see motion-library/README.md), not an approved primitive; continuous playback and human art review remain pending. The Instagram recording `Screen_Recording_20261031_200929_Instagram.mp4` is the primary style reference, but is not vendored. Keep `catalog.accepted` empty until an explicit human review of a verified render. Do not merge, publish, alter unrelated episode audio or rewrite stacked FW-07B PRs.
 
 ## Codex handoff contract
 

@@ -17,12 +17,17 @@ const lerp=(a:number,b:number,t:number)=>a+(b-a)*t;
 const palette={paper:'#F4F0E6',ink:'#142B38',teal:'#087E83',red:'#C94F3E',muted:'#667577'};
 export const ObjectLedContinuityCandidate:React.FC=()=>{
  const frame=useCurrentFrame();
- const lift=segment(frame,48,84),travel=segment(frame,77,130),land=segment(frame,128,157);
- const p=segment(frame,78,151);
- const receiptX=lerp(130,558,travel);
- const receiptY=lerp(795,1082,travel)-155*Math.sin(Math.PI*travel)+14*land;
- const receiptAngle=lerp(-7,5,travel)-3*land;
- const receiptScale=lerp(1,1.13,travel)-.13*land;
+ // Authored 30fps study: rise, travel, then settle into a reserved landing area.
+ const lift=segment(frame,48,84);
+ const travel=interpolate(frame,[77,145],[0,1],{
+   easing:Easing.bezier(.22,0,.32,1),extrapolateLeft:'clamp',extrapolateRight:'clamp',
+ });
+ const land=segment(frame,128,157);
+ const elevation=lift*(1-land);
+ const receiptX=lerp(130,590,travel);
+ const receiptY=lerp(795,885,travel)-155*Math.sin(Math.PI*travel)-18*elevation;
+ const receiptAngle=lerp(-7,4,travel)-2*land;
+ const receiptScale=lerp(1,1.08,travel)-.33*land;
  const reveal=segment(frame,119,154);
  const outcome=segment(frame,151,179);
  const inkReveal=segment(frame,11,32);
@@ -46,11 +51,11 @@ export const ObjectLedContinuityCandidate:React.FC=()=>{
      <div style={{position:'absolute',left:28,top:22,width:6,height:642,background:'#E8D5C9'}}/>
      <div style={{padding:'76px 38px 0 65px',fontSize:24,fontWeight:800,letterSpacing:2,color:palette.teal}}>RESULT / TODAY</div>
      <div style={{padding:'34px 38px 0 65px',fontSize:34,color:palette.ink,fontWeight:700}}>What remains?</div>
-     <div style={{position:'absolute',left:70,top:310,fontSize:150,fontWeight:900,color:palette.ink,opacity:outcome}}>35</div>
-     <div style={{position:'absolute',left:78,top:478,fontSize:42,fontWeight:900,color:palette.red,opacity:outcome}}>LEFT OVER</div>
+     <div style={{position:'absolute',left:70,top:410,fontSize:110,fontWeight:900,color:palette.ink,opacity:outcome}}>35</div>
+     <div style={{position:'absolute',left:78,top:550,fontSize:42,fontWeight:900,color:palette.red,opacity:outcome}}>LEFT OVER</div>
    </div>
    {/* Single continuous physical object; its shadow, crease, label and paper share one transform. */}
-   <div style={{position:'absolute',left:receiptX,top:receiptY,width:385,height:245,transform:`rotate(${receiptAngle}deg) scale(${receiptScale})`,transformOrigin:'50% 50%',filter:`drop-shadow(${lerp(8,18,lift)}px ${lerp(10,35,lift)}px ${lerp(8,20,lift)}px #142B3840)`,zIndex:8}}>
+   <div style={{position:'absolute',left:receiptX,top:receiptY,width:385,height:245,transform:`rotate(${receiptAngle}deg) scale(${receiptScale})`,transformOrigin:'50% 50%',filter:`drop-shadow(${lerp(3,18,elevation)}px ${lerp(4,35,elevation)}px ${lerp(3,20,elevation)}px #142B3840)`,zIndex:8}}>
      <div style={{position:'absolute',inset:0,background:'#FFFDF7',clipPath:'polygon(0 0,100% 0,100% 91%,94% 96%,88% 91%,82% 96%,76% 91%,70% 96%,64% 91%,58% 96%,52% 91%,46% 96%,40% 91%,34% 96%,28% 91%,22% 96%,16% 91%,10% 96%,4% 91%,0 95%)'}}/>
      <div style={{position:'absolute',top:24,left:32,fontSize:21,fontWeight:800,letterSpacing:2,color:palette.muted}}>RECEIPT / 001</div>
      <div style={{position:'absolute',top:78,left:30,fontSize:56,fontWeight:900,color:palette.ink}}>120 <span style={{color:palette.red}}>−</span> 85</div>

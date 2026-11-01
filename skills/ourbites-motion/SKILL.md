@@ -17,6 +17,8 @@ The recurring host stays the existing cream circular head, angular navy tuft, te
 
 The Instagram reference is provided only as observed stylistic inspiration; **never** copy or redistribute its original graphics, branded images, typography layouts, textures or audio.
 
+For authored curves, contact, paths, masks or camera continuity, selectively load the [motion craft adapter](../../.agents/skills/ourbites-motion-craft/SKILL.md). It provides design techniques; this skill retains architecture and reuse gates.
+
 ## Implementation boundary
 
 - Reuse `src/framework/scene-kit.tsx`, `src/CharacterStage.tsx` and `src/OurbitesHost.tsx` rather than writing a new unrelated graphics pipeline. The proposed `src/framework/motion`, `src/framework/visuals` and `src/framework/transitions` modules in the style document **do not yet exist**; create only the minimum that a claimed roadmap task needs.
