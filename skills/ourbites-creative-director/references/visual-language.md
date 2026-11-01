@@ -1,5 +1,8 @@
 # Ourbites visual direction: editorial motion, not slideware
 
+**Latest human review (2026-11-01): 90/10 reference-led influence, with a consistent-position protagonist and Dario returned as supporting guest illustration.** A reference-inspired layout alone is insufficient. The video must contain memorable object-led illustrations and animated phenomena: cash pile burning at the misleading net-loss hook, then the metaphor visibly corrected; moving physical balance for distinct reported versus operating figures; and animated valuation/liability curves instead of charts or paper cards filling the screen. A single persistent host anchor can coexist with 90% reference motion: move the world around the guide. Additional actors enter for a specific explanatory reason, not as decorative avatars. Protagonist screen-space anchoring, expression, semantic actions and caption rails remain consistent across scene cuts. Never imply an accounting valuation change literally incinerates cash. The user's sample influences the visual editing grammar; do not copy its protected art.
+
+
 ## Mandatory reference balance (human correction, 2026-11-01)
 
 **Target: ~80% user-supplied Instagram sample visual/motion grammar, ~20% original Ourbites hybrid identity.** Qualitative design weighting, not a timeline timer or an instruction to trace copyrighted frames. The previous hybrid shop-board → folio → notebook sample remains too visually close to a presentation despite smoother paper motion. Do **not** propose it again as the new style with only easing changes.
