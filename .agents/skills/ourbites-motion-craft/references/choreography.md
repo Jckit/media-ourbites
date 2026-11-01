@@ -37,6 +37,12 @@ A mask/reveal should originate from the object or edge that motivates it. Keep c
 
 At cuts or ownership transfers, match position **and velocity/direction**, plus scale and rotation; inspect frames on both sides. Independent eases often stop at the seam even when endpoints match. An overlap can preserve momentum, but never duplicate a claim or hide a caveat. Do not impose a transition variety quota.
 
+## Word-level typography and seeded art direction
+
+Narrated subtitles are not a sentence fading in: words each have measured source-clock entry and end; each word fades in on its own cue. A consistent screen-space baseline carries semantic exceptions—person names get a restrained italic/underline; company terms may include a verified and cleared local logo, otherwise typographic differentiation. Protect complete line bounds during design. Do not fabricate timings by dividing a phrase's duration.
+
+Small seeded graphic variations may prevent cloned backgrounds or perfectly repeated paper ornaments, but keep the random-looking variation **deterministic** via stable element IDs and seeds. Never use `Math.random`, the wall clock or seed-dependent changes to the source evidence, meaning, hero anchor, factual chart, subtitle timing or identity. Natural pacing comes primarily from distinct temporal curves, continuity of velocity, anticipation and follow-through—not ambient jitter.
+
 ## Verification
 
 Render the current composition with real assets; inspect launch, path midpoint, frames around contact, and final hold at phone size. Compare adjacent-frame displacement at seams and ensure settled properties stop changing. Then review normal-speed playback separately. Deterministic frame functions only: no CSS animation, wall clock, unseeded randomness, runtime fetch or GSAP timelines. HyperFrames data attributes, CLI keyframe inspection and motion-blur hooks are not Remotion APIs.
