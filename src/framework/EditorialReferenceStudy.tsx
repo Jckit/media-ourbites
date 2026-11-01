@@ -44,31 +44,33 @@ const EditorialTop:React.FC<{progress:number}>=({progress})=><g>
 
 export const EditorialReferenceStudy:React.FC=()=>{
   const frame=useCurrentFrame();const {fps}=useVideoConfig();const t=frame/fps;
-  const enter=opacity(t,0.06,0.36,2.12,2.52);
-  const ledger=opacity(t,2.11,2.44,4.58,5.02);
-  const analysis=opacity(t,4.62,4.96,7.08,7.44);
-  const payoff=p(t,7.15,7.54,timing.reveal);
+  const enter=opacity(t,0.06,0.36,2.02,2.17);
+  const ledger=opacity(t,2.14,2.32,4.60,4.78);
+  const analysis=opacity(t,4.78,4.98,7.13,7.33);
+  const payoff=p(t,7.28,7.53,timing.quick);
   const brandLine=order(t,0.18,0.65);
   const question=order(t,0.75,0.42);
-  const ledgerMotion=p(t,2.06,2.76,timing.travel);
+  const ledgerMotion=p(t,2.11,2.58,timing.travel);
+  const ledgerExit=p(t,4.52,4.82,timing.quick);
+  const chartPunch=p(t,4.72,5.32,timing.travel);
   const barEnter=order(t,4.86,0.58),costBar=order(t,5.16,0.64);
   const deduct=order(t,6.18,0.62);
   // Separate spatial and temporal Bézier: a single semantic "120" graphic
   // changes role from hero headline to ledger entry to bar value. No mid-path stop.
   const heroSegment1=p(t,2.08,2.88,timing.travel);
   const heroA=path({x:200,y:912},{x:310,y:726},{x:690,y:715},{x:748,y:823},heroSegment1);
-  const heroSegment2=p(t,4.58,5.36,timing.reveal);
+  const heroSegment2=p(t,4.61,5.19,timing.travel);
   const heroB=path(heroA,{x:770,y:785},{x:803,y:734},{x:822,y:815},heroSegment2);
   const heroPos=t<4.58?heroA:heroB;
   const heroScale=t<2.08?2.04:t<2.88?mix(2.04,0.74,heroSegment1):mix(0.74,0.79,heroSegment2);
   const heroOpacity=p(t,0.28,0.60,timing.quick)*(1-p(t,6.62,6.90,timing.quick));
-  const costTrace=order(t,5.30,0.58);
+  const costTrace=order(t,3.18,0.55);
   const resultEntrance=p(t,6.37,6.78,timing.reveal);
-  const resultTravel=p(t,7.12,8.12,timing.travel);
+  const resultTravel=p(t,7.08,8.06,timing.travel);
   const resultPos=path({x:764,y:1118},{x:652,y:913},{x:265,y:880},{x:201,y:938},resultTravel);
   const resultScale=mix(0.73,2.28,resultTravel);
   const resultOpacity=resultEntrance;
-  const resultUnderline=p(t,8.15,8.68,timing.reveal);
+  const resultUnderline=p(t,8.15,8.65,timing.reveal);
   const hostShow=opacity(t,8.20,8.55,9.65,9.96);
   const hostLean=mix(5,-4,p(t,8.34,8.76,timing.soften));
   // Decorative scatter has stable IDs and a stable seed. All important
@@ -110,7 +112,7 @@ export const EditorialReferenceStudy:React.FC=()=>{
         <text x={95} y={341} fontSize={78} fontWeight={930} letterSpacing={-3}>THE RECEIPT</text>
         <text x={98} y={421} fontSize={66} fontFamily="Georgia,serif" fontStyle="italic" fill={RED}>tells another story.</text>
         <path d="M98 456 H833" stroke={INK} strokeWidth={3} opacity={0.12}/>
-        <g transform={'translate('+(90+(1-ledgerMotion)*-150)+' '+(605+(1-ledgerMotion)*110)+') rotate('+(1-ledgerMotion)*-7+' 458 370)'}>
+        <g transform={'translate('+(90+(1-ledgerMotion)*-150-365*ledgerExit)+' '+(605+(1-ledgerMotion)*110-52*ledgerExit)+') rotate('+((1-ledgerMotion)*-7-3*ledgerExit)+' 458 370) scale('+(1-0.06*ledgerExit)+')'}>
           <rect x={13} y={19} width={870} height={646} rx={20} fill={INK} opacity={0.08}/>
           <rect width={870} height={646} rx={20} fill="white" stroke={INK} strokeWidth={5}/>
           <path d="M0 65 H870" stroke={INK} strokeWidth={4}/>
@@ -144,12 +146,12 @@ export const EditorialReferenceStudy:React.FC=()=>{
       {/* BEAT 3 / comparison graphic, highly simplified drawings but carefully
           staggered authored motion (bars, evidence marker, annotations). */}
       <g opacity={analysis} clipPath="url(#editorial-graph-window)">
-        <g transform={'translate(0 '+(1-barEnter)*58+')'}>
+        <g transform={'translate('+(1-chartPunch)*48+' '+(1-barEnter)*58+')'}>
           <text x={90} y={744} fontSize={42} fontWeight={900} letterSpacing={2}>SALES</text>
           <rect x={94} y={835} width={886} height={132} rx={16} stroke={INK} strokeWidth={4} fill="white"/>
           <rect x={106} y={846} width={(858*barEnter)} height={110} rx={8} fill={TEAL}/>
         </g>
-        <g transform={'translate(0 '+(1-costBar)*65+')'}>
+        <g transform={'translate('+(1-chartPunch)*90+' '+(1-costBar)*65+')'}>
           <text x={90} y={1079} fontSize={42} fontWeight={900} letterSpacing={2}>COSTS</text>
           <rect x={94} y={1157} width={886} height={132} rx={16} stroke={INK} strokeWidth={4} fill="white"/>
           <rect x={106} y={1168} width={609*costBar} height={110} rx={8} fill={RED}/>
