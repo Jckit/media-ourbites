@@ -104,7 +104,7 @@ export const AnthropicEditorialSample:React.FC=()=>{
         That's a lot of zeros.
       </div>
       <div style={style(80,941,{opacity:view(t,0.24,0.50,3.02,3.34)})}>
-        <StageActor x={0} y={0} size={330} pose={t<1.25?'react':'think'}
+        <StageActor x={0} y={0} size={330} pose="think" poseFrom="react" poseBlend={ease(t,1.10,1.55,move)}
           gazeX={11} gazeY={-6} lean={lerp(-6,2,ease(t,1.15,1.8,move))}/>
       </div>
     </>)}
@@ -130,7 +130,7 @@ export const AnthropicEditorialSample:React.FC=()=>{
         <div style={{height:14,width:250,background:'#DFEBE6',marginTop:13}}/>
       </div>
       <div style={style(95,964,{opacity:view(t,3.57,3.85,6.70,6.99)})}>
-        <StageActor x={0} y={0} size={322} pose={t<5?'point':'explain'}
+        <StageActor x={0} y={0} size={322} pose="explain" poseFrom="point" poseBlend={ease(t,4.79,5.21,move)}
           gazeX={10} gazeY={-4} lean={lerp(-4,1,ease(t,4.14,4.82,move))}/>
       </div>
       {/* Editorial ink annotation instead of a slide-like opaque bar that
@@ -176,7 +176,7 @@ export const AnthropicEditorialSample:React.FC=()=>{
         fontStyle:'italic',fontFamily:'Georgia,serif',
         opacity:ease(t,9.9,10.25,fast)})}>Still serious. Not eighty billion.</div>
       <div style={style(737,1047,{opacity:view(t,7.14,7.43,11.01,11.36)})}>
-        <StageActor x={0} y={0} size={260} pose={t<8.5?'think':'point'}
+        <StageActor x={0} y={0} size={260} pose="point" poseFrom="think" poseBlend={ease(t,8.28,8.77,move)}
           gazeX={-10} gazeY={-6} lean={lerp(4,-2,ease(t,8.4,9.1,move))}/>
       </div>
     </>)}
@@ -208,7 +208,7 @@ export const AnthropicEditorialSample:React.FC=()=>{
         <div style={{fontSize:40,color:C.muted,marginTop:10}}>Not just the headline.</div>
       </div>
       <div style={style(772,1116,{opacity:view(t,11.46,11.79,17.08,17.42)})}>
-        <StageActor x={0} y={0} size={253} pose={t<15.2?'explain':'point'}
+        <StageActor x={0} y={0} size={253} pose="point" poseFrom="explain" poseBlend={ease(t,15.02,15.51,move)}
           gazeX={-11} gazeY={-4}
           lean={lerp(5,-4,ease(t,13.2,15.1,move))}/>
       </div>
