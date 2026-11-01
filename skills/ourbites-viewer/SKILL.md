@@ -5,6 +5,9 @@ description: Critically review an Ourbites video draft as a new business-curious
 
 # Ourbites critical viewer
 
+**Current review gate (2026-11-01):** The user has moved to a ~90% reference-style animation/editing influence with ~10% original hybrid art; retain the original protagonist *persistently in one screen position*, and bring back Dario as an acting illustration where relevant. Evaluate the new `AnthropicEditorialMotionV2` at normal playback. Is the burning cash pile dramatic and easily recognized but clearly overturned by the cash-vs-reported-loss explanation? Are the comparison balance and valuation curve animated as actual moving graphical mechanisms, not cards? Does Dario appear without implying he provided the narration? Are captions lower-third consistent and words individually faded, while actual word timing remains explicitly provisional? Review continuous motion, timing, collisions, text legibility and character continuity. Passing CI is not visual/style/publishing approval.
+
+
 Use the canonical project at `C:/Users/Justin/Documents/ChatGPT/Businesses/business-and-chats`. Read `reviews/viewer-loop.json`, the latest review, and [research](references/retention.md). Use ourbites-production for editorial constraints and relevant Remotion skills for implementation. Preserve Justin's hybrid character style, friendly American Voice A, playful banter and 1.1x playback. Do not spawn agents unless separately authorized.
 
 ## Current FW-07B editorial motion review gate — November 1, 2026
