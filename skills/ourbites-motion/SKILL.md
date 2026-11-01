@@ -24,6 +24,12 @@ The Instagram reference is provided only as observed stylistic inspiration; **ne
 
 For authored curves, contact, paths, masks or camera continuity, selectively load the [motion craft adapter](../../.agents/skills/ourbites-motion-craft/SKILL.md). It provides design techniques; this skill retains architecture and reuse gates.
 
+## Editorial-first and captions (2026-11-01)
+
+The user's actual visual judgment of merged FW-07B was **directionally positive but not style approval**: transitions and animated graphics still feel too PowerPoint-like. The primary target is now the supplied editorial motion reference, not a compulsory illustrated-room composition. Preserve the canonical host as one supporting instrument. Use distinct spatial/temporal Bézier curves, offset staging and continuity of velocity, not a shared smoothstep or generic growing rectangle. See `styles/OURBITES-HYBRID-EDITORIAL.md`.
+
+New narrated scenes use **true measured word-level timing**, reveal individual words on their utterance and apply selectively authored person/company/emphasis treatments through `src/framework/captions/`. The existing phrase-level source cues do not meet this contract and must not be relabeled as word-aligned. Licensed local company logos only; styled text otherwise. Seed only non-semantic background irregularities and optional decorative motion offsets; renders must be deterministic.
+
 ## Implementation boundary
 
 - Reuse `src/framework/scene-kit.tsx`, `src/CharacterStage.tsx` and `src/OurbitesHost.tsx` rather than writing a new unrelated graphics pipeline. The proposed `src/framework/motion`, `src/framework/visuals` and `src/framework/transitions` modules in the style document **do not yet exist**; create only the minimum that a claimed roadmap task needs.
