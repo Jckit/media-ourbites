@@ -102,7 +102,7 @@ export const EditorialReferenceStudy:React.FC=()=>{
       <g opacity={enter*order(t,1.05,0.34)}>
         <text x={92} y={1160} fontSize={30} fill={MUTED} fontWeight={700} letterSpacing={2}>ILLUSTRATIVE SALES</text>
         <path d="M95 1214 H985" stroke={INK} strokeWidth={5} opacity={0.13}/>
-        <path d="M96 1214 H"+(96+885*order(t,1.25,0.54)) stroke={RED} strokeWidth={10} strokeLinecap="round"/>
+        <path d={'M96 1214 H'+(96+885*order(t,1.25,0.54))} stroke={RED} strokeWidth={10} strokeLinecap="round"/>
       </g>
       {/* BEAT 2 / an original mini UI/evidence element arrives with distinct
           spring-free lead/lag; no entire slide animates from another slide. */}
@@ -200,10 +200,10 @@ export const EditorialReferenceStudy:React.FC=()=>{
         ORIGINAL MOTION STUDY · SILENT · ILLUSTRATIVE · NOT AN EPISODE
       </text>
     </svg>
-    <div style={{position:'absolute',top:1270,left:745,width:230,height:335,
+    <div style={{position:'absolute',top:1170,left:775,width:205,height:296,
       opacity:hostShow,pointerEvents:'none',transform:'rotate('+hostLean+'deg)',
       transformOrigin:'50% 95%'}}>
-      <OurbitesHost pose="point" width={230} height={332} gazeX={-2} gazeY={-2}/>
+      <OurbitesHost pose="point" width={205} height={296} gazeX={-2} gazeY={-2}/>
     </div>
   </AbsoluteFill>;
 };
