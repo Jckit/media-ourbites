@@ -51,7 +51,7 @@ python pipeline.py review examples/merger.json --out out/editorial-review.md
 
 ## 4. Produce voice and assets
 
-Preferred pilot: Justin's voice, or a single selected TTS voice after a listening comparison. Check names, acronyms, amounts, pauses and emphasis. Save `narration.wav` plus text/model/voice/version/settings. Align the final recording to get word timestamps; do not turn estimated scene timings into supposedly synchronized subtitles.
+Preferred pilot: Justin's voice, or a single selected TTS voice after a listening comparison. Check names, acronyms, amounts, pauses and emphasis. Save `narration.wav` plus text/model/voice/version/settings. Align the final recording to get **start/end times for every spoken word** in source-audio seconds; the default caption renderer must fade in each individual word at its measured cue (not whole sentences). Preserve legibility and a stable line arrangement. Semantic styling for a person name, company name or important term must be sparse and consistently authored; use authentic company logos only as verified/licensed local assets, otherwise an original styled-text fallback. Do not guess word times from phrase pauses or label a silent fixture as an aligned episode. For 1.1× narration, use the source audio clock derived from the render frame.
 
 Build a small style library: palette, typography, line weight, background, 6–10 recurring business objects, narrator poses if used, chart grammar and transition rules. Generate reusable art without embedded text; apply exact typography and charts in code. Separate foreground, background, shadows and labels into layers. A flattened style frame is a reference, not a rigged animation asset.
 
