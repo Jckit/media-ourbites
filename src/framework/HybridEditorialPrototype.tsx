@@ -3,6 +3,7 @@ import {AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig} from
 import {StageActor} from '../CharacterStage';
 import {scenePalette} from './scene-kit';
 import {samplePaperFlight, type PaperFlightPlan} from './paper-flight';
+import {seededRange} from './motion/seeded-variation';
 
 /**
  * FW-07B creative style test: one evolving illustrated world with folded,
@@ -259,6 +260,13 @@ export const HybridEditorialPrototype:React.FC=()=>{
       <g opacity={editorialField}>
         <rect width={1080} height={1920} fill="#FAF9F5"/>
         <path d="M90 492 H990 M90 1270 H990" stroke={c.ink} strokeWidth={2} opacity={0.12}/>
+        {/* Deterministic, episode-seeded asymmetry only in background accents.
+            No randomness in money, narration, captions, identity or anchor positions. */}
+        {Array.from({length:16},(_,i)=><circle key={i}
+          cx={seededRange('fw07b-study','editorial-dot-'+i,115,975,'x')}
+          cy={seededRange('fw07b-study','editorial-dot-'+i,510,1290,'y')}
+          r={seededRange('fw07b-study','editorial-dot-'+i,1,3,'r')}
+          fill={c.ink} opacity={0.13}/>)}
       </g>
       {/* The physical folio relinquishes the information as its two cutouts
           detach, removing unreadable ghost text behind the active slips. */}
@@ -314,7 +322,7 @@ export const HybridEditorialPrototype:React.FC=()=>{
       <g opacity={sales*(1-focusGone)}>
         <Cutout x={salesPos.x} y={salesPos.y} w={375} h={192} angle={mix(-2,-8,sales)}
           kind="sales" value={120} raise={sales}/>
-        <Tape x={salesPos.x+113} y={salesPos.y-7} angle={-4} w={100}/>
+        <Tape x={salesPos.x+113} y={salesPos.y-7} angle={seededRange('fw07b-study','sales-tape',-7,-3)} w={100}/>
       </g>
       <g opacity={costs*(1-focusGone)}>
         <Cutout x={costsPos.x} y={costsPos.y} w={370} h={192} angle={mix(3,7,costs)}
