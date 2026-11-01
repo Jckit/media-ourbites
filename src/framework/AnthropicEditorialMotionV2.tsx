@@ -172,7 +172,7 @@ export const AnthropicEditorialMotionV2:React.FC=()=>{
           <text x={773} y={397} fill={C.teal} fontSize={62}
             fontWeight={950} opacity={operating}>{'$'+opLoss+'M'}</text>
         </g>
-        <text x={540} y={757} textAnchor="middle" fill={C.red}
+        <text x={650} y={757} textAnchor="middle" fill={C.red}
           fontFamily="Georgia,serif" fontStyle="italic" fontSize={42}
           opacity={bar}>reported net ≠ operating</text>
       </svg>
@@ -196,7 +196,8 @@ export const AnthropicEditorialMotionV2:React.FC=()=>{
         opacity:fair})}>a fair-value change.</div>
       {/* Original valuation curve with animated dash and endpoint.
           Conceptually follows the balance, not another fullscreen card. */}
-      <svg style={{position:'absolute',left:0,top:495,width:1080,height:820}}
+      <svg style={{position:'absolute',left:0,top:495,width:1080,height:820,
+        opacity:1-payoff}}
         viewBox="0 0 1080 820">
         <path d="M91 717 H989 M91 520 H989 M91 323 H989"
           stroke="#D6E4DD" strokeWidth={4} strokeDasharray="12 16"/>
@@ -217,12 +218,12 @@ export const AnthropicEditorialMotionV2:React.FC=()=>{
         letterSpacing:1.2,color:C.muted,opacity:1-payoff})}>
         CONVERTIBLE FINANCING · FAIR-VALUE REVALUATION
       </div>
-      <div style={style(95,1098,{opacity:payoff,
+      <div style={style(376,1134,{opacity:payoff,
         transform:'translateY('+(1-payoff)*100+'px)'})}>
-        <div style={{fontSize:99,fontWeight:950,letterSpacing:-5}}>READ THE</div>
-        <div style={{fontSize:120,fontFamily:'Georgia,serif',fontStyle:'italic',
+        <div style={{fontSize:70,fontWeight:950,letterSpacing:-3}}>READ THE</div>
+        <div style={{fontSize:88,fontFamily:'Georgia,serif',fontStyle:'italic',
           color:C.red}}>pieces.</div>
-        <div style={{fontSize:40,color:C.muted,marginTop:10}}>Not just the headline.</div>
+        <div style={{fontSize:31,color:C.muted,marginTop:10,whiteSpace:'nowrap'}}>Not just the headline.</div>
       </div>
       
       {/* Dario returns as a second character, with original vector design,
