@@ -1,3 +1,5 @@
+import {DepthMotionFixture} from './framework/DepthMotionFixture';
+import {AnthropicEditorialDepth,ANTHROPIC_DEPTH_FRAMES} from './framework/AnthropicEditorialDepth';
 import {ObjectLedContinuityCandidate, OBJECT_CONTINUITY_FRAMES} from './framework/motion-library/ObjectLedContinuityCandidate';
 import {AnthropicCharacter,CHARACTER_FRAMES} from './AnthropicCharacter';
 import {PaperFocusPreview} from './framework/PaperFocusPreview';
@@ -75,7 +77,7 @@ const SceneView: React.FC<{scene: Scene; index: number; draft: boolean}> = ({sce
       <OurbitesHostCameo pose={index===0?'react':scene.visual==='ownership'?'explain':'point'}
         top={970} right={82} width={178}/>}
     <div style={{borderTop:`3px solid ${colors.ink}`,paddingTop:32,fontSize:34,lineHeight:1.35,marginTop:35}}>{scene.narration}</div>
-    <div style={{position:'absolute',bottom:140,left:84,right:84,fontSize:24,color:colors.muted,display:'flex',justifyContent:'space-between'}}><span>{draft ? 'SILENT STORYBOARD Ã‚Â· EDITORIAL REVIEW REQUIRED' : 'BUSINESS EXPLAINED'}</span><span>{scene.duration}s</span></div>
+    <div style={{position:'absolute',bottom:140,left:84,right:84,fontSize:24,color:colors.muted,display:'flex',justifyContent:'space-between'}}><span>{draft ? 'SILENT STORYBOARD ÃÆ’Ã¢â‚¬Å¡Ã‚Â· EDITORIAL REVIEW REQUIRED' : 'BUSINESS EXPLAINED'}</span><span>{scene.duration}s</span></div>
     <div style={{position:'absolute',bottom:105,left:84,width:912,height:6,background:'#D7DFDB'}}><div style={{width:`${100*Math.min(1,frame/(scene.duration*fps))}%`,height:'100%',background:colors.teal}}/></div>
   </AbsoluteFill>;
 };
@@ -94,6 +96,8 @@ const AllCompositions:React.FC=()=> <><Root/><Composition id="AnthropicCharacter
 const FrameworkCompositions:React.FC=()=> <><AllCompositions/>
   <Composition id="MotionCandidateObjectContinuity" component={ObjectLedContinuityCandidate} width={1080} height={1920} fps={30} durationInFrames={OBJECT_CONTINUITY_FRAMES}/>
   <Composition id="WordCaptionPreview" component={WordCaptionPreview} width={1080} height={1920} fps={30} durationInFrames={WORD_CAPTION_PREVIEW_FRAMES}/>
+  <Composition id="DepthMotionFixture" component={DepthMotionFixture} width={1080} height={1920} fps={30} durationInFrames={120}/>
+  <Composition id="AnthropicEditorialDepth" component={AnthropicEditorialDepth} width={1080} height={1920} fps={30} durationInFrames={ANTHROPIC_DEPTH_FRAMES}/>
   <Composition id="AnthropicEditorialMotionV2" component={AnthropicEditorialMotionV2} width={1080} height={1920} fps={30} durationInFrames={ANTHROPIC_MOTION_V2_FRAMES}/>
   <Composition id="AnthropicEditorialSample" component={AnthropicEditorialSample} width={1080} height={1920} fps={30} durationInFrames={ANTHROPIC_EDITORIAL_SAMPLE_FRAMES}/>
   <Composition id="EditorialReferenceStudy" component={EditorialReferenceStudy} width={1080} height={1920} fps={30} durationInFrames={EDITORIAL_REFERENCE_FRAMES}/>

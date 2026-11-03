@@ -1,0 +1,1 @@
+User-supplied Ourbites grid assets, provided by Justin on 2026-11-03 for this animation revision. Copied unchanged from Ourbites_Grid_PNGs. No third-party license inferred; publication/rights gate remains separate.
