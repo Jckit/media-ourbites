@@ -5,9 +5,12 @@ description: Design, implement and review reusable Ourbites 2D-first motion comp
 
 # Ourbites motion authoring
 
-## New unified visual contract (2026-10-29)
+**Latest 2026-11-01 feedback, superseding 80/20:** editorial reference ~90%, original hybrid art ~10%; protagonist **must remain present with a recognizable steady screen position**, not a tiny end-only cameo. Dario should appear in Anthropic explanations using the existing original illustration, pending separate depiction approval. Build *new graphic mechanisms* (original stylized burning money metaphor → explicit accounting correction, tilting balance, time-varying valuation line, animated annotation) instead of new generic rect/cards. Dramatic visuals must not misrepresent the facts; $80.75B reported net loss is not literal destroyed cash. Give separate animation tracks different spatial and temporal Bézier profiles. Preserve source-clock word fade and measured-alignment gate; silent fixture or estimated word timings never equal production sync.
 
-Read the canonical [hybrid editorial style](../../styles/OURBITES-HYBRID-EDITORIAL.md) **first** for new FW-07 animation work. Following explicit human feedback, separate paper-focus boards alone are **not** the desired style: stage the **same hybrid protagonist** in a cohesive illustrated environment and use tactile paper objects to move the explanation through space. Old `DocumentFocus` and stacked FW-07 paper variants are implementation evidence, not approved aesthetics. New strategy: **one visually convincing prototype → human approval → reusable motion components in a second scenario → FW-08**. Do not escalate self-directed protagonist redesigns or override the 3/3 cap.
+
+## Current visual contract — 80% reference editorial motion, 20% Ourbites identity
+
+Read the [revised canonical style](../../styles/OURBITES-HYBRID-EDITORIAL.md) **first**. The older October 29 combined hybrid/scenic/paper-room treatment was superseded by November 1 human review: its rendered result remains too PowerPoint-like. **Use the supplied editorial-montage reference for roughly 80% of the visual/motion vocabulary** and retain the unchanged recognizable Ourbites host/colors as roughly 20% supporting identity. The sample's animated typographic rhythm, evidence/UI choreography, motivated visual match cuts and multiple velocity profiles matter more than graphic complexity. No fixed setting or folio in every shot. Prior `DocumentFocus` and `HybridEditorialPrototype` are technical/baseline evidence only; never confuse CI or a merged prototype with a human-approved look. Strategy: a visually convincing reference-led 10s prototype → actual continuous review and human approval → reusable motion components in a different mechanism → FW-08. Do not authorize character redesign, publication or a reusable library entry on this direction alone.
 
 
 ## Authority and inputs
@@ -23,6 +26,12 @@ The recurring host stays the existing cream circular head, angular navy tuft, te
 The Instagram reference is provided only as observed stylistic inspiration; **never** copy or redistribute its original graphics, branded images, typography layouts, textures or audio.
 
 For authored curves, contact, paths, masks or camera continuity, selectively load the [motion craft adapter](../../.agents/skills/ourbites-motion-craft/SKILL.md). It provides design techniques; this skill retains architecture and reuse gates.
+
+## Editorial-first and captions (2026-11-01)
+
+The user's actual visual judgment of merged FW-07B was **directionally positive but not style approval**: transitions and animated graphics still feel too PowerPoint-like. The primary target is now the supplied editorial motion reference, not a compulsory illustrated-room composition. Preserve the canonical host as one supporting instrument. Use distinct spatial/temporal Bézier curves, offset staging and continuity of velocity, not a shared smoothstep or generic growing rectangle. See `styles/OURBITES-HYBRID-EDITORIAL.md`.
+
+New narrated scenes use **true measured word-level timing**, reveal individual words on their utterance and apply selectively authored person/company/emphasis treatments through `src/framework/captions/`. The existing phrase-level source cues do not meet this contract and must not be relabeled as word-aligned. Licensed local company logos only; styled text otherwise. Seed only non-semantic background irregularities and optional decorative motion offsets; renders must be deterministic.
 
 ## Implementation boundary
 

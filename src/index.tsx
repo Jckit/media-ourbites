@@ -2,6 +2,10 @@ import {ObjectLedContinuityCandidate, OBJECT_CONTINUITY_FRAMES} from './framewor
 import {AnthropicCharacter,CHARACTER_FRAMES} from './AnthropicCharacter';
 import {PaperFocusPreview} from './framework/PaperFocusPreview';
 import {HybridEditorialPrototype,HYBRID_EDITORIAL_FRAMES} from './framework/HybridEditorialPrototype';
+import {EditorialReferenceStudy,EDITORIAL_REFERENCE_FRAMES} from './framework/EditorialReferenceStudy';
+import {AnthropicEditorialSample,ANTHROPIC_EDITORIAL_SAMPLE_FRAMES} from './framework/AnthropicEditorialSample';
+import {AnthropicEditorialMotionV2,ANTHROPIC_MOTION_V2_FRAMES} from './framework/AnthropicEditorialMotionV2';
+import {WordCaptionPreview, WORD_CAPTION_PREVIEW_FRAMES} from './framework/captions/WordCaptionPreview';
 import {FrameworkPreview} from './framework/FrameworkPreview';
 import React from 'react';
 import {AbsoluteFill, Composition, Sequence, interpolate, registerRoot, useCurrentFrame, useVideoConfig} from 'remotion';
@@ -88,6 +92,11 @@ const Explainer: React.FC<Episode> = ({scenes,draft=true}) => {
 const Root: React.FC = () => <Composition id="BusinessShort" component={Explainer} defaultProps={example} width={1080} height={1920} fps={30} durationInFrames={1800} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((n,s)=>n+Math.round(s.duration*30),0)})}/>;
 const AllCompositions:React.FC=()=> <><Root/><Composition id="AnthropicCharacter" component={AnthropicCharacter} width={1080} height={1920} fps={30} durationInFrames={CHARACTER_FRAMES}/><Composition id="AnthropicShort" component={AnthropicShort} width={1080} height={1920} fps={30} durationInFrames={ANTHROPIC_SHORT_FRAMES}/><Composition id="OwnershipProof" component={OwnershipProof} width={1080} height={1920} fps={30} durationInFrames={Math.ceil((proofAudio.duration+storyTiming.hook)*30/playbackSpeed)}/><Composition id="OwnershipSecondScenario" component={OwnershipProof} defaultProps={{variant:"second" as const}} width={1080} height={1920} fps={30} durationInFrames={Math.ceil((proofAudio.duration+storyTiming.hook)*30/playbackSpeed)}/></>;
 const FrameworkCompositions:React.FC=()=> <><AllCompositions/>
+  <Composition id="MotionCandidateObjectContinuity" component={ObjectLedContinuityCandidate} width={1080} height={1920} fps={30} durationInFrames={OBJECT_CONTINUITY_FRAMES}/>
+  <Composition id="WordCaptionPreview" component={WordCaptionPreview} width={1080} height={1920} fps={30} durationInFrames={WORD_CAPTION_PREVIEW_FRAMES}/>
+  <Composition id="AnthropicEditorialMotionV2" component={AnthropicEditorialMotionV2} width={1080} height={1920} fps={30} durationInFrames={ANTHROPIC_MOTION_V2_FRAMES}/>
+  <Composition id="AnthropicEditorialSample" component={AnthropicEditorialSample} width={1080} height={1920} fps={30} durationInFrames={ANTHROPIC_EDITORIAL_SAMPLE_FRAMES}/>
+  <Composition id="EditorialReferenceStudy" component={EditorialReferenceStudy} width={1080} height={1920} fps={30} durationInFrames={EDITORIAL_REFERENCE_FRAMES}/>
   <Composition id="HybridEditorialPrototype" component={HybridEditorialPrototype} width={1080} height={1920} fps={30} durationInFrames={HYBRID_EDITORIAL_FRAMES}/>
   <Composition id="PaperFocusFiling" component={PaperFocusPreview} defaultProps={{variant:'filing' as const}} width={1080} height={1920} fps={30} durationInFrames={210}/>
   <Composition id="PaperFocusReceipt" component={PaperFocusPreview} defaultProps={{variant:'receipt' as const}} width={1080} height={1920} fps={30} durationInFrames={210}/>

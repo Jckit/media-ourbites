@@ -4,7 +4,18 @@ on:
   pull_request:
     paths:
       - 'src/framework/HybridEditorialPrototype.tsx'
+      - 'src/framework/EditorialReferenceStudy.tsx'
+      - 'src/framework/AnthropicEditorialSample.tsx'
+      - 'src/framework/AnthropicEditorialMotionV2.tsx'
+      - 'src/framework/motion/BurningCashMetaphor.tsx'
+      - 'tests/test_anthropic_motion_v2.py'
+      - 'tests/test_anthropic_editorial_sample.py'
+      - 'tests/test_editorial_reference_study.py'
       - 'src/framework/paper-flight.ts'
+      - 'src/framework/captions/**'
+      - 'src/framework/motion/seeded-variation.ts'
+      - 'tests/word-captions.test.mjs'
+      - 'tests/seeded-variation.test.mjs'
       - 'tests/paper-flight.test.mjs'
       - 'src/OurbitesHost.tsx'
       - 'src/CharacterStage.tsx'
@@ -34,6 +45,8 @@ jobs:
         run: |
           npm run typecheck
           node --experimental-strip-types tests/paper-flight.test.mjs
+          node --experimental-strip-types tests/word-captions.test.mjs
+          node --experimental-strip-types tests/seeded-variation.test.mjs
           python3 scripts/check_framework_layout.py
           python3 -m unittest discover -s tests -v
       - name: Export real phone-size silent review video
@@ -83,6 +96,117 @@ jobs:
           sha256sum "$video" src/framework/HybridEditorialPrototype.tsx             src/OurbitesHost.tsx src/AnthropicCharacter.tsx             > out/hybrid-editorial-ci/source-media-sha256.txt
           sha256sum out/hybrid-editorial-ci/frames/*.png             > out/hybrid-editorial-ci/frames-sha256.txt
           git diff --check
+      - name: Render 80-percent reference-first editorial motion study
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx remotion render src/index.tsx EditorialReferenceStudy \
+            out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+            --scale=0.4 --codec=h264 --concurrency=2
+          ffprobe -v error -count_frames -select_streams v:0 \
+            -show_entries stream=codec_name,nb_read_frames,width,height,r_frame_rate -of json \
+            out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+            > out/hybrid-editorial-ci/editorial-reference-probe.json
+          python3 - <<'PY'
+          import json
+          p='out/hybrid-editorial-ci/editorial-reference-probe.json'
+          v=json.load(open(p))['streams'][0]
+          assert v['codec_name']=='h264'
+          assert (v['width'],v['height'])==(432,768)
+          assert int(v['nb_read_frames'])==300
+          assert v['r_frame_rate']=='30/1'
+          PY
+          ffmpeg -v error -i out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+            -vf "fps=2,scale=216:384,tile=5x4" -frames:v 1 \
+            out/hybrid-editorial-ci/editorial-reference-80-20-timeline.jpg
+          for frame in 0 18 37 55 66 79 94 115 131 145 156 176 192 209 220 235 255 272 288 299; do
+            ffmpeg -v error -i out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+              -vf "select=eq(n\\,$frame)" -vsync vfr -frames:v 1 \
+              "out/hybrid-editorial-ci/editorial-reference-frame-${frame}.png"
+          done
+          sha256sum out/hybrid-editorial-ci/editorial-reference-80-20.mp4 \
+            src/framework/EditorialReferenceStudy.tsx \
+            > out/hybrid-editorial-ci/editorial-reference-sha256.txt
+      - name: Render narrated Anthropic 80-20 episode sample
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx remotion render src/index.tsx AnthropicEditorialSample \
+            out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+            --scale=0.4 --codec=h264 --concurrency=2
+          ffprobe -v error -count_frames -show_entries \
+            stream=codec_name,codec_type,nb_read_frames,width,height,r_frame_rate:format=duration \
+            -of json out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+            > out/hybrid-editorial-ci/anthropic-editorial-probe.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('out/hybrid-editorial-ci/anthropic-editorial-probe.json'))
+          v=next(x for x in d['streams'] if x['codec_type']=='video')
+          assert v['codec_name']=='h264' and (v['width'],v['height'])==(432,768)
+          assert int(v['nb_read_frames'])==475 and v['r_frame_rate']=='30/1'
+          assert any(x['codec_type']=='audio' for x in d['streams']), 'Narration missing'
+          assert abs(float(d['format']['duration'])-15.85)<0.25
+          PY
+          ffmpeg -v error -i out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+            -vf "fps=2,scale=216:384,tile=5x8" -frames:v 1 \
+            out/hybrid-editorial-ci/anthropic-editorial-timeline.jpg
+          for frame in 0 25 58 88 98 125 152 185 211 250 275 310 344 380 416 454 474; do
+            ffmpeg -v error -i out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+              -vf "select=eq(n\\,$frame)" -vsync vfr -frames:v 1 \
+              "out/hybrid-editorial-ci/anthropic-editorial-frame-${frame}.png"
+          done
+          sha256sum out/hybrid-editorial-ci/anthropic-editorial-sample.mp4 \
+            src/framework/AnthropicEditorialSample.tsx \
+            > out/hybrid-editorial-ci/anthropic-editorial-sha256.txt
+      - name: Render Anthropic 90-10 character-led motion sample
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx remotion render src/index.tsx AnthropicEditorialMotionV2 \
+            out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+            --scale=0.4 --codec=h264 --concurrency=2
+          ffprobe -v error -count_frames -show_entries \
+            stream=codec_name,codec_type,nb_read_frames,width,height,r_frame_rate:format=duration \
+            -of json out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+            > out/hybrid-editorial-ci/anthropic-motion-90-10-probe.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('out/hybrid-editorial-ci/anthropic-motion-90-10-probe.json'))
+          v=next(s for s in d['streams'] if s['codec_type']=='video')
+          assert v['codec_name']=='h264' and (v['width'],v['height'])==(432,768)
+          assert int(v['nb_read_frames'])==475 and v['r_frame_rate']=='30/1'
+          assert any(s['codec_type']=='audio' for s in d['streams']),'narration not encoded'
+          assert abs(float(d['format']['duration'])-15.85)<0.25
+          PY
+          ffmpeg -v error -i out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+            -vf "fps=2,scale=216:384,tile=5x8" -frames:v 1 \
+            out/hybrid-editorial-ci/anthropic-motion-90-10-timeline.jpg
+          for frame in 0 22 47 78 99 126 151 178 211 250 282 322 352 387 413 449 474; do
+            ffmpeg -v error -i out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+              -vf "select=eq(n\\,$frame)" -vsync vfr -frames:v 1 \
+              "out/hybrid-editorial-ci/anthropic-motion-v2-frame-${frame}.png"
+          done
+          sha256sum out/hybrid-editorial-ci/anthropic-motion-90-10.mp4 \
+            src/framework/AnthropicEditorialMotionV2.tsx \
+            src/framework/motion/BurningCashMetaphor.tsx \
+            > out/hybrid-editorial-ci/anthropic-motion-v2-sha256.txt
+      - name: Render silent word-level caption fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx remotion render src/index.tsx WordCaptionPreview \
+            out/hybrid-editorial-ci/word-caption-preview.mp4 \
+            --scale=0.4 --codec=h264 --concurrency=2
+          npx remotion still src/index.tsx WordCaptionPreview \
+            out/hybrid-editorial-ci/word-caption-person.png --frame=95 --scale=0.4
+          npx remotion still src/index.tsx WordCaptionPreview \
+            out/hybrid-editorial-ci/word-caption-company.png --frame=20 --scale=0.4
+          ffprobe -v error -count_frames -select_streams v:0 \
+            -show_entries stream=nb_read_frames,width,height -of json \
+            out/hybrid-editorial-ci/word-caption-preview.mp4 \
+            > out/hybrid-editorial-ci/word-caption-probe.json
+          sha256sum out/hybrid-editorial-ci/word-caption-preview.mp4 \
+            > out/hybrid-editorial-ci/word-caption-sha256.txt
       - name: Attach complete video and review frames
         if: always()
         uses: actions/upload-artifact@v4
