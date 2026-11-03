@@ -5,6 +5,8 @@ description: Turn an evidence-checked Ourbites script into a directed, scene-by-
 
 # Ourbites Creative Director
 
+**2.5D direction (2026-11-03):** Build on the burning-cash V2 baseline, not a redesign. In existing tickets specify focal object, three depth planes, camera intent/pivot, spatial path separately from time easing, occlusion/contact, protected reading layers and entry/exit poses. Use the [controlled 2.5D rules](../ourbites-motion/SKILL.md#controlled-editorial-25d-2026-11-03). Reference-led motion remains 90/10; no full-3D pipeline or added asset detail quota. Human playback/style gate remains.
+
 **LATEST (2026-11-01): 90% reference / 10% original visual language, persistent host and recurring second character.** This supersedes the 80/20 request below. In the Anthropic episode, keep the canonical protagonist in one consistent screen-space guide position; animate gaze/pose/interaction, not repeated repositioning. Reintroduce the original `DarioIllustration` in the finance explanation with review-only likeness status. Replace repeated presentation cards with authored original graphical events (stylized burning money metaphor, an actual tilting comparison balance, drawn valuation trajectories). The cash-burning hook must be visually marked as metaphor and explicitly corrected by the factual net-loss-versus-cash-flow explanation. Use distinct temporal Bézier curves, animated shapes, impact/decay and connected focal attention. Keep caption rail consistent with individual word fade; provisional phrase-derived word timing is NOT publication-ready. Motion design is the priority: simpler art is welcome, static slide templates are not. Human normal-speed video review and final media gates remain unchanged.
 
 

@@ -1,0 +1,55 @@
+name: Review editorial depth candidate
+on:
+  pull_request:
+    paths:
+      - 'src/framework/AnthropicEditorialDepth.tsx'
+      - 'src/framework/DepthMotionFixture.tsx'
+      - 'src/framework/motion/**'
+      - 'public/ourbites-grids/**'
+      - 'tests/depth-motion.test.mjs'
+      - 'src/index.tsx'
+      - '.github/workflows/editorial-depth-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  depth-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Validate shared motion and inherited contracts
+        run: |
+          npm run typecheck
+          node --experimental-strip-types tests/depth-motion.test.mjs
+          node --experimental-strip-types tests/word-captions.test.mjs
+          node --experimental-strip-types tests/paper-flight.test.mjs
+          python3 -m unittest discover -s tests
+      - name: Render narrated candidate and distinct silent fixture
+        run: |
+          mkdir -p out/depth-ci
+          npx remotion render src/index.tsx AnthropicEditorialDepth out/depth-ci/anthropic-depth.mp4 --scale=0.4 --codec=h264 --concurrency=2
+          npx remotion render src/index.tsx DepthMotionFixture out/depth-ci/parcel-depth-fixture.mp4 --scale=0.4 --codec=h264 --concurrency=2
+          ffprobe -v error -count_frames -show_entries stream=codec_name,codec_type,width,height,r_frame_rate,nb_read_frames -of json out/depth-ci/anthropic-depth.mp4 > out/depth-ci/probe.json
+          python3 - <<'PY'
+          import json
+          p=json.load(open('out/depth-ci/probe.json'))['streams']
+          v=next(s for s in p if s['codec_type']=='video')
+          assert (v['width'],v['height'],v['r_frame_rate'],int(v['nb_read_frames']))==(432,768,'30/1',475)
+          assert any(s['codec_type']=='audio' for s in p)
+          PY
+          for n in 47 84 85 86 98 151 188 189 190 211 250 303 304 305 322 352 387 413 449 474; do
+            ffmpeg -v error -i out/depth-ci/anthropic-depth.mp4 -vf "select=eq(n\,$n)" -vsync vfr -frames:v 1 "out/depth-ci/frame-$n.png"
+          done
+          sha256sum out/depth-ci/*.mp4 src/framework/AnthropicEditorialDepth.tsx src/framework/motion/depth-motion.ts > out/depth-ci/hashes.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: editorial-depth-review
+          path: out/depth-ci/
+          retention-days: 14

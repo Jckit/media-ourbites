@@ -60,3 +60,15 @@ For exact aesthetic terms, focal hierarchy, suggested prototype timings, transit
 ## Paper-collage authoring route
 
 For editorial-paper shots, use [ourbites-paper-collage](../ourbites-paper-collage/SKILL.md) for composition and adaptable animation recipes. It does not require a sample clip or a fixed seven-second sequence. This motion skill retains responsibility for implementation, anchors and verification.
+
+## Controlled editorial 2.5D (2026-11-03)
+
+Preserve the latest working mechanisms before adding depth. V2 replaced static filing/value cards with independently moving notes, flames/embers, a tilting balance and drawn accounting trajectory; its persistent host/Dario make the explanation more active. This is an observed design difference, not measured engagement improvement.
+
+Use `motion/depth-motion.ts` for pure projection, spatial cubic paths and elevation/contact; `DepthPlane` for a single camera owner. Example: `depthPath(easedProgress, [start, control1, control2, end])` → `projectDepth(point, camera)`. Geometry controls the route; independently authored time easing controls speed. Units are composition pixels, positive z nearer, focal length defaults to1600. Avoid z >= 0.75*focalLength (throws). Sibling order explicitly controls occlusion; do not imply a full 3D scene or automatic depth sorting.
+
+Assign background/midground/foreground and a focal object per shot. Start with 2–4% camera push, small pan and shallow tilt; these are authoring defaults, not quotas. Ground contact with an elevation-driven shadow; render near/far overlap to prove depth. Keep host home position, evidence caveats and word captions in screen space. Tilt mechanisms, not essential reading copy. Match adjacent transition poses; do not replace existing expressive timing with one universal ease.
+
+Avoid: multiplying identical transforms onto every layer (no parallax), perpetual floating shadows, large camera moves that clip values, moving captions with the world, card entrances disguised by perspective, or new graphic detail as a substitute for movement. Validate matched encoded media and a distinct fixture. Current depth study remains human-review-only; provisional phrase-derived words remain explicitly unaligned.
+
+Human correction (2026-11-03): subtle shadows alone did not deliver enough difference from V2. Use supplied grid assets as a separately moving rear plane when selected; pick color for the beat, reduce opacity behind reading zones, and verify phone readability. For mechanical comparisons, render factual values and category labels in protected foreground space, clear of pivots, beams and suspension lines throughout motion. An object being drawn last does not prevent visual collisions.
