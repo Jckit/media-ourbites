@@ -14,6 +14,14 @@ This provides paths and a manual handoff, not automatic director/asset orchestra
 Author real research and copy in the existing episode manifest format; preserve human
 Gates A/B/C. Each episode references the shared engine and candidate motion catalog.
 
+## Director and viewer handoff
+
+After research/copy, use the Creative Director skill to write episode-local
+animation-tickets.json and run `python scripts/validate_animation_tickets.py <file>`.
+Motion/Codex and Viewer consume the same [ticket contract](skills/ourbites-creative-director/references/animation-tickets.md).
+Structural validation runs offline; actual director invocation/asset acquisition
+remain issue43. Visual authority: [canonical contract](styles/OURBITES-HYBRID-EDITORIAL.md).
+
 ## Current batch
 
 Revision v4: native 1.1x timing in both Ownership compositions and exports, using `playbackSpeed` / `useStoryClock` in `story-motion.tsx`. Three beats: hook, explanation, payoff. Audio/captions stay outside outgoing visual scenes so narration survives transitions. Export: `out/ourbites-story-v4.mp4`. Manual workflow: `SCRIPT-TO-VIDEO.md`. Generic BusinessShort remains a separate silent storyboard path.

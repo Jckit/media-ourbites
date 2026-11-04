@@ -5,6 +5,10 @@ description: Produce and refine Ourbites business explainer scripts, sourced epi
 
 # Ourbites production
 
+## Visual handoff
+
+After the current research/script, invoke the Creative Director skill to author [validated animation tickets](../ourbites-creative-director/references/animation-tickets.md) under the [canonical visual contract](../../styles/OURBITES-HYBRID-EDITORIAL.md). Run the validator before handing tickets to motion/Codex, and give the same ticket to the viewer. This is a documented agent workflow, not an automated director/downloader; executable orchestration belongs to issue43.
+
 ## Start with the existing project
 
 Canonical workspace: `C:/Users/Justin/Documents/ChatGPT/Businesses/business-and-chats`.

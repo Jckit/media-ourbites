@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "scenario_kind": "existing-episode",
+  "episode_manifest": "episodes/002/episode.json",
+  "synthetic_claim_ids": [],
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "tickets": [
+    {
+      "id": "extract-note",
+      "claim_ids": [
+        "remeasure",
+        "cash-distinction"
+      ],
+      "visual_thesis": "An accounting instrument separates from the filing while illustrative cash remains intact.",
+      "takeaway": "Reported loss includes financing accounting effects, not literal cash destroyed.",
+      "hero": {
+        "id": "financing-note",
+        "kind": "Illustrative convertible-financing note",
+        "start_state": "Bound to filing",
+        "action": "Lift and travel to the guest hand",
+        "end_state": "Held at the note corner"
+      },
+      "layers": {
+        "background": "Selected grid rear plane",
+        "midground": "Hero object and supporting mechanism",
+        "foreground": "Actor hands where contact requires it; captions in screen space"
+      },
+      "camera": {
+        "framing": "Medium shot",
+        "pivot": [
+          540,
+          800
+        ],
+        "action": "Static while object establishes direction; motivated push after contact"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          65,
+          1090
+        ],
+        "gaze_target": "financing-note corner",
+        "contact": "Dario hand follows transformed bottom-right note anchor; one coordinate owner",
+        "occlusion": "Note before torso; fingertips above note at contact",
+        "reason": "Preserve current guide position while the world moves"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            400,
+            700
+          ],
+          [
+            520,
+            450
+          ],
+          [
+            740,
+            740
+          ],
+          [
+            680,
+            950
+          ]
+        ],
+        "temporal_bezier": [
+          0.42,
+          0,
+          0.18,
+          1
+        ],
+        "anticipation": "Brief lift before travel, not a bounce",
+        "settle": "Decelerate into the destination with one contact owner",
+        "overlap": "Background lags the hero; captions remain on their own source clock"
+      },
+      "timing": {
+        "cue": "Existing clip3: Most of the gap comes from accounting changes on financing.",
+        "start_source_seconds": 11.6,
+        "end_source_seconds": 13.1,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          65,
+          1490,
+          950,
+          241
+        ],
+        "source_region": [
+          72,
+          1745,
+          930,
+          145
+        ],
+        "hold_seconds": 0.8
+      },
+      "transition": {
+        "type": "continuity",
+        "next_ticket": "stamp-note",
+        "shared_object": "financing-note",
+        "reason": "Keep the held note and grip unchanged while its accounting status becomes visible"
+      },
+      "assets": [
+        {
+          "request_id": "anthropic-wordmark",
+          "purpose": "Identify company on the retained filing, not an implied endorsement",
+          "kind": "logo",
+          "source_class": "official brand materials",
+          "rights_status": "pending",
+          "evidence": "",
+          "local_path": "",
+          "fallback": "Distinct ordinary Anthropic text; explicitly unapproved placeholder"
+        }
+      ],
+      "no_external_assets_reason": ""
+    },
+    {
+      "id": "stamp-note",
+      "claim_ids": [
+        "remeasure",
+        "cash-distinction"
+      ],
+      "visual_thesis": "An accounting instrument separates from the filing while illustrative cash remains intact.",
+      "takeaway": "Read the accounting component; selected pieces do not fully reconcile the total.",
+      "hero": {
+        "id": "financing-note",
+        "kind": "Illustrative convertible-financing note",
+        "start_state": "Held at note corner",
+        "action": "Physical stamp lands; matching accounting entry appears on filing",
+        "end_state": "Marked note still held; cash remains intact"
+      },
+      "layers": {
+        "background": "Selected grid rear plane",
+        "midground": "Hero object and supporting mechanism",
+        "foreground": "Actor hands where contact requires it; captions in screen space"
+      },
+      "camera": {
+        "framing": "Wider view: note, filing entry and unchanged cash",
+        "pivot": [
+          540,
+          800
+        ],
+        "action": "Static while object establishes direction; motivated push after contact"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          65,
+          1090
+        ],
+        "gaze_target": "financing-note corner",
+        "contact": "Dario hand follows transformed bottom-right note anchor; one coordinate owner",
+        "occlusion": "Note before torso; fingertips above note at contact",
+        "reason": "Preserve current guide position while the world moves"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            680,
+            950
+          ]
+        ],
+        "temporal_bezier": [
+          0.42,
+          0,
+          0.18,
+          1
+        ],
+        "anticipation": "Stamp, a separate supporting object, lifts before descending",
+        "settle": "Note stays held through stamp impact; stamp retracts",
+        "overlap": "Background lags the hero; captions remain on their own source clock"
+      },
+      "timing": {
+        "cue": "Existing clip3: Most of the gap comes from accounting changes on financing.",
+        "start_source_seconds": 13.1,
+        "end_source_seconds": 17.4,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          65,
+          1490,
+          950,
+          241
+        ],
+        "source_region": [
+          72,
+          1745,
+          930,
+          145
+        ],
+        "hold_seconds": 0.8
+      },
+      "transition": {
+        "type": "end",
+        "next_ticket": "",
+        "shared_object": "",
+        "reason": "Read selected component, not a full reconciliation"
+      },
+      "assets": [
+        {
+          "request_id": "anthropic-wordmark",
+          "purpose": "Identify company on the retained filing, not an implied endorsement",
+          "kind": "logo",
+          "source_class": "official brand materials",
+          "rights_status": "pending",
+          "evidence": "",
+          "local_path": "",
+          "fallback": "Distinct ordinary Anthropic text; explicitly unapproved placeholder"
+        }
+      ],
+      "no_external_assets_reason": ""
+    }
+  ]
+}
