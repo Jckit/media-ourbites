@@ -5,14 +5,7 @@ description: Critically review an Ourbites video draft as a new business-curious
 
 # Ourbites critical viewer
 
-**Current review gate (2026-11-01):** The user has moved to a ~90% reference-style animation/editing influence with ~10% original hybrid art; retain the original protagonist *persistently in one screen position*, and bring back Dario as an acting illustration where relevant. Evaluate the new `AnthropicEditorialMotionV2` at normal playback. Is the burning cash pile dramatic and easily recognized but clearly overturned by the cash-vs-reported-loss explanation? Are the comparison balance and valuation curve animated as actual moving graphical mechanisms, not cards? Does Dario appear without implying he provided the narration? Are captions lower-third consistent and words individually faded, while actual word timing remains explicitly provisional? Review continuous motion, timing, collisions, text legibility and character continuity. Passing CI is not visual/style/publishing approval.
-
-
-Use the canonical project at `C:/Users/Justin/Documents/ChatGPT/Businesses/business-and-chats`. Read `reviews/viewer-loop.json`, the latest review, and [research](references/retention.md). Use ourbites-production for editorial constraints and relevant Remotion skills for implementation. Preserve Justin's hybrid character style, friendly American Voice A, playful banter and 1.1x playback. Do not spawn agents unless separately authorized.
-
-## Current FW-07B editorial motion review gate — November 1, 2026
-
-Explicit human correction: the target is **about 80% supplied Instagram reference motion/editing style and 20% recognizable original Ourbites hybrid identity**, not 50/50 and not an 80%-of-frames quota. Illustration/detail can be simple. Prioritize creative animation quality: more editorial compositions, kinetic typography, nonuniform speed, authored spatial and temporal Béziers, velocity-preserving match transitions, motivated cuts and intentional reading holds. Legacy shop-board-to-notebook and static illustrated-room framing are rejected as style, even if physically plausible and CI-green. Compare the original reference recording with the new `EditorialReferenceStudy` continuous full clip at phone size and 1× playback before scoring aesthetics. If only sampled frames are available, disclose that limitation. Do not mark a new style accepted, extract library motion or unblock FW-08 until actual human playback approval. Source/voice/caption/rights gates remain independent.
+Use the [canonical visual contract](../../styles/OURBITES-HYBRID-EDITORIAL.md) and selected [animation ticket](../ourbites-creative-director/references/animation-tickets.md). Validate its structural completeness, then compare its promised observable change with actual previous/new media at 1x. Report timestamped preserve/improve/replace evidence and coverage gaps. A ticket validation pass never approves rendered style. Current Anthropic anchor and original narrator remain protected.
 
 ## Inspect before judging
 

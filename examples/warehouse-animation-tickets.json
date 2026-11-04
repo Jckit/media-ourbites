@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "scenario_kind": "synthetic",
+  "episode_manifest": "",
+  "synthetic_claim_ids": [
+    "hypothetical-return-process",
+    "hypothetical-stock-release"
+  ],
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "tickets": [
+    {
+      "id": "returns-arrive",
+      "claim_ids": [
+        "hypothetical-return-process"
+      ],
+      "visual_thesis": "Synthetic warehouse: a returned parcel enters the inspection lane before it can return to stock.",
+      "takeaway": "A return must be checked before it becomes sellable stock.",
+      "hero": {
+        "id": "returned-parcel",
+        "kind": "Original cardboard parcel illustration",
+        "start_state": "On incoming belt",
+        "action": "Travel through a scanner and stop at inspection mark",
+        "end_state": "At inspection stop"
+      },
+      "layers": {
+        "background": "Selected grid rear plane",
+        "midground": "Hero object and supporting mechanism",
+        "foreground": "Actor hands where contact requires it; captions in screen space"
+      },
+      "camera": {
+        "framing": "Medium shot",
+        "pivot": [
+          540,
+          850
+        ],
+        "action": "Track lateral belt travel, then lock for inspection"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          65,
+          1090
+        ],
+        "gaze_target": "parcel at scanner",
+        "contact": "None required; host directs attention",
+        "occlusion": "Host above environment, protected from hero collision",
+        "reason": "Host points out inspection as the bottleneck"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            40,
+            850
+          ],
+          [
+            250,
+            850
+          ],
+          [
+            600,
+            850
+          ],
+          [
+            850,
+            850
+          ]
+        ],
+        "temporal_bezier": [
+          0.42,
+          0,
+          0.18,
+          1
+        ],
+        "anticipation": "Brief lift before travel, not a bounce",
+        "settle": "Decelerate into the destination with one contact owner",
+        "overlap": "Background lags the hero; captions remain on their own source clock"
+      },
+      "timing": {
+        "cue": "Synthetic silent animatic cue: returned is not yet restocked",
+        "start_source_seconds": 0,
+        "end_source_seconds": 2.5,
+        "word_timing": "none"
+      },
+      "reading": {
+        "caption_region": [
+          65,
+          1490,
+          950,
+          241
+        ],
+        "source_region": [
+          72,
+          1745,
+          930,
+          145
+        ],
+        "hold_seconds": 0.8
+      },
+      "transition": {
+        "type": "clean-cut",
+        "next_ticket": "stock-release",
+        "shared_object": "",
+        "reason": "Change from physical inspection to inventory decision; no pretend parcel morph"
+      },
+      "assets": [],
+      "no_external_assets_reason": "Original illustrative objects; no documentary asset needed for this action"
+    },
+    {
+      "id": "stock-release",
+      "claim_ids": [
+        "hypothetical-stock-release"
+      ],
+      "visual_thesis": "Synthetic warehouse: checked inventory is released only after the inspection signal.",
+      "takeaway": "Only inspected goods re-enter available stock; no real-company claim.",
+      "hero": {
+        "id": "stock-dial",
+        "kind": "Original stock dial",
+        "start_state": "Awaiting inspection signal",
+        "action": "Latch releases after green inspection signal; dial advances one illustrative step",
+        "end_state": "Available stock indicator advanced"
+      },
+      "layers": {
+        "background": "Selected grid rear plane",
+        "midground": "Hero object and supporting mechanism",
+        "foreground": "Actor hands where contact requires it; captions in screen space"
+      },
+      "camera": {
+        "framing": "Tight mechanism close-up",
+        "pivot": [
+          540,
+          800
+        ],
+        "action": "Clean cut to dial; hold to read the changed state"
+      },
+      "actor": {
+        "mode": "absent",
+        "anchor": [
+          65,
+          1090
+        ],
+        "gaze_target": "not applicable",
+        "contact": "No actor contact in close-up",
+        "occlusion": "Indicator in foreground, signal behind latch",
+        "reason": "Close-up clarifies release; host was meaningful in preceding shot"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            540,
+            800
+          ]
+        ],
+        "temporal_bezier": [
+          0.42,
+          0,
+          0.18,
+          1
+        ],
+        "anticipation": "Signal arrives before latch moves",
+        "settle": "Dial stops once at next tick, not a numerical factual estimate",
+        "overlap": "Background lags the hero; captions remain on their own source clock"
+      },
+      "timing": {
+        "cue": "Synthetic silent animatic cue: inspected then available",
+        "start_source_seconds": 2.5,
+        "end_source_seconds": 6,
+        "word_timing": "none"
+      },
+      "reading": {
+        "caption_region": [
+          65,
+          1490,
+          950,
+          241
+        ],
+        "source_region": [
+          72,
+          1745,
+          930,
+          145
+        ],
+        "hold_seconds": 0.8
+      },
+      "transition": {
+        "type": "end",
+        "next_ticket": "",
+        "shared_object": "",
+        "reason": "Hold the consequence for comprehension"
+      },
+      "assets": [],
+      "no_external_assets_reason": "Original illustrative objects; no documentary asset needed for this action"
+    }
+  ]
+}

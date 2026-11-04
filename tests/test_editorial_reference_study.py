@@ -1,4 +1,4 @@
-"""80/20 editorial-first motion candidate: structural guardrails, not art approval."""
+"""Historical editorial-first motion candidate: structural guardrails, not art approval."""
 import pathlib
 import re
 import unittest
@@ -40,9 +40,9 @@ class EditorialReferenceStudyTests(unittest.TestCase):
         self.assertNotIn("scale('+(page.w/1080)", SCENE)
 
     def test_revised_direction_is_explicit_and_requires_real_visual_review(self):
-        self.assertIn("80% supplied reference, 20% original", STYLE)
-        self.assertIn("technically correct Bézier curve", STYLE)
-        self.assertIn("natural speed", STYLE)
+        self.assertIn("90% motion/editing grammar, 10% recognizable Ourbites identity", STYLE)
+        self.assertIn("Tests do not measure taste or retention", STYLE)
+        self.assertIn("at 1x, phone size", STYLE)
 
 if __name__ == "__main__":
     unittest.main()

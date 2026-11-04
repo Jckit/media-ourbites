@@ -44,11 +44,9 @@ class HybridEditorialPrototypeTests(unittest.TestCase):
         self.assertIn("poseFrom={poseFrom} poseBlend={poseBlend}",stage)
 
     def test_canonical_style_requires_user_art_review(self):
-        self.assertIn("Ourbites Hybrid Editorial Animation",STYLE)
-        self.assertIn("not too PowerPoint-like",STYLE)
-        self.assertIn("human judgment",STYLE)
-        self.assertIn("FW-07B",STYLE)
-        self.assertIn("No forced 3D",STYLE)
+        self.assertIn("Human playback/art acceptance precedes",STYLE)
+        self.assertIn("No mandatory room",STYLE)
+        self.assertIn("No merge, CI result or written contract supplies",STYLE)
 
 if __name__=="__main__":
     unittest.main()

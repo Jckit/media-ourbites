@@ -1,0 +1,429 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ourbites animation tickets v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scenario_kind",
+    "episode_manifest",
+    "synthetic_claim_ids",
+    "canvas",
+    "tickets"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "enum": [
+        1
+      ]
+    },
+    "scenario_kind": {
+      "type": "string",
+      "enum": [
+        "existing-episode",
+        "synthetic"
+      ]
+    },
+    "episode_manifest": {
+      "type": "string"
+    },
+    "synthetic_claim_ids": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "canvas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "width",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "tickets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "claim_ids",
+          "visual_thesis",
+          "takeaway",
+          "hero",
+          "layers",
+          "camera",
+          "actor",
+          "motion",
+          "timing",
+          "reading",
+          "transition",
+          "assets",
+          "no_external_assets_reason"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "claim_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "visual_thesis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "takeaway": {
+            "type": "string",
+            "minLength": 1
+          },
+          "hero": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "kind",
+              "start_state",
+              "action",
+              "end_state"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "type": "string",
+                "minLength": 1
+              },
+              "start_state": {
+                "type": "string",
+                "minLength": 1
+              },
+              "action": {
+                "type": "string",
+                "minLength": 1
+              },
+              "end_state": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "layers": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "background",
+              "midground",
+              "foreground"
+            ],
+            "properties": {
+              "background": {
+                "type": "string",
+                "minLength": 1
+              },
+              "midground": {
+                "type": "string",
+                "minLength": 1
+              },
+              "foreground": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "camera": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "framing",
+              "pivot",
+              "action"
+            ],
+            "properties": {
+              "framing": {
+                "type": "string",
+                "minLength": 1
+              },
+              "pivot": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "action": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "actor": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "mode",
+              "anchor",
+              "gaze_target",
+              "contact",
+              "occlusion",
+              "reason"
+            ],
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "fixed-anchor",
+                  "absent",
+                  "none"
+                ]
+              },
+              "anchor": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "gaze_target": {
+                "type": "string",
+                "minLength": 1
+              },
+              "contact": {
+                "type": "string",
+                "minLength": 1
+              },
+              "occlusion": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "motion": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "spatial_path",
+              "temporal_bezier",
+              "anticipation",
+              "settle",
+              "overlap"
+            ],
+            "properties": {
+              "spatial_path": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "temporal_bezier": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "anticipation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "settle": {
+                "type": "string",
+                "minLength": 1
+              },
+              "overlap": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "timing": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "cue",
+              "start_source_seconds",
+              "end_source_seconds",
+              "word_timing"
+            ],
+            "properties": {
+              "cue": {
+                "type": "string",
+                "minLength": 1
+              },
+              "start_source_seconds": {
+                "type": "number",
+                "minimum": 0
+              },
+              "end_source_seconds": {
+                "type": "number",
+                "minimum": 0
+              },
+              "word_timing": {
+                "type": "string",
+                "enum": [
+                  "provisional",
+                  "measured",
+                  "none"
+                ]
+              }
+            }
+          },
+          "reading": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "caption_region",
+              "source_region",
+              "hold_seconds"
+            ],
+            "properties": {
+              "caption_region": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "source_region": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "hold_seconds": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          },
+          "transition": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "next_ticket",
+              "shared_object",
+              "reason"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "continuity",
+                  "motivated-cut",
+                  "clean-cut",
+                  "end"
+                ]
+              },
+              "next_ticket": {
+                "type": "string"
+              },
+              "shared_object": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "assets": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "request_id",
+                "purpose",
+                "kind",
+                "source_class",
+                "rights_status",
+                "evidence",
+                "local_path",
+                "fallback"
+              ],
+              "properties": {
+                "request_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "purpose": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "kind": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_class": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "rights_status": {
+                  "type": "string",
+                  "enum": [
+                    "pending",
+                    "approved",
+                    "original-fallback"
+                  ]
+                },
+                "evidence": {
+                  "type": "string"
+                },
+                "local_path": {
+                  "type": "string"
+                },
+                "fallback": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "no_external_assets_reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
