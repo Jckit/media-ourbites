@@ -55,6 +55,44 @@ To explicitly export a draft later:
 npm run render:draft
 ```
 
+## Start an episode workspace
+
+```powershell
+python scripts/create_episode_workspace.py --id 003 --slug coffee-subscriptions --dry-run
+python scripts/create_episode_workspace.py --id 003 --slug coffee-subscriptions
+python scripts/create_episode_workspace.py --id 004 --slug warehouse-returns
+```
+
+These are example topics, not researched stories. IDs are exactly three ASCII digits
+(`001`–`999`); slugs start with a lowercase letter and use lowercase letters/digits
+separated by single hyphens (maximum 64 characters). The script resolves the repo
+from its own location, so it can run from another working directory.
+
+Each command creates only `episodes/<id>/workspace.json` and `PRODUCTION.md`, plus
+empty local media directories under `out/episodes/<id>/`. Dry-run prints the same
+planned manifest without writing. Existing IDs or local media, invalid names and
+linked/junction output parents are refused. On an I/O failure, inspect any retained
+partial output; retry never overwrites it. Run in a trusted checkout without another
+process replacing directory links while creation is in progress.
+
+| Ownership | Contents |
+|---|---|
+| Episode, tracked | Workspace/handoff; research brief, episode.json (claims + scene narration), shot plan, animation tickets and asset manifests **when actually produced** |
+| Shared, referenced | Existing `src/framework`, host/characters, production/director/viewer skills and `motion-library/catalog.json`; no component copies |
+| Local, ignored | `out/episodes/<id>/{assets/originals,assets/working,audio,captions,renders,reviews}`; source bytes separate from derivatives |
+
+The motion catalog currently has `accepted: []`; references do not approve candidate
+recipes. This command scaffolds paths only: it does not write claims/scripts, invoke
+agents, download assets, register compositions, render video or approve any gate.
+Issue #43 owns director execution/assets; #45 owns visual tickets. Follow
+[WORKFLOW.md](WORKFLOW.md) and the generated handoff for those later stages.
+
+Offline proof: `python -m unittest discover -s tests -p test_episode_workspace.py -v`
+creates two synthetic workspaces (003 coffee subscriptions / 004 warehouse returns)
+in temporary repositories, checks common shared references and zero cloned code,
+exercises the CLI from another directory, and verifies no-write/no-overwrite behavior.
+The test also checks actual Git ignore rules for working media versus tracked config.
+
 ## Human approval examples
 
 Only a human reviewer should use `approve` after reading/watching the artifacts. Replace the explanatory notes with the actual review outcome. The tool never authenticates identity or proves the factual accuracy of a claim.

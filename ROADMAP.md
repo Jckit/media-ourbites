@@ -68,3 +68,7 @@ PR30 flair pass: Codex owns HybridEditorialPrototype.tsx and reviews/viewer/2026
 PR30 flair pass verified: [review](reviews/viewer/20261029-pr30-editorial-flair.md). Ownership released; FW-07B remains review. Local 432x768/300-frame render, TypeScript and 54 tests passed; continuous human playback/style acceptance still needed.
 
 FW-07B new paper-turn direction draft: codex/paper-turn-art-direction, based on PR34 e6dff7b. [Review and remaining style gate](reviews/viewer/20261030-paper-turn-draft.md). Scope: isolated sample, small trajectory helper, regression check and CI routing. Implementation ownership released; human direction review pending, FW-07C/FW-08 remain blocked.
+
+
+## Issue 46 — episode workspace MVP
+Owner: Codex; 2026-11-04; branch codex/episode-workspace-generator; base60fcd17. Status: implemented, awaiting PR review. Scope: scripts/create_episode_workspace.py, offline tests, README/WORKFLOW usage. No animation or existing episode changes. Owner released. Evidence: 003 coffee-subscriptions and 004 warehouse-returns created via CLI in temporary fixtures with identical shared references; dry-run writes nothing; collisions/traversal rejected; actual Git ignore rules checked. Full suite: 74 tests, 73 passed/one Windows symlink-privilege skip; npm run typecheck passed. Linux CI covers symlink creation.
