@@ -6,6 +6,14 @@ Use [ROADMAP.md](ROADMAP.md) as the canonical reusable-animation task board. Age
 
 Updated 27 October 2026. We will refine this against actual episodes.
 
+## New episode shell
+
+Run `python scripts/create_episode_workspace.py --id 003 --slug example-topic --dry-run`,
+then omit `--dry-run` to create the empty workspace. See [usage and ownership](README.md#start-an-episode-workspace).
+This provides paths and a manual handoff, not automatic director/asset orchestration.
+Author real research and copy in the existing episode manifest format; preserve human
+Gates A/B/C. Each episode references the shared engine and candidate motion catalog.
+
 ## Current batch
 
 Revision v4: native 1.1x timing in both Ownership compositions and exports, using `playbackSpeed` / `useStoryClock` in `story-motion.tsx`. Three beats: hook, explanation, payoff. Audio/captions stay outside outgoing visual scenes so narration survives transitions. Export: `out/ourbites-story-v4.mp4`. Manual workflow: `SCRIPT-TO-VIDEO.md`. Generic BusinessShort remains a separate silent storyboard path.
