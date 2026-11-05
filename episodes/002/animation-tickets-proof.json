@@ -12,16 +12,18 @@
       "id": "accounting-press",
       "claim_ids": [
         "remeasure",
-        "cash-distinction"
+        "net",
+        "cash-distinction",
+        "other-lines"
       ],
-      "visual_thesis": "An illustrative press posts a financing fair-value component to reported loss while separate cash does not change.",
+      "visual_thesis": "Remeasurement produces a charge; the same printed entry physically enters the reported-loss statement while separate cash stays unchanged.",
       "takeaway": "Financing accounting changes affect reported loss; this does not mean cash was destroyed.",
       "hero": {
-        "id": "financing-slip",
-        "kind": "Original illustrative financing slip and accounting press",
-        "start_state": "Slip poised above feed rollers",
-        "action": "Dario turns crank; slip feeds and reported-loss entry emerges",
-        "end_state": "Posted selected component beside unchanged illustrative cash"
+        "id": "printed-charge",
+        "kind": "Charge emerging from an illustrative remeasurement press",
+        "start_state": "Charge not emitted yet; financing instruments enter without a preprinted amount",
+        "action": "Dario drives remeasurement press; printed charge detaches and follows a continuous arc into the statement pocket",
+        "end_state": "Selected financing charge included within a statement showing the fixed sourced reported net loss"
       },
       "layers": {
         "background": "Selected grid rear plane",
@@ -29,12 +31,12 @@
         "foreground": "Actor hands where contact requires it; captions in screen space"
       },
       "camera": {
-        "framing": "Medium three-quarter mechanical close-up, then widen to cash",
+        "framing": "Larger mechanical close-up, then upper statement payoff",
         "pivot": [
           540,
           800
         ],
-        "action": "Push during feed; pull back to show independent cash lane"
+        "action": "Press camera begins at1.15x and pushes to1.21x; press exits left/up after hand release while the sheet travels independently"
       },
       "actor": {
         "mode": "fixed-anchor",
@@ -42,8 +44,8 @@
           65,
           1090
         ],
-        "gaze_target": "press crank then result",
-        "contact": "Dario hand and crank endpoint use one projected point",
+        "gaze_target": "Press then ascending charge and received statement",
+        "contact": "Crank and hand share a projected anchor until2.25s; hand returns to rest before press exits at3s",
         "occlusion": "Hand holds foreground crank handle; paper passes behind front roller",
         "reason": "Preserve current guide position while the world moves"
       },
@@ -73,12 +75,123 @@
           1
         ],
         "anticipation": "Crank winds back before forward drive",
-        "settle": "Drive decelerates to its stop; host makes a small single impact response",
-        "overlap": "Slip feed leads record emergence; independent camera widens after posting"
+        "settle": "Paper lands in the statement pocket without changing its amount or the fixed reported total",
+        "overlap": "Print finishes at2.55s; release2.85s; press exit3\u20133.85s; sheet arrives4.55s leaving over1s for reading"
       },
       "timing": {
         "cue": "Whole original narration clip3",
         "start_source_seconds": 11.368666666666666,
+        "end_source_seconds": 14.503666666666666,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          65,
+          1490,
+          950,
+          241
+        ],
+        "source_region": [
+          72,
+          1745,
+          930,
+          145
+        ],
+        "hold_seconds": 0.3
+      },
+      "transition": {
+        "type": "continuity",
+        "next_ticket": "include-accounting-entry",
+        "shared_object": "printed-charge",
+        "reason": "Output sheet continues without a pose change; press clears for the statement view"
+      },
+      "assets": [
+        {
+          "request_id": "anthropic-official-mark",
+          "purpose": "Company identification",
+          "kind": "Official wordmark",
+          "source_class": "Official brand kit",
+          "rights_status": "pending",
+          "evidence": "Prior permission not established; no official asset ingested",
+          "local_path": "",
+          "fallback": "Ordinary text Anthropic; original illustrative press. Candidate remains unapproved."
+        }
+      ],
+      "no_external_assets_reason": ""
+    },
+    {
+      "id": "include-accounting-entry",
+      "claim_ids": [
+        "remeasure",
+        "net",
+        "cash-distinction",
+        "other-lines"
+      ],
+      "visual_thesis": "Remeasurement produces a charge; the same printed entry physically enters the reported-loss statement while separate cash stays unchanged.",
+      "takeaway": "Financing accounting changes affect reported loss; this does not mean cash was destroyed.",
+      "hero": {
+        "id": "printed-charge",
+        "kind": "Original accounting entry",
+        "start_state": "Fully printed at shared press release anchor",
+        "action": "Travel upward and settle behind the receiving pocket lip",
+        "end_state": "Physically included beneath fixed reported-net-loss total"
+      },
+      "layers": {
+        "background": "Selected grid rear plane",
+        "midground": "Hero object and supporting mechanism",
+        "foreground": "Actor hands where contact requires it; captions in screen space"
+      },
+      "camera": {
+        "framing": "Reported statement receives the physical component",
+        "pivot": [
+          540,
+          800
+        ],
+        "action": "Statement moves into upper stage while press exits; cash, host and captions stay fixed"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          65,
+          1090
+        ],
+        "gaze_target": "Press then ascending charge and received statement",
+        "contact": "Dario hand remains at its resting anchor; no pretend grip on the flying sheet",
+        "occlusion": "Hand holds foreground crank handle; paper passes behind front roller",
+        "reason": "Preserve current guide position while the world moves"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            521.85,
+            1126.7
+          ],
+          [
+            780,
+            850
+          ],
+          [
+            850,
+            570
+          ],
+          [
+            560,
+            780
+          ]
+        ],
+        "temporal_bezier": [
+          0.42,
+          0,
+          0.18,
+          1
+        ],
+        "anticipation": "Crank winds back before forward drive",
+        "settle": "Paper lands in the statement pocket without changing its amount or the fixed reported total",
+        "overlap": "Print finishes at2.55s; release2.85s; press exit3\u20133.85s; sheet arrives4.55s leaving over1s for reading"
+      },
+      "timing": {
+        "cue": "Whole original narration clip3",
+        "start_source_seconds": 14.503666666666666,
         "end_source_seconds": 17.598666666666666,
         "word_timing": "provisional"
       },
@@ -95,7 +208,7 @@
           930,
           145
         ],
-        "hold_seconds": 1.3
+        "hold_seconds": 1.1
       },
       "transition": {
         "type": "end",

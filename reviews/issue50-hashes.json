@@ -2,7 +2,7 @@
   "recorded_at": "2026-11-05T08:04:53.344357+00:00",
   "base": "7dc9bcb",
   "comparison_pr41": "e64f5c0f6b38f51590b39c70e4aec25224c18157",
-  "status": "candidate-awaiting-human-playback",
+  "status": "payoff-candidate-awaiting-human-playback",
   "inputs": {
     "src/anthropic-character-audio.json": "21192ac00ff4ac211535df18c3c45be21c5cf4bf88edc58592c586162c3f4a9c",
     "public/anthropic-character/3.wav": "587cf22d3f5214a3216cfd1141e2beaf936dace96c8106fc155fe79b1a6302ad",
@@ -11,16 +11,19 @@
     "out/issue44/after.mp4": "a1decfd3214eaf8b4bc48ac3fe0a929f363b2c049184fe0fb566cf61d7f66fc7"
   },
   "outputs": {
-    "src/framework/proofs/AccountingPressProof.tsx": "a14b2d1122d81203d7690177a499bfcac4b4e50e01930325859ea2538e42e690",
-    "src/framework/proofs/accounting-press.ts": "7bf2b30965213d8800c33d9dc6bc5ec0b1a3aa7c657f0fafa006651df7a03f18",
+    "src/framework/proofs/AccountingPressProof.tsx": "0b450d6461629ec1ecac1da184d46e8ebc7acbfea5fc984ad8991593d0c5dfe7",
+    "src/framework/proofs/accounting-press.ts": "fd4a4234133f204f6eb9e433b31c0736c264f6d1baeb011c0a98236fdaa66937",
     "src/index.tsx": "91742261e898960fcd63601d58ddcbec9fccbf7171df89b5e05f7c5d2a85cce1",
-    "episodes/002/animation-tickets-proof.json": "89261ee360cac811b427b450175b134eb2ca1db4d738c4b733c4cd57d5cddd3d",
-    "tests/accounting-press.test.mjs": "afa66377fc87391feb6c263dd48a121eaada5a0eeb2f725f500a4e6504e00fb9",
+    "episodes/002/animation-tickets-proof.json": "fb88ac4fe7880175698313547d9f8d4c51a470cab44a9d22eec056c85e47f103",
+    "tests/accounting-press.test.mjs": "38ab794ebad61285444ade5f840a9a39c4f21210f0100068af71a752e57d7c3e",
     ".github/workflows/motion-proof.yml": "47b1bd7213a8a1d6c1ea69d06f4dd4f6cafbe30151edaa71ccc3c15886acb3ad",
     "reviews/media/issue50-ab.png": "33fa83bbb5bed3acb9bb221767840a07ae905963cc02906a58ad7b3fc0e2dcb7",
     "reviews/media/issue50-adjacent.png": "fc330806c99d293ee1d5c26c03a15776d0d07bbb8b19da3d53420a0e784718a5",
     "reviews/media/issue50-before-pr41.mp4": "d9c9abd5520d749641fec81d8697b2040b3694d81c2f9db8ef3bf535dce738fa",
-    "reviews/media/issue50-proof.mp4": "b3f721aef87657f3843512f3222482b49f00e040b24b8ce329723696db68122f"
+    "reviews/media/issue50-proof.mp4": "ada8373bb514823af8848daecf198b447bab6e1ff26578f25a3dc6f8213b0497",
+    "reviews/media/issue50-before-payoff.mp4": "b3f721aef87657f3843512f3222482b49f00e040b24b8ce329723696db68122f",
+    "reviews/media/issue50-payoff-ab.png": "ba2b644a9d6e1f98691ca7daae3c926d87c7582e3165578e6b7493b1a4984132",
+    "reviews/media/issue50-payoff-adjacent.png": "3835f176f220e8e12ec285230f0e61d5e3e0f5649213b2e69d25c1a5cfaa7262"
   },
   "coverage": "sampled phone-size frames and adjacent 30fps frames; no uninterrupted playback/listening",
   "repair": "Unclip Dario arm, shorten reach and label financing charge as component",
@@ -34,9 +37,38 @@
   ],
   "unresolved": [
     "Human playback/art decision",
-    "Schematic press and final negative space; revaluation calculation not depicted",
-    "Official logo rights/asset unavailable",
-    "Provisional word timings",
-    "Recipe extraction and second mechanism gated on acceptance"
+    "Authentic logo asset/rights",
+    "Provisional word alignment",
+    "No valuation arithmetic or full reconciliation"
+  ],
+  "revisions": [
+    {
+      "base": "8cfa982",
+      "recorded_at": "2026-11-05T20:33:11.516460+00:00",
+      "finding": "Preprinted charge and static payoff",
+      "change": "Persistent charge sheet physically enters the fixed reported-loss statement; cash unchanged",
+      "input_hashes": {
+        "src/framework/proofs/accounting-press.ts": "7bf2b30965213d8800c33d9dc6bc5ec0b1a3aa7c657f0fafa006651df7a03f18",
+        "src/framework/proofs/AccountingPressProof.tsx": "a14b2d1122d81203d7690177a499bfcac4b4e50e01930325859ea2538e42e690",
+        "tests/accounting-press.test.mjs": "afa66377fc87391feb6c263dd48a121eaada5a0eeb2f725f500a4e6504e00fb9",
+        "episodes/002/animation-tickets-proof.json": "89261ee360cac811b427b450175b134eb2ca1db4d738c4b733c4cd57d5cddd3d",
+        "reviews/media/issue50-proof.mp4": "b3f721aef87657f3843512f3222482b49f00e040b24b8ce329723696db68122f",
+        "public/anthropic-character/3.wav": "587cf22d3f5214a3216cfd1141e2beaf936dace96c8106fc155fe79b1a6302ad",
+        "episodes/002/financials.json": "09517bd85d6bc734a967f68071d2928ec3f995b7c2beeddf4152bbe2ee6ef104"
+      },
+      "coverage": "Matched stills and adjacent release/arrival frames; no uninterrupted playback/listening",
+      "checks": [
+        "TypeScript pass",
+        "Motion/contact/release/arrival regression pass",
+        "Two tickets validate",
+        "170 decoded frames H264 432x768 30fps AAC48k stereo"
+      ],
+      "unresolved": [
+        "Human playback/art decision",
+        "Authentic logo asset/rights",
+        "Provisional word alignment",
+        "No valuation arithmetic or full reconciliation"
+      ]
+    }
   ]
 }
