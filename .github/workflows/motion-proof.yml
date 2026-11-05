@@ -1,0 +1,49 @@
+name: Review issue50 motion proof
+on:
+  pull_request:
+    paths:
+      - 'src/framework/proofs/**'
+      - 'episodes/002/animation-tickets-proof.json'
+      - 'tests/accounting-press.test.mjs'
+      - '.github/workflows/motion-proof.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Validate motion and ticket
+        run: |
+          npm run typecheck
+          node tests/accounting-press.test.mjs
+          python3 scripts/validate_animation_tickets.py episodes/002/animation-tickets-proof.json
+      - name: Render and inspect encoded media
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          mkdir -p out/issue50-ci
+          npx remotion render src/index.tsx AccountingPressProof out/issue50-ci/proof.mp4 --scale=0.4 --codec=h264 --concurrency=2
+          ffprobe -v error -count_frames -show_entries stream=codec_type,codec_name,width,height,r_frame_rate,nb_read_frames:format=duration -of json out/issue50-ci/proof.mp4 > out/issue50-ci/probe.json
+          python3 - <<'PY'
+          import json
+          p=json.load(open('out/issue50-ci/probe.json'))
+          v=next(s for s in p['streams'] if s['codec_type']=='video')
+          assert (v['width'],v['height'],v['r_frame_rate'],int(v['nb_read_frames']))==(432,768,'30/1',170)
+          assert 5.6 < float(p['format']['duration']) < 5.8
+          assert any(s['codec_type']=='audio' and s['codec_name']=='aac' for s in p['streams'])
+          PY
+          sha256sum out/issue50-ci/proof.mp4 > out/issue50-ci/hash.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: issue50-motion-proof
+          path: out/issue50-ci/
+          retention-days: 14
