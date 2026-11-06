@@ -45,4 +45,18 @@ assert.equal(sample(5).hand.x,814.5,'resting hand must not follow offscreen pres
 assert.equal(sample(4.55).flight,1,'arrive with at least one second of reading time');
 assert.deepEqual(sample(5.6).receipt,{x:560,y:780,scale:.95});
 assert(sample(3.6).receipt.y<sample(2.85).receipt.y-200,'payoff must travel into upper statement');
+// Test the entire rotated paper silhouette, not just its center or paint order.
+// Dario hair/face bounds plus a safety margin, in composition pixels.
+const face={left:825,right:1000,top:1010,bottom:1210};
+for(let t=2.85;t<=4.55;t+=1/120) {
+  const s=sample(t),a=s.receiptAngle*Math.PI/180;
+  const corners=[[-225,-120],[225,-120],[225,142],[-225,142]].map(([x,y])=>({
+    x:s.receipt.x+s.receipt.scale*(x*Math.cos(a)-y*Math.sin(a)),
+    y:s.receipt.y+s.receipt.scale*(x*Math.sin(a)+y*Math.cos(a)),
+  }));
+  const xs=corners.map(p=>p.x),ys=corners.map(p=>p.y);
+  assert(Math.max(...xs)<face.left || Math.min(...xs)>face.right ||
+    Math.max(...ys)<face.top || Math.min(...ys)>face.bottom,
+    `receipt grazes Dario face at ${t.toFixed(3)}s`);
+}
 console.log('Accounting press: grip/release, print-to-flight continuity, arrival, sequencing and determinism pass.');

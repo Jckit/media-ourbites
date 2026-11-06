@@ -27,6 +27,9 @@ export const AccountingPressProof:React.FC = () => {
   const world = depthPlaneTransform(0, s.camera);
   // Dario's arm endpoint is solved from the same projected crank endpoint, in his SVG coordinates.
   const hand = {x:(s.hand.x-768)/.75, y:(s.hand.y-1015)/.75};
+  const follow = Math.min(1,s.flight*4);
+  const gaze = {x:Math.max(-1,Math.min(1,(s.receipt.x-903)/200))*follow,
+    y:Math.max(-1,Math.min(1,(s.receipt.y-1122)/200))*follow};
   return <AbsoluteFill style={{fontFamily:'Arial, sans-serif', color:ink, overflow:'hidden'}}>
     <EditorialGrid tone="amber" travel={s.feed*.65+s.widen*.35}/>
     <Audio src={staticFile(clip.file)} playbackRate={playbackSpeed}/>
@@ -61,10 +64,9 @@ export const AccountingPressProof:React.FC = () => {
           <path d="M-200 -140 L195 -140 L215 120 L-190 120 Z" fill="#142B3818" transform="translate(14 16)"/>
           <path d="M-200 -140 L195 -140 L205 120 L-190 120 Z" fill="#D8E5D4" stroke={ink} strokeWidth="4"/>
           <path d="M-180 -118 H175 M-180 -105 H175" stroke={teal} strokeWidth="3"/>
-          <text x="0" y="-61" textAnchor="middle" fontSize="29" fontWeight="800">FINANCING</text>
-          <text x="0" y="-20" textAnchor="middle" fontSize="28">Notes · derivatives · SAFEs</text>
-          <text x="0" y="37" textAnchor="middle" fontSize="29" fontWeight="800" fill={teal}>FAIR VALUE</text>
-          <text x="0" y="74" textAnchor="middle" fontSize="29" fontWeight="800" fill={teal}>REMEASURED</text>
+          <text x="0" y="-55" textAnchor="middle" fontSize="35" fontWeight="800">FINANCING</text>
+          <text x="0" y="7" textAnchor="middle" fontSize="35" fontWeight="800" fill={teal}>FAIR VALUE</text>
+          <text x="0" y="56" textAnchor="middle" fontSize="35" fontWeight="800" fill={teal}>REMEASURED</text>
           <path d="M-160 86 H160" stroke={teal} strokeWidth="2"/>
         </g>
       </g>
@@ -115,7 +117,7 @@ export const AccountingPressProof:React.FC = () => {
     </svg>
 
     <style>{'.accounting-press-dario > svg { overflow: visible; }'}</style>
-    <div className="accounting-press-dario" style={at(768,1015,{width:270})}><DarioIllustration hand={hand}/></div>
+    <div className="accounting-press-dario" style={at(768,1015,{width:270})}><DarioIllustration hand={hand} gaze={gaze}/></div>
     {/* Foreground crank and hand use screen-space projection; no independently guessed grip. */}
     <svg viewBox="0 0 1080 1920" style={{position:'absolute',inset:0,width:'100%',height:'100%'}}>
       <line x1={projectDepth({x:755,y:1130,z:0},s.camera).x} y1={projectDepth({x:755,y:1130,z:0},s.camera).y}
@@ -123,7 +125,8 @@ export const AccountingPressProof:React.FC = () => {
       <circle cx={s.crank.x} cy={s.crank.y} r="20" fill="#C4794F" stroke={ink} strokeWidth="4"/>
       <path d={`M${s.hand.x-9} ${s.hand.y-12} q20 -10 21 9 q0 12 -13 13`} opacity={s.grip} fill="none" stroke="#F0C99F" strokeWidth="11" strokeLinecap="round"/>
     </svg>
-    <StageActor x={65} y={1090} size={278} pose="explain" poseFrom="react" poseBlend={s.output}
+    <StageActor x={65} y={1090} size={278} pose={t<2.85?'explain':'point'}
+      poseFrom={t<2.85?'react':'explain'} poseBlend={t<2.85?s.output:follow}
       gazeX={.8-.3*s.flight} gazeY={-.7-.2*s.flight} lean={-2*s.impact}/>
     {/* No banknote is destroyed, spent, added or removed during this accounting action. */}
     <svg viewBox="0 0 1080 1920" style={{position:'absolute',inset:0,width:'100%',height:'100%'}}>

@@ -81,3 +81,5 @@ Owner Codex, 2026-11-05; branch codex/issue50-motion-proof; base7dc9bcb. One 5â€
 Status: rendered candidate ready for human review; owner released.170frames/5.67s, paired PR41 excerpt, A/B and adjacent frames in reviews/media/issue50-*. Typecheck,82 Python tests(one skip), movement/ticket checks pass. No recipe accepted; extraction remains gated. See reviews/issue50-proof.md for actual coverage and unresolved art limitations.
 
 Issue50 / PR55 payoff revision,2026-11-05: addressed Justin feedback by removing preprinted amount and transporting the same output into a sourced reported-loss statement. Original audio/cash unchanged; targeted tests and sampled/adjacent media checked. Owner released; candidate awaits human playback/art review. Authentic mark and measured captions unresolved. See latest section of reviews/issue50-proof.md.
+
+PR55 / issue50,2026-11-06: corrected3.1â€“3.3s face grazing via bounded paper route; padded silhouette regression, default-safe Dario gaze, host point response and simpler input. Matched/adjacent media inspected. Owner released; human playback/style and official-brand rights review remain open. Existing payoff and hold preserved.

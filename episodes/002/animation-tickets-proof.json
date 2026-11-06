@@ -21,7 +21,7 @@
       "hero": {
         "id": "printed-charge",
         "kind": "Charge emerging from an illustrative remeasurement press",
-        "start_state": "Charge not emitted yet; financing instruments enter without a preprinted amount",
+        "start_state": "Charge not emitted yet; financing slip labels fair-value remeasurement without a preprinted amount",
         "action": "Dario drives remeasurement press; printed charge detaches and follows a continuous arc into the statement pocket",
         "end_state": "Selected financing charge included within a statement showing the fixed sourced reported net loss"
       },
@@ -44,9 +44,9 @@
           65,
           1090
         ],
-        "gaze_target": "Press then ascending charge and received statement",
+        "gaze_target": "Dario tracks the sheet with bounded gaze; host morphs explain to point during flight",
         "contact": "Crank and hand share a projected anchor until2.25s; hand returns to rest before press exits at3s",
-        "occlusion": "Hand holds foreground crank handle; paper passes behind front roller",
+        "occlusion": "Actors stay foreground. Receipt route clears padded Dario head region; pocket lip covers sheet only at landing.",
         "reason": "Preserve current guide position while the world moves"
       },
       "motion": {
@@ -112,7 +112,7 @@
           "kind": "Official wordmark",
           "source_class": "Official brand kit",
           "rights_status": "pending",
-          "evidence": "Prior permission not established; no official asset ingested",
+          "evidence": "Checked2026-11-06: approved-media registry empty. Official newsroom https://brandfolder.com/anthropic/newsroom (13 assets; JS catalog). Published https://www.anthropic.com/legal/trademark-guidelines asks prior permission/approved materials. No permission or reviewed editorial-use basis recorded. Human rights review under #43 required before ingestion; no fabricated mark.",
           "local_path": "",
           "fallback": "Ordinary text Anthropic; original illustrative press. Candidate remains unapproved."
         }
@@ -155,9 +155,9 @@
           65,
           1090
         ],
-        "gaze_target": "Press then ascending charge and received statement",
+        "gaze_target": "Dario tracks the sheet with bounded gaze; host morphs explain to point during flight",
         "contact": "Dario hand remains at its resting anchor; no pretend grip on the flying sheet",
-        "occlusion": "Hand holds foreground crank handle; paper passes behind front roller",
+        "occlusion": "Actors stay foreground. Receipt route clears padded Dario head region; pocket lip covers sheet only at landing.",
         "reason": "Preserve current guide position while the world moves"
       },
       "motion": {
@@ -167,11 +167,11 @@
             1126.7
           ],
           [
-            780,
+            500,
             850
           ],
           [
-            850,
+            650,
             570
           ],
           [
@@ -223,7 +223,7 @@
           "kind": "Official wordmark",
           "source_class": "Official brand kit",
           "rights_status": "pending",
-          "evidence": "Prior permission not established; no official asset ingested",
+          "evidence": "Checked2026-11-06: approved-media registry empty. Official newsroom https://brandfolder.com/anthropic/newsroom (13 assets; JS catalog). Published https://www.anthropic.com/legal/trademark-guidelines asks prior permission/approved materials. No permission or reviewed editorial-use basis recorded. Human rights review under #43 required before ingestion; no fabricated mark.",
           "local_path": "",
           "fallback": "Ordinary text Anthropic; original illustrative press. Candidate remains unapproved."
         }

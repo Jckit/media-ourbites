@@ -2,7 +2,7 @@ import React from 'react';
 
 // Original vector interpretation of Justin's supplied concept, not event footage.
 // Shared geometry keeps the likeness stable while the arm changes pose.
-export const DarioIllustration: React.FC<{gesture?: number; hand?: {x: number; y: number}}> = ({gesture = 0, hand}) => (
+export const DarioIllustration: React.FC<{gesture?: number; hand?: {x: number; y: number}; gaze?: {x:number;y:number}}> = ({gesture = 0, hand, gaze}) => (
   <svg viewBox="0 0 360 520" width="100%" role="img" aria-label="Dario illustration, design draft">
     <ellipse cx="180" cy="501" rx="105" ry="12" fill="#142B38" opacity="0.12"/>
     <path d="M145 365 L140 480 M215 365 L230 480" stroke="#142B38" strokeWidth="34" strokeLinecap="round"/>
@@ -26,7 +26,8 @@ export const DarioIllustration: React.FC<{gesture?: number; hand?: {x: number; y
       <rect x="188" y="125" width="51" height="38" rx="15"/>
       <path d="M173 136 Q180 130 188 136 M111 128 L122 134 M239 134 L249 125"/>
     </g>
-    <circle cx="150" cy="141" r="5" fill="#142B38"/><circle cx="209" cy="141" r="5" fill="#142B38"/>
+    <circle cx={150+5*Math.max(-1,Math.min(1,gaze?.x??0))} cy={141+4*Math.max(-1,Math.min(1,gaze?.y??0))} r="5" fill="#142B38"/>
+    <circle cx={209+5*Math.max(-1,Math.min(1,gaze?.x??0))} cy={141+4*Math.max(-1,Math.min(1,gaze?.y??0))} r="5" fill="#142B38"/>
     <path d="M180 145 L174 169 L186 171 M159 188 Q180 198 200 187" fill="none" stroke="#A36C51" strokeWidth="4" strokeLinecap="round"/>
   </svg>
 );

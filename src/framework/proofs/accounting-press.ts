@@ -38,7 +38,7 @@ export const accountingPressState = (t: number) => {
     y:projectedCrank.y*grip+1250.5*(1-grip),scale:projectedCrank.scale};
   const flight = progress(t,RELEASE_AT,4.55,drive);
   const arc = depthPath(flight,[{x:launch.x,y:launch.y,z:0},
-    {x:780,y:850,z:110},{x:850,y:570,z:85},{x:560,y:780,z:0}]);
+    {x:500,y:850,z:110},{x:650,y:570,z:85},{x:560,y:780,z:0}]);
   const projected = projectDepth(arc,{x:0,y:0,zoom:1});
   const printPoint = projectDepth({x:540,y:660+380*output,z:0},camera);
   const receipt = t<RELEASE_AT ? {...printPoint,scale:printPoint.scale*.85} :

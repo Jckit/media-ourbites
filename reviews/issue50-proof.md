@@ -1,6 +1,6 @@
 # Issue 50 — accounting press calibration
 
-**Latest:** payoff revision after Justin feedback; [current video](media/issue50-proof.mp4), [previous PR55 video](media/issue50-before-payoff.mp4), [matched comparison](media/issue50-payoff-ab.png), [release/arrival frames](media/issue50-payoff-adjacent.png). Earlier sections below are historical evidence; the current result is recorded at the end.
+**Latest:** face-clearance correction after review5797858172; [current video](media/issue50-proof.mp4), [previous PR55 video](media/issue50-before-clearance.mp4), [matched comparison](media/issue50-clearance-ab.png), [adjacent crossing/landing frames](media/issue50-clearance-adjacent.png). Earlier sections below are historical evidence; the current result is recorded at the end.
 
 Status: owned by Codex, 2026-11-05; base 7dc9bcb. Candidate only; no accepted recipe.
 
@@ -51,3 +51,19 @@ Actual final170-frame render inspected at0,1.17,2.17,2.83,3.17,3.67,4.17,4.57,5.
 TypeScript, deterministic motion/contact/arrival tests and both animation tickets pass. Local ffmpeg: H.264432x76830fps, AAC48k stereo,170decoded frames,5.68s container. Narration and financial input hashes unchanged. Coverage remains sampled stills/adjacent frames, not uninterrupted normal-speed motion or audio listening; prior local preview connection limitation remains unclosed. CI re-render/ffprobe status is on PR55.
 
 Remaining scope: authentic logo still lacks a rights-cleared local asset; plain text is explicit fallback. This depicts the charge's inclusion, not the valuation mathematics or a complete accounting reconciliation. Captions remain provisional. Final statement still uses illustrated paper; human must judge whether the stronger payoff meets the requested style. No character redesign, new dependency, accepted recipe, merge or publication. Await Justin's playback/visual review before further extraction or expansion. Owner released.
+
+## Face-clearance correction — Justin / review5797858172, 2026-11-06
+Frozen before editing; basea2dfae8. Actual phone frame96 (3.20s) inspected: receipt's right edge meets Dario's hair/glasses region. Selected correction: move the cubic route left/up, keeping exact release and landing; protect a padded face region across flight. Preserve current actor-front layering as an explicit relation; do not rely on layering to conceal intersection. Add bounded optional gaze to the shared Dario illustration (default unchanged), motivated host pointing, and simplify the crowded input label. Preserve the useful payoff and1.1s final reading hold. No new mechanism, valuation formula, full reconciliation or creative approval.
+
+Acceptance: receipt's transformed bounds clear Dario's padded head rectangle at every sampled flight frame; inspect adjacent3.1–3.3s frames and landing. Exact release and landing unchanged; both actor anchors, cash, audio, figures, total and frame count unchanged. Shared Dario defaults must retain existing rendering. Authentic branding stays a separate rights/asset workflow gate unless a verified asset is found.
+
+### Face-clearance result
+Bounded technical correction plus acting/readability polish; no mechanism redesign. Cubic controls now(500,850,110) and(650,570,85), replacing the rightward swing. Same release position/scale, landing(560,780,.95),4.55s arrival and final reading hold. Actor-front paint order unchanged, but the full sheet now geometrically clears a conservative padded face rectangle[825,1010]–[1000,1210] at120Hz across the flight. This is geometric evidence, not perceptual quality certification.
+
+Actual encoded A/B inspected at3.10/3.20/3.30s; adjacent95–97 and134–136 confirm separation and unchanged landing. Opening frame0 checked after removing dense instrument sublabels; original financial dataset still names the instrument types. Dario's optional normalized gaze is clamped to5px horizontal/4px vertical pupil travel inside existing glasses, defaulting to zero. Before/after default React-rendered SVG markup matched exactly, so existing callers retain their geometry. Host morphs explain→point as flight starts; anchors and shared identity unchanged. Press remains schematic; no new depth/shot benchmark approval claimed.
+
+TypeScript, existing release/arrival/determinism tests, new rotated-bounds regression and both tickets pass. Local MP4 decodes170frames; original audio and financial hashes match baseline. Coverage: actual phone-size stills and adjacent motion frames only; uninterrupted1x playback/listening remains unverified. Await human playback/style review, not automatic recipe extraction.
+
+Asset workflow check2026-11-06: src/anthropic-approved-media.json remains empty. [Official newsroom](https://brandfolder.com/anthropic/newsroom) exposes13assets via a JavaScript catalog; [published trademark guidelines](https://www.anthropic.com/legal/trademark-guidelines) ask for permission/approved materials. No official asset or documented permission/editorial-use clearance is present. Existing asset requests remain pending with those sources and a human rights-review dependency under#43. This records the blocker; it does not assert all editorial reference legally requires permission. No third-party artwork downloaded into the render and no mark fabricated.
+
+Owner released. PR55 stays draft; meaningful payoff preserved, no art/rights/publication approval inferred.
