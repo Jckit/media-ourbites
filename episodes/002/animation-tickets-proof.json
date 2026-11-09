@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "scenario_kind": "existing-episode",
+  "episode_manifest": "episodes/002/episode.json",
+  "synthetic_claim_ids": [],
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "tickets": [
+    {
+      "id": "accounting-press",
+      "claim_ids": [
+        "remeasure",
+        "net",
+        "cash-distinction",
+        "other-lines"
+      ],
+      "visual_thesis": "Remeasurement produces a charge; the same printed entry physically enters the reported-loss statement while separate cash stays unchanged.",
+      "takeaway": "Financing accounting changes affect reported loss; this does not mean cash was destroyed.",
+      "hero": {
+        "id": "printed-charge",
+        "kind": "Charge emerging from an illustrative remeasurement press",
+        "start_state": "Charge not emitted yet; financing slip labels fair-value remeasurement without a preprinted amount",
+        "action": "Dario drives remeasurement press; printed charge detaches and follows a continuous arc into the statement pocket",
+        "end_state": "Selected financing charge included within a statement showing the fixed sourced reported net loss"
+      },
+      "layers": {
+        "background": "Selected grid rear plane",
+        "midground": "Hero object and supporting mechanism",
+        "foreground": "Actor hands where contact requires it; captions in screen space"
+      },
+      "camera": {
+        "framing": "Larger mechanical close-up, then upper statement payoff",
+        "pivot": [
+          540,
+          800
+        ],
+        "action": "Press camera begins at1.15x and pushes to1.21x; press exits left/up after hand release while the sheet travels independently"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          65,
+          1090
+        ],
+        "gaze_target": "Dario tracks the sheet with bounded gaze; host morphs explain to point during flight",
+        "contact": "Crank and hand share a projected anchor until2.25s; hand returns to rest before press exits at3s",
+        "occlusion": "Actors stay foreground. Receipt route clears padded Dario head region; pocket lip covers sheet only at landing.",
+        "reason": "Preserve current guide position while the world moves"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            490,
+            500
+          ],
+          [
+            450,
+            450
+          ],
+          [
+            480,
+            630
+          ],
+          [
+            490,
+            960
+          ]
+        ],
+        "temporal_bezier": [
+          0.42,
+          0,
+          0.18,
+          1
+        ],
+        "anticipation": "Crank winds back before forward drive",
+        "settle": "Paper lands in the statement pocket without changing its amount or the fixed reported total",
+        "overlap": "Print finishes at2.55s; release2.85s; press exit3\u20133.85s; sheet arrives4.55s leaving over1s for reading"
+      },
+      "timing": {
+        "cue": "Whole original narration clip3",
+        "start_source_seconds": 11.368666666666666,
+        "end_source_seconds": 14.503666666666666,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          65,
+          1490,
+          950,
+          241
+        ],
+        "source_region": [
+          72,
+          1745,
+          930,
+          145
+        ],
+        "hold_seconds": 0.3
+      },
+      "transition": {
+        "type": "continuity",
+        "next_ticket": "include-accounting-entry",
+        "shared_object": "printed-charge",
+        "reason": "Output sheet continues without a pose change; press clears for the statement view"
+      },
+      "assets": [
+        {
+          "request_id": "anthropic-official-mark",
+          "purpose": "Company identification",
+          "kind": "Official wordmark",
+          "source_class": "Official brand kit",
+          "rights_status": "pending",
+          "evidence": "Checked2026-11-06: approved-media registry empty. Official newsroom https://brandfolder.com/anthropic/newsroom (13 assets; JS catalog). Published https://www.anthropic.com/legal/trademark-guidelines asks prior permission/approved materials. No permission or reviewed editorial-use basis recorded. Human rights review under #43 required before ingestion; no fabricated mark.",
+          "local_path": "",
+          "fallback": "Ordinary text Anthropic; original illustrative press. Candidate remains unapproved."
+        }
+      ],
+      "no_external_assets_reason": ""
+    },
+    {
+      "id": "include-accounting-entry",
+      "claim_ids": [
+        "remeasure",
+        "net",
+        "cash-distinction",
+        "other-lines"
+      ],
+      "visual_thesis": "Remeasurement produces a charge; the same printed entry physically enters the reported-loss statement while separate cash stays unchanged.",
+      "takeaway": "Financing accounting changes affect reported loss; this does not mean cash was destroyed.",
+      "hero": {
+        "id": "printed-charge",
+        "kind": "Original accounting entry",
+        "start_state": "Fully printed at shared press release anchor",
+        "action": "Travel upward and settle behind the receiving pocket lip",
+        "end_state": "Physically included beneath fixed reported-net-loss total"
+      },
+      "layers": {
+        "background": "Selected grid rear plane",
+        "midground": "Hero object and supporting mechanism",
+        "foreground": "Actor hands where contact requires it; captions in screen space"
+      },
+      "camera": {
+        "framing": "Reported statement receives the physical component",
+        "pivot": [
+          540,
+          800
+        ],
+        "action": "Statement moves into upper stage while press exits; cash, host and captions stay fixed"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          65,
+          1090
+        ],
+        "gaze_target": "Dario tracks the sheet with bounded gaze; host morphs explain to point during flight",
+        "contact": "Dario hand remains at its resting anchor; no pretend grip on the flying sheet",
+        "occlusion": "Actors stay foreground. Receipt route clears padded Dario head region; pocket lip covers sheet only at landing.",
+        "reason": "Preserve current guide position while the world moves"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            521.85,
+            1126.7
+          ],
+          [
+            500,
+            850
+          ],
+          [
+            650,
+            570
+          ],
+          [
+            560,
+            780
+          ]
+        ],
+        "temporal_bezier": [
+          0.42,
+          0,
+          0.18,
+          1
+        ],
+        "anticipation": "Crank winds back before forward drive",
+        "settle": "Paper lands in the statement pocket without changing its amount or the fixed reported total",
+        "overlap": "Print finishes at2.55s; release2.85s; press exit3\u20133.85s; sheet arrives4.55s leaving over1s for reading"
+      },
+      "timing": {
+        "cue": "Whole original narration clip3",
+        "start_source_seconds": 14.503666666666666,
+        "end_source_seconds": 17.598666666666666,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          65,
+          1490,
+          950,
+          241
+        ],
+        "source_region": [
+          72,
+          1745,
+          930,
+          145
+        ],
+        "hold_seconds": 1.1
+      },
+      "transition": {
+        "type": "end",
+        "next_ticket": "",
+        "shared_object": "",
+        "reason": "Calibration ends on component and cash distinction; no full-episode replacement"
+      },
+      "assets": [
+        {
+          "request_id": "anthropic-official-mark",
+          "purpose": "Company identification",
+          "kind": "Official wordmark",
+          "source_class": "Official brand kit",
+          "rights_status": "pending",
+          "evidence": "Checked2026-11-06: approved-media registry empty. Official newsroom https://brandfolder.com/anthropic/newsroom (13 assets; JS catalog). Published https://www.anthropic.com/legal/trademark-guidelines asks prior permission/approved materials. No permission or reviewed editorial-use basis recorded. Human rights review under #43 required before ingestion; no fabricated mark.",
+          "local_path": "",
+          "fallback": "Ordinary text Anthropic; original illustrative press. Candidate remains unapproved."
+        }
+      ],
+      "no_external_assets_reason": ""
+    }
+  ]
+}

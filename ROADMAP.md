@@ -75,3 +75,11 @@ Owner: Codex; 2026-11-04; branch codex/episode-workspace-generator; base60fcd17.
 
 ## Issue 45 — animation direction contract
 Owner Codex, 2026-11-04; branch codex/animation-direction-contract; base1484e8c. Hypothesis: one authority plus validated observable-event tickets prevents contradictory direction and missing motion/contact decisions. Scope: canonical style, skill routing, schema/validator, two contrasting fixtures/tests. No animation rebuild; reference-quality proof and human acceptance remain open. Status: contract implementation ready for review; owner released. Evidence: both two-ticket fixtures validate, 82 tests run (81 passed / existing Windows symlink privilege skip), TypeScript passes. No src, audio or rendered media edits. Remaining issue45 work: selected reference-quality 5–8s calibration and actual comparative playback/human acceptance; not closed by this contract batch.
+
+## Issue 50 — narrated motion calibration
+Owner Codex, 2026-11-05; branch codex/issue50-motion-proof; base7dc9bcb. One 5–8s clip3 accounting-press candidate, ticket first; PR41 remains unchanged. Scope: isolated proof, movement tests, ticket, render evidence and CI. Human visual acceptance blocks recipe extraction. See reviews/issue50-proof.md.
+Status: rendered candidate ready for human review; owner released.170frames/5.67s, paired PR41 excerpt, A/B and adjacent frames in reviews/media/issue50-*. Typecheck,82 Python tests(one skip), movement/ticket checks pass. No recipe accepted; extraction remains gated. See reviews/issue50-proof.md for actual coverage and unresolved art limitations.
+
+Issue50 / PR55 payoff revision,2026-11-05: addressed Justin feedback by removing preprinted amount and transporting the same output into a sourced reported-loss statement. Original audio/cash unchanged; targeted tests and sampled/adjacent media checked. Owner released; candidate awaits human playback/art review. Authentic mark and measured captions unresolved. See latest section of reviews/issue50-proof.md.
+
+PR55 / issue50,2026-11-06: corrected3.1–3.3s face grazing via bounded paper route; padded silhouette regression, default-safe Dario gaze, host point response and simpler input. Matched/adjacent media inspected. Owner released; human playback/style and official-brand rights review remain open. Existing payoff and hold preserved.
