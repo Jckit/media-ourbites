@@ -26,7 +26,7 @@ const blinkAt=(frame:number,center:number)=>
 
 // Single evidence target, shared by the eyes and the pointing fingertip.
 // Coordinates are in Concept C's original 360x520 actor viewBox.
-const evidence={x:390,y:179} as const;
+const evidence={x:370,y:179} as const;
 const gazeToEvidence=conceptCGazeForTarget(evidence);
 
 export const HostConceptCActingProof:React.FC=()=>{
