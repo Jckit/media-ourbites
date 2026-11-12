@@ -191,19 +191,20 @@ export const OurbitesHostConceptC:React.FC<EditorialHostConceptProps>=({
   return <svg viewBox="0 0 360 520" width={width} height={height}
       role="img" aria-label={'Redesigned fictional Ourbites presenter: '+pose}
       style={{display:'block',overflow:'visible'}}>
-    {/* NEW human-like silhouette: sturdy trousers and distinct sneakers. */}
+    {/* Navy tapered trousers + independently legible cream trainers.
+        The leg and foot geometry is unchanged across all five poses. */}
     <g stroke={C.ink} strokeWidth={30} fill="none" strokeLinecap="round">
       <path d="M151 355 Q143 421 133 472"/>
       <path d="M214 355 Q224 421 230 472"/>
     </g>
-    <g fill={C.ink}>
+    <g fill={C.white} stroke={C.ink} strokeWidth={4.5} strokeLinejoin="round">
       <path d="M112 463 Q121 458 145 465 Q149 474 151 488
         L96 489 Q91 481 102 474Z"/>
       <path d="M218 466 Q236 459 244 470 L266 478
         Q276 487 262 490 H211 Q206 480 218 466Z"/>
     </g>
-    <path d="M103 483 H149 M218 484 H262" stroke={C.white} strokeWidth={4}
-      strokeLinecap="round" opacity={0.68}/>
+    <path d="M103 483 H149 M218 484 H262" stroke={C.ink} strokeWidth={3.5}
+      strokeLinecap="round" opacity={0.75}/>
 
     {/* True sleeves, not stick lines. Ink under-stroke = simple vector outline. */}
     <g fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -213,22 +214,36 @@ export const OurbitesHostConceptC:React.FC<EditorialHostConceptProps>=({
       <path d={rightPath} stroke={C.teal} strokeWidth={23}/>
     </g>
 
-    {/* Layered overshirt is a flat editorial shape, not a shaded 3D costume. */}
+    {/* Smart-casual teal overshirt: preserve Concept C's outer silhouette
+        and stroke language but remove the suit-like long white V and lapels.
+        Every piece remains flat 2D vector art at phone resolution. */}
     <path d="M118 247 Q140 235 169 237 L214 237 Q237 242 246 257
       L247 353 Q214 373 177 376 Q133 373 109 353 L109 285
       Q110 264 118 247Z"
       fill={C.teal} stroke={C.ink} strokeWidth={7} strokeLinejoin="round"/>
-    <path d="M159 246 L174 288 L188 360 L203 286 L220 246Z"
-      fill={C.white}/>
-    <path d="M158 247 L172 283 L151 275 L137 247
-      M221 247 L206 281 L225 275 L236 253"
-      fill={C.light} stroke={C.ink} strokeWidth={3.5} strokeLinejoin="round"/>
-    <path d="M188 281 L188 359" stroke={C.ink} strokeWidth={3} opacity={0.34}/>
-    <path d="M205 308 L231 306" stroke={C.tealShade} strokeWidth={5}
+    {/* A small cream crew neck, not a tie running through the whole torso. */}
+    <path d="M162 243 Q186 260 213 243
+      L206 269 Q188 282 171 269Z" fill={C.white}/>
+    {/* Compact shirt collar rather than oversized formal blazer lapels. */}
+    <path d="M154 244 L181 257 L170 270 L146 251Z"
+      fill={C.light} stroke={C.tealShade} strokeWidth={3}
+      strokeLinejoin="round"/>
+    <path d="M218 244 L194 257 L205 270 L235 252Z"
+      fill={C.light} stroke={C.tealShade} strokeWidth={3}
+      strokeLinejoin="round"/>
+    {/* Tonal placket, understated buttons and one quiet chest seam. */}
+    <path d="M187 274 Q188 317 187 358"
+      fill="none" stroke={C.tealShade} strokeWidth={4} opacity={0.67}/>
+    <path d="M194 278 L194 356"
+      fill="none" stroke={C.light} strokeWidth={2} opacity={0.42}/>
+    <circle cx={191} cy={307} r={2.5} fill={C.ink} opacity={0.63}/>
+    <circle cx={191} cy={334} r={2.5} fill={C.ink} opacity={0.63}/>
+    <path d="M208 310 Q220 312 232 307"
+      fill="none" stroke={C.tealShade} strokeWidth={3}
       strokeLinecap="round"/>
-    <circle cx={188} cy={317} r={4} fill={C.ink}/>
-    <path d="M116 337 Q145 358 175 361 Q211 365 243 348"
-      fill="none" stroke={C.ink} opacity={0.23} strokeWidth={4}/>
+    <path d="M118 346 Q175 365 239 349"
+      fill="none" stroke={C.tealShade} opacity={0.48} strokeWidth={3}/>
+    <rect x={226} y={349} width={6} height={10} rx={1.5} fill={C.orange}/>
 
     {/* Separate neck/head layer, meaningfully different from original mascot. */}
     <path d="M166 215 H206 L211 251 Q188 266 164 251Z"
