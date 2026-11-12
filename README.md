@@ -10,7 +10,7 @@ The production framework includes a recurring **hybrid fictional host** ([source
 
 The optional **editorial paper-collage / digital cutout motion language** is documented in the [style guide](styles/OURBITES-EDITORIAL-PAPER-MOTION.md) and [motion skill](skills/ourbites-motion/SKILL.md), approved as *documentation* in [PR #11](https://github.com/jcbandc-arch/media-creator-outbites/pull/11). The paper-motion components, scene-director and modern transition primitives described there are **planned, not implemented**. [ROADMAP.md](ROADMAP.md) is the current task and gate tracker; the [repository cleanup audit](reviews/REPO-CLEANUP-2026-10-28.md) describes status reconciliation. Preserve local Codex work and reviewer decisions.
 
-The selected lead voice for new Ourbites protagonist narration is **Justin’s local Qwen3-TTS clone**, using the Audio 1_59 reference, light cleanup and 4% pitch reduction at 1.0× playback. Existing rendered demonstrations retain their historical Kokoro audio and timing. Use `python scripts/generate_lead_voice.py --text "Your narration" --output out/voice-auditions/new-take.wav`. Private `out/voice-local.json` supplies `cli`, `model`, `reference_audio`, `reference_text`, and `ffmpeg`; use absolute paths for the executable, model, reference WAV and ffmpeg, and the exact spoken reference transcript for `reference_text`. Voice selection: [selected-voice.json](auditions/selected-voice.json).
+The selected lead voice for new Ourbites protagonist narration is **Justin’s local Qwen3-TTS clone**, using the Audio 1_59 reference, gentle 3 dB noise reduction, 6% slower delivery and 4% pitch reduction at 1.0× playback. Existing rendered demonstrations retain their historical Kokoro audio and timing. Use `python scripts/generate_lead_voice.py --text "Your narration" --output out/voice-auditions/new-take.wav`. Private `out/voice-local.json` supplies `cli`, `model`, `reference_audio`, `reference_text`, and `ffmpeg`; use absolute paths for the executable, model, reference WAV and ffmpeg, and the exact spoken reference transcript for `reference_text`. Voice selection: [selected-voice.json](auditions/selected-voice.json).
 
 ## Deliverables
 
@@ -238,3 +238,15 @@ The draft [`OfficeWorld` pilot](src/BusinessWorld.tsx) gives `AnthropicCharacter
 **Optional visual blend (PR #2):** the requested reference is **low-poly animation**, but the intended Ourbites aesthetic is still the established flat 2D hybrid. We are testing small 2.5D/faceted-shading touches on scenery and props—not replacing the host, forcing 3D, or requiring event simulations. See [Ourbites Hybrid 2.5D](styles/OURBITES-HYBRID-2.5D.md). [PR #2](https://github.com/jcbandc-arch/media-creator-outbites/pull/2) was merged after its visual integration checks; the later [FW-06 production integration](https://github.com/jcbandc-arch/media-creator-outbites/pull/10) was merged as well. The framework's visual dimensionality has been approved as an experiment, **not** as final episode media. Open human art/audio/factual/rights gates remain tracked in the roadmap.
 
 **New optional motion vocabulary:** [editorial paper-collage / mixed-media cutout animation](styles/OURBITES-EDITORIAL-PAPER-MOTION.md) with motivated object focus, layered evidence cards, kinetic typography, and smooth transitions is now documented. Use [ourbites-motion](skills/ourbites-motion/SKILL.md) for future implementations; this is **not** already a functional motion library, nor a required treatment for every scene. The protagonist identity, selected Voice A, 1.1× playback, source accuracy and final approval gates remain unchanged.
+
+## Local protagonist voice preview
+
+Run `python scripts/build_voice_preview.py` once in a fresh `out/lead-voice-preview` folder. It generates seven phrases with the selected Justin voice, retains raw takes and writes measured clip durations to `props.json`. Captions are phrase-level, timed to those actual clips; these are not forced-aligned word captions.
+
+Render with the local media folder as the public directory (no recordings are committed):
+
+```powershell
+npx remotion render src/voice-preview.tsx JustinVoicePreview out/lead-voice-preview/justin-protagonist.mp4 --props=out/lead-voice-preview/props.json --public-dir=out/lead-voice-preview --scale=0.5 --concurrency=2
+```
+
+The preview reuses the Ourbites host and office setting for an illustrative ownership example. It plays the processed voice at 1.0x and holds briefly between phrases. Review the rendered voice, captions and acting together before final episode use.
