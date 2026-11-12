@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill,Easing,interpolate,useCurrentFrame} from 'remotion';
 import {OurbitesHostConceptC} from '../characters/OurbitesHostConceptC';
+import {conceptCGazeForTarget} from '../characters/ConceptCPointRig';
 
 /**
  * Issue #64 follow-up: selected Concept C in ONE purpose-led editorial action.
@@ -26,10 +27,7 @@ const blinkAt=(frame:number,center:number)=>
 // Single evidence target, shared by the eyes and the pointing fingertip.
 // Coordinates are in Concept C's original 360x520 actor viewBox.
 const evidence={x:390,y:179} as const;
-const gazeToEvidence={
-  x:Math.max(-11,Math.min(11,(evidence.x-186)/16)),
-  y:Math.max(-7,Math.min(7,(evidence.y-152)/14)),
-};
+const gazeToEvidence=conceptCGazeForTarget(evidence);
 
 export const HostConceptCActingProof:React.FC=()=>{
   const frame=useCurrentFrame();
@@ -37,7 +35,8 @@ export const HostConceptCActingProof:React.FC=()=>{
   // Eyes lead the arm; the hand settles lightly instead of freezing at max reach.
   const glance=between(frame,17,35);
   const anticipation=between(frame,29,47);
-  const reach=between(frame,40,78)*(1-0.045*between(frame,108,119));
+  const release=between(frame,103,119);
+  const reach=between(frame,40,78)*(1-release);
   // A single change beat keeps the number and its semantic label in sync.
   // Crossfading both numbers left €40 visible under 'BEFORE THE CHANGE'.
   const priceChangeFrame=90;
@@ -47,6 +46,7 @@ export const HostConceptCActingProof:React.FC=()=>{
   const ticketEntrance=between(frame,0,16);
   const blink=Math.max(blinkAt(frame,26),blinkAt(frame,101));
   const settle=between(frame,105,119);
+  const looking=glance*(1-0.80*release);
 
   return <AbsoluteFill style={{
     background:paper,color:ink,fontFamily:'Arial,Helvetica,sans-serif',
@@ -99,9 +99,9 @@ export const HostConceptCActingProof:React.FC=()=>{
       transform:`translate(${3*anticipation}px,${-2*anticipation+settle}px)`}}>
       <OurbitesHostConceptC pose="point" width={410} height={594}
         pointProgress={reach} insight={understand} blink={blink}
-        headTilt={1.8*anticipation-0.6*settle} pointTarget={evidence}
-        gazeX={gazeToEvidence.x*glance}
-        gazeY={gazeToEvidence.y*glance}/>
+        headTilt={1.8*anticipation*(1-release)-0.6*settle} pointTarget={evidence}
+        gazeX={gazeToEvidence.x*looking}
+        gazeY={gazeToEvidence.y*looking}/>
     </div>
 
     <div style={{position:'absolute',left:75,right:75,top:1430,

@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'src/framework/characters/OurbitesHostConceptC.tsx'
+      - 'src/framework/characters/ConceptCPointRig.ts'
+      - 'tests/concept-c-rig.test.mjs'
       - 'src/framework/proofs/HostConceptCReview.tsx'
       - 'src/framework/proofs/HostConceptCActingProof.tsx'
       - 'src/framework/proofs/HostConceptCReceiptProof.tsx'
@@ -30,6 +32,7 @@ jobs:
       - name: Compile and verify existing layout contract
         run: |
           npm run typecheck
+          node --experimental-strip-types tests/concept-c-rig.test.mjs
           python3 scripts/check_framework_layout.py
           git diff --check
       - name: Render actual same-pose comparison and editorial cameo
@@ -91,6 +94,7 @@ jobs:
           PY
           sha256sum src/OurbitesHost.tsx \
             src/framework/characters/OurbitesHostConceptC.tsx \
+            src/framework/characters/ConceptCPointRig.ts \
             src/framework/proofs/HostConceptCReview.tsx \
             src/framework/proofs/HostConceptCActingProof.tsx \
             src/framework/proofs/HostConceptCReceiptProof.tsx \

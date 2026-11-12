@@ -1,5 +1,6 @@
 import React from 'react';
 import type {HostPose} from '../../OurbitesHost';
+import {conceptCPointRig} from './ConceptCPointRig';
 
 /**
  * ISSUE #64 — CONCEPT C / complete character redesign, UNAPPROVED.
@@ -170,22 +171,23 @@ export const OurbitesHostConceptC:React.FC<EditorialHostConceptProps>=({
   const a=armPlan[pose];
   const p=clamp01(pointProgress);
   const isPoint=pose==='point';
-  // Finger SVG endpoint is (18,-54) before rotation. Keep the end effector
-  // on the requested prop, independent of screen position and scaling.
-  const rad=a.rightAngle*Math.PI/180;
-  const fingertip={x:18*Math.cos(rad)+54*Math.sin(rad),
-    y:18*Math.sin(rad)-54*Math.cos(rad)};
-  const end=isPoint&&pointTarget
-    ?{x:pointTarget.x-fingertip.x,y:pointTarget.y-fingertip.y}
-    :a.rightHand;
-  const rightHand=isPoint?{
-    x:mix(armPlan.neutral.rightHand.x,end.x,p),
-    y:mix(armPlan.neutral.rightHand.y,end.y,p),
+  // Candidate scene points supply one SVG-space target. The tip follows a
+  // continuous path; elbow and wrist remain articulated and the fingertip is
+  // constrained by the hand's actual per-frame rotation/extension.
+  const rig=isPoint&&pointTarget?conceptCPointRig(pointTarget,p):null;
+  // Preserve all original static poses when scenes do not supply a target.
+  const legacyHand=isPoint?{
+    x:mix(armPlan.neutral.rightHand.x,a.rightHand.x,p),
+    y:mix(armPlan.neutral.rightHand.y,a.rightHand.y,p),
   }:a.rightHand;
-  const rightAngle=isPoint?mix(armPlan.neutral.rightAngle,a.rightAngle,p):a.rightAngle;
-  const rightPath=isPoint
-    ? `M243 276 Q${mix(266,298,p)} ${mix(309,224,p)} ${rightHand.x} ${rightHand.y}`
-    :a.right;
+  const rightHand=rig?.wrist??legacyHand;
+  const rightAngle=rig?.angle??(isPoint?
+    mix(armPlan.neutral.rightAngle,a.rightAngle,p):a.rightAngle);
+  const rightPath=rig
+    ? `M243 276 L${rig.elbow.x} ${rig.elbow.y} L${rightHand.x} ${rightHand.y}`
+    :isPoint
+      ? `M243 276 Q${mix(266,298,p)} ${mix(309,224,p)} ${rightHand.x} ${rightHand.y}`
+      :a.right;
   return <svg viewBox="0 0 360 520" width={width} height={height}
       role="img" aria-label={'Redesigned fictional Ourbites presenter: '+pose}
       style={{display:'block',overflow:'visible'}}>

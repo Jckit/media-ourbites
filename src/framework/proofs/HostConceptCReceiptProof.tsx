@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill,Easing,interpolate,useCurrentFrame} from 'remotion';
 import {OurbitesHostConceptC} from '../characters/OurbitesHostConceptC';
+import {conceptCGazeForTarget} from '../characters/ConceptCPointRig';
 
 /**
  * Second evidence target: receipt line instead of a large price ticket.
@@ -14,8 +15,8 @@ const progress=(frame:number,start:number,end:number)=>
   interpolate(frame,[start,end],[0,1],{
     easing:ease,extrapolateLeft:'clamp',extrapolateRight:'clamp',
   });
-const target={x:325,y:224} as const;
-const eye={x:11,y:7} as const;
+const target={x:375,y:260} as const;
+const eye=conceptCGazeForTarget(target);
 const blink=(frame:number,center:number)=>Math.max(0,1-Math.abs(frame-center)/3);
 
 export const HostConceptCReceiptProof:React.FC=()=>{
@@ -40,7 +41,7 @@ export const HostConceptCReceiptProof:React.FC=()=>{
     <div style={{position:'absolute',left:77,top:572,
       color:teal,fontSize:31,fontWeight:900}}>SECOND EVIDENCE TARGET · RECEIPT</div>
     {/* One receipt throughout the scene, and one atomic value/label update. */}
-    <div style={{position:'absolute',left:390,top:858,width:595,height:420,
+    <div style={{position:'absolute',left:510,top:910,width:530,height:420,
       background:'#F0E8D6',border:'7px solid '+ink,borderRadius:13,
       boxShadow:'14px 17px 0 rgba(20,43,56,0.14)',
       transform:`translateY(${(1-entrance)*35}px)`,opacity:entrance}}>
@@ -59,8 +60,9 @@ export const HostConceptCReceiptProof:React.FC=()=>{
         {feeAppears?'FEE ADDED':'BEFORE THE FEE'}
       </div>
     </div>
-    {/* The same actor-side target mechanism is used as in the ticket scene. The fingertip contacts the dashed separator ABOVE the service-fee label, not the legible text.
-        This time the hand retracts without snapping to a second pose. */}
+    {/* The same actor-side target drives the eyes and the wrist.
+        The shifted receipt reserves a text-free margin along the entire reach.
+        The fingertip contacts the left end of its dashed separator. */}
     <div style={{position:'absolute',left:90,top:710,
       transform:`translate(${3*prepare-2*release}px,${-3*prepare+2*release}px)`}}>
       <OurbitesHostConceptC pose="point" width={410} height={594}
