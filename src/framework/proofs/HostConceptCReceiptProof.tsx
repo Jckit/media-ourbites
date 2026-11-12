@@ -14,7 +14,7 @@ const progress=(frame:number,start:number,end:number)=>
   interpolate(frame,[start,end],[0,1],{
     easing:ease,extrapolateLeft:'clamp',extrapolateRight:'clamp',
   });
-const target={x:325,y:266} as const;
+const target={x:325,y:224} as const;
 const eye={x:11,y:7} as const;
 const blink=(frame:number,center:number)=>Math.max(0,1-Math.abs(frame-center)/3);
 
@@ -37,7 +37,7 @@ export const HostConceptCReceiptProof:React.FC=()=>{
       fontSize:82,fontWeight:950,lineHeight:1.08,letterSpacing:-3}}>
       WHERE DID THE<br/>EXTRA FEE COME FROM?
     </div>
-    <div style={{position:'absolute',left:77,top:478,
+    <div style={{position:'absolute',left:77,top:572,
       color:teal,fontSize:31,fontWeight:900}}>SECOND EVIDENCE TARGET · RECEIPT</div>
     {/* One receipt throughout the scene, and one atomic value/label update. */}
     <div style={{position:'absolute',left:390,top:858,width:595,height:420,
@@ -59,7 +59,7 @@ export const HostConceptCReceiptProof:React.FC=()=>{
         {feeAppears?'FEE ADDED':'BEFORE THE FEE'}
       </div>
     </div>
-    {/* The same actor-side target mechanism is used as in the ticket scene.
+    {/* The same actor-side target mechanism is used as in the ticket scene. The fingertip contacts the dashed separator ABOVE the service-fee label, not the legible text.
         This time the hand retracts without snapping to a second pose. */}
     <div style={{position:'absolute',left:90,top:710,
       transform:`translate(${3*prepare-2*release}px,${-3*prepare+2*release}px)`}}>
