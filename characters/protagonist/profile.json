@@ -41,5 +41,6 @@
     "approved_at": null,
     "asset_sha256": null,
     "notes": "SVG/Remotion prototype is usable for drafts; human must approve final protagonist design and variants."
-  }
+  },
+  "voice_preset": "auditions/selected-voice.json"
 }
