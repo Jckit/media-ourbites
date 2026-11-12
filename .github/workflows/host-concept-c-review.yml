@@ -6,6 +6,9 @@ on:
       - 'src/framework/characters/OurbitesHostConceptC.tsx'
       - 'src/framework/characters/ConceptCPointRig.ts'
       - 'tests/concept-c-rig.test.mjs'
+      - 'src/framework/motion/PaperHingeReveal.tsx'
+      - 'src/framework/motion/paper-hinge-motion.ts'
+      - 'tests/paper-hinge-motion.test.mjs'
       - 'src/framework/proofs/HostConceptCReview.tsx'
       - 'src/framework/proofs/HostConceptCActingProof.tsx'
       - 'src/framework/proofs/HostConceptCReceiptProof.tsx'
@@ -33,6 +36,7 @@ jobs:
         run: |
           npm run typecheck
           node --experimental-strip-types tests/concept-c-rig.test.mjs
+          node --experimental-strip-types tests/paper-hinge-motion.test.mjs
           python3 scripts/check_framework_layout.py
           git diff --check
       - name: Render actual same-pose comparison and editorial cameo
@@ -66,6 +70,17 @@ jobs:
               -vf "select=eq(n\\,$n)" -frames:v 1 \
               "out/host-concept-c/acting-frames/frame-$n.png"
           done
+          mkdir -p out/host-concept-c/reveal-frames
+          for n in 84 89 92 93 97 101; do
+            ffmpeg -hide_banner -loglevel error -y -i out/host-concept-c/acting.mp4 \
+              -vf "select=eq(n\\,$n)" -frames:v 1 \
+              "out/host-concept-c/reveal-frames/price-$n.png"
+          done
+          for n in 88 93 96 97 101 105; do
+            ffmpeg -hide_banner -loglevel error -y -i out/host-concept-c/receipt.mp4 \
+              -vf "select=eq(n\\,$n)" -frames:v 1 \
+              "out/host-concept-c/reveal-frames/receipt-$n.png"
+          done
           python3 - <<'PY'
           import json
           from pathlib import Path
@@ -90,11 +105,15 @@ jobs:
           assert int(bv['nb_read_frames'])==150 and bv['r_frame_rate']=='30/1',b
           assert abs(float(b['format']['duration'])-5.0)<0.1,b
           assert not any(s['codec_type']=='audio' for s in b['streams']),b
-          print('PASS: Concept C two evidence-target acting proofs + pose comparison, silent H.264')
+          assert len(list(Path('out/host-concept-c/reveal-frames').glob('price-*.png')))==6
+          assert len(list(Path('out/host-concept-c/reveal-frames').glob('receipt-*.png')))==6
+          print('PASS: Concept C two physically reprinted paper proofs + pose comparison, silent H.264')
           PY
           sha256sum src/OurbitesHost.tsx \
             src/framework/characters/OurbitesHostConceptC.tsx \
             src/framework/characters/ConceptCPointRig.ts \
+            src/framework/motion/PaperHingeReveal.tsx \
+            src/framework/motion/paper-hinge-motion.ts \
             src/framework/proofs/HostConceptCReview.tsx \
             src/framework/proofs/HostConceptCActingProof.tsx \
             src/framework/proofs/HostConceptCReceiptProof.tsx \

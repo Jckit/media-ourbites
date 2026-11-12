@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill,Easing,interpolate,useCurrentFrame} from 'remotion';
 import {OurbitesHostConceptC} from '../characters/OurbitesHostConceptC';
 import {conceptCGazeForTarget} from '../characters/ConceptCPointRig';
+import {PaperHingeReveal} from '../motion/PaperHingeReveal';
 
 /**
  * Second evidence target: receipt line instead of a large price ticket.
@@ -25,10 +26,10 @@ export const HostConceptCReceiptProof:React.FC=()=>{
   const glance=progress(frame,22,40);
   const prepare=progress(frame,35,48);
   const extend=progress(frame,45,84);
-  const release=progress(frame,118,146);
+  const release=progress(frame,122,148);
   const reach=extend*(1-release);
-  const feeAppears=frame>=94;
-  const recognize=progress(frame,96,112);
+  const revealStart=89, revealFrames=16;
+  const recognize=progress(frame,101,121);
   const blinkEyes=Math.max(blink(frame,30),blink(frame,109));
   return <AbsoluteFill style={{background:paper,color:ink,
     fontFamily:'Arial,Helvetica,sans-serif',overflow:'hidden'}}>
@@ -51,14 +52,14 @@ export const HostConceptCReceiptProof:React.FC=()=>{
         borderTop:'4px dashed #B8AB91'}}/>
       <div style={{position:'absolute',left:35,top:151,
         fontSize:35,fontWeight:800}}>SERVICE FEE</div>
-      <div style={{position:'absolute',left:35,top:211,
-        fontSize:100,fontWeight:950,color:feeAppears?teal:ink}}>
-        {feeAppears?'+€12':'€0'}
-      </div>
-      <div style={{position:'absolute',left:35,bottom:27,
-        fontSize:25,fontWeight:900}}>
-        {feeAppears?'FEE ADDED':'BEFORE THE FEE'}
-      </div>
+      <PaperHingeReveal frame={frame} startFrame={revealStart}
+        durationFrames={revealFrames}
+        left={35} top={211} width={448} height={176}
+        amountSize={100} labelTop={143} labelSize={25}
+        before={{amount:'€0',label:'BEFORE THE FEE'}}
+        after={{amount:'+€12',label:'FEE ADDED'}}
+        ink={ink} afterInk={teal}
+        paperColor="#F0E8D6" updatedPaperColor="#F7EEDD"/>
     </div>
     {/* The same actor-side target drives the eyes and the wrist.
         The shifted receipt reserves a text-free margin along the entire reach.

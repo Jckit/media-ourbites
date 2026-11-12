@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill,Easing,interpolate,useCurrentFrame} from 'remotion';
 import {OurbitesHostConceptC} from '../characters/OurbitesHostConceptC';
 import {conceptCGazeForTarget} from '../characters/ConceptCPointRig';
+import {PaperHingeReveal} from '../motion/PaperHingeReveal';
 
 /**
  * Issue #64 follow-up: selected Concept C in ONE purpose-led editorial action.
@@ -37,12 +38,10 @@ export const HostConceptCActingProof:React.FC=()=>{
   const anticipation=between(frame,29,47);
   const release=between(frame,103,119);
   const reach=between(frame,40,78)*(1-release);
-  // A single change beat keeps the number and its semantic label in sync.
-  // Crossfading both numbers left €40 visible under 'BEFORE THE CHANGE'.
-  const priceChangeFrame=90;
-  const afterChange=frame>=priceChangeFrame;
-  const priceImpact=Math.max(0,1-Math.abs(frame-priceChangeFrame)/7);
-  const understand=between(frame,94,110);
+  // The fingertip triggers a hinged paper reprint within the persistent tag.
+  // Old amount/label fold away as one face; new amount/label unfold together.
+  const revealStart=85, revealFrames=16;
+  const understand=between(frame,97,113);
   const ticketEntrance=between(frame,0,16);
   const blink=Math.max(blinkAt(frame,26),blinkAt(frame,101));
   const settle=between(frame,105,119);
@@ -75,23 +74,17 @@ export const HostConceptCActingProof:React.FC=()=>{
     }}>
       <div style={{position:'absolute',left:41,top:35,fontSize:27,
         fontWeight:850,letterSpacing:2,color:ink}}>PRICE TAG</div>
-      {/* Exactly one price is visible on every frame, with the meaning tied
-          to the same change beat. Never crossfade contradictory euro amounts. */}
-      <div style={{position:'absolute',left:43,top:87,
-        fontSize:124,letterSpacing:-7,fontWeight:950,
-        color:afterChange?teal:ink,
-        transform:`scale(${1-0.07*priceImpact})`,transformOrigin:'left center'}}>
-        {afterChange?'€40':'€20'}
-      </div>
-      <div style={{position:'absolute',left:42,top:264,right:32,
-        height:5,background:ink,opacity:0.15}}/>
-      <div style={{position:'absolute',left:43,top:294,
-        fontSize:29,fontWeight:900,color:ink}}>
-        {afterChange?'AFTER THE CHANGE':'BEFORE THE CHANGE'}
-      </div>
+      <PaperHingeReveal frame={frame} startFrame={revealStart}
+        durationFrames={revealFrames}
+        left={43} top={87} width={393} height={246}
+        amountSize={124} letterSpacing={-7}
+        labelTop={206} labelSize={29} dividerTop={176}
+        before={{amount:'€20',label:'BEFORE THE CHANGE'}}
+        after={{amount:'€40',label:'AFTER THE CHANGE'}}
+        ink={ink} afterInk={teal}
+        paperColor="#F7DE9D" updatedPaperColor="#F6E0A9"/>
       <div style={{position:'absolute',right:36,top:33,
-        width:22,height:22,borderRadius:'50%',background:orange,
-        transform:`scale(${1+0.33*priceImpact})`}}/>
+        width:22,height:22,borderRadius:'50%',background:orange}}/>
     </div>
     {/* Same Concept C artwork; shoulder leads the wrist and the face follows.
         A tiny forward lean is intentional, not a perpetual idle bounce. */}
