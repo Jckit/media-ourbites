@@ -1,0 +1,109 @@
+name: Issue 64 - selected Concept C acting proofs
+
+on:
+  pull_request:
+    paths:
+      - 'src/framework/characters/OurbitesHostConceptC.tsx'
+      - 'src/framework/proofs/HostConceptCReview.tsx'
+      - 'src/framework/proofs/HostConceptCActingProof.tsx'
+      - 'src/framework/proofs/HostConceptCReceiptProof.tsx'
+      - 'src/index.tsx'
+      - 'package.json'
+      - '.github/workflows/host-concept-c-review.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-redesign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install pinned dependencies
+        run: npm ci --ignore-scripts
+      - name: Compile and verify existing layout contract
+        run: |
+          npm run typecheck
+          python3 scripts/check_framework_layout.py
+          git diff --check
+      - name: Render actual same-pose comparison and editorial cameo
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/host-concept-c/frames out/host-concept-c/acting-frames
+          npm run render:host-concept-c
+          npm run render:host-concept-c-acting
+          npm run render:host-concept-c-receipt
+          npm run still:host-concept-c-cameo
+          for n in 0 30 60 90 120; do
+            npx remotion still src/index.tsx HostConceptCReview \
+              "out/host-concept-c/frames/pose-$n.png" --frame="$n" --scale=0.4
+          done
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          ffprobe -v error -count_frames \
+            -show_entries stream=codec_type,codec_name,width,height,nb_read_frames,r_frame_rate:format=duration \
+            -of json out/host-concept-c/compare.mp4 > out/host-concept-c/probe.json
+          ffprobe -v error -count_frames \
+            -show_entries stream=codec_type,codec_name,width,height,nb_read_frames,r_frame_rate:format=duration \
+            -of json out/host-concept-c/acting.mp4 > out/host-concept-c/acting-probe.json
+          ffprobe -v error -count_frames \
+            -show_entries stream=codec_type,codec_name,width,height,nb_read_frames,r_frame_rate:format=duration \
+            -of json out/host-concept-c/receipt.mp4 > out/host-concept-c/receipt-probe.json
+          for n in 15 45 70 90 109; do
+            ffmpeg -hide_banner -loglevel error -y -i out/host-concept-c/acting.mp4 \
+              -vf "select=eq(n\\,$n)" -frames:v 1 \
+              "out/host-concept-c/acting-frames/frame-$n.png"
+          done
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('out/host-concept-c/probe.json').read_text())
+          v=next(s for s in d['streams'] if s['codec_type']=='video')
+          assert v['codec_name']=='h264' and (v['width'],v['height'])==(432,768),d
+          assert int(v['nb_read_frames'])==150 and v['r_frame_rate']=='30/1',d
+          assert abs(float(d['format']['duration'])-5.0)<0.1,d
+          assert not any(s['codec_type']=='audio' for s in d['streams']),d
+          assert len(list(Path('out/host-concept-c/frames').glob('pose-*.png')))==5
+          assert Path('out/host-concept-c/cameo.png').exists()
+          a=json.loads(Path('out/host-concept-c/acting-probe.json').read_text())
+          av=next(s for s in a['streams'] if s['codec_type']=='video')
+          assert av['codec_name']=='h264' and (av['width'],av['height'])==(432,768),a
+          assert int(av['nb_read_frames'])==120 and av['r_frame_rate']=='30/1',a
+          assert abs(float(a['format']['duration'])-4.0)<0.1,a
+          assert not any(s['codec_type']=='audio' for s in a['streams']),a
+          assert len(list(Path('out/host-concept-c/acting-frames').glob('frame-*.png')))==5
+          b=json.loads(Path('out/host-concept-c/receipt-probe.json').read_text())
+          bv=next(s for s in b['streams'] if s['codec_type']=='video')
+          assert bv['codec_name']=='h264' and (bv['width'],bv['height'])==(432,768),b
+          assert int(bv['nb_read_frames'])==150 and bv['r_frame_rate']=='30/1',b
+          assert abs(float(b['format']['duration'])-5.0)<0.1,b
+          assert not any(s['codec_type']=='audio' for s in b['streams']),b
+          print('PASS: Concept C two evidence-target acting proofs + pose comparison, silent H.264')
+          PY
+          sha256sum src/OurbitesHost.tsx \
+            src/framework/characters/OurbitesHostConceptC.tsx \
+            src/framework/proofs/HostConceptCReview.tsx \
+            src/framework/proofs/HostConceptCActingProof.tsx \
+            src/framework/proofs/HostConceptCReceiptProof.tsx \
+            out/host-concept-c/compare.mp4 \
+            out/host-concept-c/acting.mp4 \
+            out/host-concept-c/receipt.mp4 > out/host-concept-c/sha256.txt
+      - name: Attach MP4, all poses and scene-scale cameo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue64-full-redesign-concept-c
+          path: out/host-concept-c/
+          retention-days: 14
+          if-no-files-found: warn
+
+# User selected Concept C over D. These proofs DO NOT grant canonical replacement or art approval.
