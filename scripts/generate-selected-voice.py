@@ -1,6 +1,8 @@
 """Generate pilot narration using the selected Ourbites preset and measured timings."""
 from pathlib import Path
 import json
+if json.loads((Path(__file__).resolve().parents[1] / 'auditions/selected-voice.json').read_text(encoding='utf-8-sig'))['provider'] != 'kokoro-onnx':
+    raise SystemExit('The lead voice is now Justin. Use scripts/generate_lead_voice.py for new narration; existing proof timings require realignment before replacing audio.')
 import numpy as np
 import soundfile as sf
 from kokoro_onnx import Kokoro
