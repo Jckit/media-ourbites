@@ -33,7 +33,7 @@ def main():
         frames = math.ceil(duration * 30)
         clips.append(dict(text=text, file=wav.name, startFrame=frame, durationInFrames=frames))
         # Shorten the intentional pauses by 40% while retaining a readable beat.
-        frame += frames + (11 if index in (0, 3, 4) else 5)
+        frame += frames + (6 if index in (0, 3, 4) else 3)
     manifest = dict(clips=clips, durationInFrames=frame + 15)
     (dest / 'props.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
     print(f'Preview props: {dest / "props.json"}; duration {manifest["durationInFrames"] / 30:.2f}s')
