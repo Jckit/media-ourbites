@@ -1,6 +1,6 @@
 import React from 'react';
 import type {HostPose} from '../../OurbitesHost';
-import {conceptCPointRig} from './ConceptCPointRig';
+import {conceptCArmPath,conceptCPointRig} from './ConceptCPointRig';
 
 /**
  * ISSUE #64 — CONCEPT C / complete character redesign, UNAPPROVED.
@@ -184,7 +184,7 @@ export const OurbitesHostConceptC:React.FC<EditorialHostConceptProps>=({
   const rightAngle=rig?.angle??(isPoint?
     mix(armPlan.neutral.rightAngle,a.rightAngle,p):a.rightAngle);
   const rightPath=rig
-    ? `M243 276 L${rig.elbow.x} ${rig.elbow.y} L${rightHand.x} ${rightHand.y}`
+    ? conceptCArmPath(rig)
     :isPoint
       ? `M243 276 Q${mix(266,298,p)} ${mix(309,224,p)} ${rightHand.x} ${rightHand.y}`
       :a.right;

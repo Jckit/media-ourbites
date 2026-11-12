@@ -70,6 +70,17 @@ jobs:
               -vf "select=eq(n\\,$n)" -frames:v 1 \
               "out/host-concept-c/acting-frames/frame-$n.png"
           done
+          mkdir -p out/host-concept-c/elbow-frames
+          for n in 35 45 53 61 70 79 87 104 118; do
+            ffmpeg -hide_banner -loglevel error -y -i out/host-concept-c/acting.mp4 \
+              -vf "select=eq(n\\,$n)" -frames:v 1 \
+              "out/host-concept-c/elbow-frames/price-$n.png"
+          done
+          for n in 35 49 60 70 80 90 111 129 146; do
+            ffmpeg -hide_banner -loglevel error -y -i out/host-concept-c/receipt.mp4 \
+              -vf "select=eq(n\\,$n)" -frames:v 1 \
+              "out/host-concept-c/elbow-frames/receipt-$n.png"
+          done
           mkdir -p out/host-concept-c/reveal-frames
           for n in 84 89 92 93 97 101; do
             ffmpeg -hide_banner -loglevel error -y -i out/host-concept-c/acting.mp4 \
@@ -105,6 +116,8 @@ jobs:
           assert int(bv['nb_read_frames'])==150 and bv['r_frame_rate']=='30/1',b
           assert abs(float(b['format']['duration'])-5.0)<0.1,b
           assert not any(s['codec_type']=='audio' for s in b['streams']),b
+          assert len(list(Path('out/host-concept-c/elbow-frames').glob('price-*.png')))==9
+          assert len(list(Path('out/host-concept-c/elbow-frames').glob('receipt-*.png')))==9
           assert len(list(Path('out/host-concept-c/reveal-frames').glob('price-*.png')))==6
           assert len(list(Path('out/host-concept-c/reveal-frames').glob('receipt-*.png')))==6
           print('PASS: Concept C two physically reprinted paper proofs + pose comparison, silent H.264')

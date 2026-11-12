@@ -1,26 +1,40 @@
 import assert from 'node:assert/strict';
-import {conceptCPointRig,conceptCGazeForTarget} from '../src/framework/characters/ConceptCPointRig.ts';
+import {conceptCPointRig,conceptCGazeForTarget,conceptCArmPath} from '../src/framework/characters/ConceptCPointRig.ts';
 
 // Pure geometry contract: reproducible at any rendered frame, no scene-specific magic numbers.
 const targets=[{x:370,y:179},{x:375,y:260}];
 for(const target of targets){
-  let prior=null;
+  let previous=null;
   for(let n=0;n<=100;n++){
     const p=n/100;
     const rig=conceptCPointRig(target,p);
     for(const point of [rig.wrist,rig.elbow,rig.fingertip]){
       assert(Number.isFinite(point.x)&&Number.isFinite(point.y));
     }
-    if(prior)assert(Math.hypot(rig.fingertip.x-prior.x,rig.fingertip.y-prior.y)<5,
-      'No abrupt frame-to-frame fingertip jumps along the approach');
-    prior=rig.fingertip;
+    const s={x:243,y:276},e=rig.elbow,w=rig.wrist;
+    const upper={x:e.x-s.x,y:e.y-s.y},fore={x:w.x-e.x,y:w.y-e.y};
+    const upperLen=Math.hypot(upper.x,upper.y);
+    const foreLen=Math.hypot(fore.x,fore.y);
+    const cosTurn=(upper.x*fore.x+upper.y*fore.y)/(upperLen*foreLen);
+    const turn=Math.acos(Math.max(-1,Math.min(1,cosTurn)))*180/Math.PI;
+    assert(turn<48,'Elbow must not form a harsh V bend');
+    assert(turn>14,'Elbow should retain a subtle natural bend');
+    assert(upperLen>30&&upperLen<65&&foreLen>30&&foreLen<65,
+      'Neither arm segment should collapse or grow excessively');
+    assert(conceptCArmPath(rig).includes(' C') &&
+      !conceptCArmPath(rig).includes(' L'),'Sleeve must have C1-smooth cubic joins');
+    if(previous){
+      assert(Math.hypot(rig.fingertip.x-previous.fingertip.x,
+        rig.fingertip.y-previous.fingertip.y)<5,
+        'No fingertip pops along the approach');
+      assert(Math.hypot(e.x-previous.elbow.x,e.y-previous.elbow.y)<2.5,
+        'Elbow may not jump or change IK solution between frames');
+    }
+    previous=rig;
   }
   const contact=conceptCPointRig(target,1);
   assert(Math.abs(contact.fingertip.x-target.x)<1e-7);
   assert(Math.abs(contact.fingertip.y-target.y)<1e-7);
-  const s={x:243,y:276};
-  assert(Math.abs(Math.hypot(contact.elbow.x-s.x,contact.elbow.y-s.y)-72)<0.001);
-  assert(Math.abs(Math.hypot(contact.wrist.x-contact.elbow.x,contact.wrist.y-contact.elbow.y)-72)<0.001);
 }
 const priceGaze=conceptCGazeForTarget(targets[0]);
 const receiptGaze=conceptCGazeForTarget(targets[1]);
@@ -39,4 +53,4 @@ for(let n=0;n<=100;n++){
   const palmRight=90+(rig.wrist.x+46)*410/360+3;
   assert(palmRight<538,'Price hand must not occlude € glyph');
 }
-console.log('PASS: Concept C tip contact, joint lengths, path continuity, target-led gaze and text clearance');
+console.log('PASS: Concept C smooth elbow, stable sleeve curvature, fingertip contact, gaze and text clearance');

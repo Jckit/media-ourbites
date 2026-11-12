@@ -23,22 +23,40 @@ export const conceptCGazeForTarget=(target:Point2):Point2=>({
   y:clamp((target.y-152)/14,-7,7),
 });
 
-/** Anatomical bend: two consistent 72-unit arm segments at contact.
- * The elbow takes the upper solution, lifted toward the shoulder. */
-const elbowFor=(wrist:Point2):Point2=>{
+/** Small controlled elbow flex.
+ * Previous equal-length 72-unit IK demanded ~90-degree turns at contact,
+ * creating a rigid V-shaped puppet arm. Keep the elbow near the line from
+ * shoulder to wrist, offset just 11.5–14 units toward screen-up.
+ * The chosen elbow stays on the SAME side throughout the reach; no IK flips.
+ */
+const elbowFor=(wrist:Point2,progress:number):Point2=>{
   const dx=wrist.x-shoulder.x,dy=wrist.y-shoulder.y;
   const d=Math.max(0.001,Math.hypot(dx,dy));
-  const along=Math.min(d/2,72);
-  const height=Math.sqrt(Math.max(0,72*72-along*along));
+  const bend=lerp(11.5,14,clamp(progress,0,1));
   return {
-    x:shoulder.x+(dx/d)*along+(dy/d)*height,
-    y:shoulder.y+(dy/d)*along-(dx/d)*height,
+    x:shoulder.x+dx/2+(dy/d)*bend,
+    y:shoulder.y+dy/2-(dx/d)*bend,
   };
 };
 
+/** Tangent-continuous sleeve through the actual elbow.
+ * Two cubic segments meet with the same derivative, so there is no sharp
+ * SVG "L" corner while the forearm still visibly follows the wrist.
+ */
+export const conceptCArmPath=(rig:PointRig):string=>{
+  const e=rig.elbow,w=rig.wrist;
+  const dx=w.x-shoulder.x,dy=w.y-shoulder.y;
+  const d=Math.max(0.001,Math.hypot(dx,dy));
+  const tangent=Math.min(19,d*0.18);
+  const tx=dx/d*tangent,ty=dy/d*tangent;
+  const c1={x:lerp(shoulder.x,e.x,0.55),y:lerp(shoulder.y,e.y,0.55)};
+  const c4={x:lerp(w.x,e.x,0.47),y:lerp(w.y,e.y,0.47)};
+  return `M${shoulder.x} ${shoulder.y} C${c1.x} ${c1.y} ${e.x-tx} ${e.y-ty} ${e.x} ${e.y} C${e.x+tx} ${e.y+ty} ${c4.x} ${c4.y} ${w.x} ${w.y}`;
+};
+
 /** The fingertip follows one continuous curved path; the wrist is solved
- * backwards from its per-frame angle and finger extension.
- * A bent elbow follows that constrained wrist, rather than redrawing an arbitrary sleeve.
+ * backwards from its per-frame angle and finger extension. A modest elbow
+ * flex follows the wrist, with a C1-continuous sleeve instead of a hard kink.
  */
 export const conceptCPointRig=(target:Point2,progress:number):PointRig=>{
   const p=clamp(progress,0,1);
@@ -47,19 +65,17 @@ export const conceptCPointRig=(target:Point2,progress:number):PointRig=>{
   const start:Point2={
     x:idleWrist.x+startOffset.x,y:idleWrist.y+startOffset.y,
   };
+  // A modest arc that does not whip the wrist up past the shoulder mid-reach.
+  // The previous min(start,target)-12 control forced a sharp premature bend.
   const control:Point2={
     x:lerp(start.x,target.x,0.45),
-    y:Math.min(start.y,target.y)-12,
+    y:lerp(start.y,target.y,0.5)-8,
   };
   const curve=(key:'x'|'y')=>(1-p)*(1-p)*start[key]+
     2*(1-p)*p*control[key]+p*p*target[key];
   const fingertip={x:curve('x'),y:curve('y')};
   const offset=conceptCFingerOffset(angle,p);
   const wrist={x:fingertip.x-offset.x,y:fingertip.y-offset.y};
-  const raisedElbow=elbowFor(wrist);
-  const elbow={
-    x:lerp(266,raisedElbow.x,p),
-    y:lerp(309,raisedElbow.y,p),
-  };
+  const elbow=elbowFor(wrist,p);
   return {wrist,elbow,fingertip,angle};
 };
