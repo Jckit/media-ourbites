@@ -55,18 +55,17 @@ def main() -> int:
     if ffmpeg is None:
         raw.unlink(missing_ok=True)
         raise SystemExit("ffmpeg was not found; install it or pass --ffmpeg <path>")
-    filters = "highpass=f=75,afftdn=nf=-25:tn=1,loudnorm=I=-19:TP=-1.5:LRA=11,rubberband=pitch=0.96:formant=preserved,volume=0.96"
+    filters = "highpass=f=75,afftdn=nr=3:nf=-40:tn=1,rubberband=tempo=0.94:pitch=0.96:formant=preserved,loudnorm=I=-19:TP=-1.5:LRA=11,volume=0.96"
     try:
         subprocess.run([
             ffmpeg, "-y", "-i", str(raw), "-af", filters, "-ar", "48000",
             "-ac", "1", "-c:a", "pcm_s24le", str(output),
         ], check=True)
     finally:
-        raw.unlink(missing_ok=True)
+        print(f"Raw take retained at {raw}")
     print(f"Wrote polished voice clone to {output}")
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
