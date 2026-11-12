@@ -55,7 +55,7 @@ def main() -> int:
     if ffmpeg is None:
         raw.unlink(missing_ok=True)
         raise SystemExit("ffmpeg was not found; install it or pass --ffmpeg <path>")
-    filters = "highpass=f=75,afftdn=nr=3:nf=-40:tn=1,rubberband=tempo=1.03:pitch=0.96:formant=preserved,loudnorm=I=-19:TP=-1.5:LRA=11,volume=0.96"
+    filters = "highpass=f=75,afftdn=nr=3:nf=-40:tn=1,rubberband=tempo=1.06:pitch=0.96:formant=preserved,loudnorm=I=-19:TP=-1.5:LRA=11,volume=0.96"
     try:
         subprocess.run([
             ffmpeg, "-y", "-i", str(raw), "-af", filters, "-ar", "48000",
