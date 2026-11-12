@@ -177,6 +177,29 @@ Local Kokoro voice audition paths:
 
 The command above is an **optional historical audition example for an alternative voice**, not the selected episode voice. The selected voice is **Kokoro `am_puck` (A), original pitch, 1.1× video playback**, as recorded in [auditions/selected-voice.json](auditions/selected-voice.json). This cleanup does not rerender or resynthesize audio. Actual final voice listening/word-level sync, media rights, and publication remain gated by the SOP.
 
+## Optional local voice-clone experiment
+
+For a private voice-clone audition, `scripts/generate_qwen_voice.py` wraps the local audio.cpp CLI and Qwen3-TTS 0.6B Base GGUF. It runs on your machine (Vulkan is the recommended backend for the tested GTX 1080 setup), then applies light noise reduction, loudness normalization, a 4% pitch reduction with formants preserved, and exports mono 48 kHz / 24-bit WAV. It does **not** change the selected Kokoro preset or any production audio.
+
+Keep the reference recording, transcript, model and output on your computer. The helper does not upload them. `out/` is ignored by Git, and the GitHub Actions workflows do not download models or synthesize audio. Do not place voice recordings in tracked folders or commit generated WAVs.
+
+```powershell
+$cli = 'C:\path\to\audio.cpp\vulkan\audiocpp_cli.exe'
+$model = 'C:\path\to\models\Qwen3-TTS-12Hz-0.6B-Base-GGUF\qwen3-tts-12hz-0.6b-base-q8_0.gguf'
+$reference = 'C:\private\voice-reference.wav'
+$ffmpeg = 'C:\path\to\audio.cpp\ffmpeg.exe'
+python scripts/generate_qwen_voice.py `
+  --cli $cli `
+  --model $model `
+  --reference-audio $reference `
+  --reference-text 'The exact words spoken in the reference recording.' `
+  --text-file episodes/002/narration.txt `
+  --ffmpeg $ffmpeg `
+  --output out/voice-auditions/episode-002-qwen.wav
+```
+
+The script also accepts `--text '...'` instead of `--text-file`, and `--no-polish` to retain raw model output. Listen to the result and check names, numbers, pacing and caption alignment before considering any production use. Model output remains an audition until explicitly approved.
+
 ## Reusable character system — recurring Ourbites host + real-person illustrations
 
 The character stage is documented in [research/CHARACTER-ASSETS.md](research/CHARACTER-ASSETS.md), with machine-readable [protagonist](characters/protagonist/profile.json) and [Dario Amodei](characters/dario-amodei/profile.json) profiles. The **existing hybrid host** has been extracted into [src/OurbitesHost.tsx](src/OurbitesHost.tsx): one fictional face/silhouette with `neutral`, `explain`, `think`, `point`, and `react` poses. The owner can approve or revise its final appearance later; **provisional is not approved**.
@@ -215,3 +238,4 @@ The draft [`OfficeWorld` pilot](src/BusinessWorld.tsx) gives `AnthropicCharacter
 **Optional visual blend (PR #2):** the requested reference is **low-poly animation**, but the intended Ourbites aesthetic is still the established flat 2D hybrid. We are testing small 2.5D/faceted-shading touches on scenery and props—not replacing the host, forcing 3D, or requiring event simulations. See [Ourbites Hybrid 2.5D](styles/OURBITES-HYBRID-2.5D.md). [PR #2](https://github.com/jcbandc-arch/media-creator-outbites/pull/2) was merged after its visual integration checks; the later [FW-06 production integration](https://github.com/jcbandc-arch/media-creator-outbites/pull/10) was merged as well. The framework's visual dimensionality has been approved as an experiment, **not** as final episode media. Open human art/audio/factual/rights gates remain tracked in the roadmap.
 
 **New optional motion vocabulary:** [editorial paper-collage / mixed-media cutout animation](styles/OURBITES-EDITORIAL-PAPER-MOTION.md) with motivated object focus, layered evidence cards, kinetic typography, and smooth transitions is now documented. Use [ourbites-motion](skills/ourbites-motion/SKILL.md) for future implementations; this is **not** already a functional motion library, nor a required treatment for every scene. The protagonist identity, selected Voice A, 1.1× playback, source accuracy and final approval gates remain unchanged.
+
