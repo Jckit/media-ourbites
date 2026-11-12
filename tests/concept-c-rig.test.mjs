@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {conceptCPointRig,conceptCGazeForTarget} from '../src/framework/characters/ConceptCPointRig.ts';
 
 // Pure geometry contract: reproducible at any rendered frame, no scene-specific magic numbers.
-const targets=[{x:390,y:179},{x:375,y:260}];
+const targets=[{x:370,y:179},{x:375,y:260}];
 for(const target of targets){
   let prior=null;
   for(let n=0;n<=100;n++){
@@ -32,4 +32,11 @@ for(let n=0;n<=100;n++){
   const palmRight=90+(rig.wrist.x+46)*410/360+3;
   assert(palmRight<545-7,'Hand cannot cover the receipt label column');
 }
-console.log('PASS: Concept C tip contact, joint lengths, path continuity, gaze and receipt text clearance');
+// Price card starts x505 and the € glyph begins at screen x548;
+// reserve a conservative 10px gap from the ink outline at ALL approach frames.
+for(let n=0;n<=100;n++){
+  const rig=conceptCPointRig(targets[0],n/100);
+  const palmRight=90+(rig.wrist.x+46)*410/360+3;
+  assert(palmRight<538,'Price hand must not occlude € glyph');
+}
+console.log('PASS: Concept C tip contact, joint lengths, path continuity, target-led gaze and text clearance');
