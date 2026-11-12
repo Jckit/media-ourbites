@@ -11,7 +11,7 @@ LINES = [
     'Imagine you own ten of one hundred shares.',
     'The company issues twenty-five more.',
     'Your ten shares now represent eight percent.',
-    'Rude.',
+    "Well, that's rude.",
     'Same shares. Smaller percentage. But not necessarily less value.',
     'That depends on what the company does with the new money.',
 ]
