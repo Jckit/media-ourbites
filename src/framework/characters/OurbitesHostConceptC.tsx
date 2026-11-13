@@ -70,6 +70,22 @@ const armPlan:Record<HostPose,ArmPlan>={
   },
 };
 
+/** A quiet ink/teal cuff break at the end of an actual arm stroke.
+ * The cuff follows authored wrist poses and the target-driven pointing wrist;
+ * it cannot remain behind on a stationary sleeve when the character gestures.
+ */
+const SleeveCuff:React.FC<{shoulder:P;wrist:P}>=({shoulder,wrist})=>{
+  const dx=wrist.x-shoulder.x,dy=wrist.y-shoulder.y;
+  const magnitude=Math.max(1,Math.hypot(dx,dy));
+  const ux=dx/magnitude,uy=dy/magnitude;
+  const cx=wrist.x-ux*14,cy=wrist.y-uy*14;
+  const nx=-uy*10,ny=ux*10;
+  return <path
+    d={`M${cx-nx} ${cy-ny} L${cx+nx} ${cy+ny}`}
+    stroke={C.tealShade} strokeWidth={4}
+    strokeLinecap="round" opacity={0.85} fill="none"/>;
+};
+
 const Hand:React.FC<{at:P;angle:number;pose:HostPose;side:'left'|'right';extension?:number}>=
   ({at,angle,pose,side,extension=1})=>{
   const pointing=pose==='point'&&side==='right';
@@ -191,20 +207,28 @@ export const OurbitesHostConceptC:React.FC<EditorialHostConceptProps>=({
   return <svg viewBox="0 0 360 520" width={width} height={height}
       role="img" aria-label={'Redesigned fictional Ourbites presenter: '+pose}
       style={{display:'block',overflow:'visible'}}>
-    {/* Navy tapered trousers + independently legible cream trainers.
-        The leg and foot geometry is unchanged across all five poses. */}
-    <g stroke={C.ink} strokeWidth={30} fill="none" strokeLinecap="round">
-      <path d="M151 355 Q143 421 133 472"/>
-      <path d="M214 355 Q224 421 230 472"/>
+    {/* Tapered ink-edged navy trousers: retain the original leg
+        trajectories while making their material distinct from the shoes. */}
+    <g fill="none" strokeLinecap="round">
+      <path d="M151 355 Q143 421 133 472 M214 355 Q224 421 230 472"
+        stroke={C.ink} strokeWidth={34}/>
+      <path d="M151 355 Q143 421 133 472 M214 355 Q224 421 230 472"
+        stroke="#253E50" strokeWidth={26}/>
     </g>
-    <g fill={C.white} stroke={C.ink} strokeWidth={4.5} strokeLinejoin="round">
+    {/* Warm neutral trainers and navy uppers instead of pure white blocks. */}
+    <g fill="#E9E4D9" stroke={C.ink} strokeWidth={4.5} strokeLinejoin="round">
       <path d="M112 463 Q121 458 145 465 Q149 474 151 488
         L96 489 Q91 481 102 474Z"/>
       <path d="M218 466 Q236 459 244 470 L266 478
         Q276 487 262 490 H211 Q206 480 218 466Z"/>
     </g>
-    <path d="M103 483 H149 M218 484 H262" stroke={C.ink} strokeWidth={3.5}
-      strokeLinecap="round" opacity={0.75}/>
+    <path d="M120 465 Q132 463 141 470 L144 476 L113 478Z
+      M226 470 Q234 462 245 471 L254 478 L220 478Z"
+      fill="#253E50" opacity={0.86}/>
+    <path d="M104 482 H147 M216 483 H261" stroke={C.white} strokeWidth={3.6}
+      strokeLinecap="round"/>
+    <path d="M128 467 L140 471 M232 472 L245 476"
+      stroke={C.white} strokeWidth={2.4} strokeLinecap="round" opacity={0.87}/>
 
     {/* True sleeves, not stick lines. Ink under-stroke = simple vector outline. */}
     <g fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -214,36 +238,60 @@ export const OurbitesHostConceptC:React.FC<EditorialHostConceptProps>=({
       <path d={rightPath} stroke={C.teal} strokeWidth={23}/>
     </g>
 
-    {/* Smart-casual teal overshirt: preserve Concept C's outer silhouette
-        and stroke language but remove the suit-like long white V and lapels.
-        Every piece remains flat 2D vector art at phone resolution. */}
-    <path d="M118 247 Q140 235 169 237 L214 237 Q237 242 246 257
-      L247 353 Q214 373 177 376 Q133 373 109 353 L109 285
-      Q110 264 118 247Z"
+    {/* One recognisable editorial-workwear uniform.
+        A slightly cropped teal overshirt sits over a separate cream crewneck.
+        Flat layer overlaps (not gradients/3D) give the small silhouette form. */}
+    <path d="M117 249 Q140 237 167 239 L216 240 Q237 241 246 259
+      L246 338 Q224 356 180 356 Q139 355 110 338 L111 284
+      Q111 264 117 249Z"
       fill={C.teal} stroke={C.ink} strokeWidth={7} strokeLinejoin="round"/>
-    {/* A small cream crew neck, not a tie running through the whole torso. */}
-    <path d="M162 243 Q186 260 213 243
-      L206 269 Q188 282 171 269Z" fill={C.white}/>
-    {/* Compact shirt collar rather than oversized formal blazer lapels. */}
-    <path d="M154 244 L181 257 L170 270 L146 251Z"
+    {/* Subtle recessed side plane, inside the same jacket boundary. */}
+    <path d="M222 245 Q241 250 243 265 L242 332
+      Q233 341 220 344 L221 283Z"
+      fill={C.tealShade} opacity={0.43}/>
+    {/* Cream T-shirt: a consistent open strip and a genuine rounded neckline,
+        not a necklace at the throat or the former long pointed white tie. */}
+    <path d="M169 244 Q188 262 208 244
+      L211 348 Q190 352 171 347Z" fill="#F5F0E6"/>
+    <path d="M169 247 Q185 258 207 245"
+      stroke="#D4C9B8" strokeWidth={3.5} strokeLinecap="round" fill="none"/>
+    {/* Two distinct overshirt fronts cover the tee's edges.
+        Their offset openings suggest cloth thickness without extra outlines. */}
+    <path d="M117 251 Q137 240 162 243 L176 269 L177 345
+      Q148 346 112 331 L111 283 Q111 263 117 251Z"
+      fill={C.teal}/>
+    <path d="M215 242 Q237 246 245 261 L244 334
+      Q223 347 207 345 L206 270Z" fill={C.teal}/>
+    {/* Short workwear collar: 2 tabs, with the shirt visible between them. */}
+    <path d="M159 243 Q167 245 177 255 L177 272
+      Q167 267 153 253Z"
       fill={C.light} stroke={C.tealShade} strokeWidth={3}
       strokeLinejoin="round"/>
-    <path d="M218 244 L194 257 L205 270 L235 252Z"
+    <path d="M215 243 Q208 247 202 255 L205 270
+      Q222 265 229 251Z"
       fill={C.light} stroke={C.tealShade} strokeWidth={3}
       strokeLinejoin="round"/>
-    {/* Tonal placket, understated buttons and one quiet chest seam. */}
-    <path d="M187 274 Q188 317 187 358"
-      fill="none" stroke={C.tealShade} strokeWidth={4} opacity={0.67}/>
-    <path d="M194 278 L194 356"
-      fill="none" stroke={C.light} strokeWidth={2} opacity={0.42}/>
-    <circle cx={191} cy={307} r={2.5} fill={C.ink} opacity={0.63}/>
-    <circle cx={191} cy={334} r={2.5} fill={C.ink} opacity={0.63}/>
-    <path d="M208 310 Q220 312 232 307"
-      fill="none" stroke={C.tealShade} strokeWidth={3}
-      strokeLinecap="round"/>
-    <path d="M118 346 Q175 365 239 349"
-      fill="none" stroke={C.tealShade} opacity={0.48} strokeWidth={3}/>
-    <rect x={226} y={349} width={6} height={10} rx={1.5} fill={C.orange}/>
+    {/* One stronger left opening + quieter offset right placket. */}
+    <path d="M177 273 L179 344"
+      stroke={C.tealShade} strokeWidth={4} strokeLinecap="round"/>
+    <path d="M210 271 Q208 302 209 342"
+      stroke={C.light} strokeWidth={2.5} opacity={0.7} fill="none"/>
+    {/* One functional pocket, not multiple decorative seam lines. */}
+    <path d="M217 294 H236 V318 Q227 325 217 319Z"
+      fill={C.tealShade} opacity={0.68}/>
+    <path d="M216 294 H237 M218 319 Q227 326 236 319"
+      stroke={C.ink} strokeWidth={2.6} strokeLinecap="round"
+      fill="none" opacity={0.62}/>
+    {/* Signature accent is an orange tag on the pocket, not a floating patch. */}
+    <rect x={234} y={298} width={5} height={9} rx={1.4} fill={C.orange}/>
+    {/* The jacket ends above the leg origins; the T-shirt remains visible. */}
+    <path d="M113 338 Q143 354 176 349 M209 349 Q235 347 245 337"
+      fill="none" stroke={C.tealShade} strokeWidth={3.5}
+      strokeLinecap="round" opacity={0.64}/>
+    {/* Real cuffs ride with the hands across neutral, point, react and explain.
+        Rendered over the torso but beneath the hand so they stay attached. */}
+    <SleeveCuff shoulder={{x:117,y:276}} wrist={a.leftHand}/>
+    <SleeveCuff shoulder={{x:243,y:276}} wrist={rightHand}/>
 
     {/* Separate neck/head layer, meaningfully different from original mascot. */}
     <path d="M166 215 H206 L211 251 Q188 266 164 251Z"
