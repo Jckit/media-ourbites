@@ -1,10 +1,14 @@
 {
-  "provider": "kokoro-onnx",
-  "model": "Kokoro v1.0",
-  "voice": "am_puck",
-  "language": "en-us",
-  "synthesis_speed": 1.0,
-  "pitch_shift_semitones": 0,
-  "reference": "auditions/A.wav",
-  "selected_by": "Justin"
+  "backend": "vulkan",
+  "provider": "audio.cpp",
+  "selected_by": "Justin",
+  "role": "ourbites-protagonist",
+  "voice": "justin",
+  "model": "Qwen3-TTS 0.6B Base Q8_0",
+  "pitch_scale": 0.96,
+  "reference_config": "out/voice-local.json",
+  "playback_rate": 1.0,
+  "tempo_scale": 1.06,
+  "noise_reduction_db": 3,
+  "noise_floor_db": -40
 }

@@ -10,7 +10,7 @@ The production framework includes a recurring **hybrid fictional host** ([source
 
 The optional **editorial paper-collage / digital cutout motion language** is documented in the [style guide](styles/OURBITES-EDITORIAL-PAPER-MOTION.md) and [motion skill](skills/ourbites-motion/SKILL.md), approved as *documentation* in [PR #11](https://github.com/jcbandc-arch/media-creator-outbites/pull/11). The paper-motion components, scene-director and modern transition primitives described there are **planned, not implemented**. [ROADMAP.md](ROADMAP.md) is the current task and gate tracker; the [repository cleanup audit](reviews/REPO-CLEANUP-2026-10-28.md) describes status reconciliation. Preserve local Codex work and reviewer decisions.
 
-The **selected production voice** is Kokoro **`am_puck` Voice A**, synthesis speed 1.0, **original pitch (0 semitones)** from [selected-voice.json](auditions/selected-voice.json); the existing composition uses **1.1× playback**. Do not substitute an audition candidate, pitch-shift, or regenerate WAVs during cleanup.
+The selected lead voice for new Ourbites protagonist narration is **Justin’s local Qwen3-TTS clone**, using the Audio 1_59 reference, gentle 3 dB noise reduction, 6% faster tempo (`tempo_scale: 1.06`) and a 4% pitch-scale reduction (`pitch_scale: 0.96`) at 1.0× video playback. Voice processing remains provisional pending an actual listening comparison. Existing rendered demonstrations retain their historical Kokoro audio and timing. Use `python scripts/generate_lead_voice.py --text "Your narration" --output out/voice-auditions/new-take.wav`. Private `out/voice-local.json` supplies `cli`, `model`, `reference_audio`, `reference_text`, and `ffmpeg`; use absolute paths for the executable, model, reference WAV and ffmpeg, and the exact spoken reference transcript for `reference_text`. Voice selection: [selected-voice.json](auditions/selected-voice.json).
 
 ## Deliverables
 
@@ -175,7 +175,30 @@ Local Kokoro voice audition paths:
 .venv-voice/Scripts/python scripts/audition-anthropic.py --mode full --voice am_liam  # optional DIFFERENT voice audition only; never overwrite selected Voice A
 ```
 
-The command above is an **optional historical audition example for an alternative voice**, not the selected episode voice. The selected voice is **Kokoro `am_puck` (A), original pitch, 1.1× video playback**, as recorded in [auditions/selected-voice.json](auditions/selected-voice.json). This cleanup does not rerender or resynthesize audio. Actual final voice listening/word-level sync, media rights, and publication remain gated by the SOP.
+The command above is an **optional historical audition example for an alternative voice**, not the selected episode voice. The **historical** selected voice for these earlier proof renders was Kokoro `am_puck` (A), original pitch, played at 1.1×. The **current selected preset for new narration** is Justin's local Qwen3 clone in [auditions/selected-voice.json](auditions/selected-voice.json). Existing proofs remain untouched; this PR does not rerender them. Actual final voice listening/word-level sync, media rights, and publication remain gated by the SOP.
+
+## Local lead-voice generation
+
+For a private voice-clone audition, `scripts/generate_qwen_voice.py` wraps the local audio.cpp CLI and Qwen3-TTS 0.6B Base GGUF. It runs on your machine (Vulkan is the recommended backend for the tested GTX 1080 setup), then applies light noise reduction, loudness normalization, a 4% pitch reduction with formants preserved, and exports mono 48 kHz / 24-bit WAV. These values come from the tracked [selected voice preset](auditions/selected-voice.json), not hardcoded FFmpeg settings. A tempo greater than 1.0 **speeds up** speech; it does not slow it down. This is a proposed preset until the human listening gate passes.
+
+Keep the reference recording, transcript, model and output on your computer. The helper does not upload them. `out/` is ignored by Git, and the GitHub Actions workflows do not download models or synthesize audio. Do not place voice recordings in tracked folders or commit generated WAVs.
+
+```powershell
+$cli = 'C:\path\to\audio.cpp\vulkan\audiocpp_cli.exe'
+$model = 'C:\path\to\models\Qwen3-TTS-12Hz-0.6B-Base-GGUF\qwen3-tts-12hz-0.6b-base-q8_0.gguf'
+$reference = 'C:\private\voice-reference.wav'
+$ffmpeg = 'C:\path\to\audio.cpp\ffmpeg.exe'
+python scripts/generate_qwen_voice.py `
+  --cli $cli `
+  --model $model `
+  --reference-audio $reference `
+  --reference-text 'The exact words spoken in the reference recording.' `
+  --text-file episodes/002/narration.txt `
+  --ffmpeg $ffmpeg `
+  --output out/voice-auditions/episode-002-qwen.wav
+```
+
+The script also accepts `--text '...'` instead of `--text-file`, and `--processing raw` (or the legacy `--no-polish`) to skip the enhancement stage. Existing raw takes are preserved; outputs are never overwritten. Listen to the result and check names, numbers, pacing and caption alignment before considering any production use. Justin selected this voice for the protagonist; each final episode still needs listening and caption alignment.
 
 ## Reusable character system — recurring Ourbites host + real-person illustrations
 
@@ -215,3 +238,32 @@ The draft [`OfficeWorld` pilot](src/BusinessWorld.tsx) gives `AnthropicCharacter
 **Optional visual blend (PR #2):** the requested reference is **low-poly animation**, but the intended Ourbites aesthetic is still the established flat 2D hybrid. We are testing small 2.5D/faceted-shading touches on scenery and props—not replacing the host, forcing 3D, or requiring event simulations. See [Ourbites Hybrid 2.5D](styles/OURBITES-HYBRID-2.5D.md). [PR #2](https://github.com/jcbandc-arch/media-creator-outbites/pull/2) was merged after its visual integration checks; the later [FW-06 production integration](https://github.com/jcbandc-arch/media-creator-outbites/pull/10) was merged as well. The framework's visual dimensionality has been approved as an experiment, **not** as final episode media. Open human art/audio/factual/rights gates remain tracked in the roadmap.
 
 **New optional motion vocabulary:** [editorial paper-collage / mixed-media cutout animation](styles/OURBITES-EDITORIAL-PAPER-MOTION.md) with motivated object focus, layered evidence cards, kinetic typography, and smooth transitions is now documented. Use [ourbites-motion](skills/ourbites-motion/SKILL.md) for future implementations; this is **not** already a functional motion library, nor a required treatment for every scene. The protagonist identity, selected Voice A, 1.1× playback, source accuracy and final approval gates remain unchanged.
+
+## Matched voice-quality comparison (private, offline)
+
+Evaluate the voice on **one identical synthesized take**, so differences come from processing and not random TTS variation. The locally ignored raw take can be reused directly, without loading Qwen3-TTS or re-running the GTX 1080 model. Use the raw sidecar left by processed generation (e.g. `clip-0.raw.wav`) as input:
+
+```powershell
+$raw = 'out/lead-voice-preview/clip-0.raw.wav'
+python scripts/generate_qwen_voice.py --raw-input $raw --processing raw --output out/voice-auditions/compare-raw.wav
+python scripts/generate_qwen_voice.py --raw-input $raw --processing clean --ffmpeg C:\path\to\ffmpeg.exe --output out/voice-auditions/compare-clean.wav
+python scripts/generate_qwen_voice.py --raw-input $raw --processing selected --tempo-scale 1.06 --pitch-scale 0.96 --noise-reduction-db 3 --noise-floor-db -40 --ffmpeg C:\path\to\ffmpeg.exe --output out/voice-auditions/compare-selected.wav
+```
+
+`clean` retains gentle noise cleanup and level normalization without tempo/pitch changes. `selected` also applies tempo/pitch controls. `raw` is an unchanged copy of the original output. Outputs and private references stay inside ignored `out/`; different filenames are required because previous takes are never overwritten. For future generation use `python scripts/generate_lead_voice.py --processing selected` with normal text/output arguments.
+
+Compare similarity to Justin's original delivery, pronunciation of financial numbers, emotion, pacing and artifacts, preferably blind and at normal speed. **Neither ASR success nor CI substitutes for human listening approval.** Only after that approval should production word captions be aligned to final narration; this preview contains phrase-level captions only.
+
+Offline regression tests: `python -m unittest discover -s tests -p test_voice_clone.py -v`. These do not download models or synthesize speech.
+
+## Local protagonist voice preview
+
+Run `python scripts/build_voice_preview.py` once in a fresh `out/lead-voice-preview` folder. It generates seven phrases with the selected Justin voice, retains raw takes and writes measured clip durations to `props.json`. Captions are phrase-level, timed to those actual clips; these are not forced-aligned word captions.
+
+Render with the local media folder as the public directory (no recordings are committed):
+
+```powershell
+npx remotion render src/voice-preview.tsx JustinVoicePreview out/lead-voice-preview/justin-protagonist.mp4 --props=out/lead-voice-preview/props.json --public-dir=out/lead-voice-preview --scale=0.5 --concurrency=2
+```
+
+The preview reuses the Ourbites host and office setting for an illustrative ownership example. It plays the processed voice at 1.0x and holds briefly between phrases. Review the rendered voice, captions and acting together before final episode use.
