@@ -251,41 +251,43 @@ export const OurbitesHostConceptC:React.FC<EditorialHostConceptProps>=({
       fill={C.tealShade} opacity={0.43}/>
     {/* Cream T-shirt: a consistent open strip and a genuine rounded neckline,
         not a necklace at the throat or the former long pointed white tie. */}
-    <path d="M169 244 Q188 262 208 244
-      L211 348 Q190 352 171 347Z" fill="#F5F0E6"/>
-    <path d="M169 247 Q185 258 207 245"
+    <path d="M160 242 Q188 267 216 242
+      L220 351 Q192 362 163 351Z" fill="#F5F0E6"/>
+    <path d="M169 247 Q186 261 208 245"
       stroke="#D4C9B8" strokeWidth={3.5} strokeLinecap="round" fill="none"/>
     {/* Two distinct overshirt fronts cover the tee's edges.
         Their offset openings suggest cloth thickness without extra outlines. */}
-    <path d="M117 251 Q137 240 162 243 L176 269 L177 345
-      Q148 346 112 331 L111 283 Q111 263 117 251Z"
+    <path d="M117 251 Q136 240 160 243 L170 268
+      Q171 300 166 344 Q137 345 112 331
+      L111 283 Q111 263 117 251Z"
       fill={C.teal}/>
-    <path d="M215 242 Q237 246 245 261 L244 334
-      Q223 347 207 345 L206 270Z" fill={C.teal}/>
+    <path d="M216 243 Q237 246 245 261 L244 334
+      Q230 346 218 345 Q217 305 215 270Z"
+      fill={C.teal}/>
     {/* Short workwear collar: 2 tabs, with the shirt visible between them. */}
-    <path d="M159 243 Q167 245 177 255 L177 272
-      Q167 267 153 253Z"
+    <path d="M157 243 Q165 246 174 256 L170 269
+      Q163 264 150 252Z"
       fill={C.light} stroke={C.tealShade} strokeWidth={3}
       strokeLinejoin="round"/>
-    <path d="M215 243 Q208 247 202 255 L205 270
-      Q222 265 229 251Z"
+    <path d="M217 243 Q209 248 205 256 L216 270
+      Q224 262 231 251Z"
       fill={C.light} stroke={C.tealShade} strokeWidth={3}
       strokeLinejoin="round"/>
     {/* One stronger left opening + quieter offset right placket. */}
-    <path d="M177 273 L179 344"
-      stroke={C.tealShade} strokeWidth={4} strokeLinecap="round"/>
-    <path d="M210 271 Q208 302 209 342"
+    <path d="M170 272 Q172 305 167 344"
+      stroke={C.tealShade} strokeWidth={4} strokeLinecap="round" fill="none"/>
+    <path d="M215 273 Q219 304 218 342"
       stroke={C.light} strokeWidth={2.5} opacity={0.7} fill="none"/>
     {/* One functional pocket, not multiple decorative seam lines. */}
-    <path d="M217 294 H236 V318 Q227 325 217 319Z"
+    <path d="M127 290 H155 V316 Q142 325 127 316Z"
       fill={C.tealShade} opacity={0.68}/>
-    <path d="M216 294 H237 M218 319 Q227 326 236 319"
+    <path d="M126 290 H156 M129 316 Q142 324 154 316"
       stroke={C.ink} strokeWidth={2.6} strokeLinecap="round"
       fill="none" opacity={0.62}/>
-    {/* Signature accent is an orange tag on the pocket, not a floating patch. */}
-    <rect x={234} y={298} width={5} height={9} rx={1.4} fill={C.orange}/>
+    {/* Signature accent belongs to the single left-front pocket. */}
+    <rect x={153} y={295} width={5} height={9} rx={1.4} fill={C.orange}/>
     {/* The jacket ends above the leg origins; the T-shirt remains visible. */}
-    <path d="M113 338 Q143 354 176 349 M209 349 Q235 347 245 337"
+    <path d="M113 338 Q141 354 166 348 M218 348 Q236 347 245 337"
       fill="none" stroke={C.tealShade} strokeWidth={3.5}
       strokeLinecap="round" opacity={0.64}/>
     {/* Real cuffs ride with the hands across neutral, point, react and explain.
