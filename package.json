@@ -10,7 +10,11 @@
     "render:draft": "remotion render src/index.tsx BusinessShort out/merger-draft.mp4 --props=examples/merger.json --concurrency=2",
     "still": "remotion still src/index.tsx BusinessShort out/merger-still.png --props=examples/merger.json --frame=660",
     "render:anthropic:storyboard": "remotion render src/index.tsx AnthropicShort out/anthropic-storyboard.mp4 --concurrency=2",
-    "still:anthropic": "remotion still src/index.tsx AnthropicShort out/anthropic-still.png --frame=1150"
+    "still:anthropic": "remotion still src/index.tsx AnthropicShort out/anthropic-still.png --frame=1150",
+    "render:host-concept-c": "remotion render src/index.tsx HostConceptCReview out/host-concept-c/compare.mp4 --scale=0.4 --codec=h264 --concurrency=2",
+    "render:host-concept-c-acting": "remotion render src/index.tsx HostConceptCActingProof out/host-concept-c/acting.mp4 --scale=0.4 --codec=h264 --concurrency=2",
+    "render:host-concept-c-receipt": "remotion render src/index.tsx HostConceptCReceiptProof out/host-concept-c/receipt.mp4 --scale=0.4 --codec=h264 --concurrency=2",
+    "still:host-concept-c-cameo": "remotion still src/index.tsx HostConceptCCameo out/host-concept-c/cameo.png --frame=0 --scale=0.4"
   },
   "dependencies": {
     "@remotion/cli": "4.0.539",

@@ -1,3 +1,6 @@
+import {HostConceptCReview,HostConceptCCameo,HOST_CONCEPT_C_REVIEW_FRAMES} from './framework/proofs/HostConceptCReview';
+import {HostConceptCActingProof,HOST_CONCEPT_C_ACTING_FRAMES} from './framework/proofs/HostConceptCActingProof';
+import {HostConceptCReceiptProof,HOST_CONCEPT_C_RECEIPT_FRAMES} from './framework/proofs/HostConceptCReceiptProof';
 import {AccountingPressProof, ACCOUNTING_PRESS_FRAMES} from './framework/proofs/AccountingPressProof';
 import {DepthMotionFixture} from './framework/DepthMotionFixture';
 import {AnthropicEditorialDepth,ANTHROPIC_DEPTH_FRAMES} from './framework/AnthropicEditorialDepth';
@@ -95,6 +98,10 @@ const Explainer: React.FC<Episode> = ({scenes,draft=true}) => {
 const Root: React.FC = () => <Composition id="BusinessShort" component={Explainer} defaultProps={example} width={1080} height={1920} fps={30} durationInFrames={1800} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((n,s)=>n+Math.round(s.duration*30),0)})}/>;
 const AllCompositions:React.FC=()=> <><Root/><Composition id="AnthropicCharacter" component={AnthropicCharacter} width={1080} height={1920} fps={30} durationInFrames={CHARACTER_FRAMES}/><Composition id="AnthropicShort" component={AnthropicShort} width={1080} height={1920} fps={30} durationInFrames={ANTHROPIC_SHORT_FRAMES}/><Composition id="OwnershipProof" component={OwnershipProof} width={1080} height={1920} fps={30} durationInFrames={Math.ceil((proofAudio.duration+storyTiming.hook)*30/playbackSpeed)}/><Composition id="OwnershipSecondScenario" component={OwnershipProof} defaultProps={{variant:"second" as const}} width={1080} height={1920} fps={30} durationInFrames={Math.ceil((proofAudio.duration+storyTiming.hook)*30/playbackSpeed)}/></>;
 const FrameworkCompositions:React.FC=()=> <><AllCompositions/>
+  <Composition id="HostConceptCReview" component={HostConceptCReview} width={1080} height={1920} fps={30} durationInFrames={HOST_CONCEPT_C_REVIEW_FRAMES}/>
+  <Composition id="HostConceptCActingProof" component={HostConceptCActingProof} width={1080} height={1920} fps={30} durationInFrames={HOST_CONCEPT_C_ACTING_FRAMES}/>
+  <Composition id="HostConceptCCameo" component={HostConceptCCameo} width={1080} height={1920} fps={30} durationInFrames={30}/>
+  <Composition id="HostConceptCReceiptProof" component={HostConceptCReceiptProof} width={1080} height={1920} fps={30} durationInFrames={HOST_CONCEPT_C_RECEIPT_FRAMES}/>
   <Composition id="AccountingPressProof" component={AccountingPressProof} width={1080} height={1920} fps={30} durationInFrames={ACCOUNTING_PRESS_FRAMES}/>
   <Composition id="MotionCandidateObjectContinuity" component={ObjectLedContinuityCandidate} width={1080} height={1920} fps={30} durationInFrames={OBJECT_CONTINUITY_FRAMES}/>
   <Composition id="WordCaptionPreview" component={WordCaptionPreview} width={1080} height={1920} fps={30} durationInFrames={WORD_CAPTION_PREVIEW_FRAMES}/>
