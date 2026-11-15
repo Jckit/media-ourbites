@@ -88,3 +88,7 @@ The `AnthropicSceneCurrentHost` and `AnthropicSceneConceptC` compositions now re
 ### 2026-11-15 — Concept C physical balance intervention
 
 The real-scene integration review found the host pointed beside the comparison balance without touching it. In the isolated Concept C variant only, add a small scale-base control physically aligned to the SVG hand tip. Connect the source-timed press to the existing balance beam angle while leaving the factual figures and narration entirely unchanged. Avoid additional cards/labels, render the original A/B 213-frame pair, verify continuous finger/control coupling and protected caption areas, and preserve the default canonical composition.
+
+### 2026-11-15 — physically coupled balance animation validated
+
+Exact code head `c5b34be8`; CI run `43734563232` passed, render artifact `14170395824`. One target-specific shared `balance-contact.ts` makes the actual fingertip press a 44×34 world-pixel teal control tethered beneath the existing balance, then tilts and settles the existing beam. Same source facts, captions, Voice A WAVs and original host. Matched encoded frames f124/131/139/146/156/172/188/206 confirm the approach/contact/responsive tilt/release without new number/label occlusion at 432×768. This is a local readability and agency improvement, not final professional quality or measurable retention. Details in `reviews/viewer/20261115-ConceptC-real-episode-gate.md`.
