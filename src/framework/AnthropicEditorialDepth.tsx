@@ -3,6 +3,7 @@ import {AbsoluteFill,Audio,Easing,interpolate,Sequence,staticFile,useCurrentFram
 import {StageActor} from '../CharacterStage';
 import {OurbitesHostConceptC} from './characters/OurbitesHostConceptC';
 import {conceptCGazeForTarget} from './characters/ConceptCPointRig';
+import {balanceContact} from './motion/balance-contact';
 import {DarioIllustration} from '../DarioIllustration';
 import {BurningCashMetaphor} from './motion/BurningCashMetaphor';
 import narration from '../anthropic-character-audio.json';
@@ -56,15 +57,15 @@ export const AnthropicEditorialDepth:React.FC<{hostVariant?:AnthropicHostVariant
   const net=Math.abs(financials.h1_2026.net_loss)/1000;
   const opLoss=Math.abs(financials.h1_2026.operating_loss);
   const chargeValue=Math.abs(financials.h1_2026.convertible_financing_fair_value_change)/1000;
-  // The review host performs ONE continuous glance -> reach -> recognize ->
-  // release cycle aimed toward the existing illustrated balance base.
-  // Same body anchor as the canonical host; no scene or narrator rewrite.
-  const target={x:392,y:133} as const;
-  const targetGaze=conceptCGazeForTarget(target);
-  const notice=ease(t,7.08,7.82,fast);
-  const release=ease(t,10.35,11.13,fast);
-  const pointReach=ease(t,7.85,8.65,move)*(1-release);
-  const recognition=ease(t,8.83,9.55,fast);
+  // In Concept C mode alone, the hand makes genuine contact with a socket
+  // attached to the existing balance foot. The beam only begins tipping AFTER
+  // contact. Source figures, words and all canonical-host art stay unchanged.
+  const balanceGrip=balanceContact(t);
+  const targetGaze=conceptCGazeForTarget(balanceGrip.handTarget);
+  const notice=ease(t,7.08,7.64,fast);
+  const release=ease(t,10.2,10.8,fast);
+  const pointReach=balanceGrip.approach;
+  const recognition=ease(t,8.65,9.38,fast);
   const headAngle=lerp(-2.0,1.7,recognition)*(1-0.50*release);
   const eyeX=lerp(-6,targetGaze.x,notice)*(1-0.25*release);
   const eyeY=lerp(-4,targetGaze.y,notice);
@@ -167,7 +168,8 @@ export const AnthropicEditorialDepth:React.FC<{hostVariant?:AnthropicHostVariant
         <path d="M540 272 L466 685 H613Z" fill="#C8E2D8"
           stroke={C.ink} strokeWidth={9}/>
         <rect x={364} y={663} width={352} height={29} rx={14} fill={C.ink}/>
-        <g style={{filter:'drop-shadow(8px 16px 5px #142B3826)'}} transform={'rotate('+(-14*Math.sin(Math.PI*compare*0.83))+' 540 272)'}>
+        <g style={{filter:'drop-shadow(8px 16px 5px #142B3826)'}} transform={'rotate('+(hostVariant==='concept-c'?
+          balanceGrip.beamAngle:-14*Math.sin(Math.PI*compare*0.83))+' 540 272)'}>
           <path d="M140 276 H937" fill="none" stroke={C.ink}
             strokeWidth={18} strokeLinecap="round"/>
           <circle cx={540} cy={276} r={34} fill={C.white}
@@ -184,6 +186,25 @@ export const AnthropicEditorialDepth:React.FC<{hostVariant?:AnthropicHostVariant
           opacity={bar}>reported net ≠ operating</text>
       </svg>
       </DepthPlane>
+      {/* A restrained physical input belongs to the SAME balance and the
+          character's actual fingertip. It exists only in the Concept C
+          *review* variant; canonical stage is pixel-for-pixel unchanged. */}
+      {hostVariant==='concept-c'&&<svg
+        viewBox="0 0 1080 1920" width={1080} height={1920}
+        aria-label="Illustrative comparison-scale push control"
+        style={{position:'absolute',inset:0,pointerEvents:'none',zIndex:7}}>
+        <path d={`M434 1167 V${balanceGrip.socketScreen.y}
+          H${balanceGrip.socketScreen.x+25}`}
+          stroke={C.ink} strokeWidth={9} strokeLinejoin="round"
+          strokeLinecap="round" fill="none"/>
+        <rect x={balanceGrip.contactScreen.x-2}
+          y={balanceGrip.contactScreen.y-17} width={44} height={34}
+          rx={9} fill={C.teal} stroke={C.ink} strokeWidth={5}/>
+        <path d={`M${balanceGrip.contactScreen.x+8}
+          ${balanceGrip.contactScreen.y-8} V${balanceGrip.contactScreen.y+8}`}
+          stroke={C.white} strokeWidth={3.2} strokeLinecap="round"
+          opacity={0.8}/>
+      </svg>}
       {/* Values are screen-space foreground, never intersecting suspension lines. */}
       <div style={style(88,547,{opacity:compare,transform:`translateY(${35*(1-compare)}px)`,zIndex:6})}>
         <div style={{fontSize:27,fontWeight:850,letterSpacing:1,color:C.muted}}>REPORTED NET LOSS</div>
@@ -270,7 +291,7 @@ export const AnthropicEditorialDepth:React.FC<{hostVariant?:AnthropicHostVariant
       transform:'rotate('+lerp(-4,3,ease(t,4.3,5.0,move))+'deg)'})}>
       {hostVariant==='concept-c'
         ? <OurbitesHostConceptC pose="point" width={278} height={278*520/360}
-            pointTarget={target} pointProgress={pointReach}
+            pointTarget={balanceGrip.handTarget} pointProgress={pointReach}
             gazeX={eyeX} gazeY={eyeY} insight={recognition}
             headTilt={headAngle} blink={deliberateBlink}/>
         : <StageActor x={0} y={0} size={278}

@@ -14,6 +14,8 @@ on:
       - 'src/framework/proofs/HostConceptCReceiptProof.tsx'
       - 'src/framework/proofs/HostConceptCEpisodeProof.tsx'
       - 'src/framework/AnthropicEditorialDepth.tsx'
+      - 'src/framework/motion/balance-contact.ts'
+      - 'tests/balance-contact.test.mjs'
       - 'src/index.tsx'
       - 'package.json'
       - '.github/workflows/host-concept-c-review.yml'
@@ -39,6 +41,7 @@ jobs:
           npm run typecheck
           node --experimental-strip-types tests/concept-c-rig.test.mjs
           node --experimental-strip-types tests/paper-hinge-motion.test.mjs
+          node --experimental-strip-types tests/balance-contact.test.mjs
           python3 scripts/check_framework_layout.py
           git diff --check
       - name: Render actual same-pose comparison and editorial cameo
@@ -84,6 +87,13 @@ jobs:
                 -vf "select=eq(n\\,$n)" -frames:v 1 \
                 "out/host-concept-c/episode-frames/$variant-$n.png"
             done
+          done
+          # Same-source visual samples around the press, balance response and release.
+          for n in 124 131 139 146 156 172 188 206; do
+            ffmpeg -hide_banner -loglevel error -y \
+              -i out/host-concept-c/anthropic-concept-c.mp4 \
+              -vf "select=eq(n\\,$n)" -frames:v 1 \
+              "out/host-concept-c/episode-frames/press-$n.png"
           done
           for n in 15 45 70 90 109; do
             ffmpeg -hide_banner -loglevel error -y -i out/host-concept-c/acting.mp4 \
@@ -155,6 +165,7 @@ jobs:
               assert any(x['codec_type']=='audio' for x in r['streams']),f'Voice A missing from {fname}'
           for kind in ('current','concept-c'):
               assert len(list(Path('out/host-concept-c/episode-frames').glob(f'{kind}-*.png')))==7
+          assert len(list(Path('out/host-concept-c/episode-frames').glob('press-*.png')))==8
           x=Path('out/host-concept-c/anthropic-current.mp4').read_bytes()
           y=Path('out/host-concept-c/anthropic-concept-c.mp4').read_bytes()
           assert hashlib.sha256(x).digest()!=hashlib.sha256(y).digest(),'Host A/B identical'
@@ -166,6 +177,7 @@ jobs:
             src/framework/characters/ConceptCPointRig.ts \
             src/framework/motion/PaperHingeReveal.tsx \
             src/framework/motion/paper-hinge-motion.ts \
+            src/framework/motion/balance-contact.ts \
             src/framework/proofs/HostConceptCReview.tsx \
             src/framework/proofs/HostConceptCActingProof.tsx \
             src/framework/proofs/HostConceptCReceiptProof.tsx \
