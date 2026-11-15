@@ -1,0 +1,20 @@
+{
+  "framework": "ourbites-morning-brew-inspired-performance",
+  "intensity_cap": 0.7,
+  "profiles": {
+    "curious_surprise": {"instruction": "Sound like a curious business friend discovering a surprising number. Keep the delivery conversational, lift the key reveal slightly, and leave room before the reaction."},
+    "impressed_but_clear": {"instruction": "Sound impressed by the growth, but stay precise and approachable. Emphasize the comparison without sounding like a financial advertisement."},
+    "serious_clarity": {"instruction": "Use calm, serious clarity. Give the operating-loss distinction weight, pronounce the number cleanly, and avoid melodrama."},
+    "focused_explanation": {"instruction": "Explain the accounting mechanism with focused patience. Keep the tone grounded and make the cash-versus-earnings distinction easy to follow."},
+    "concerned_realism": {"instruction": "Sound concerned but practical. Acknowledge the real cost, then land the hardware line with a small dry smile."},
+    "confident_takeaway": {"instruction": "Finish with warm, confident clarity. Make the question feel useful and memorable, without turning it into a grand conclusion."}
+  },
+  "scenes": {
+    "hook": {"profile": "curious_surprise", "intensity": 0.65},
+    "growth": {"profile": "impressed_but_clear", "intensity": 0.45},
+    "operations": {"profile": "serious_clarity", "intensity": 0.4},
+    "accounting": {"profile": "focused_explanation", "intensity": 0.3},
+    "cost": {"profile": "concerned_realism", "intensity": 0.45},
+    "payoff": {"profile": "confident_takeaway", "intensity": 0.55}
+  }
+}
