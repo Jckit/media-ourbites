@@ -1,0 +1,87 @@
+> Historical copy of ROADMAP.md captured on 2026-11-15 before the outcome-led roadmap refresh. Kept to preserve FW-01–FW-10 decisions, historical claims and audit references. Superseded for planning by [../ROADMAP.md](../ROADMAP.md).
+
+# Ourbites reusable animation framework
+
+Canonical shared task board. Current goal: reproducible, reference-led editorial motion graphics, with the existing hybrid host as a supporting channel signature. No simulation requirement or fixed story formula.
+
+Current visual authority: [editorial-first contract](styles/OURBITES-HYBRID-EDITORIAL.md). Reference-led 90/10 influence; preserve the existing Anthropic host anchor. Historical entries below record prior decisions, not current style instructions.
+
+**Direction update 2026-10-29:** User accepted the corrected FW-06 scenic animation **for its framework gate**, but rejected the subsequent FW-07 paper-focus previews as **too PowerPoint-like**. New explicit direction: **one unified [Ourbites Hybrid Editorial Animation](styles/OURBITES-HYBRID-EDITORIAL.md)**—original hybrid presenter/scenes plus tactile paper-collage *within the same world*. The earlier FW-07 document-focus subset remains a technical prototype, **not an approved style**. FW-07B has an isolated new character-led style candidate under review; FW-08 remains blocked. CI is never human style, factual, likeness, rights or final-media publication approval.
+
+## Coordination
+
+- Status: `ready`, `active`, `blocked`, `review`, `done`. `done` requires linked acceptance evidence; human style approval is separate.
+- Claim a task here before editing: record owner, UTC claim time, branch/base and exact file scope. One owner per file; reviewers stay read-only. Check current remote revisions first.
+- Shared checkout writers must coordinate through the owner of `reviews/viewer-loop.lock`; independent editors should use separate branches/checkouts. Do not steal a live lock or erase unrelated changes.
+- Owner updates this board after validation, includes handoff/blocker, and releases the lock. A stale claim requires checking the owner/process before reassignment.
+- The scheduled loop selects the next authorized ready task. Repeated wakeups do not grant additional subjective design revisions.
+
+## Tasks
+
+| ID | Deliverable / acceptance | Depends on | Status | Owner / files | Evidence or handoff |
+|---|---|---|---|---|---|
+| FW-01 | Establish current merged baseline without losing local work | — | done | root | `feb6307`; scenic, caption and ending work merged upstream; local fast-forward preserved dirty review files |
+| FW-02 | Shared palette, depth primitive, floor/reading zones; no episode timing or facts | FW-01 | done | scene_kit; `src/framework/*` | First batch; root owns integration; claim 2026-10-28 |
+| FW-03 | Office and storefront presets use same character, prop and camera interfaces | FW-02 | done | scene_kit; `src/framework/*` | Two synthetic silent fixtures; inspect neutral/gesture/camera-extreme at phone size |
+| FW-04 | Register/render both previews, typecheck, save hashes and visual evidence | FW-03 | done | root; `src/index.tsx`, package scripts, review evidence | Reject overlaps/foot floating/character redesign; disclose motion/audio coverage |
+| FW-05 | Human choice of dimensionality and scene balance | FW-04 | done | Justin; review only | Justin explicitly approved FW-05 in ChatGPT on 2026-10-28; approval covers framework dimensionality and scene balance only, not final episode media |
+| FW-06 | Adapt production office to shared kit without changing episode timing/claims | FW-05 | done | Human reviewed and accepted the corrected 15.851s scenic draft on 2026-10-29; implementation merged [PR #10](https://github.com/jcbandc-arch/media-creator-outbites/pull/10) + [PR #21](https://github.com/jcbandc-arch/media-creator-outbites/pull/21); implementation/review ownership released | [FW-06 recorded human acceptance](reviews/20261029-fw06-human-acceptance.md). [Actual final-candidate media CI 40843248112](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40843248112) **passed**: 432×768, 475 frames, 15.851s, original audio unchanged, 12 shorter WAV-pause cues (449 caption-visible/475; 0 mismatches) and orphaned orange connector removed. Human acceptance is for **framework animation, perceived timing and scenic balance only**, **not release**: independent financial fact/source, media rights, Dario likeness and publication gates remain open. Paper-collage runtime **not implemented** |
+| FW-07 | Build one **unified hybrid + paper-collage** visual/motion framework, not separate slide templates | FW-06 | review | Hybrid editorial candidate owner `design/fw07-hybrid-editorial-prototype-20261029` from `8a0e634`; scoped to new style contract, new isolated composition+render workflow, roadmap/skill routing/review state; no production episode sources. Existing `DocumentFocus`/filing+receipt subset remains merged as unapproved reference; stacked #25–#28 are not main integration | User rejected prior FW-07 as too PowerPoint-like: [frozen directive](reviews/viewer/20261029-fw07-unified-hybrid-editorial-direction.md). **FW-07A:** one coherent style contract (authored; human final art not approved). **FW-07B:** rendered & technically verified one 300-frame silent, synthetic **character-led, folio → paper split → object-led scene transition → explanatory payoff** prototype in [HybridEditorialPrototype.tsx](src/framework/HybridEditorialPrototype.tsx); [render/video CI #40953258396](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40953258396) passed: real 432×768, 300 frames, 10s, H.264, silent, [artifact #12932571845](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40953258396/artifacts/12932571845), [review evidence](reviews/viewer/20261029-fw07-unified-hybrid-editorial-direction.md), 22/22 verified extracted keyframes; **human style/pacing/legibility review outstanding**. **FW-07C:** only after human visual approval, extract reusable behavior and prove a different subject. No FW-08 unblock or Anthropic release. |
+| FW-08 | Episode scene configuration and narration-driven beat adapter | FW-07 | blocked | unclaimed | New fixture changes data/config only; voice A, original pitch, 1.1x retained; captions tied to real word times |
+| FW-09 | Repeatable QA command and CI coverage for shared scene library | FW-04 | review | Source guard [PR #8](https://github.com/jcbandc-arch/media-creator-outbites/pull/8) and six-frame fixture CI [PR #9](https://github.com/jcbandc-arch/media-creator-outbites/pull/9) both merged; implementation ownership released | [CI 40771802212](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40771802212) passed on current merged main; six phone-size stills / PNG hashes and matched lower-strip checks documented in [review](reviews/viewer/20261028T1945Z-fw09-fixture-ci.md). Continuous scene-motion and narrated audiovisual QA still require separate review; no final-media approval |
+| FW-10 | Document authoring recipe and prove reuse on a second business topic | FW-06, FW-08, FW-09 | blocked | unclaimed | Record configuration/code effort, render evidence and remaining exceptions; no forced narrative structure |
+| FW-M00 | Document optional editorial paper-collage motion language and map into FW-07/FW-08; no runtime changes | — | done | User approved documentation PR [#11](https://github.com/jcbandc-arch/media-creator-outbites/pull/11), merged 2026-10-28; ownership released | [Creative contract](styles/OURBITES-EDITORIAL-PAPER-MOTION.md), [motion skill](skills/ourbites-motion/SKILL.md), production/viewer skill routing and framework roadmap documented; [main CI 40771802365](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40771802365) passed. **Documentation complete**, new runtime paper-motion primitives and human animation/art approvals remain pending |
+
+## Current batch boundaries
+
+First implementation is a reviewable scene-library prototype, not a replacement of existing episodes. Preserve `OurbitesHost`, `DarioIllustration`, production narration and numerical claims. Keep synthetic fixture labels visible. Next batches depend on evidence and human style direction, not an automatic mandate to redesign.
+
+No purchase, publication, push, merge or final-media approval is implied by a completed roadmap task.
+
+## Batch 1 evidence
+
+FW-02–04: [frozen framework review](reviews/viewer/20261028-framework-batch1.md); the two original office/storefront MP4s were generated under Git-ignored `out/framework-batch1/` and are **local outputs, not portable GitHub links**. Reproduce previews with `npm run render:framework:office` and `npm run render:framework:storefront`; [fixture CI on merged main](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40771802212) provides six 432×768 PNGs and checks. Original six phone-size stills inspected; continuous motion remains a separate review item; synthetic fixtures are silent. Implementation ownership released.
+
+
+## New optional motion language: editorial paper collage (2026-10-28)
+
+Justin supplied a screen recording of an animated editorial collage reel and explicitly clarified that **3D is not required**. The intended motion vocabulary is layered paper cards, evidence/photo layouts, magnifier focus, fold/torn-edge reveals, kinetic typography and **smooth, object-led transitions**. It is a **selectable 2D-first shot treatment** alongside existing scenic hybrid illustration and precise financial charts, **not** a new protagonist design, default template for every episode, new retention claim or media release approval.
+
+Canonical references:
+- **Creative contract / motion and transition rules:** [styles/OURBITES-EDITORIAL-PAPER-MOTION.md](styles/OURBITES-EDITORIAL-PAPER-MOTION.md)
+- **How to implement/review reusable actions:** [skills/ourbites-motion/SKILL.md](skills/ourbites-motion/SKILL.md), routed through production and viewer skills.
+- **Code/API ownership:** [src/framework/README.md](src/framework/README.md), with prospective modules clearly marked *not implemented*.
+
+**Updated implementation order (after explicit style rejection):** FW-06 remains **done** for the approved scenic framework. **FW-07A**: define one [hybrid editorial contract](styles/OURBITES-HYBRID-EDITORIAL.md). **FW-07B**: build an isolated polished 10-second **character-led animated paper world**, with **human** style/pacing/readability approval on real video before codifying aesthetics. **FW-07C**: extract **only visually accepted** motion primitives, reuse them across a materially different second mechanism, and integrate any useful parts of the earlier document-focus prototype without imposing its slide composition. FW-07 remains `review` until this gate is met. **FW-08** then connects declarative scene beats, named object actions and actual narration/captions; **FW-09** extends continuous motion and safe-area QA; **FW-10** proves episode-scale reuse. The user's visual-style direction is **not** publication approval, a protagonist redesign permit or an obligation to force paper everywhere.
+
+**Initial visual acceptance:** at 432×768, inspect entry/focus/reveal/exit *and adjacent frames*, show no object/hand discontinuity, preserve caption/source safe areas and recognizable actor identity, and use original/rights-cleared paper graphics. Continuous playback and audio listening remain separately required on narrated drafts. New motion-art direction is for human review; the old 3/3 protagonist subjective-revision cap is not reset.
+
+FW-07 first subset: [document-focus prototype and evidence](reviews/viewer/20261029T094712Z-paper-focus.md). Two silent synthetic exports inspected at adjacent boundary/mid-action frames. Continuous playback, production adapter and remaining actor actions are outstanding; task is not done.
+
+
+## FW-07 hybrid-editorial acceptance record (new 2026-10-29 direction)
+
+The earliest document-focus and subsequent stacked paper handoffs (#23 and #25–#28) helped prove basic motion, but **were never approved as the target art style**. They are neither a new visual default nor a reason to merge a stale stacked branch into `main`. The reviewed motion was technically smooth but too much like a static infographic/slideshow. Future FW-07 progress must involve the established host *inside* a cohesive visual world with physically suggested paper folds, active props and an object-led scene handoff. Create the visual *before* extracting an abstract library; user approval is required on the continuous rendered prototype. [Style contract](styles/OURBITES-HYBRID-EDITORIAL.md) · [Frozen user direction](reviews/viewer/20261029-fw07-unified-hybrid-editorial-direction.md).
+
+**FW-07B technical outcome (2026-10-29):** one isolated unified hybrid-paper **10-second** prototype rendered/verified in [CI #40953258396](https://github.com/jcbandc-arch/media-creator-outbites/actions/runs/40953258396) and independently inspected sampled actual frames ([review](reviews/viewer/20261029-fw07-unified-hybrid-editorial-direction.md)). Previous slide-like folio text overlap repaired. **Do not call style accepted**: the next gate is **human viewing of the actual new MP4**, specifically character/prop integration, tactile physical-paper behavior, legibility and pacing. FW-07C and FW-08 remain blocked, no automatic library rollout or publication.
+
+PR30 flair pass: Codex owns HybridEditorialPrototype.tsx and reviews/viewer/20261029-pr30-editorial-flair.md on codex/pr30-editorial-flair at 2026-10-29T21:18:45.4181875Z; user explicitly requested style refinement. FW-07 stays review pending actual human playback judgment.
+
+PR30 flair pass verified: [review](reviews/viewer/20261029-pr30-editorial-flair.md). Ownership released; FW-07B remains review. Local 432x768/300-frame render, TypeScript and 54 tests passed; continuous human playback/style acceptance still needed.
+
+FW-07B new paper-turn direction draft: codex/paper-turn-art-direction, based on PR34 e6dff7b. [Review and remaining style gate](reviews/viewer/20261030-paper-turn-draft.md). Scope: isolated sample, small trajectory helper, regression check and CI routing. Implementation ownership released; human direction review pending, FW-07C/FW-08 remain blocked.
+
+
+## Issue 46 — episode workspace MVP
+Owner: Codex; 2026-11-04; branch codex/episode-workspace-generator; base60fcd17. Status: implemented, awaiting PR review. Scope: scripts/create_episode_workspace.py, offline tests, README/WORKFLOW usage. No animation or existing episode changes. Owner released. Evidence: 003 coffee-subscriptions and 004 warehouse-returns created via CLI in temporary fixtures with identical shared references; dry-run writes nothing; collisions/traversal rejected; actual Git ignore rules checked. Full suite: 74 tests, 73 passed/one Windows symlink-privilege skip; npm run typecheck passed. Linux CI covers symlink creation.
+
+## Issue 45 — animation direction contract
+Owner Codex, 2026-11-04; branch codex/animation-direction-contract; base1484e8c. Hypothesis: one authority plus validated observable-event tickets prevents contradictory direction and missing motion/contact decisions. Scope: canonical style, skill routing, schema/validator, two contrasting fixtures/tests. No animation rebuild; reference-quality proof and human acceptance remain open. Status: contract implementation ready for review; owner released. Evidence: both two-ticket fixtures validate, 82 tests run (81 passed / existing Windows symlink privilege skip), TypeScript passes. No src, audio or rendered media edits. Remaining issue45 work: selected reference-quality 5–8s calibration and actual comparative playback/human acceptance; not closed by this contract batch.
+
+## Issue 50 — narrated motion calibration
+Owner Codex, 2026-11-05; branch codex/issue50-motion-proof; base7dc9bcb. One 5–8s clip3 accounting-press candidate, ticket first; PR41 remains unchanged. Scope: isolated proof, movement tests, ticket, render evidence and CI. Human visual acceptance blocks recipe extraction. See reviews/issue50-proof.md.
+Status: rendered candidate ready for human review; owner released.170frames/5.67s, paired PR41 excerpt, A/B and adjacent frames in reviews/media/issue50-*. Typecheck,82 Python tests(one skip), movement/ticket checks pass. No recipe accepted; extraction remains gated. See reviews/issue50-proof.md for actual coverage and unresolved art limitations.
+
+Issue50 / PR55 payoff revision,2026-11-05: addressed Justin feedback by removing preprinted amount and transporting the same output into a sourced reported-loss statement. Original audio/cash unchanged; targeted tests and sampled/adjacent media checked. Owner released; candidate awaits human playback/art review. Authentic mark and measured captions unresolved. See latest section of reviews/issue50-proof.md.
+
+PR55 / issue50,2026-11-06: corrected3.1–3.3s face grazing via bounded paper route; padded silhouette regression, default-safe Dario gaze, host point response and simpler input. Matched/adjacent media inspected. Owner released; human playback/style and official-brand rights review remain open. Existing payoff and hold preserved.
