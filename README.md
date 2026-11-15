@@ -267,3 +267,7 @@ npx remotion render src/voice-preview.tsx JustinVoicePreview out/lead-voice-prev
 ```
 
 The preview reuses the Ourbites host and office setting for an illustrative ownership example. It plays the processed voice at 1.0x and holds briefly between phrases. Review the rendered voice, captions and acting together before final episode use.
+
+## Scene-level emotion
+
+`auditions/voice-emotion.json` defines Morning Brew-inspired performance direction as scene-level energy, warmth, surprise, dry amusement and seriousness. Generate a scene with `--scene hook`, or use `--emotion <profile>` and `--emotion-intensity 0.0..0.7` for a bounded override. The instruction is forwarded to Qwen3-TTS; selected speed, pitch and cleanup remain unchanged.
