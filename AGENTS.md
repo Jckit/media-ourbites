@@ -1,0 +1,23 @@
+# Agent execution instructions — Ourbites
+
+Read [ROADMAP.md](ROADMAP.md) first. The current forward plan is **four outcome milestones**, not the archived FW micro-task board. Take **one substantial workstream** from the linked milestone issues, comment to claim the role/file scope/base SHA, and coordinate with the milestone integrator. See [WORKFLOW.md](WORKFLOW.md), [editorial style contract](styles/OURBITES-HYBRID-EDITORIAL.md), [creative director skill](skills/ourbites-creative-director/SKILL.md), [production skill](skills/ourbites-production/SKILL.md) and [viewer skill](skills/ourbites-viewer/SKILL.md).
+
+## Current assignments / GitHub tracker
+
+- **M1 [#4](https://github.com/Jckit/media-ourbites/issues/4)** — [#8 editorial direction](https://github.com/Jckit/media-ourbites/issues/8) **READY**; [#9 whole-film Remotion](https://github.com/Jckit/media-ourbites/issues/9) prepare until packet #8 is coherent; [#10 approved audio, per-word captions, full-film QA](https://github.com/Jckit/media-ourbites/issues/10) prepare integration, final review after #9. Deliver *one complete narrated, watchable, coherent Short*, not independent 5s improvements.
+- **M2 [#5](https://github.com/Jckit/media-ourbites/issues/5)** — [#11 extract accepted scene behaviors](https://github.com/Jckit/media-ourbites/issues/11), [#12 different complete business Short](https://github.com/Jckit/media-ourbites/issues/12), [#13 quality and reuse audit](https://github.com/Jckit/media-ourbites/issues/13). **Blocked on human M1 full-video acceptance.**
+- **M3 [#6](https://github.com/Jckit/media-ourbites/issues/6)** — [#14 story/director/asset intake](https://github.com/Jckit/media-ourbites/issues/14), [#15 approved voice/caption/sound workflow](https://github.com/Jckit/media-ourbites/issues/15), [#16 build, preflight and packaging](https://github.com/Jckit/media-ourbites/issues/16). Scoped interface research is allowed early; full implementation gated by M1/M2.
+- **M4 [#7](https://github.com/Jckit/media-ourbites/issues/7)** — [#17 three release-gated pilots](https://github.com/Jckit/media-ourbites/issues/17), [#18 genuine audience metrics](https://github.com/Jckit/media-ourbites/issues/18), [#19 strategic decision](https://github.com/Jckit/media-ourbites/issues/19). No release before explicit human approval.
+
+## Operating rules
+
+1. **Large outcomes; no micro-change PR queues.** Complete the workstream's substantive viewer-facing or end-to-end output. A hand curve, outfit seam, paper edge or isolated animation fix is *part of the task*, not another issue, PR or roadmap milestone.
+2. **One coherent milestone branch / integration plan.** Parallel roles may own separate files and research, but register owner, changed paths and base SHA; never make competing edits to a shared scene. Merge an integrated deliverable rather than a cascade of tiny PRs. Observe existing PR #1 (Concept C) and PR #2 (voice) as **candidates**—do not silently overwrite or auto-merge them.
+3. **Real-media evidence.** Provide a stable artifact, render instructions and whole-video comparisons when relevant. Review actual encoded film at 1x with sound and at phone scale, plus adjacent-frame inspection for defects. Disclose still-only or no-listening coverage. A green CI validates code, not reference-quality art, human preference or audience response.
+4. **Separate safety and editorial gates.** Check source facts, financial numbers, licensed media/provenance, voice/likeness permission, actual caption alignment and owner creative approval. Do not interpret finishing a coding issue as permission to publish.
+5. **Repo routing, 15–30 Nov 2026:** run all *new* development commits, issues/PRs and GitHub Actions **only** in `Jckit/media-ourbites`. Keep `jcbandc-arch/media-creator-outbites` read-only, preserving existing branches/issues/PRs. On Dec 1 check its Actions allowance *before* reconciling and returning.
+6. **Status is evidence-based.** Before closing a child issue, link substantive output, baseline comparison, tests/recordings and any remaining blockers. Parent milestone closes only after its own **human-reviewed** acceptance gate. A blocked future task should remain open; do not invent progress.
+
+## Immediate next step
+
+Assign an Editorial Director agent **M1-A #8**, with current production material/Anthropic episode as a candidate. In parallel an Animation Director can review base film and draft the full-sequence integration plan for **M1-B #9**, while Audio/Viewer QA audits caption/voice constraints for **M1-C #10**. Avoid modifying the same code paths in parallel. The focus remains the complete, professionally directed Short.
