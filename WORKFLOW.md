@@ -1,10 +1,12 @@
 # Ourbites working flow
 
-## Shared framework task tracking
+## Current delivery strategy — supersedes old "next slice" notes
 
-Use [ROADMAP.md](ROADMAP.md) as the canonical reusable-animation task board. Agents and editors claim an ID and file scope before editing, follow its dependency/status rules, and attach render/check evidence before marking implementation done. Read it alongside `reviews/viewer-loop.json`; a scheduled wake does not reopen completed work or bypass a pending human style review.
+**15 November 2026:** [ROADMAP.md](ROADMAP.md) is the canonical **milestone roadmap**. The previous FW task-board is [archived](reviews/ROADMAP-ARCHIVE-2026-11-15.md). Deliver **one complete, reviewable narrated Short first (M1)**; then prove scene-language reuse on a different business story (M2); integrate the end-to-end workflow (M3); only then launch the controlled pilot (M4). Do **not** split a visual-quality milestone into standalone outfit, hand, caption-decoration or five-second motion PRs. Necessary technical fixes belong inside the milestone PR.
 
-Updated 27 October 2026. We will refine this against actual episodes.
+For each milestone: freeze the baseline inputs and major visual hypothesis, choose a story + meaningful visual mechanism, direct and animate the **entire video**, produce a downloadable encoded MP4 and phone-size/sound 1x review evidence, record the human decision and only then advance. Keep factual, rights, voice, final-media and publication gates separate. The single-issue scheduled viewer loop can still run technical checks, but it does **not** give permission to repeatedly micro-polish unapproved design or declare a milestone complete.
+
+**Historical implementation notes follow.** Earlier paragraphs mentioning "next implementation slice", FW dependencies or October status are useful provenance, not instructions that supersede the current roadmap.
 
 ## New episode shell
 
