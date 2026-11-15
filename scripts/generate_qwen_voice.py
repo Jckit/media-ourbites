@@ -18,6 +18,7 @@ def parse_args(argv=None) -> argparse.Namespace:
     parser.add_argument("--model", type=Path, help="Local Qwen3-TTS GGUF model")
     parser.add_argument("--reference-audio", type=Path, help="Private voice-reference WAV")
     parser.add_argument("--reference-text", help="Exact spoken reference transcript")
+    parser.add_argument("--instruct", help="Optional scene-level performance direction")
     text = parser.add_mutually_exclusive_group()
     text.add_argument("--text", help="Narration to synthesize")
     text.add_argument("--text-file", type=Path, help="UTF-8 narration script")
@@ -115,6 +116,8 @@ def main() -> int:
             "--reference-text", args.reference_text, "--text", narration,
             "--out", str(raw), "--out-format", "pcm24",
         ]
+        if args.instruct:
+            command.extend(["--instruct", args.instruct])
         subprocess.run(command, check=True)
 
     if args.processing == "raw":
