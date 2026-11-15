@@ -32,7 +32,7 @@ def emotion_instruction(scene: str | None, emotion: str | None, intensity: float
 
 
 
-def selected_voice_command(args, preset: dict, config: dict) -> list[str]:
+def selected_voice_command(args, preset: dict, config: dict, instruction: str | None = None) -> list[str]:
     """Build the exact command from tracked preset + private file locations."""
     command = [
         sys.executable, str(ROOT / "scripts/generate_qwen_voice.py"),
