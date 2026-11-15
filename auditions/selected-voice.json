@@ -7,8 +7,9 @@
   "model": "Qwen3-TTS 0.6B Base Q8_0",
   "pitch_scale": 0.96,
   "reference_config": "out/voice-local.json",
-  "playback_rate": 1.0,
+  "playback_rate": 1,
   "tempo_scale": 1.06,
   "noise_reduction_db": 3,
-  "noise_floor_db": -40
+  "noise_floor_db": -40,
+  "emotion_framework": "auditions/voice-emotion.json"
 }
