@@ -12,6 +12,8 @@ on:
       - 'src/framework/proofs/HostConceptCReview.tsx'
       - 'src/framework/proofs/HostConceptCActingProof.tsx'
       - 'src/framework/proofs/HostConceptCReceiptProof.tsx'
+      - 'src/framework/proofs/HostConceptCEpisodeProof.tsx'
+      - 'src/framework/AnthropicEditorialDepth.tsx'
       - 'src/index.tsx'
       - 'package.json'
       - '.github/workflows/host-concept-c-review.yml'
@@ -47,6 +49,10 @@ jobs:
           npm run render:host-concept-c
           npm run render:host-concept-c-acting
           npm run render:host-concept-c-receipt
+          # Matched real-episode test: same source frame window, actual claims,
+          # original voice/captions and all assets; only the host differs.
+          npm run render:host-c-anthropic-current
+          npm run render:host-c-anthropic-c
           npm run still:host-concept-c-cameo
           for n in 0 30 60 90 120; do
             npx remotion still src/index.tsx HostConceptCReview \
@@ -65,6 +71,20 @@ jobs:
           ffprobe -v error -count_frames \
             -show_entries stream=codec_type,codec_name,width,height,nb_read_frames,r_frame_rate:format=duration \
             -of json out/host-concept-c/receipt.mp4 > out/host-concept-c/receipt-probe.json
+          for name in anthropic-current anthropic-concept-c; do
+            ffprobe -v error -count_frames \
+              -show_entries stream=codec_type,codec_name,width,height,nb_read_frames,r_frame_rate:format=duration \
+              -of json "out/host-concept-c/$name.mp4" > "out/host-concept-c/$name.probe.json"
+          done
+          mkdir -p out/host-concept-c/episode-frames
+          for n in 0 29 60 90 120 164 208; do
+            for variant in current concept-c; do
+              ffmpeg -hide_banner -loglevel error -y \
+                -i "out/host-concept-c/anthropic-$variant.mp4" \
+                -vf "select=eq(n\\,$n)" -frames:v 1 \
+                "out/host-concept-c/episode-frames/$variant-$n.png"
+            done
+          done
           for n in 15 45 70 90 109; do
             ffmpeg -hide_banner -loglevel error -y -i out/host-concept-c/acting.mp4 \
               -vf "select=eq(n\\,$n)" -frames:v 1 \
@@ -120,7 +140,26 @@ jobs:
           assert len(list(Path('out/host-concept-c/elbow-frames').glob('receipt-*.png')))==9
           assert len(list(Path('out/host-concept-c/reveal-frames').glob('price-*.png')))==6
           assert len(list(Path('out/host-concept-c/reveal-frames').glob('receipt-*.png')))==6
-          print('PASS: Concept C two physically reprinted paper proofs + pose comparison, silent H.264')
+          from pathlib import Path
+          import hashlib
+          # Two real-episode excerpts must have the same 213-frame source window,
+          # the exact H.264 geometry and their own audio stream.
+          for fname in ('anthropic-current.mp4','anthropic-concept-c.mp4'):
+              path=Path('out/host-concept-c')/fname
+              p=path.with_suffix('.probe.json')
+              assert p.exists(),f'{p} missing'
+              r=json.loads(p.read_text())
+              video=next(x for x in r['streams'] if x['codec_type']=='video')
+              assert video['codec_name']=='h264' and (video['width'],video['height'])==(432,768),r
+              assert int(video['nb_read_frames'])==213 and video['r_frame_rate']=='30/1',r
+              assert any(x['codec_type']=='audio' for x in r['streams']),f'Voice A missing from {fname}'
+          for kind in ('current','concept-c'):
+              assert len(list(Path('out/host-concept-c/episode-frames').glob(f'{kind}-*.png')))==7
+          x=Path('out/host-concept-c/anthropic-current.mp4').read_bytes()
+          y=Path('out/host-concept-c/anthropic-concept-c.mp4').read_bytes()
+          assert hashlib.sha256(x).digest()!=hashlib.sha256(y).digest(),'Host A/B identical'
+          print('PASS: unchanged episode A/B 213-frame 432x768 H.264 + audio and 7 matching frames')
+          print('PASS: Concept C paper proofs + pose comparison')
           PY
           sha256sum src/OurbitesHost.tsx \
             src/framework/characters/OurbitesHostConceptC.tsx \
@@ -132,7 +171,9 @@ jobs:
             src/framework/proofs/HostConceptCReceiptProof.tsx \
             out/host-concept-c/compare.mp4 \
             out/host-concept-c/acting.mp4 \
-            out/host-concept-c/receipt.mp4 > out/host-concept-c/sha256.txt
+            out/host-concept-c/receipt.mp4 \
+            out/host-concept-c/anthropic-current.mp4 \
+            out/host-concept-c/anthropic-concept-c.mp4 > out/host-concept-c/sha256.txt
       - name: Attach MP4, all poses and scene-scale cameo
         if: always()
         uses: actions/upload-artifact@v4

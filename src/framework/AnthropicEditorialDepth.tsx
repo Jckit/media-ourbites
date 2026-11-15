@@ -1,6 +1,8 @@
 import React from 'react';
 import {AbsoluteFill,Audio,Easing,interpolate,Sequence,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
 import {StageActor} from '../CharacterStage';
+import {OurbitesHostConceptC} from './characters/OurbitesHostConceptC';
+import {conceptCGazeForTarget} from './characters/ConceptCPointRig';
 import {DarioIllustration} from '../DarioIllustration';
 import {BurningCashMetaphor} from './motion/BurningCashMetaphor';
 import narration from '../anthropic-character-audio.json';
@@ -37,7 +39,11 @@ const Header:React.FC<{label:string;t:number;dark?:boolean}>=({label,t,dark})=><
     <div style={{height:4,width:(Math.min(t/17.5,1)*100)+'%',background:C.red}}/></div>
 </>;
 
-export const AnthropicEditorialDepth:React.FC=()=>{
+/** The default is the unchanged canonical protagonist. Concept C is permitted
+ * only in the isolated review composition, never silently in the episode. */
+export type AnthropicHostVariant='canonical'|'concept-c';
+export const AnthropicEditorialDepth:React.FC<{hostVariant?:AnthropicHostVariant}>=
+({hostVariant='canonical'})=>{
   const frame=useCurrentFrame(),{fps}=useVideoConfig(),t=frame/fps*playbackSpeed;
   const a=view(t,0.0,0.13,3.12,3.38),b=view(t,3.23,3.49,6.79,7.04);
   const c=view(t,6.93,7.15,11.13,11.40),d=ease(t,11.24,11.52,fast);
@@ -50,6 +56,19 @@ export const AnthropicEditorialDepth:React.FC=()=>{
   const net=Math.abs(financials.h1_2026.net_loss)/1000;
   const opLoss=Math.abs(financials.h1_2026.operating_loss);
   const chargeValue=Math.abs(financials.h1_2026.convertible_financing_fair_value_change)/1000;
+  // The review host performs ONE continuous glance -> reach -> recognize ->
+  // release cycle aimed toward the existing illustrated balance base.
+  // Same body anchor as the canonical host; no scene or narrator rewrite.
+  const target={x:392,y:133} as const;
+  const targetGaze=conceptCGazeForTarget(target);
+  const notice=ease(t,7.08,7.82,fast);
+  const release=ease(t,10.35,11.13,fast);
+  const pointReach=ease(t,7.85,8.65,move)*(1-release);
+  const recognition=ease(t,8.83,9.55,fast);
+  const headAngle=lerp(-2.0,1.7,recognition)*(1-0.50*release);
+  const eyeX=lerp(-6,targetGaze.x,notice)*(1-0.25*release);
+  const eyeY=lerp(-4,targetGaze.y,notice);
+  const deliberateBlink=Math.max(0,1-Math.abs(t-9.72)/0.12);
   const hookCamera={x:18*ease(t,.35,2.8),y:-10*ease(t,.35,2.8),zoom:1+.035*ease(t,.35,2.8)};
   const exit=ease(t,2.85,3.38,move);
   const comparisonCamera={x:lerp(-38,15,compare),y:12*(1-compare),zoom:lerp(.88,1.02,compare)};
@@ -249,13 +268,18 @@ export const AnthropicEditorialDepth:React.FC=()=>{
     <div style={style(65,1090,{width:300,height:405,zIndex:70,
       pointerEvents:'none',transformOrigin:'50% 96%',
       transform:'rotate('+lerp(-4,3,ease(t,4.3,5.0,move))+'deg)'})}>
-      <StageActor x={0} y={0} size={278}
-        pose={t<3.23?'think':t<7?'explain':'point'}
-        poseFrom={t<3.23?'react':t<7?'think':'explain'}
-        poseBlend={t<3.23?ease(t,1.1,1.8,move):
-          t<7?ease(t,4.7,5.3,move):
-          t<11.4?ease(t,8.4,9.0,move):ease(t,14.6,15.2,move)}
-        gazeX={t<3.23?12:-6} gazeY={-4}/>
+      {hostVariant==='concept-c'
+        ? <OurbitesHostConceptC pose="point" width={278} height={278*520/360}
+            pointTarget={target} pointProgress={pointReach}
+            gazeX={eyeX} gazeY={eyeY} insight={recognition}
+            headTilt={headAngle} blink={deliberateBlink}/>
+        : <StageActor x={0} y={0} size={278}
+            pose={t<3.23?'think':t<7?'explain':'point'}
+            poseFrom={t<3.23?'react':t<7?'think':'explain'}
+            poseBlend={t<3.23?ease(t,1.1,1.8,move):
+              t<7?ease(t,4.7,5.3,move):
+              t<11.4?ease(t,8.4,9.0,move):ease(t,14.6,15.2,move)}
+            gazeX={t<3.23?12:-6} gazeY={-4}/>}
     </div>
     {/* Caption overlay stays in screen space, while scenes move independently. */}
     <div style={style(65,1490,{width:950,height:241,

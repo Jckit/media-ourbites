@@ -14,6 +14,8 @@
     "render:host-concept-c": "remotion render src/index.tsx HostConceptCReview out/host-concept-c/compare.mp4 --scale=0.4 --codec=h264 --concurrency=2",
     "render:host-concept-c-acting": "remotion render src/index.tsx HostConceptCActingProof out/host-concept-c/acting.mp4 --scale=0.4 --codec=h264 --concurrency=2",
     "render:host-concept-c-receipt": "remotion render src/index.tsx HostConceptCReceiptProof out/host-concept-c/receipt.mp4 --scale=0.4 --codec=h264 --concurrency=2",
+    "render:host-c-anthropic-current": "remotion render src/index.tsx AnthropicSceneCurrentHost out/host-concept-c/anthropic-current.mp4 --scale=0.4 --codec=h264 --concurrency=2",
+    "render:host-c-anthropic-c": "remotion render src/index.tsx AnthropicSceneConceptC out/host-concept-c/anthropic-concept-c.mp4 --scale=0.4 --codec=h264 --concurrency=2",
     "still:host-concept-c-cameo": "remotion still src/index.tsx HostConceptCCameo out/host-concept-c/cameo.png --frame=0 --scale=0.4"
   },
   "dependencies": {
