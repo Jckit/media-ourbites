@@ -11,6 +11,25 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LOCAL_KEYS = ("cli", "model", "reference_audio", "reference_text", "ffmpeg")
 PROCESSING_KEYS = ("tempo_scale", "pitch_scale", "noise_reduction_db", "noise_floor_db")
+EMOTION_PATH = ROOT / "auditions/voice-emotion.json"
+
+def emotion_instruction(scene: str | None, emotion: str | None, intensity: float | None) -> str | None:
+    if not scene and not emotion:
+        return None
+    data = json.loads(EMOTION_PATH.read_text(encoding="utf-8-sig"))
+    scene_data = data["scenes"].get(scene, {}) if scene else {}
+    name = emotion or scene_data.get("profile")
+    if name not in data["profiles"]:
+        raise ValueError(f"Unknown emotion profile: {name}")
+    level = intensity if intensity is not None else scene_data.get("intensity", 0.5)
+    cap = data["intensity_cap"]
+    if not 0 <= level <= cap:
+        raise ValueError(f"Emotion intensity must be between 0 and {cap}")
+    profile = data["profiles"][name]
+    return f"{profile['instruction']} Emotional intensity: {level:.2f} on a restrained 0–{cap:.2f} scale."
+
+
+
 
 
 def selected_voice_command(args, preset: dict, config: dict) -> list[str]:
@@ -26,6 +45,8 @@ def selected_voice_command(args, preset: dict, config: dict) -> list[str]:
         if isinstance(value, bool) or not isinstance(value, (float, int)) or not math.isfinite(value):
             raise ValueError(f"Selected voice field {key} must be a finite number")
         command.extend(["--" + key.replace("_", "-"), str(value)])
+    if instruction:
+        command.extend(["--instruct", instruction])
     command.extend(["--output", str(args.output.resolve())])
     if args.text is not None:
         command.extend(["--text", args.text])
@@ -42,6 +63,9 @@ def main() -> None:
     group.add_argument("--text-file", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--processing", choices=("raw", "clean", "selected"), default="selected")
+    parser.add_argument("--scene", choices=("hook", "growth", "operations", "accounting", "cost", "payoff"))
+    parser.add_argument("--emotion", help="Named profile from auditions/voice-emotion.json")
+    parser.add_argument("--emotion-intensity", type=float)
     args = parser.parse_args()
     preset = json.loads((ROOT / "auditions/selected-voice.json").read_text(encoding="utf-8-sig"))
     if preset.get("provider") != "audio.cpp":
@@ -62,7 +86,8 @@ def main() -> None:
     if args.text_file is not None and not args.text_file.is_file():
         parser.error("Narration text file does not exist")
     try:
-        command = selected_voice_command(args, preset, config)
+        instruction = emotion_instruction(args.scene, args.emotion, args.emotion_intensity)
+        command = selected_voice_command(args, preset, config, instruction)
     except (KeyError, ValueError) as exc:
         parser.error(f"Invalid selected voice preset: {exc}")
     subprocess.run(command, check=True)
