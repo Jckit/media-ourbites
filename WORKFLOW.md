@@ -21,6 +21,9 @@ Gates A/B/C. Each episode references the shared engine and candidate motion cata
 After research/copy, use the Creative Director skill to write episode-local
 animation-tickets.json and run `python scripts/validate_animation_tickets.py <file>`.
 Motion/Codex and Viewer consume the same [ticket contract](skills/ourbites-creative-director/references/animation-tickets.md).
+For cross-file bindings, existing asset-format limits and original fallbacks, use the
+[M3-A handoff audit](skills/ourbites-creative-director/references/animation-tickets.md#m3-a-research--director--asset-handoff-design-audit-2026-11-16).
+This is design guidance; runtime integration remains gated by M1/M2 acceptance.
 Structural validation runs offline; actual director invocation/asset acquisition
 remain issue43. Visual authority: [canonical contract](styles/OURBITES-HYBRID-EDITORIAL.md).
 
