@@ -1,0 +1,187 @@
+{
+  "id": "ourbites-anthropic-ipo-accounting-m1",
+  "title": "Why Anthropic Reported a $104 Billion Net Loss",
+  "draft": true,
+  "language": "en",
+  "as_of": "2026-11-16",
+  "sources": [
+    {
+      "id": "s1a",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm",
+      "publisher": "Anthropic",
+      "kind": "primary",
+      "published_at": "2026-11-10",
+      "checked_at": "2026-11-16T15:25:18+00:00",
+      "locator": "Summary Consolidated Financial and Other Data, p. 27; MD&A, Change in Fair Value of Convertible Notes, Derivative Liabilities, and SAFEs; Consolidated Statements of Cash Flows, nine months ended September 30, 2026",
+      "note": "Issuer's preliminary prospectus filed on EDGAR. Figures are USD millions for the unaudited nine months ended September 30, 2026."
+    }
+  ],
+  "claims": [
+    {
+      "id": "losses",
+      "kind": "fact",
+      "text": "For the nine months ended September 30, 2026, consolidated operating loss was $1,260 million and net loss was $104,039 million.",
+      "source_ids": [
+        "s1a"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "fair-value",
+      "kind": "fact",
+      "text": "The fair-value change for convertible notes, derivative liabilities and SAFEs was a $94,324 million charge. Anthropic attributes the increase primarily to outstanding convertible promissory notes rising in fair value as its enterprise valuation increased.",
+      "source_ids": [
+        "s1a"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "reconciliation",
+      "kind": "fact",
+      "text": "In USD millions: −1,260 operating loss + 2,359 interest income − 94,324 fair-value charge − 10,397 other net expense − 417 income tax expense = −104,039 net loss.",
+      "source_ids": [
+        "s1a"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "cash",
+      "kind": "fact",
+      "text": "The cash flow statement adds back the $94,324 million fair-value charge in its reconciliation from net loss to operating cash flow. The charge itself is not a $94,324 million cash payment.",
+      "source_ids": [
+        "s1a"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "compute",
+      "kind": "fact",
+      "text": "Compute and infrastructure expense was $18,808 million in the same nine months. That is an operating expense category.",
+      "source_ids": [
+        "s1a"
+      ],
+      "volatile": false
+    },
+    {
+      "id": "takeaway",
+      "kind": "analysis",
+      "text": "Operating performance, reported net loss and cash flows answer different questions.",
+      "source_ids": [
+        "s1a"
+      ],
+      "volatile": false
+    }
+  ],
+  "scenes": [
+    {
+      "id": "hook",
+      "duration": 8,
+      "kicker": "THE IPO FILING",
+      "title": "Two very different losses",
+      "narration": "Anthropic reported a hundred and four billion dollars in net losses in nine months. Its operating loss? About one point three billion.",
+      "visual": "steps",
+      "labels": [
+        "$104.04B net loss",
+        "$1.26B operating loss",
+        "Nine months ended Sep 30, 2026"
+      ],
+      "claim_ids": [
+        "losses"
+      ]
+    },
+    {
+      "id": "question",
+      "duration": 4,
+      "kicker": "THE GAP",
+      "title": "Where did the difference come from?",
+      "narration": "So where did the rest come from? Start with the financing.",
+      "visual": "balance",
+      "labels": [
+        "Financing"
+      ],
+      "claim_ids": [
+        "losses",
+        "fair-value"
+      ]
+    },
+    {
+      "id": "remeasure",
+      "duration": 10,
+      "kicker": "THE MECHANISM",
+      "title": "The valuation changed",
+      "narration": "Anthropic says that as its valuation rose, some of its financing agreements became more valuable to investors. That change had to be recorded in the accounts.",
+      "visual": "steps",
+      "labels": [
+        "Company valuation rises",
+        "Fair value of outstanding notes rises",
+        "Change recorded in earnings"
+      ],
+      "claim_ids": [
+        "fair-value"
+      ]
+    },
+    {
+      "id": "press",
+      "duration": 10,
+      "kicker": "FOLLOW THE ENTRY",
+      "title": "A charge goes into net loss",
+      "narration": "That revaluation produced a ninety-four-point-three-billion-dollar charge. It accounts for most of the gap. The charge itself didn’t send that amount of cash out the door.",
+      "visual": "steps",
+      "labels": [
+        "$94.32B fair-value charge",
+        "Other lines also contribute",
+        "No cash payment from this charge"
+      ],
+      "claim_ids": [
+        "fair-value",
+        "reconciliation",
+        "cash"
+      ]
+    },
+    {
+      "id": "compute",
+      "duration": 7,
+      "kicker": "THE OPERATING BUSINESS",
+      "title": "Compute is still a big expense",
+      "narration": "The operating costs are still real. Compute and infrastructure alone were almost nineteen billion dollars in those same nine months.",
+      "visual": "balance",
+      "labels": [
+        "$18.81B compute and infrastructure expense"
+      ],
+      "claim_ids": [
+        "compute"
+      ]
+    },
+    {
+      "id": "payoff",
+      "duration": 8,
+      "kicker": "READ THE RIGHT LINE",
+      "title": "What do you want to measure?",
+      "narration": "So when you see that headline loss, ask two different questions. How did the business operate? And what actually happened to the cash?",
+      "visual": "balance",
+      "labels": [
+        "Operations ≠ net loss ≠ cash flow"
+      ],
+      "claim_ids": [
+        "losses",
+        "cash",
+        "takeaway"
+      ]
+    }
+  ],
+  "character_cast": {
+    "protagonist": {
+      "id": "ourbites-protagonist",
+      "profile": "characters/protagonist/profile.json",
+      "appearance_scene_ids": [
+        "hook",
+        "question",
+        "press",
+        "payoff"
+      ],
+      "status": "provisional_awaiting_user_approval"
+    },
+    "real_people": [],
+    "notes": "The fictional host operates the schematic press."
+  }
+}
