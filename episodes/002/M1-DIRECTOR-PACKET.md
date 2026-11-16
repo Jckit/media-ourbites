@@ -1,0 +1,39 @@
+# M1 editorial packet · Why Anthropic reported a $104 billion net loss
+
+Draft for Justin's editorial review. The [episode manifest](m1-episode.json) is the source for narration, claims and approximate timing. The cut plans for a 47-second vertical Short about the nine months ended September 30, 2026.
+
+## Story and visual direction
+
+How did Anthropic report a $104 billion net loss when its operating loss was about $1.3 billion? Follow one financing slip from the valuation change, through the accounting press, into the net-loss statement. End by giving the viewer a practical way to read the next headline: look at operations and cash flow separately. The press is an illustration. It posts the accounting entry, while the explanation of why its value changed happens before the slip goes in.
+
+The strongest documented motion candidate is the [Issue 50 press proof](../../reviews/media/issue50-proof.mp4). Its [review](../../reviews/issue50-proof.md) records a continuous sheet transfer, a deliberate landing hold, and a separate cash prop. Carry those actions into this cut and use the fictional host as the operator. Compare with the [grid-depth candidate](../../reviews/media/anthropic-grid-depth.mp4) for staging. Replace the isolated proof's immediate crank action with a setup that establishes the discrepancy and lets the viewer follow the same slip to its destination. Use a brief heat treatment at the compute beat only if it reads as an expense metaphor. Avoid flames over the reported net-loss card.
+
+An alternative was a magnifier moving through three sections of a filing. The press better communicates that a single entry contributes to the result and creates a handoff the viewer can follow across cuts. Use the reference's varied shot sizes, anchored attention and purposeful cuts. Baseline conclusions here are based on the repository's documented proof review. Continuous playback, audio and reference replay are pending.
+
+## Shot plan
+
+Times are editorial estimates. The final audio sets cut and caption timing.
+
+| Window | Action and framing | Handoff and audio direction | Evidence and fallback |
+| --- | --- | --- | --- |
+| 0–8s · Hook | Close on a loss statement held by the host. Reveal net and operating losses in narration order. Keep the reporting period attached to both. | Cut to a wider desk on the host's glance at the gap. Curious read with a slight lift at “operating loss.” | S-1/A p. 27, consolidated statements of operations. Original two-line ledger with a filing citation. |
+| 8–12s · Question | The host follows a tab marked “Financing” and pulls out a financing slip. Shift attention from totals to that single prop. | Hold briefly after “Where did the rest come from?” before continuing. Start with a 0.65-second audition and tune by ear against the full read. Match-cut on the slip. | S-1/A MD&A, change in fair value. Original tab and slip with plain lettering. |
+| 12–22s · Mechanism | Tight insert. The company-valuation marker rises, then the fair value marker on the outstanding notes rises. The host's hand turns the slip toward the press. | Emphasize “valuation rose” and “more valuable.” Cut on the turn. Avoid a dollar scale or a fabricated starting valuation. | S-1/A p. 27 n. 2 and MD&A fair-value discussion. Original two-marker graphic. |
+| 22–32s · Accounting | Medium shot. The host cranks the press. The sheet bearing the $94.32B charge lands in the net-loss statement. The total is already visible and a line marks other entries. Hold on the statement, with a separate cash-flow tab outside the paper path. | Grounded read. Time the sheet landing to the charge and give the cash sentence its own beat. Show “This charge” beside the cash caveat. | S-1/A p. 27 and consolidated cash flow statement. Original press and ledger. Keep the cash graphic neutral to avoid implying aggregate cash stayed flat. |
+| 32–39s · Counterpoint | Cut to a server rack and one clearly labeled expense card. Brief heat shimmer can underscore the compute expense. | A slight shift in weight on “still real.” Cut back on the same report tab or binder edge. | S-1/A p. 27 compute and infrastructure line. Original unbranded servers. |
+| 39–47s · Payoff | The host turns the binder toward the viewer and points to the operating result and cash-flow tabs, one at a time. | Let each question land once. Hold the final frame long enough to read both tab names. | Original binder and labels tied to the same filing. |
+
+Keep captions and source references in separate screen-fixed regions. At 432×768, inspect against the actual captions at shot boundaries and the receipt landing. Show one number at a time during the mechanism and reserve the dense reconciliation for the evidence packet. Use exact filing values for the data and the rounding in the manifest for speech.
+
+## Claims and assets
+
+- The November 10 S-1/A presents nine-month results. Compare its rows within that period. The October 26 filing is the six-month comparison baseline. Keep the older $80.75B, $693M and $72.39B values out of the new cut. The November 10 [roadshow announcement](https://www.anthropic.com/news/roadshow-launch) supplied a preliminary range, so the draft omits the October language about terms being undetermined and avoids a current listing or price claim.
+- The [S-1/A](https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm) supports the figures, valuation explanation and cash-flow treatment. The same-period arithmetic in millions is −1,260 + 2,359 − 94,324 − 10,397 − 417 = −104,039. The charge is approximately 92% of the gap between the two loss lines. Exact figures and accounting treatment rely on the issuer's original filing.
+- Filing-excerpt candidate, Anthropic as issuer, SEC EDGAR as host, filed Nov 10, 2026. Use the p. 27 table, MD&A fair-value section, or cash flow statement only as specified above. Rights status is unreviewed. Use directly typeset figures with a source credit for this cut. No external bytes selected or hashed.
+- Company/product media from the [original discovery brief](RESEARCH-BRIEF.md) remains unreviewed and is unnecessary for this cut. Use plain-text Anthropic identification, original servers and the fictional host. Concept C from [draft PR #1](https://github.com/Jckit/media-ourbites/pull/1) can be compared at episode scale against the existing host during assembly.
+
+## Handoff to film and audio
+
+- [Issue #9](https://github.com/Jckit/media-ourbites/issues/9) uses the six shots as one sequence. At each cut, compare prop position, grip, caption space and numeric labels. Export the complete 9:16 film and record what changes from the prior excerpt. The excerpt is a shot comparison; identify any comparable full-length baseline and state playback coverage explicitly.
+- [Issue #10](https://github.com/Jckit/media-ourbites/issues/10) auditions Justin's merged cloned-voice preset locally on this exact script. The previous sample follows the six-month wording. Use the established narration voice as the fallback if the clone does not pass listening. Measure word timestamps from the chosen final WAV and confirm the question-to-answer pause, number reads, scene joins and word fades at 1×.
+- Before advancing to the final animation pass, capture Justin's decision on this script and shot direction. M1 acceptance requires the complete narrated film at 1× on a phone.
