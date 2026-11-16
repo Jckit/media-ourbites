@@ -271,3 +271,96 @@ The preview reuses the Ourbites host and office setting for an illustrative owne
 ## Scene-level emotion
 
 `auditions/voice-emotion.json` defines Morning Brew-inspired performance direction as scene-level energy, warmth, surprise, dry amusement and seriousness. Generate a scene with `--scene hook`, or use `--emotion <profile>` and `--emotion-intensity 0.0..0.7` for a bounded override. The instruction is forwarded to Qwen3-TTS; selected speed, pitch and cleanup remain unchanged.
+
+## M3-B audio/caption compatibility handoff — design only
+
+Audited 2026-11-16 against main `9618fbfa1083130e221a30bd5bebca4262c2d1c2`
+for [#15](https://github.com/Jckit/media-ourbites/issues/15).
+No voice, M1 episode, caption runtime or dependencies changed. Integration follows
+M1 audio review and the [M1/M2 roadmap gates](ROADMAP.md).
+
+### Preserve distinct source clocks
+
+| Input | Source audio | Render clock |
+|---|---|---|
+| Historical Anthropic proofs | Existing Kokoro WAVs, original pitch | `sourceTimeSeconds = frame / fps * 1.1`; do not regenerate |
+| New selected voice | Final processed Qwen WAV: tempo 1.06 / pitch 0.96 already baked into bytes | Preset and voice preview use playback 1.0; align these final bytes, not the raw take |
+| Voice-preview props | `startFrame` / `durationInFrames` at 30 fps, with intentional gaps | Frame scheduling and phrase captions only; not source-second word alignment |
+
+At frame 60 / 30 fps, the legacy source clock is 2.2 seconds; the new voice
+clock is 2.0. Do **not** multiply new captions by 1.06 or inherit 1.1 automatically.
+For a clip beginning at frame 15 with a word at local source 0.4 seconds and
+playback 1.0, its global onset is frame 27. In a clip-local overlay use
+`(globalFrame - startFrame) / fps * playbackRate + trimSourceSeconds`;
+in a global overlay map each cue to the common timeline once. Never add both
+the clip offset and a Sequence-local offset. Preserve gaps, trims and scene order.
+
+### Reuse the historical alignment work, with explicit adaptation
+
+Original [PR #59's adapter and QA contract](https://github.com/jcbandc-arch/media-creator-outbites/blob/1c851b497047895b32bdf73ae3a80832cb7f9741/skills/ourbites-production/references/audio-quality-gates.md)
+was inspected read-only at `1c851b4`; it is not installed on this main.
+Its PocketSphinx 5.1.1 / Python 3.11 workflow produces
+`forced-alignment-draft`, retains WAV/script/cue hashes and verifies word order.
+Two historical flagged onsets remain review findings, not automatic corrections
+or measurements transferable to a new voice.
+
+- The current Qwen export is mono 48 kHz **PCM24**. PR #59's reader rejects it:
+  it requires **PCM16** before its 16 kHz resampling. Create a disposable PCM16
+  analysis derivative of the final processed take; retain the render WAV unchanged.
+  Hash both, record the conversion and verify equal duration/time origin.
+  No silence removal, tempo processing or new trim during conversion.
+- The adapter expects source-second `clips[].start/duration/file/text` plus
+  matching phrase groups. The new preview has frame-based props and rounded
+  durations. Map scheduling explicitly and measure WAV durations; do not pass
+  props directly or derive word boundaries by dividing phrase durations.
+- Retain transcript parity, number/name checks, missing/extra token failures,
+  ordered non-overlapping intervals, source bounds and review flags. Forced
+  alignment assumes the supplied words; it does not prove they were spoken.
+  Remotion-caption imports using `startMs/endMs` need division by 1000 once;
+  the existing Ourbites overlay consumes seconds, not that external shape.
+- Keep draft words separate from human-reviewed production tracks. Record final
+  audio, transcript, clip schedule, processing/aligner settings and track hashes
+  in the existing episode review record. Regeneration, processing, clipping or
+  a schedule change invalidates the corresponding alignment/review.
+  Local references/models/voice files remain ignored; do not expose private paths
+  or reference transcripts in public evidence.
+
+### What the current checks do not prove
+
+`validateWordCaptionTrack` checks shape, intervals, ordered starts and line groups.
+A synthetic overlapping, hashless track **passes** if tagged
+`measured-word-alignment`. The type string does not establish measurement or
+human approval; `WordCaptionOverlay` also accepts provisional words for previews.
+Use source-bound draft verification plus a distinct human review decision before
+production use. Never promote a track merely by changing its timing label.
+
+`verify_caption_windows.py` checks a fixed 432×768 legacy pixel strip at 30 fps
+and 1.1×. It is not a general new-voice sync checker. Its success establishes
+neither words nor intelligibility. The FFmpeg `loudnorm` target is a processing
+instruction, not a measured final-mix result; check the encoded soundtrack and
+voice/SFX balance, then listen at normal speed.
+
+### Verification and implementation acceptance
+
+Executed: **7 voice tests, 3 frame-count tests, 5 phrase-cue tests**, and the
+existing Node word-caption test passed. Synthetic PCM16/PCM24 reader probes
+confirmed the format mismatch; source-clock probes confirmed the examples above
+and overlapping-track acceptance. No dependencies installed, real narration
+generated/aligned, media rendered or audio listened to in this audit.
+
+After the gates, reuse the existing adapter and add only the required input mapping
+and analysis conversion. Acceptance must reject swapped WAV/hash, dropped/reordered
+words, overlaps, wrong units/rate, shifted clip origin, stale transcript and
+unreviewed promotion. Cover both legacy 1.1× and selected-voice 1.0× with real audio,
+including gaps and trims. Render the complete film, inspect actual word onsets,
+listen through numbers/names and the final mix, and record exact media hashes and
+human decisions. This design handoff does not close #15 or approve cloned audio.
+
+Existing checks:
+
+```sh
+python -m unittest discover -s tests -p test_voice_clone.py
+python -m unittest discover -s tests -p test_caption_frame_count.py
+python -m unittest discover -s tests -p test_anthropic_caption_cues.py
+node --experimental-strip-types tests/word-captions.test.mjs
+```
