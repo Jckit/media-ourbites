@@ -294,6 +294,14 @@ playback 1.0, its global onset is frame 27. In a clip-local overlay use
 `(globalFrame - startFrame) / fps * playbackRate + trimSourceSeconds`;
 in a global overlay map each cue to the common timeline once. Never add both
 the clip offset and a Sequence-local offset. Preserve gaps, trims and scene order.
+For the reverse mapping use `globalFrame = startFrame +
+(sourceWordSeconds - trimSourceSeconds) / playbackRate * fps` (before render-frame
+quantization). Example: start frame 15, source word 1.3s, trim 0.2s, rate 1.1 and
+30 fps gives frame 45; mapping that frame back yields source 1.3s. Use the same
+frame-rounding policy for audio placement and caption onset. Words outside the
+retained source interval are excluded or flagged for review, never clamped into
+an artificial onset. Clip-local and global-track durations must use their own
+clock consistently; a global playback-time track must not be multiplied again.
 
 ### Reuse the historical alignment work, with explicit adaptation
 
