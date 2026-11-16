@@ -102,3 +102,77 @@ After PR #1 merged, Justin requested that Ourbites feel closer to the **illustra
 **Review clarification on PR #2:** this is a VISUAL STYLE reference, **not** a request for simulation, mandatory cause/effect stories, or multiple locations in every Short. The Ourbites news-led business narrative, factual graphics and pacing remain as before. Build a consistent hybrid visual world using clean 2D backgrounds, readable props, dimensional layering and meaningful movement only when it helps. Static scenes and exact-number charts are still valid.
 
 The draft PR adds a reusable original `OfficeWorld` to `AnthropicCharacter`, with optional paper motion at the filing drop. The reviewer also identified desk depth and Dario label interference; the revised furniture now sits behind the characters, above their feet and away from the label. Verify new phone-sized frames at 30,100,220,450,499 and through the zoom. Never infer performance, art approval or licensing rights from successful CI.
+
+## M3-C build, packaging and release readiness — design handoff
+
+[Issue #16](https://github.com/Jckit/media-ourbites/issues/16) started 2026-11-16
+against main `9618fbfa1083130e221a30bd5bebca4262c2d1c2`. **Runtime implementation
+is blocked** on accepted M3-A/B integration and the M2 film. Reviewed design notes
+for [assets](skills/ourbites-creative-director/references/animation-tickets.md#m3-a-research--director--asset-handoff-design-audit-2026-11-16)
+and [audio](README.md#m3-b-audiocaption-compatibility-handoff--design-only)
+are inputs, not acceptance evidence. M1 remains a separate owner's work.
+
+### Reuse and gaps at the integration boundary
+
+| Existing component | Reuse | Required integration boundary |
+|---|---|---|
+| `scripts/create_episode_workspace.py` | Safe episode paths and references | Its planned inputs are not completed artifacts; resolve the actual #14/#15 outputs before building. |
+| `pipeline.py validate/review/verify` | Manifest structure, freshness and hash-bound editorial/media receipts | `verify` without `--media` does not test final-media acceptance. Final review must supply the exact MP4 and check other gates separately. |
+| Ticket, asset and word-caption checks | Existing focused validators | Cross-file bindings, reviewed derivatives, audio provenance and accepted scene inputs remain #14/#15 dependencies. |
+| Registered Remotion compositions / existing CI | Pinned rendering engine and technical checks | Discover the actual composition with its props; verify width/height/fps/duration and audio in the encoded output. Existing silent previews cannot stand in for a narrated master. |
+| [Original PR #60 packaging](https://github.com/jcbandc-arch/media-creator-outbites/blob/51558460ceffe256ff33cdd679eae3fa2fa7a998/scripts/prepare_shorts_packaging.py) | Draft spec, reused-art covers, title/description alternatives, optional video hash lock | Read-only candidate at `5155846`, not installed here. Reconcile once; do not rebuild or copy its historical Anthropic artwork/approvals wholesale. |
+
+### One episode build and review handoff
+
+After the gates, extend existing entry points rather than introduce another engine:
+
+1. Freeze the source commit, lockfile, manifest, tickets, asset packet and selection,
+   narration/word track, props and composition IDs. Hash all actual render inputs,
+   including imported art/fonts/audio; an explicit file list alone is not a
+   dependency graph. Record environment/tool versions and manual exceptions.
+2. Run source/asset/audio checks; preserve diagnostic reasons. A dry run reports
+   missing or blocked stages and planned commands without downloads, synthesis,
+   rendering or fabricated approval. A provisional preview may use documented
+   fallbacks; that must not upgrade its release status.
+3. Render the complete film with approved inputs when available. Keep the
+   phone-review render and full-size master separately identified and hashed;
+   approval of one does not silently approve the other. Verify actual encoded
+   9:16 geometry, expected fps/duration, audio presence and input provenance.
+4. Reuse the packaging exporter against the exact film/props and verified
+   registered cover composition. Keep optional `reviewed_video: null` as
+   `unbound-draft`; a matching MP4 hash still proves identity, not approval.
+   Bind selected title, description, cover and credits to final review too.
+5. Produce a downloadable review packet: exact source/output hashes, film and
+   cover links, scene timestamps, test results, measured/manual effort, exceptions
+   and separate factual, rights/likeness, voice, creative and publication decisions.
+   Changing media or metadata invalidates affected decisions. Preserve private
+   voice/model files outside uploaded artifacts. No upload/publication action
+   belongs in this build.
+
+Do not promise bit-identical MP4 encoding across machines merely from pinned
+packages. Fix rendering inputs/environment, compare content and timing, and
+record each actual output hash. GitHub artifacts expire: record run/artifact
+identity and expiry, and retain an authorized accessible review copy as needed.
+
+### Readiness evidence and acceptance cases
+
+Nine existing `tests/test_pipeline.py` tests passed. A synthetic spec exercised
+PR #60's actual `prepare(..., dry_run=True)`: no render or export directory,
+and `unbound-draft` retained. A second probe using
+`NoSuchM3AuditComposition` also passed: the current planner checks ID syntax,
+**not registration**. It hashes declared reuse files, not transitive dependencies.
+These are audit findings, not a successful end-to-end build.
+
+Before integrating, require: unknown composition and out-of-range frame rejection
+against actual metadata; wrong/missing episode props; missing registered media;
+changed dependencies/WAV/captions/MP4/cover/metadata; expired or absent review
+artifact; silent/unexpected encoded output; absent human decisions; and a second
+real episode built without bespoke manual source edits. Preserve graphics-only
+previews and unavailable-private-audio diagnostics without calling them release-ready.
+Run `python -m unittest discover -s tests -p test_pipeline.py` for the current
+receipt foundation; it does not cover these future integration cases.
+
+No dependencies installed, real video rendered, audio listened to or artwork
+approved during this readiness audit. #16 remains open/blocked; next executable
+integration is reconciliation of accepted #14/#15 inputs and M2 evidence, not
+another standalone micro-PR or speculative orchestrator.
