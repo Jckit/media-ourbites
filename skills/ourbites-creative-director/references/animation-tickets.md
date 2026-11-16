@@ -92,12 +92,17 @@ packet in the shot plan; reconcile workspace path references during gated integr
 
 Use one row per ticket/request in the **existing** shot plan:
 
-`ticket ID | manifest scene ID | claim IDs | request ID | packet path + candidate ID (or NONE) | chosen fallback | unresolved gate`
+`ticket ID | manifest scene ID | claim IDs | request ID | packet path + SHA-256 + candidate ID (or NONE) | chosen fallback | unresolved gate`
 
 - Match by explicit IDs and purpose, never array position, filename similarity or
   company name alone. Ticket claims must belong to the bound scene; verify that
   the selected candidate supports the requested purpose, not merely the same company.
   A deliberate cross-scene shot lists its contributing scenes and claim mapping.
+- Freeze the exact discovery packet hash alongside the binding table. Curated IDs
+  such as `hook-lead-1` are generated from list order: reordering leads changes
+  their meaning. Regenerating a packet invalidates its bindings even if the IDs
+  remain identical. Re-resolve source URL, locator, purpose and scene before reuse.
+  Do not infer persistent identity from these generated IDs.
 - Scope a request by ticket ID + request ID. Repeated requests can share one candidate
   after checking each usage; one request may have several discovery candidates,
   but the selection for each usage must be explicit.
@@ -178,7 +183,8 @@ After M1/M2 acceptance, implement the smallest adapter against the accepted inpu
 1. Reconcile scene/request/candidate bindings and workspace path references.
    The current ticket validator only checks claims against the entire episode:
    a probe substituting another scene's valid claim still passes. Add cross-file
-   checks for unknown scenes, wrong-scene claims, ambiguous selections and wrong
+   checks for changed packet hashes/reordered leads, unknown scenes, wrong-scene
+   claims, ambiguous selections and wrong
    asset purpose; retain human semantic review.
 2. Reuse the existing discovery packet and insertion verifier. Research preflight
    checks hash **format**, not actual bytes; ticket preflight checks file existence,
