@@ -1,6 +1,6 @@
 # M1 editorial packet · Why Anthropic reported a $104 billion net loss
 
-Draft for Justin's editorial review. The [episode manifest](m1-episode.json) is the source for narration, claims and approximate timing. The cut plans for a 47-second vertical Short about the nine months ended September 30, 2026.
+Justin approved this script and six-shot direction in Alex's chat on November 23, 2026. The [decision record](https://github.com/Jckit/media-ourbites/issues/8#issuecomment-7095857443) unlocks the representative scene for visual review. The [episode manifest](m1-episode.json) supplies narration, claims and approximate timing. The cut plans for a 47-second vertical Short about the nine months ended September 30, 2026.
 
 ## Story and visual direction
 
@@ -36,4 +36,4 @@ Keep captions and source references in separate screen-fixed regions. At 432×76
 
 - [Issue #9](https://github.com/Jckit/media-ourbites/issues/9) uses the six shots as one sequence. At each cut, compare prop position, grip, caption space and numeric labels. Export the complete 9:16 film and record what changes from the prior excerpt. The excerpt is a shot comparison; identify any comparable full-length baseline and state playback coverage explicitly.
 - [Issue #10](https://github.com/Jckit/media-ourbites/issues/10) auditions Justin's merged cloned-voice preset locally on this exact script. The previous sample follows the six-month wording. Use the established narration voice as the fallback if the clone does not pass listening. Measure word timestamps from the chosen final WAV and confirm the question-to-answer pause, number reads, scene joins and word fades at 1×.
-- Before advancing to the final animation pass, capture Justin's decision on this script and shot direction. M1 acceptance requires the complete narrated film at 1× on a phone.
+- The script and shot direction are approved. Obtain Justin's visual decision on the representative press/ledger scene before expanding the full sequence. M1 acceptance requires the complete narrated film at 1× on a phone.
