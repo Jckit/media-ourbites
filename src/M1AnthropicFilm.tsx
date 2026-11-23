@@ -20,7 +20,6 @@ export const m1PressPose = (t: number) => {
   const retreat = phase(t, 3.8, 5.5);
   const angle = -.5 + feed * Math.PI * 2;
   const crank = {x: 590 + Math.cos(angle) * 60, y: 1050 + Math.sin(angle) * 60};
-  const release = phase(t, 2.7, 3.4);
   // One sheet persists from the roller mouth to the ledger pocket.
   const u = 1 - travel;
   const x = u*u*u*440 + 3*u*u*travel*450 + 3*u*travel*travel*730 + travel*travel*travel*730;
@@ -29,7 +28,6 @@ export const m1PressPose = (t: number) => {
     feed, print, travel, retreat, crank, angle,
     sheet: {x: t < 3.4 ? 440 : x, y: t < 3.4 ? 920 + 215 * print : y,
       scale: 1 - .18 * travel, rotation: -10 * Math.sin(Math.PI * travel)},
-    hand: {x: crank.x * (1-release) + 610 * release, y: crank.y * (1-release) + 1200 * release},
     ledger: phase(t, 2.8, 4.2),
     caveat: phase(t, 6.2, 6.6),
   };
@@ -41,7 +39,6 @@ export const M1AnthropicFilm: React.FC = () => {
   const t = frame / fps;
   const s = m1PressPose(t);
   const actor = {x: 730, y: 1080, width: 250};
-  const scale = actor.width / 360;
   const machineX = -850 * s.retreat;
   const ledgerX = 400 * (1-s.ledger);
   return <AbsoluteFill style={{backgroundColor: cream, color: ink, fontFamily: 'Arial, sans-serif'}}>
@@ -111,8 +108,8 @@ export const M1AnthropicFilm: React.FC = () => {
     </svg>
     <div style={{position: 'absolute', left: actor.x, top: actor.y, width: actor.width}}>
       <OurbitesHost width={actor.width} height={actor.width*520/360}
-        pose="explain" gazeX={t<3.4 ? 8 : 10} gazeY={t<3.4 ? -2 : -7}
-        rightHandTarget={{x:(s.hand.x-actor.x)/scale, y:(s.hand.y-actor.y)/scale}}/>
+        pose="explain" poseFrom="think" poseBlend={phase(t,3.4,4.2)}
+        gazeX={-5} gazeY={t<3.4 ? -2 : -7}/>
     </div>
     <div style={{position:'absolute',left:72,top:1510,width:936,fontSize:38,fontWeight:700,lineHeight:1.3}}>
       {t<3.4 ? 'A financing revaluation enters the accounts.' : t<6.2 ? 'One charge explains most of the gap.' : 'Accounting charges and cash flows answer different questions.'}

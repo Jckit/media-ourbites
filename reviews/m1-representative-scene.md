@@ -8,11 +8,11 @@ Justin approved the six-shot script and visual direction in this chat. The [issu
 
 [Silent 10-second MP4](media/m1-press-ledger.mp4), H.264, 432×768, 30fps, 300 frames.
 
-SHA-256 DB7278F893D78FBAD9F5E7BC41078792EDE5F6B326F37D031F0822DB8360DD66.
+SHA-256 18ACC8F746F86D334272DC0C266C2EED134C97F80429EB871329260793B989A5.
 
-One financing slip feeds into the press. A single output sheet carries the $94.32B fair-value charge into the $104.04B net-loss statement. The host's right hand shares the crank anchor during operation, releases before the press leaves, then points toward the cash caveat. The receiving ledger acknowledges other entries. All numbers refer to the nine months ended September 30, 2026.
+One financing slip feeds into the press. A single output sheet carries the $94.32B fair-value charge into the $104.04B net-loss statement. Justin accepted the ledger and requested removal of the protagonist's graphic interactions. The revised host observes the mechanism and transitions from thinking to explaining. The receiving ledger acknowledges other entries. All numbers refer to the nine months ended September 30, 2026.
 
-The new entry point keeps the review scene independent of the historical H1 narration and data. The host gains an optional right-hand prop target. Existing default poses produce identical SVG markup in the regression check.
+The scene uses the standard host pose API. The optional right-hand prop target has been removed. The ledger, press and sheet retain identical motion values at every frame compared with the prior candidate.
 
 ## Reproduce and checks
 
@@ -26,9 +26,9 @@ npx remotion render src/m1-film.tsx M1PressLedgerReview out/m1-press-ledger.mp4 
 npx remotion still src/m1-film.tsx M1PressLedgerReview out/m1-frame120.png --frame=120 --scale=0.4
 ```
 
-Typecheck and default-host parity, crank contact, release continuity, adjacent-frame speed/direction and settled-landing checks pass. The first adjacent-frame inspection exposed an incorrect cubic coefficient, which was corrected before this export.
+Typecheck, default-host parity, all-frame graphic-motion parity, release continuity, adjacent-frame speed/direction and settled-landing checks pass. The first candidate's cubic coefficient correction is retained.
 
-Actual encoded opening, frames around release 101–103 and landing 173–175 were inspected at 432×768. The early receipt reveal and right-edge title crowding were corrected. A fresh Remotion still at frame 120 / 4.0s matches the encoded shot and layout. Mean RGB channel differences against its H.264-decoded counterpart were 2.695, 2.037 and 3.586 on the 0–255 scale. This is a compressed-image comparison.
+The revised encoded opening at 1s, transfer at 4s and ending at 8s were inspected at 432×768. The host's hands stay near its own body, with a curious reaction followed by a small explanatory gesture. The prior candidate's release/landing frame inspection and frame-120 reproducibility comparison remain historical evidence. Graphics motion parity is checked across all 300 revised frames.
 
 ## Remaining review
 

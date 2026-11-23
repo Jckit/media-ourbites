@@ -19,8 +19,6 @@ type HostProps = {
   /** Optional transition between existing poses; omitted preserves legacy drawing. */
   poseFrom?: HostPose;
   poseBlend?: number;
-  /** Optional prop-contact target in the host's 360×520 SVG coordinates. */
-  rightHandTarget?: {x: number; y: number};
 };
 
 const ink = '#142B38';
@@ -30,7 +28,7 @@ const orange = '#E97F48';
 
 export const OurbitesHost: React.FC<HostProps> = ({
   pose = 'neutral', doubt, width = 330, height = 477, animate = false,
-  gazeX = 0, gazeY = 0, poseFrom, poseBlend, rightHandTarget,
+  gazeX = 0, gazeY = 0, poseFrom, poseBlend,
 }) => {
   const frame = useCurrentFrame();
   const entrance = animate
@@ -75,9 +73,7 @@ export const OurbitesHost: React.FC<HostProps> = ({
       +lerp(fromLeft.ex,toLeft.ex)+' '+lerp(fromLeft.ey,toLeft.ey)
       +' L'+lerp(fromLeft.hx,toLeft.hx)+' '+lerp(fromLeft.hy,toLeft.hy)
     : leftArm;
-  const rightPath=rightHandTarget
-    ? `M236 255 Q${(236+rightHandTarget.x)/2+12} ${rightHandTarget.y+32} ${rightHandTarget.x} ${rightHandTarget.y}`
-    : blending
+  const rightPath=blending
     ? 'M236 255 Q'+lerp(fromRight.cx,toRight.cx)+' '+lerp(fromRight.cy,toRight.cy)+' '
       +lerp(fromRight.ex,toRight.ex)+' '+lerp(fromRight.ey,toRight.ey)
     : rightArm;
@@ -133,18 +129,17 @@ export const OurbitesHost: React.FC<HostProps> = ({
           fm('mouthEndX')+' '+fm('mouthEndY')} fill="none"/>
         <circle cx={144 + pupilX} cy={139 + pupilY} r="6"/>
         <circle cx={219 + pupilX} cy={139 + pupilY} r="6"/>
-        {rightHandTarget ? <circle cx={rightHandTarget.x} cy={rightHandTarget.y} r="10" fill={paper}/> : null}
         {blending ? <>
           <circle cx={lerp(fromLeft.hx,toLeft.hx)} cy={lerp(fromLeft.hy,toLeft.hy)}
             r={lerp(poseFrom==='think'?8:10,pose==='think'?8:10)} fill={paper}
             opacity={lerp(leftMark(poseFrom!),leftMark(pose))}/>
           <circle cx={lerp(fromRight.hx,toRight.hx)} cy={lerp(fromRight.hy,toRight.hy)}
             r={lerp(poseFrom==='explain'?10:6,pose==='explain'?10:6)} fill={paper}
-            opacity={rightHandTarget ? 0 : lerp(rightMark(poseFrom!),rightMark(pose))}/>
+            opacity={lerp(rightMark(poseFrom!),rightMark(pose))}/>
         </> : <>
           {thinking && <circle cx="153" cy="203" r="8" fill={paper}/>}
-          {pointing && !rightHandTarget && <circle cx="337" cy="163" r="6" fill={paper}/>}
-          {explaining && !rightHandTarget && <circle cx="328" cy="212" r="10" fill={paper}/>}
+          {pointing && <circle cx="337" cy="163" r="6" fill={paper}/>}
+          {explaining && <circle cx="328" cy="212" r="10" fill={paper}/>}
           {reacting && <circle cx="61" cy="161" r="10" fill={paper}/>}
         </>}
       </g>
