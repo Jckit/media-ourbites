@@ -65,7 +65,7 @@
     {
       "id": "takeaway",
       "kind": "analysis",
-      "text": "Operating performance, reported net loss and cash flows answer different questions.",
+      "text": "A rise in enterprise valuation can increase the fair value of outstanding financing obligations and therefore worsen reported earnings. Whether growth becomes sustainable profit remains an analytical question.",
       "source_ids": [
         "s1a"
       ],
@@ -75,46 +75,46 @@
   "scenes": [
     {
       "id": "hook",
-      "duration": 8,
+      "duration": 5,
       "kicker": "THE IPO FILING",
-      "title": "Two very different losses",
-      "narration": "Anthropic reported a hundred and four billion dollars in net losses in nine months. Its operating loss? About one point three billion.",
+      "title": "Where did the money go?",
+      "narration": "Anthropic reported a hundred-and-four-billion-dollar loss. So where did the money go?",
       "visual": "steps",
       "labels": [
-        "$104.04B net loss",
-        "$1.26B operating loss",
-        "Nine months ended Sep 30, 2026"
+        "$104.04B reported net loss",
+        "Nine months ended Sep 30, 2026",
+        "Where did the money go?"
       ],
       "claim_ids": [
-        "losses"
+        "losses",
+        "cash"
       ]
     },
     {
       "id": "question",
       "duration": 4,
       "kicker": "THE GAP",
-      "title": "Where did the difference come from?",
-      "narration": "So where did the rest come from? Start with the financing.",
+      "title": "Financing obligations",
+      "narration": "Some of its financing obligations rise in value with the company.",
       "visual": "balance",
       "labels": [
-        "Financing"
+        "Financing obligations"
       ],
       "claim_ids": [
-        "losses",
         "fair-value"
       ]
     },
     {
       "id": "remeasure",
-      "duration": 10,
+      "duration": 4,
       "kicker": "THE MECHANISM",
       "title": "The valuation changed",
-      "narration": "Anthropic says that as its valuation rose, some of its financing agreements became more valuable to investors. That change had to be recorded in the accounts.",
+      "narration": "Revaluing them created a ninety-four-point-three-billion-dollar charge.",
       "visual": "steps",
       "labels": [
         "Company valuation rises",
         "Fair value of outstanding notes rises",
-        "Change recorded in earnings"
+        "$94.32B charge"
       ],
       "claim_ids": [
         "fair-value"
@@ -122,10 +122,10 @@
     },
     {
       "id": "press",
-      "duration": 10,
+      "duration": 9,
       "kicker": "FOLLOW THE ENTRY",
       "title": "A charge goes into net loss",
-      "narration": "That revaluation produced a ninety-four-point-three-billion-dollar charge. It accounts for most of the gap. The charge itself didn’t send that amount of cash out the door.",
+      "narration": "That charge went into the accounts, pushing the reported nine-month loss above a hundred billion dollars. The revaluation itself involved no equivalent cash payment.",
       "visual": "steps",
       "labels": [
         "$94.32B fair-value charge",
@@ -143,7 +143,7 @@
       "duration": 7,
       "kicker": "THE OPERATING BUSINESS",
       "title": "Compute is still a big expense",
-      "narration": "The operating costs are still real. Compute and infrastructure alone were almost nineteen billion dollars in those same nine months.",
+      "narration": "But the running costs were still enormous. Compute and infrastructure alone approached nineteen billion dollars in those same nine months.",
       "visual": "balance",
       "labels": [
         "$18.81B compute and infrastructure expense"
@@ -154,17 +154,16 @@
     },
     {
       "id": "payoff",
-      "duration": 8,
+      "duration": 7,
       "kicker": "READ THE RIGHT LINE",
-      "title": "What do you want to measure?",
-      "narration": "So when you see that headline loss, ask two different questions. How did the business operate? And what actually happened to the cash?",
+      "title": "Valuation, accounting and lasting profit",
+      "narration": "So a rising valuation can make the accounts look worse. Whether that growth becomes sustainable profit is the question still waiting for an answer.",
       "visual": "balance",
       "labels": [
-        "Operations ≠ net loss ≠ cash flow"
+        "Will growth become sustainable profit?"
       ],
       "claim_ids": [
-        "losses",
-        "cash",
+        "fair-value",
         "takeaway"
       ]
     }
@@ -183,5 +182,11 @@
     },
     "real_people": [],
     "notes": "The fictional host observes and reacts through gaze, expression and restrained gestures. Graphic motion operates independently of the protagonist."
+  },
+  "narration_review": {
+    "copy_status": "revised-body-liked-hook-1-selected-by-Justin-2026-11-24",
+    "take_status": "awaiting-final-take-listening-decision",
+    "timing_basis": "planning-estimates-awaiting-final-audio-alignment",
+    "note": "Scene narration matches the selected hook audition. Source check timestamps retain their original verification dates."
   }
 }
