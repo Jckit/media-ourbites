@@ -5,6 +5,7 @@ import json
 import math
 import tempfile
 import unittest
+import wave
 from pathlib import Path
 from unittest.mock import patch
 
@@ -24,6 +25,76 @@ lead = load_script("generate_lead_voice.py", "lead_voice")
 
 
 class VoicePresetTests(unittest.TestCase):
+    def test_sections_preserve_numbers_and_work_on_different_topics(self):
+        for script in (
+            "Revenue rose to $19.4 billion. The charge reached ninety-four point three billion dollars.\n\nWhere did the cash go?",
+            "A coffee shop sells each cup for four dollars. Beans cost one dollar. Rent still needs paying.\n\nMore sales can spread that fixed cost.",
+        ):
+            sections = lead.narration_sections(script, 16)
+            self.assertGreater(len(sections), 1)
+            self.assertEqual(" ".join(sections).split(), script.split())
+            self.assertTrue(all(len(part.split()) <= 16 for part in sections))
+        with self.assertRaisesRegex(ValueError, "Rewrite as shorter spoken sentences"):
+            lead.narration_sections(" ".join(["word"] * 29) + ".", 28)
+        with self.assertRaisesRegex(ValueError, "empty"):
+            lead.narration_sections("  ", 28)
+        self.assertEqual(lead.narration_sections("Sales rose. Costs fell. Cash grew. Profit followed.", 28),
+                         ["Sales rose. Costs fell.", "Cash grew. Profit followed."])
+        self.assertEqual(lead.narration_sections("U.S. Revenue rose. Dr. Smith explained why.", 28),
+                         ["U.S. Revenue rose. Dr. Smith explained why."])
+
+    @staticmethod
+    def write_section(path, rate=1000, silent=False):
+        with wave.open(str(path), "wb") as writer:
+            writer.setparams((1, 3, rate, 0, "NONE", "not compressed"))
+            tone = (0 if silent else 100000).to_bytes(3, "little", signed=True)
+            writer.writeframes(b"\0" * 600 + tone * 400 + b"\0" * 600)
+
+    def test_pcm24_join_trims_only_edges_and_inserts_measured_pause(self):
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            paths = [folder / "one.wav", folder / "two.wav"]
+            for path in paths:
+                self.write_section(path)
+            timings = lead.join_sections(paths, folder / "joined.wav", 100)
+            with wave.open(str(folder / "joined.wav"), "rb") as reader:
+                self.assertEqual(reader.getsampwidth(), 3)
+                self.assertEqual(reader.getnframes(), 1060)  # 480ms + 100ms + 480ms
+            self.assertAlmostEqual(timings[1]["start_seconds"] - timings[0]["end_seconds"], 0.1)
+            self.write_section(paths[1], silent=True)
+            with self.assertRaisesRegex(ValueError, "no audible speech"):
+                lead.join_sections(paths, folder / "silent.wav", 100)
+            self.write_section(paths[1], rate=2000)
+            with self.assertRaisesRegex(ValueError, "formats must match"):
+                lead.join_sections(paths, folder / "mismatch.wav", 100)
+
+    def test_generation_uses_short_raw_calls_then_polishes_once(self):
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            args = argparse.Namespace(output=folder / "take.wav", processing="selected", join_pause_ms=100)
+            preset = json.loads((ROOT / "auditions/selected-voice.json").read_text())
+            config = dict(cli="cli.exe", model="model.gguf", reference_audio="private.wav",
+                          reference_text="Private reference words.", ffmpeg="ffmpeg")
+            sections = ["Sales rose.", "Costs rose too."]
+            def fake_run(command, **kwargs):
+                destination = Path(command[command.index("--output") + 1])
+                self.write_section(destination)
+            with patch.object(lead.subprocess, "run", side_effect=fake_run) as runner:
+                lead.generate_sections(args, preset, config, sections, None)
+                commands = [call.args[0] for call in runner.call_args_list]
+                self.assertEqual(len(commands), 3)
+                for command, text in zip(commands[:2], sections):
+                    self.assertEqual(command[command.index("--text") + 1], text)
+                    self.assertEqual(command[command.index("--processing") + 1], "raw")
+                    self.assertNotIn("--instruct", command)
+                self.assertIn("--raw-input", commands[-1])
+                self.assertEqual(commands[-1][commands[-1].index("--processing") + 1], "selected")
+                with self.assertRaisesRegex(ValueError, "already exist"):
+                    lead.generate_sections(args, preset, config, sections, None)
+            receipt = (folder / "take.sections/generation.json").read_text()
+            self.assertNotIn(config["reference_text"], receipt)
+            self.assertNotIn(config["reference_audio"], receipt)
+
     def test_selected_preset_is_valid_and_honest_about_speed(self):
         preset = json.loads((ROOT / "auditions" / "selected-voice.json").read_text(encoding="utf-8"))
         self.assertEqual(preset["provider"], "audio.cpp")

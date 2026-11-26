@@ -256,6 +256,21 @@ Compare similarity to Justin's original delivery, pronunciation of financial num
 
 Offline regression tests: `python -m unittest discover -s tests -p test_voice_clone.py -v`. These do not download models or synthesize speech.
 
+### Reusable short-section narration
+
+`scripts/generate_lead_voice.py` now splits new narration into sections of at most two complete sentences and 28 words, respecting blank-line beat boundaries. This is shared behavior for every episode using this entry point. Write one thought per sentence and give explanations room to breathe; technical words are fine. A sentence over the limit stops generation with a copy-revision message rather than silently rewriting facts or splitting a financial number.
+
+```powershell
+# Inspect section boundaries without a model or private configuration.
+python scripts/generate_lead_voice.py --text-file out/narration.txt --output out/new-take.wav --dry-run
+# Generate with the shared preset and neutral delivery.
+python scripts/generate_lead_voice.py --text-file out/narration.txt --output out/new-take.wav
+```
+
+The tracked `generation` settings in `auditions/selected-voice.json` control section size and a 100ms join gap. Each raw section keeps a 40ms quiet-edge handle; only leading/trailing quiet audio is trimmed. Interior sentence pauses remain intact. The generator joins raw sections, then applies noise reduction, pitch, tempo and leveling once to the complete take. The gap is measured before the selected 1.06 tempo adjustment. Default delivery has no emotion instruction; `--scene` or `--emotion` explicitly opts in to performance direction.
+
+Raw sections and a private generation receipt remain in `out/<take>.sections/`; joined raw audio remains in `out/<take>.raw.wav`. Existing takes/sidecars are never overwritten. The low-level `generate_qwen_voice.py` remains an explicit single-take/A-B tool. Replacing audio requires fresh word alignment against the final processed WAV. Listen for voice consistency, number pronunciation, clipped word endings and unnatural joins; sectioning reduces one source of drift but cannot guarantee a clean take. Re-record only the affected section when reviewing defects, preserving the approved copy.
+
 ## Local protagonist voice preview
 
 Run `python scripts/build_voice_preview.py` once in a fresh `out/lead-voice-preview` folder. It generates seven phrases with the selected Justin voice, retains raw takes and writes measured clip durations to `props.json`. Captions are phrase-level, timed to those actual clips; these are not forced-aligned word captions.
