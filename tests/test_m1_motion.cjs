@@ -29,7 +29,7 @@ for (const pose of ['neutral','explain','think','point','react']) {
   }
 }
 
-const {m1PressPose} = loadTsx(fs.readFileSync('src/M1AnthropicFilm.tsx','utf8'),
+const {m1PressPose, m1FilmShotAt, M1_REVIEW_CUES} = loadTsx(fs.readFileSync('src/M1AnthropicFilm.tsx','utf8'),
   'M1AnthropicFilm.tsx', {
     './OurbitesHost': {OurbitesHost:newHost},
     '../episodes/002/m1-episode.json': require('../episodes/002/m1-episode.json'),
@@ -60,3 +60,21 @@ for (const t of [5.8,7,9.9]) {
   assert.ok(Math.abs(s.scale-.82)<1e-10);
 }
 console.log('Passed host parity, all-frame graphics parity, sheet continuity and settled landing checks.');
+
+// Every review frame belongs to exactly one shot; boundary frames enter the next
+// shot without a duplicate frame or a gap. These are provisional scene cues.
+const counts = Array(6).fill(0);
+for (let frame=0; frame<1011; frame++) {
+  const shot = m1FilmShotAt(frame/30);
+  counts[shot.index]++;
+  assert.ok(shot.seconds >= 0 && shot.seconds < shot.duration + 1e-8);
+}
+assert.ok(counts.every(count=>count>0));
+for (let i=1; i<6; i++) {
+  assert.equal(m1FilmShotAt(M1_REVIEW_CUES[i]-1e-8).index, i-1);
+  assert.equal(m1FilmShotAt(M1_REVIEW_CUES[i]).index, i);
+}
+assert.equal(m1FilmShotAt(40).index,5);
+assert.throws(()=>m1FilmShotAt(0,[0,1,1,3,4,5,6]),/increasing/);
+assert.throws(()=>m1FilmShotAt(0,[0,1,2]),/seven/);
+console.log('Passed all-frame six-shot coverage and cue-boundary checks: '+counts.join(', '));
