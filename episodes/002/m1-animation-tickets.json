@@ -1,0 +1,526 @@
+{
+  "schema_version": 1,
+  "scenario_kind": "existing-episode",
+  "episode_manifest": "episodes/002/m1-episode.json",
+  "synthetic_claim_ids": [],
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "tickets": [
+    {
+      "id": "loss-statement",
+      "claim_ids": [
+        "losses",
+        "cash"
+      ],
+      "visual_thesis": "Close on reported net loss, then reveal the financing tab.",
+      "takeaway": "The headline loss raises a cash question.",
+      "hero": {
+        "id": "reported-loss-binder",
+        "kind": "Original illustrative business prop",
+        "start_state": "Binder report at close scale",
+        "action": "Clean title reveal and settled number hold",
+        "end_state": "Financing tab enters the lower report edge"
+      },
+      "layers": {
+        "background": "Cream ground and quiet grid",
+        "midground": "Hero prop, shallow depth and its cast shadow",
+        "foreground": "Observer host; separate screen-fixed title, reading cue and evidence regions"
+      },
+      "camera": {
+        "framing": "Medium-close binder / fixed observer",
+        "pivot": [
+          540,
+          820
+        ],
+        "action": "Cut or object-owned transform; screen-fixed reading layers remain outside world transforms"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          730,
+          1080
+        ],
+        "gaze_target": "reported-loss-binder",
+        "contact": "None. Host observes and reacts; graphics operate independently.",
+        "occlusion": "Host stays in its lower-right anchor; no hands cross the hero action.",
+        "reason": "Preserve accepted observer identity and guide attention"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            540,
+            820
+          ]
+        ],
+        "temporal_bezier": [
+          0.22,
+          0.05,
+          0.25,
+          1
+        ],
+        "anticipation": "Clean title reveal and settled number hold",
+        "settle": "Decelerate prop arrival and hold factual text still",
+        "overlap": "Object, world and secondary labels have separate timing; clean cuts do not imply a literal continuous physical event"
+      },
+      "timing": {
+        "cue": "Close on reported net loss, then reveal the financing tab.",
+        "start_source_seconds": 0,
+        "end_source_seconds": 4.9,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          72,
+          1490,
+          936,
+          200
+        ],
+        "source_region": [
+          72,
+          1738,
+          936,
+          155
+        ],
+        "hold_seconds": 1.2
+      },
+      "transition": {
+        "type": "motivated-cut",
+        "next_ticket": "funding-slip",
+        "shared_object": "",
+        "reason": "Change focus at the spoken business beat; retain the same binder-world and observer anchor"
+      },
+      "assets": [],
+      "no_external_assets_reason": "Original SVG props and existing fictional host; plain company text and existing source-led figures. No external media or logos."
+    },
+    {
+      "id": "funding-slip",
+      "claim_ids": [
+        "fair-value"
+      ],
+      "visual_thesis": "The financing slip separates from the binder into focus.",
+      "takeaway": "Outstanding financing can change in fair value.",
+      "hero": {
+        "id": "financing-note",
+        "kind": "Original illustrative business prop",
+        "start_state": "Financing tab at the lower report edge",
+        "action": "Offset binder departure behind slip travel",
+        "end_state": "Slip settles at 540,820"
+      },
+      "layers": {
+        "background": "Cream ground and quiet grid",
+        "midground": "Hero prop, shallow depth and its cast shadow",
+        "foreground": "Observer host; separate screen-fixed title, reading cue and evidence regions"
+      },
+      "camera": {
+        "framing": "Medium binder pulling away / fixed observer",
+        "pivot": [
+          540,
+          820
+        ],
+        "action": "Cut or object-owned transform; screen-fixed reading layers remain outside world transforms"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          730,
+          1080
+        ],
+        "gaze_target": "financing-note",
+        "contact": "None. Host observes and reacts; graphics operate independently.",
+        "occlusion": "Host stays in its lower-right anchor; no hands cross the hero action.",
+        "reason": "Preserve accepted observer identity and guide attention"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            540,
+            820
+          ]
+        ],
+        "temporal_bezier": [
+          0.22,
+          0.05,
+          0.25,
+          1
+        ],
+        "anticipation": "Offset binder departure behind slip travel",
+        "settle": "Decelerate prop arrival and hold factual text still",
+        "overlap": "Object, world and secondary labels have separate timing; clean cuts do not imply a literal continuous physical event"
+      },
+      "timing": {
+        "cue": "The financing slip separates from the binder into focus.",
+        "start_source_seconds": 4.9,
+        "end_source_seconds": 8.9,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          72,
+          1490,
+          936,
+          200
+        ],
+        "source_region": [
+          72,
+          1738,
+          936,
+          155
+        ],
+        "hold_seconds": 1.2
+      },
+      "transition": {
+        "type": "continuity",
+        "next_ticket": "valuation-insert",
+        "shared_object": "financing-note",
+        "reason": "Follow the financing slip into the accounting mechanism"
+      },
+      "assets": [],
+      "no_external_assets_reason": "Original SVG props and existing fictional host; plain company text and existing source-led figures. No external media or logos."
+    },
+    {
+      "id": "valuation-insert",
+      "claim_ids": [
+        "fair-value"
+      ],
+      "visual_thesis": "Company value rises, followed by note fair value; reveal the charge on the slip.",
+      "takeaway": "Valuation changes can worsen reported earnings.",
+      "hero": {
+        "id": "financing-note",
+        "kind": "Original illustrative business prop",
+        "start_state": "Slip identifies outstanding notes",
+        "action": "Company marker leads note marker, then charge moves toward inlet",
+        "end_state": "Charge slip arrives at the press inlet"
+      },
+      "layers": {
+        "background": "Cream ground and quiet grid",
+        "midground": "Hero prop, shallow depth and its cast shadow",
+        "foreground": "Observer host; separate screen-fixed title, reading cue and evidence regions"
+      },
+      "camera": {
+        "framing": "Tight unscaled direction markers / fixed observer",
+        "pivot": [
+          540,
+          820
+        ],
+        "action": "Cut or object-owned transform; screen-fixed reading layers remain outside world transforms"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          730,
+          1080
+        ],
+        "gaze_target": "financing-note",
+        "contact": "None. Host observes and reacts; graphics operate independently.",
+        "occlusion": "Host stays in its lower-right anchor; no hands cross the hero action.",
+        "reason": "Preserve accepted observer identity and guide attention"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            540,
+            820
+          ]
+        ],
+        "temporal_bezier": [
+          0.22,
+          0.05,
+          0.25,
+          1
+        ],
+        "anticipation": "Company marker leads note marker, then charge moves toward inlet",
+        "settle": "Decelerate prop arrival and hold factual text still",
+        "overlap": "Object, world and secondary labels have separate timing; clean cuts do not imply a literal continuous physical event"
+      },
+      "timing": {
+        "cue": "Company value rises, followed by note fair value; reveal the charge on the slip.",
+        "start_source_seconds": 8.9,
+        "end_source_seconds": 14.9,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          72,
+          1490,
+          936,
+          200
+        ],
+        "source_region": [
+          72,
+          1738,
+          936,
+          155
+        ],
+        "hold_seconds": 1.2
+      },
+      "transition": {
+        "type": "continuity",
+        "next_ticket": "ledger-entry",
+        "shared_object": "financing-note",
+        "reason": "Follow the financing slip into the accounting mechanism"
+      },
+      "assets": [],
+      "no_external_assets_reason": "Original SVG props and existing fictional host; plain company text and existing source-led figures. No external media or logos."
+    },
+    {
+      "id": "ledger-entry",
+      "claim_ids": [
+        "fair-value",
+        "reconciliation",
+        "cash"
+      ],
+      "visual_thesis": "Accepted press choreography posts one charge to the net-loss ledger.",
+      "takeaway": "This charge has no equivalent cash payment; other entries contribute.",
+      "hero": {
+        "id": "financing-note",
+        "kind": "Original illustrative business prop",
+        "start_state": "Financing slip at the press",
+        "action": "Existing press poses retained; 10 local seconds mapped to review cue interval",
+        "end_state": "Charge settles in ledger; separate cash caveat holds"
+      },
+      "layers": {
+        "background": "Cream ground and quiet grid",
+        "midground": "Hero prop, shallow depth and its cast shadow",
+        "foreground": "Observer host; separate screen-fixed title, reading cue and evidence regions"
+      },
+      "camera": {
+        "framing": "Accepted medium press / observer host",
+        "pivot": [
+          540,
+          820
+        ],
+        "action": "Cut or object-owned transform; screen-fixed reading layers remain outside world transforms"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          730,
+          1080
+        ],
+        "gaze_target": "financing-note",
+        "contact": "None. Host observes and reacts; graphics operate independently.",
+        "occlusion": "Host stays in its lower-right anchor; no hands cross the hero action.",
+        "reason": "Preserve accepted observer identity and guide attention"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            540,
+            820
+          ]
+        ],
+        "temporal_bezier": [
+          0.22,
+          0.05,
+          0.25,
+          1
+        ],
+        "anticipation": "Existing press poses retained; 10 local seconds mapped to review cue interval",
+        "settle": "Decelerate prop arrival and hold factual text still",
+        "overlap": "Object, world and secondary labels have separate timing; clean cuts do not imply a literal continuous physical event"
+      },
+      "timing": {
+        "cue": "Accepted press choreography posts one charge to the net-loss ledger.",
+        "start_source_seconds": 14.9,
+        "end_source_seconds": 20.3,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          72,
+          1490,
+          936,
+          200
+        ],
+        "source_region": [
+          72,
+          1738,
+          936,
+          155
+        ],
+        "hold_seconds": 1.2
+      },
+      "transition": {
+        "type": "motivated-cut",
+        "next_ticket": "compute-costs",
+        "shared_object": "",
+        "reason": "Change focus at the spoken business beat; retain the same binder-world and observer anchor"
+      },
+      "assets": [],
+      "no_external_assets_reason": "Original SVG props and existing fictional host; plain company text and existing source-led figures. No external media or logos."
+    },
+    {
+      "id": "compute-costs",
+      "claim_ids": [
+        "compute"
+      ],
+      "visual_thesis": "Cut to an original server rack; reveal operating expense over the rack.",
+      "takeaway": "The accounting explanation does not erase operating expense.",
+      "hero": {
+        "id": "server-expense",
+        "kind": "Original illustrative business prop",
+        "start_state": "Server rack in depth",
+        "action": "Server arrival precedes expense label; restrained heat paths",
+        "end_state": "Expense label settles; heat is metaphor only"
+      },
+      "layers": {
+        "background": "Cream ground and quiet grid",
+        "midground": "Hero prop, shallow depth and its cast shadow",
+        "foreground": "Observer host; separate screen-fixed title, reading cue and evidence regions"
+      },
+      "camera": {
+        "framing": "Angled server rack / fixed observer",
+        "pivot": [
+          540,
+          820
+        ],
+        "action": "Cut or object-owned transform; screen-fixed reading layers remain outside world transforms"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          730,
+          1080
+        ],
+        "gaze_target": "server-expense",
+        "contact": "None. Host observes and reacts; graphics operate independently.",
+        "occlusion": "Host stays in its lower-right anchor; no hands cross the hero action.",
+        "reason": "Preserve accepted observer identity and guide attention"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            540,
+            820
+          ]
+        ],
+        "temporal_bezier": [
+          0.22,
+          0.05,
+          0.25,
+          1
+        ],
+        "anticipation": "Server arrival precedes expense label; restrained heat paths",
+        "settle": "Decelerate prop arrival and hold factual text still",
+        "overlap": "Object, world and secondary labels have separate timing; clean cuts do not imply a literal continuous physical event"
+      },
+      "timing": {
+        "cue": "Cut to an original server rack; reveal operating expense over the rack.",
+        "start_source_seconds": 20.3,
+        "end_source_seconds": 26.6,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          72,
+          1490,
+          936,
+          200
+        ],
+        "source_region": [
+          72,
+          1738,
+          936,
+          155
+        ],
+        "hold_seconds": 1.2
+      },
+      "transition": {
+        "type": "clean-cut",
+        "next_ticket": "profit-payoff",
+        "shared_object": "",
+        "reason": "Change focus at the spoken business beat; retain the same binder-world and observer anchor"
+      },
+      "assets": [],
+      "no_external_assets_reason": "Original SVG props and existing fictional host; plain company text and existing source-led figures. No external media or logos."
+    },
+    {
+      "id": "profit-payoff",
+      "claim_ids": [
+        "fair-value",
+        "takeaway"
+      ],
+      "visual_thesis": "Return to the same binder and reveal the sustainable-profit question.",
+      "takeaway": "Company value and lasting profit answer different questions.",
+      "hero": {
+        "id": "reported-loss-binder",
+        "kind": "Original illustrative business prop",
+        "start_state": "Binder returns to valuation/accounting relationship",
+        "action": "Binder settles before internal page reveal",
+        "end_state": "Profit question settles for final hold"
+      },
+      "layers": {
+        "background": "Cream ground and quiet grid",
+        "midground": "Hero prop, shallow depth and its cast shadow",
+        "foreground": "Observer host; separate screen-fixed title, reading cue and evidence regions"
+      },
+      "camera": {
+        "framing": "Binder callback / fixed observer",
+        "pivot": [
+          540,
+          820
+        ],
+        "action": "Cut or object-owned transform; screen-fixed reading layers remain outside world transforms"
+      },
+      "actor": {
+        "mode": "fixed-anchor",
+        "anchor": [
+          730,
+          1080
+        ],
+        "gaze_target": "reported-loss-binder",
+        "contact": "None. Host observes and reacts; graphics operate independently.",
+        "occlusion": "Host stays in its lower-right anchor; no hands cross the hero action.",
+        "reason": "Preserve accepted observer identity and guide attention"
+      },
+      "motion": {
+        "spatial_path": [
+          [
+            540,
+            820
+          ]
+        ],
+        "temporal_bezier": [
+          0.22,
+          0.05,
+          0.25,
+          1
+        ],
+        "anticipation": "Binder settles before internal page reveal",
+        "settle": "Decelerate prop arrival and hold factual text still",
+        "overlap": "Object, world and secondary labels have separate timing; clean cuts do not imply a literal continuous physical event"
+      },
+      "timing": {
+        "cue": "Return to the same binder and reveal the sustainable-profit question.",
+        "start_source_seconds": 26.6,
+        "end_source_seconds": 33.7,
+        "word_timing": "provisional"
+      },
+      "reading": {
+        "caption_region": [
+          72,
+          1490,
+          936,
+          200
+        ],
+        "source_region": [
+          72,
+          1738,
+          936,
+          155
+        ],
+        "hold_seconds": 1.2
+      },
+      "transition": {
+        "type": "end",
+        "next_ticket": "",
+        "shared_object": "",
+        "reason": "Change focus at the spoken business beat; retain the same binder-world and observer anchor"
+      },
+      "assets": [],
+      "no_external_assets_reason": "Original SVG props and existing fictional host; plain company text and existing source-led figures. No external media or logos."
+    }
+  ]
+}

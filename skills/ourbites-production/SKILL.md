@@ -26,6 +26,7 @@ Justin wants playful, engaging explanations with slight banter. Use a curious, l
 - Keep uncertainty and numerical explanations clear. Do not put a punchline over the key calculation or imply a possible deal is confirmed.
 - Example tone: "Same shares. Smaller percentage. Rude." Follow it with the explanation of why a lower percentage does not automatically mean lost value.
 - Read the script aloud. Cut any joke that delays the answer, requires explanation, or sounds like a presenter trying too hard. Playfulness is a voice preference, not a promise of retention.
+- Write one thought per spoken sentence; avoid packing multiple explanations into a long sentence. Keep necessary technical vocabulary and exact financial meaning. Use blank lines to mark natural beat boundaries. Generate through `scripts/generate_lead_voice.py`: the shared preset limits complete-sentence sections to 28 words, defaults to neutral delivery, joins raw sections with a controlled pause, then applies the selected processing once. Use `--dry-run` to inspect boundaries before synthesis. Scene emotion is opt-in. Review the final WAV for robotic drift, numbers, endings and joins, and align captions to that exact processed file. A successful generation is not listening approval.
 
 ## Produce one reviewable episode
 
